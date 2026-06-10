@@ -1,0 +1,26 @@
+# Development stage
+FROM node:20-alpine AS development
+WORKDIR /app
+COPY package.json tsconfig.base.json turbo.json ./
+COPY packages/shared/package.json packages/shared/
+COPY apps/worker/package.json apps/worker/
+RUN npm install
+COPY . .
+EXPOSE 4001
+CMD ["npx", "tsx", "watch", "apps/worker/src/index.ts"]
+
+# Build stage
+FROM node:20-alpine AS build
+WORKDIR /app
+COPY --from=development /app /app
+RUN npm run build -w apps/worker
+
+# Production stage
+FROM node:20-alpine AS production
+WORKDIR /app
+ENV NODE_ENV=production
+COPY --from=build /app/apps/worker/dist ./dist
+COPY --from=build /app/apps/worker/package.json ./
+COPY --from=build /app/node_modules ./node_modules
+EXPOSE 4001
+CMD ["node", "dist/index.js"]

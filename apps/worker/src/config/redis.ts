@@ -1,24 +1,22 @@
-import Redis from 'ioredis';
-import { config } from './index.js';
-import { logger } from './logger.js';
+import Redis from "ioredis";
+import { config } from "./index.js";
 
-let redisInstance: Redis | null = null;
+let redis: Redis | null = null;
 
-export function getRedisClient(): Redis {
-  if (!redisInstance) {
-    redisInstance = new Redis(config.redis.url, {
+export function getRedis(): Redis {
+  if (!redis) {
+    redis = new Redis(config.redisUrl, {
       maxRetriesPerRequest: null,
       enableReadyCheck: false,
-      retryStrategy(times) {
-        return Math.min(times * 50, 2000);
-      },
+      retryStrategy: (times) => Math.min(times * 50, 2000),
     });
-
-    redisInstance.on('connect', () => logger.info('Worker Redis connected'));
-    redisInstance.on('error', (err) => logger.error('Worker Redis error', err));
   }
-
-  return redisInstance;
+  return redis;
 }
 
-export const redis = getRedisClient();
+export async function closeRedis(): Promise<void> {
+  if (redis) {
+    await redis.quit();
+    redis = null;
+  }
+}

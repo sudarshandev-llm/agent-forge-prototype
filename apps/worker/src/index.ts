@@ -1,28 +1,32 @@
-import { PrismaClient } from '@prisma/client';
-import { config } from './config/index.js';
-import { setupWorkers } from './config/queue.js';
-import { logger } from './config/logger.js';
+import dotenv from "dotenv";
+dotenv.config();
 
-const prisma = new PrismaClient();
+import { closeRedis, getRedis } from "./config/redis.js";
+import { config } from "./config/index.js";
+import { logger } from "./config/logger.js";
+import { AgentWorker } from "./workers/agent-worker.js";
+import { WorkflowWorker } from "./workers/workflow-worker.js";
 
 async function main() {
-  logger.info('Worker service starting...');
-  logger.info(`Environment: ${config.env}`);
+  logger.info(
+    { env: config.env, agentQueue: config.agentQueueName, workflowQueue: config.workflowQueueName },
+    "Worker service starting",
+  );
+
+  const redis = getRedis();
 
   try {
-    await prisma.$connect();
-    logger.info('Database connected');
+    await redis.ping();
+    logger.info("Redis connection established");
   } catch (error) {
-    logger.error('Failed to connect to database', error);
+    logger.error("Failed to connect to Redis", error);
     process.exit(1);
   }
 
-  const { agentWorker, workflowWorker, emailWorker } = setupWorkers();
+  const agentWorker = new AgentWorker();
+  const workflowWorker = new WorkflowWorker();
 
-  logger.info('Workers registered:');
-  logger.info('  - Agent execution worker');
-  logger.info('  - Workflow execution worker');
-  logger.info('  - Email worker');
+  logger.info("All workers registered and ready");
 
   const gracefulShutdown = async (signal: string) => {
     logger.info(`${signal} received. Shutting down workers...`);
@@ -30,18 +34,17 @@ async function main() {
     await Promise.all([
       agentWorker.close(),
       workflowWorker.close(),
-      emailWorker.close(),
     ]);
 
-    await prisma.$disconnect();
-    logger.info('Workers shut down gracefully');
+    await closeRedis();
+    logger.info("Graceful shutdown complete");
     process.exit(0);
   };
 
-  process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
-  process.on('SIGINT', () => gracefulShutdown('SIGINT'));
-  process.on('uncaughtException', (error) => {
-    logger.error('Uncaught exception', error);
+  process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
+  process.on("SIGINT", () => gracefulShutdown("SIGINT"));
+  process.on("uncaughtException", (error) => {
+    logger.error("Uncaught exception", error);
     process.exit(1);
   });
 }

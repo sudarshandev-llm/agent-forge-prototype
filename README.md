@@ -16,38 +16,23 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/agentforge/agentforge/blob/main/LICENSE">
+  <a href="LICENSE">
     <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License">
   </a>
   <a href="https://www.typescriptlang.org/">
-    <img src="https://img.shields.io/badge/language-TypeScript-3178C6.svg" alt="TypeScript">
+    <img src="https://img.shields.io/badge/TypeScript-5.4-blue" alt="TypeScript">
   </a>
   <a href="https://nextjs.org/">
-    <img src="https://img.shields.io/badge/framework-Next.js%2015-000000.svg" alt="Next.js 15">
+    <img src="https://img.shields.io/badge/Next.js-15-black" alt="Next.js 15">
   </a>
-  <a href="https://github.com/agentforge/agentforge/actions">
-    <img src="https://img.shields.io/github/actions/workflow/status/agentforge/agentforge/ci.yml?branch=main" alt="CI Status">
+  <a href="https://github.com/sudarshandev-llm/agent-forge-prototype/actions/workflows/ci.yml">
+    <img src="https://github.com/sudarshandev-llm/agent-forge-prototype/actions/workflows/ci.yml/badge.svg" alt="CI">
   </a>
-  <a href="https://codecov.io/gh/agentforge/agentforge">
-    <img src="https://img.shields.io/codecov/c/github/agentforge/agentforge" alt="Code Coverage">
-  </a>
-  <a href="https://github.com/agentforge/agentforge/issues">
-    <img src="https://img.shields.io/github/issues/agentforge/agentforge" alt="GitHub Issues">
-  </a>
-  <a href="https://github.com/agentforge/agentforge/stargazers">
-    <img src="https://img.shields.io/github/stars/agentforge/agentforge" alt="GitHub Stars">
-  </a>
-  <a href="https://github.com/agentforge/agentforge/network">
-    <img src="https://img.shields.io/github/forks/agentforge/agentforge" alt="GitHub Forks">
-  </a>
-  <a href="https://github.com/agentforge/agentforge/pulls">
+  <a href="CONTRIBUTING.md">
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome">
   </a>
-  <a href="https://discord.gg/agentforge">
-    <img src="https://img.shields.io/discord/123456789?label=Discord&logo=discord&color=5865F2" alt="Discord">
-  </a>
-  <a href="https://agentforge.dev">
-    <img src="https://img.shields.io/badge/docs-agentforge.dev-blue" alt="Docs">
+  <a href="https://github.com/sudarshandev-llm/agent-forge-prototype">
+    <img src="https://img.shields.io/github/stars/sudarshandev-llm/agent-forge-prototype?style=social" alt="GitHub stars">
   </a>
 </p>
 
@@ -155,7 +140,7 @@ AgentForge follows a **modular, microservices-inspired architecture** built on a
 |-------|-----------|---------|
 | **Frontend** | Next.js 15 (App Router), React 19, Tailwind CSS, Radix UI | Web application UI |
 | **Type Safety** | TypeScript (Strict), tRPC, Zod | End-to-end type safety |
-| **Backend** | Next.js API Routes, tRPC, Node.js 20+ | API and server logic |
+| **Backend** | Express.js, tRPC, Node.js 20+ | API and server logic |
 | **Database** | PostgreSQL 15+, Drizzle ORM, pgvector | Primary data store & vector embeddings |
 | **Cache** | Redis 7+ (Upstash/ioredis) | Session cache, rate limiting, pub/sub |
 | **Queue** | BullMQ | Async job processing & scheduling |
@@ -165,31 +150,23 @@ AgentForge follows a **modular, microservices-inspired architecture** built on a
 | **Monitoring** | OpenTelemetry, Sentry, Pino | Logging, tracing, error tracking |
 | **Testing** | Vitest, Playwright, MSW | Unit, E2E, and API mocking |
 | **CI/CD** | GitHub Actions, Docker, Docker Compose | Build, test, deploy |
-| **Deployment** | Docker, Vercel, Railway, self-hosted | Platform deployment |
+| **Deployment** | Docker, Vercel, Railway, Render, self-hosted | Platform deployment |
 
 ---
 
 ## 📸 Screenshots
 
-> Screenshots will be available in the `/assets/screenshots` directory once generated.
+> Screenshots will be available in the `/apps/web/public/screenshots` directory once generated.
 
 | Dashboard | Agent Builder | Workflow Editor |
 |:---------:|:-------------:|:---------------:|
-| ![Dashboard](assets/screenshots/dashboard.png) | ![Agent Builder](assets/screenshots/agent-builder.png) | ![Workflow](assets/screenshots/workflow-editor.png) |
+| ![Dashboard](apps/web/public/screenshots/dashboard.png) | ![Agent Builder](apps/web/public/screenshots/agent-builder.png) | ![Workflow](apps/web/public/screenshots/workflow-editor.png) |
 | **Chat Interface** | **Marketplace** | **Analytics** |
-| ![Chat](assets/screenshots/chat-interface.png) | ![Marketplace](assets/screenshots/marketplace.png) | ![Analytics](assets/screenshots/analytics.png) |
+| ![Chat](apps/web/public/screenshots/chat-interface.png) | ![Marketplace](apps/web/public/screenshots/marketplace.png) | ![Analytics](apps/web/public/screenshots/analytics.png) |
 
 ---
 
 ## 🚀 Getting Started
-
-### Quick Start (npx)
-
-```bash
-npx create-agentforge@latest my-agent
-cd my-agent
-npm run dev
-```
 
 ### Prerequisites
 
@@ -199,13 +176,13 @@ npm run dev
 - **Docker** (optional, for containerized development)
 - **pnpm** (recommended) or npm
 
-### Manual Installation
+### Installation
 
 #### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/agentforge/agentforge.git
-cd agentforge
+git clone https://github.com/sudarshandev-llm/agent-forge-prototype.git
+cd agent-forge-prototype
 ```
 
 #### 2. Install Dependencies
@@ -324,8 +301,20 @@ agentforge/
 │   ├── web/                          # Next.js 15 web application
 │   │   ├── app/                      # App Router pages & API routes
 │   │   ├── components/               # Shared React components
-│   │   └── lib/                      # Client-side utilities
-│   └── cli/                          # CLI tool (commander.js)
+│   │   ├── lib/                      # Client-side utilities
+│   │   └── public/                   # Static assets & screenshots
+│   ├── api/                          # Express API server
+│   │   ├── src/
+│   │   │   ├── controllers/          # Route controllers
+│   │   │   ├── services/             # Business logic
+│   │   │   ├── middleware/           # Auth, rate limiting, validation
+│   │   │   └── routes/              # API route definitions
+│   │   └── test/                     # API tests
+│   └── worker/                       # BullMQ worker for async processing
+│       ├── src/
+│       │   ├── jobs/                 # Job processors
+│       │   └── queues/              # Queue definitions
+│       └── test/                     # Worker tests
 ├── packages/
 │   ├── core/                         # Core agent engine & abstractions
 │   │   ├── src/
@@ -339,21 +328,22 @@ agentforge/
 │   │   ├── schema/                  # Database table definitions
 │   │   └── migrations/              # Migration files
 │   ├── api/                          # tRPC routers & middleware
-│   │   ├── routers/                 # API route definitions
+│   │   ├── routers/                 # tRPC route definitions
 │   │   └── middleware/              # Auth, rate limiting, validation
-│   ├── queue/                        # BullMQ job definitions & workers
-│   ├── marketplace/                  # Marketplace service & package manager
-│   ├── config/                       # Shared configuration & environment
-│   └── ui/                          # Shared UI component library
-├── docker/                           # Docker & Docker Compose configs
+│   └── shared/                       # Shared types, utilities, configs
+│       ├── types/                   # Shared TypeScript types
+│       ├── utils/                   # Shared utilities
+│       └── config/                  # Shared configuration
+├── infra/
+│   ├── docker/                       # Docker & Docker Compose configs
+│   └── github/                       # GitHub-specific infrastructure configs
 ├── scripts/                          # Build & maintenance scripts
 ├── docs/                             # Documentation
-├── assets/                           # Screenshots, logos, media
+├── assets/                           # Logos, branding, media
 ├── .github/                          # GitHub templates & workflows
-├── .vscode/                          # VS Code workspace settings
 ├── turbo.json                        # Turborepo configuration
 ├── package.json                      # Root package configuration
-└── tsconfig.json                     # TypeScript configuration
+└── tsconfig.base.json                # Base TypeScript configuration
 ```
 
 ---
@@ -373,7 +363,7 @@ AgentForge exposes a comprehensive REST and tRPC API. Key endpoints:
 | `/api/marketplace/packages` | GET | Browse marketplace |
 | `/api/auth/*` | Various | Authentication endpoints |
 
-Full API documentation is available at **[https://agentforge.dev/docs/api](https://agentforge.dev/docs/api)**.
+Full API documentation is available in the `/docs` directory.
 
 ---
 
@@ -396,7 +386,7 @@ Please read our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing.
 
 ### Q1 2026 — Foundation & Core
 - [x] Agent creation and management engine
-- [x] Multi-LLM provider support (OpenAI, Anthropic, Google, local)
+- [x] Multi-LLM provider support (OpenAI, Anthropic, Google, Groq)
 - [x] Visual workflow builder
 - [x] Tool system with MCP protocol support
 - [x] Agent marketplace MVP
@@ -404,28 +394,28 @@ Please read our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing.
 - [x] Docker deployment
 
 ### Q2 2026 — Scale & Collaborate
-- [ ] Real-time agent collaboration and communication
-- [ ] Advanced team orchestration (debate, voting, consensus)
-- [ ] Enterprise SSO (SAML, OIDC, LDAP)
-- [ ] Audit logging and compliance reporting
-- [ ] Performance optimization and caching improvements
-- [ ] Agent analytics and cost tracking dashboard
+- [🔄] Real-time agent collaboration and communication
+- [🔄] Advanced team orchestration (debate, voting, consensus)
+- [🔄] Enterprise SSO (SAML, OIDC, LDAP)
+- [🔄] Audit logging and compliance reporting
+- [🔄] Performance optimization and caching improvements
+- [🔄] Agent analytics and cost tracking dashboard
 
 ### Q3 2026 — Ecosystem & Enterprise
-- [ ] Mobile companion app (React Native)
-- [ ] Custom model fine-tuning pipeline
-- [ ] Agent-to-agent communication protocol
-- [ ] Multi-tenant organization support with billing
-- [ ] Advanced RAG with hybrid search
-- [ ] Plugin SDK for third-party developers
+- [📅] Mobile companion app (React Native)
+- [📅] Custom model fine-tuning pipeline
+- [📅] Agent-to-agent communication protocol
+- [📅] Multi-tenant organization support with billing
+- [📅] Advanced RAG with hybrid search
+- [📅] Plugin SDK for third-party developers
 
 ### Q4 2026 — Platform Maturity
-- [ ] Agent monitoring and observability suite
-- [ ] Auto-scaling and self-healing infrastructure
-- [ ] Compliance certifications (SOC 2, GDPR)
-- [ ] Enterprise support tier
-- [ ] On-premise deployment option
-- [ ] Community governance model
+- [📅] Agent monitoring and observability suite
+- [📅] Auto-scaling and self-healing infrastructure
+- [📅] Compliance certifications (SOC 2, GDPR)
+- [📅] Enterprise support tier
+- [📅] On-premise deployment option
+- [📅] Community governance model
 
 ---
 
@@ -437,8 +427,8 @@ AgentForge is **MIT licensed**. See the [LICENSE](LICENSE) file for details.
 
 ## 👥 Contributors
 
-<a href="https://github.com/agentforge/agentforge/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=agentforge/agentforge" alt="Contributors" />
+<a href="https://github.com/sudarshandev-llm/agent-forge-prototype/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=sudarshandev-llm/agent-forge-prototype" alt="Contributors" />
 </a>
 
 **Want to become a contributor?** Check our [Contributing Guide](CONTRIBUTING.md) to get started.
@@ -447,17 +437,15 @@ AgentForge is **MIT licensed**. See the [LICENSE](LICENSE) file for details.
 
 ## 💬 Support
 
-- **GitHub Issues** — [Report bugs](https://github.com/agentforge/agentforge/issues/new/choose) or [request features](https://github.com/agentforge/agentforge/issues/new/choose)
-- **Discord Community** — [Join our Discord](https://discord.gg/agentforge)
-- **Documentation** — [agentforge.dev/docs](https://agentforge.dev/docs)
+- **GitHub Issues** — Report bugs or request features
+- **Documentation** — See the `/docs` directory
 - **Email** — support@agentforge.dev
-- **Twitter / X** — [@agentforge](https://twitter.com/agentforge)
 
 ---
 
 ## ⭐ Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=agentforge/agentforge&type=Date)](https://star-history.com/#agentforge/agentforge&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=sudarshandev-llm/agent-forge-prototype&type=Date)](https://star-history.com/#sudarshandev-llm/agent-forge-prototype&Date)
 
 ---
 
@@ -473,7 +461,23 @@ AgentForge stands on the shoulders of giants. Special thanks to:
 - **[Drizzle ORM](https://github.com/drizzle-team/drizzle-orm)** — For the lightweight, type-safe ORM
 - **[BullMQ](https://github.com/taskforcesh/bullmq)** — For robust job queue management
 - **[Vercel AI SDK](https://github.com/vercel/ai)** — For streamlined LLM integrations
-- **[All Contributors](https://github.com/agentforge/agentforge/graphs/contributors)** — Every contributor who helps make this project better
+- **[All Contributors](https://github.com/sudarshandev-llm/agent-forge-prototype/graphs/contributors)** — Every contributor who helps make this project better
+
+---
+
+## 📋 Repository Topics
+
+When setting up this repository on GitHub, add these topics:
+- `ai-agents`
+- `agent-framework`
+- `llm`
+- `nextjs`
+- `typescript`
+- `open-source`
+- `multi-agent`
+- `workflow-automation`
+- `nodejs`
+- `docker`
 
 ---
 
