@@ -1,0 +1,423 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  avatarUrl String?
+  clerkId   String?  @unique
+  roles     String[] @default(["user"])
+
+  apiKeys     ApiKey[]
+  ownedTeams  Team[]           @relation("TeamOwner")
+  teamMembers TeamMember[]
+  agents      Agent[]
+  tools       Tool[]
+  executions  Execution[]
+  workflows   Workflow[]
+  notifications Notification[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model ApiKey {
+  id        String   @id @default(cuid())
+  name      String
+  key       String   @unique
+  userId    String
+  scopes    String[] @default(["*"])
+  lastUsedAt DateTime?
+  expiresAt DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("api_keys")
+}
+
+model Team {
+  id          String   @id @default(cuid())
+  name        String
+  description String   @default("")
+  avatarUrl   String?
+  ownerId     String
+  isPersonal  Boolean  @default(false)
+  maxMembers  Int      @default(10)
+
+  owner   User         @relation("TeamOwner", fields: [ownerId], references: [id])
+  members TeamMember[]
+  agents  Agent[]
+
+  metadata Json?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@map("teams")
+}
+
+model TeamMember {
+  id     String @id @default(cuid())
+  teamId String
+  userId String
+  role   String @default("member")
+
+  joinedAt     DateTime  @default(now())
+  lastActiveAt DateTime?
+
+  team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([teamId, userId])
+  @@map("team_members")
+}
+
+model Agent {
+  id           String   @id @default(cuid())
+  name         String
+  description  String
+  avatarUrl    String?
+  status       String   @default("idle")
+  capabilities String[]
+  config       Json
+  teamId       String?
+  ownerId      String
+  isTemplate   Boolean  @default(false)
+  isPublic     Boolean  @default(false)
+  version      Int      @default(1)
+
+  metadata Json?
+
+  owner   User    @relation(fields: [ownerId], references: [id])
+  team    Team?   @relation(fields: [teamId], references: [id])
+  tools   AgentTool[]
+  versions AgentVersion[]
+  memories AgentMemory[]
+  executions Execution[]
+  conversations Conversation[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@map("agents")
+}
+
+model AgentVersion {
+  id        String   @id @default(cuid())
+  agentId   String
+  version   Int
+  config    Json
+  snapshot  Json
+  createdBy String
+
+  agent Agent @relation(fields: [agentId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([agentId, version])
+  @@map("agent_versions")
+}
+
+model Tool {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  type        String
+  config      Json
+  category    String   @default("general")
+  ownerId     String
+  isPublic    Boolean  @default(false)
+  isBuiltin   Boolean  @default(false)
+  version     Int      @default(1)
+
+  metadata Json?
+
+  owner    User        @relation(fields: [ownerId], references: [id])
+  agentTools AgentTool[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@map("tools")
+}
+
+model AgentTool {
+  agentId String
+  toolId  String
+
+  agent Agent @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  tool  Tool  @relation(fields: [toolId], references: [id], onDelete: Cascade)
+
+  assignedAt DateTime @default(now())
+
+  @@id([agentId, toolId])
+  @@map("agent_tools")
+}
+
+model Conversation {
+  id        String   @id @default(cuid())
+  agentId   String
+  title     String
+  metadata  Json?
+
+  agent    Agent     @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  messages Message[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("conversations")
+}
+
+model Message {
+  id             String   @id @default(cuid())
+  conversationId String
+  role           String
+  content        String
+  metadata       Json?
+  tokenCount     Int?
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@map("messages")
+}
+
+model AgentMemory {
+  id          String   @id @default(cuid())
+  agentId     String
+  type        String   @default("conversation")
+  key         String
+  content     String
+  embedding   Unsupported("vector(1536)?")
+  metadata    Json?
+  importance  Float    @default(0.5)
+  accessCount Int      @default(0)
+
+  agent Agent @relation(fields: [agentId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  expiresAt DateTime?
+
+  @@map("agent_memory")
+}
+
+model Execution {
+  id           String   @id @default(cuid())
+  type         String
+  status       String   @default("pending")
+  trigger      String   @default("manual")
+  input        Json
+  output       Json?
+  error        String?
+  duration     Int?
+  tokenUsage   Json?
+  cost         Float?
+  ownerId      String
+  agentId      String?
+  workflowId   String?
+  workflowRunId String?
+  metadata     Json?
+
+  owner    User           @relation(fields: [ownerId], references: [id])
+  agent    Agent?         @relation(fields: [agentId], references: [id])
+  logs     ExecutionLog[]
+
+  createdAt    DateTime   @default(now())
+  completedAt  DateTime?
+
+  @@map("executions")
+}
+
+model ExecutionLog {
+  id          String   @id @default(cuid())
+  executionId String
+  level       String   @default("info")
+  message     String
+  source      String   @default("system")
+  data        Json?
+
+  execution Execution @relation(fields: [executionId], references: [id], onDelete: Cascade)
+
+  timestamp DateTime @default(now())
+
+  @@map("execution_logs")
+}
+
+model Workflow {
+  id            String   @id @default(cuid())
+  name          String
+  description   String   @default("")
+  triggerType   String
+  triggerConfig Json     @default("{}")
+  status        String   @default("draft")
+  ownerId       String
+  teamId        String?
+  version       Int      @default(1)
+  metadata      Json?
+
+  owner User?   @relation(fields: [ownerId], references: [id])
+  team  Team?   @relation(fields: [teamId], references: [id])
+
+  nodes WorkflowNode[]
+  edges WorkflowEdge[]
+  runs  WorkflowRun[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@map("workflows")
+}
+
+model WorkflowNode {
+  id           String   @id @default(cuid())
+  workflowId   String
+  type         String
+  label        String
+  config       Json     @default("{}")
+  position     Json
+  inputMapping Json     @default("{}")
+  outputMapping Json    @default("{}")
+  metadata     Json?
+
+  workflow Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("workflow_nodes")
+}
+
+model WorkflowEdge {
+  id           String  @id @default(cuid())
+  workflowId   String
+  sourceNodeId String
+  targetNodeId String
+  condition    String?
+  label        String?
+
+  workflow Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+
+  @@map("workflow_edges")
+}
+
+model WorkflowRun {
+  id           String   @id @default(cuid())
+  workflowId   String
+  status       String   @default("pending")
+  trigger      String   @default("manual")
+  input        Json     @default("{}")
+  output       Json?
+  error        String?
+  currentNodeId String?
+  nodeResults  Json     @default("{}")
+
+  workflow Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+
+  startedAt   DateTime?
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+
+  @@map("workflow_runs")
+}
+
+model MarketplaceListing {
+  id               String   @id @default(cuid())
+  name             String
+  description      String
+  shortDescription String
+  type             String
+  status           String   @default("draft")
+  price            Float    @default(0)
+  currency         String   @default("USD")
+  authorId         String
+  sourceId         String
+  sourceType       String
+  category         String
+  tags             String[] @default([])
+  mediaUrls        String[] @default([])
+  documentationUrl String?
+  version          String   @default("1.0.0")
+  downloads        Int      @default(0)
+  rating           Float    @default(0)
+  reviewCount      Int      @default(0)
+  metadata         Json?
+
+  author User              @relation(fields: [authorId], references: [id])
+  reviews MarketplaceReview[]
+
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  publishedAt  DateTime?
+
+  @@map("marketplace_listings")
+}
+
+model MarketplaceReview {
+  id        String   @id @default(cuid())
+  listingId String
+  userId    String
+  rating    Int
+  title     String
+  content   String
+  pros      String[] @default([])
+  cons      String[] @default([])
+
+  listing MarketplaceListing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  user    User              @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([listingId, userId])
+  @@map("marketplace_reviews")
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  type      String
+  title     String
+  message   String
+  data      Json?
+  readAt    DateTime?
+  channel   String   @default("in_app")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@map("notifications")
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  action    String
+  entityType String
+  entityId  String
+  userId    String?
+  metadata  Json?
+  ipAddress String?
+  userAgent String?
+
+  createdAt DateTime @default(now())
+
+  @@map("audit_logs")
+}
