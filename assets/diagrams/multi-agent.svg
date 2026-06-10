@@ -1,0 +1,185 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0e27"/>
+      <stop offset="100%" stop-color="#141832"/>
+    </linearGradient>
+    <linearGradient id="user" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="orchestrator" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+    <linearGradient id="agentCEO" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#f87171"/>
+    </linearGradient>
+    <linearGradient id="agentCTO" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#60a5fa"/>
+    </linearGradient>
+    <linearGradient id="agentDev" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#34d399"/>
+    </linearGradient>
+    <linearGradient id="agentDesign" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#fbbf24"/>
+    </linearGradient>
+    <linearGradient id="agentMktg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ec4899"/>
+      <stop offset="100%" stop-color="#f472b6"/>
+    </linearGradient>
+    <linearGradient id="bus" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="compMemory" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#14b8a6"/>
+      <stop offset="100%" stop-color="#2dd4bf"/>
+    </linearGradient>
+    <linearGradient id="compTools" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#fb923c"/>
+    </linearGradient>
+    <linearGradient id="compLLM" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#fbbf24"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6366f1"/>
+    </marker>
+    <marker id="arrowCyan" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#06b6d4"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#10b981"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e2448" stroke-width="0.5"/>
+  </pattern>
+  <rect width="1200" height="900" fill="url(#grid)" opacity="0.5"/>
+  <text x="600" y="35" text-anchor="middle" fill="#e2e8f0" font-family="monospace" font-size="20" font-weight="bold" letter-spacing="2">MULTI-AGENT COMMUNICATION</text>
+  <line x1="320" y1="45" x2="880" y2="45" stroke="#6366f1" stroke-width="1" opacity="0.5"/>
+  <rect x="475" y="60" width="250" height="55" rx="14" fill="url(#user)" filter="url(#shadow)"/>
+  <text x="600" y="85" text-anchor="middle" fill="#fff" font-family="monospace" font-size="14" font-weight="bold">👤 User</text>
+  <text x="600" y="103" text-anchor="middle" fill="#c7d2fe" font-family="monospace" font-size="10">Web / Mobile client</text>
+  <line x1="600" y1="115" x2="600" y2="175" stroke="#6366f1" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="425" y="180" width="350" height="60" rx="16" fill="url(#orchestrator)" filter="url(#shadow)" stroke="#a78bfa" stroke-width="2"/>
+  <text x="600" y="207" text-anchor="middle" fill="#fff" font-family="monospace" font-size="15" font-weight="bold">🎯 Orchestrator Agent</text>
+  <text x="600" y="226" text-anchor="middle" fill="#ddd6fe" font-family="monospace" font-size="10">Task planning · Delegation · Result aggregation</text>
+  <line x1="520" y1="240" x2="250" y2="330" stroke="#8b5cf6" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="555" y1="240" x2="400" y2="330" stroke="#8b5cf6" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="600" y1="240" x2="600" y2="330" stroke="#8b5cf6" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="645" y1="240" x2="800" y2="330" stroke="#8b5cf6" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="680" y1="240" x2="950" y2="330" stroke="#8b5cf6" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="140" y="340" width="220" height="60" rx="12" fill="url(#agentCEO)" filter="url(#shadow)"/>
+  <text x="250" y="363" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13" font-weight="bold">👑 CEO Agent</text>
+  <text x="250" y="383" text-anchor="middle" fill="#fecaca" font-family="monospace" font-size="9">High-level strategy · Planning</text>
+  <rect x="290" y="340" width="220" height="60" rx="12" fill="url(#agentCTO)" filter="url(#shadow)"/>
+  <text x="400" y="363" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13" font-weight="bold">🔬 CTO Agent</text>
+  <text x="400" y="383" text-anchor="middle" fill="#dbeafe" font-family="monospace" font-size="9">Architecture · Technical design</text>
+  <rect x="490" y="340" width="220" height="60" rx="12" fill="url(#agentDev)" filter="url(#shadow)"/>
+  <text x="600" y="363" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13" font-weight="bold">💻 Developer Agent</text>
+  <text x="600" y="383" text-anchor="middle" fill="#d1fae5" font-family="monospace" font-size="9">Code generation · Implementation</text>
+  <rect x="690" y="340" width="220" height="60" rx="12" fill="url(#agentDesign)" filter="url(#shadow)"/>
+  <text x="800" y="363" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13" font-weight="bold">🎨 Designer Agent</text>
+  <text x="800" y="383" text-anchor="middle" fill="#fef3c7" font-family="monospace" font-size="9">UI/UX · Visual design</text>
+  <rect x="840" y="340" width="220" height="60" rx="12" fill="url(#agentMktg)" filter="url(#shadow)"/>
+  <text x="950" y="363" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13" font-weight="bold">📢 Marketing Agent</text>
+  <text x="950" y="383" text-anchor="middle" fill="#fbcfe8" font-family="monospace" font-size="9">Content · SEO · Campaigns</text>
+  <text x="70" y="460" fill="#6366f1" font-family="monospace" font-size="11" font-weight="bold" letter-spacing="1">AGENT INTERNALS</text>
+  <line x1="70" y1="465" x2="210" y2="465" stroke="#6366f1" stroke-width="1" opacity="0.3"/>
+  <rect x="140" y="475" width="220" height="50" rx="8" fill="url(#compMemory)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="250" y="496" text-anchor="middle" fill="#fff" font-family="monospace" font-size="11" font-weight="bold">🧠 Memory</text>
+  <text x="250" y="512" text-anchor="middle" fill="#ccfbf1" font-family="monospace" font-size="8">Conversation history · Vectors</text>
+  <rect x="290" y="475" width="220" height="50" rx="8" fill="url(#compMemory)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="400" y="496" text-anchor="middle" fill="#fff" font-family="monospace" font-size="11" font-weight="bold">🧠 Memory</text>
+  <text x="400" y="512" text-anchor="middle" fill="#ccfbf1" font-family="monospace" font-size="8">Conversation history · Vectors</text>
+  <rect x="490" y="475" width="220" height="50" rx="8" fill="url(#compMemory)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="600" y="496" text-anchor="middle" fill="#fff" font-family="monospace" font-size="11" font-weight="bold">🧠 Memory</text>
+  <text x="600" y="512" text-anchor="middle" fill="#ccfbf1" font-family="monospace" font-size="8">Conversation history · Vectors</text>
+  <rect x="690" y="475" width="220" height="50" rx="8" fill="url(#compMemory)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="800" y="496" text-anchor="middle" fill="#fff" font-family="monospace" font-size="11" font-weight="bold">🧠 Memory</text>
+  <text x="800" y="512" text-anchor="middle" fill="#ccfbf1" font-family="monospace" font-size="8">Conversation history · Vectors</text>
+  <rect x="840" y="475" width="220" height="50" rx="8" fill="url(#compMemory)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="950" y="496" text-anchor="middle" fill="#fff" font-family="monospace" font-size="11" font-weight="bold">🧠 Memory</text>
+  <text x="950" y="512" text-anchor="middle" fill="#ccfbf1" font-family="monospace" font-size="8">Conversation history · Vectors</text>
+  <rect x="140" y="535" width="220" height="50" rx="8" fill="url(#compTools)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="250" y="556" text-anchor="middle" fill="#fff" font-family="monospace" font-size="11" font-weight="bold">🔧 Tools</text>
+  <text x="250" y="572" text-anchor="middle" fill="#ffedd5" font-family="monospace" font-size="8">API calls · Code execution</text>
+  <rect x="290" y="535" width="220" height="50" rx="8" fill="url(#compTools)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="400" y="556" text-anchor="middle" fill="#fff" font-family="monospace" font-size="11" font-weight="bold">🔧 Tools</text>
+  <text x="400" y="572" text-anchor="middle" fill="#ffedd5" font-family="monospace" font-size="8">API calls · Code execution</text>
+  <rect x="490" y="535" width="220" height="50" rx="8" fill="url(#compTools)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="600" y="556" text-anchor="middle" fill="#fff" font-family="monospace" font-size="11" font-weight="bold">🔧 Tools</text>
+  <text x="600" y="572" text-anchor="middle" fill="#ffedd5" font-family="monospace" font-size="8">API calls · Code execution</text>
+  <rect x="690" y="535" width="220" height="50" rx="8" fill="url(#compTools)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="800" y="556" text-anchor="middle" fill="#fff" font-family="monospace" font-size="11" font-weight="bold">🔧 Tools</text>
+  <text x="800" y="572" text-anchor="middle" fill="#ffedd5" font-family="monospace" font-size="8">API calls · Code execution</text>
+  <rect x="840" y="535" width="220" height="50" rx="8" fill="url(#compTools)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="950" y="556" text-anchor="middle" fill="#fff" font-family="monospace" font-size="11" font-weight="bold">🔧 Tools</text>
+  <text x="950" y="572" text-anchor="middle" fill="#ffedd5" font-family="monospace" font-size="8">API calls · Code execution</text>
+  <rect x="140" y="595" width="220" height="50" rx="8" fill="url(#compLLM)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="250" y="616" text-anchor="middle" fill="#fff" font-family="monospace" font-size="11" font-weight="bold">🤖 LLM</text>
+  <text x="250" y="632" text-anchor="middle" fill="#fef3c7" font-family="monospace" font-size="8">GPT-4 · Claude · Llama</text>
+  <rect x="290" y="595" width="220" height="50" rx="8" fill="url(#compLLM)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="400" y="616" text-anchor="middle" fill="#fff" font-family="monospace" font-size="11" font-weight="bold">🤖 LLM</text>
+  <text x="400" y="632" text-anchor="middle" fill="#fef3c7" font-family="monospace" font-size="8">GPT-4 · Claude · Llama</text>
+  <rect x="490" y="595" width="220" height="50" rx="8" fill="url(#compLLM)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="600" y="616" text-anchor="middle" fill="#fff" font-family="monospace" font-size="11" font-weight="bold">🤖 LLM</text>
+  <text x="600" y="632" text-anchor="middle" fill="#fef3c7" font-family="monospace" font-size="8">GPT-4 · Claude · Llama</text>
+  <rect x="690" y="595" width="220" height="50" rx="8" fill="url(#compLLM)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="800" y="616" text-anchor="middle" fill="#fff" font-family="monospace" font-size="11" font-weight="bold">🤖 LLM</text>
+  <text x="800" y="632" text-anchor="middle" fill="#fef3c7" font-family="monospace" font-size="8">GPT-4 · Claude · Llama</text>
+  <rect x="840" y="595" width="220" height="50" rx="8" fill="url(#compLLM)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="950" y="616" text-anchor="middle" fill="#fff" font-family="monospace" font-size="11" font-weight="bold">🤖 LLM</text>
+  <text x="950" y="632" text-anchor="middle" fill="#fef3c7" font-family="monospace" font-size="8">GPT-4 · Claude · Llama</text>
+  <text x="70" y="690" fill="#06b6d4" font-family="monospace" font-size="11" font-weight="bold" letter-spacing="1">MESSAGE BUS</text>
+  <line x1="70" y1="695" x2="200" y2="695" stroke="#06b6d4" stroke-width="1" opacity="0.3"/>
+  <rect x="140" y="710" width="920" height="36" rx="18" fill="url(#bus)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="600" y="733" text-anchor="middle" fill="#fff" font-family="monospace" font-size="13" font-weight="bold">📨  Inter-Agent Message Bus (Redis Pub/Sub · RabbitMQ)</text>
+  <line x1="250" y1="645" x2="250" y2="710" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowCyan)" opacity="0.6"/>
+  <line x1="400" y1="645" x2="400" y2="710" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowCyan)" opacity="0.6"/>
+  <line x1="600" y1="645" x2="600" y2="710" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowCyan)" opacity="0.6"/>
+  <line x1="800" y1="645" x2="800" y2="710" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowCyan)" opacity="0.6"/>
+  <line x1="950" y1="645" x2="950" y2="710" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowCyan)" opacity="0.6"/>
+  <line x1="250" y1="400" x2="250" y2="475" stroke="#ef4444" stroke-width="1" stroke-dasharray="4,3" opacity="0.3"/>
+  <line x1="400" y1="400" x2="400" y2="475" stroke="#3b82f6" stroke-width="1" stroke-dasharray="4,3" opacity="0.3"/>
+  <line x1="600" y1="400" x2="600" y2="475" stroke="#10b981" stroke-width="1" stroke-dasharray="4,3" opacity="0.3"/>
+  <line x1="800" y1="400" x2="800" y2="475" stroke="#f59e0b" stroke-width="1" stroke-dasharray="4,3" opacity="0.3"/>
+  <line x1="950" y1="400" x2="950" y2="475" stroke="#ec4899" stroke-width="1" stroke-dasharray="4,3" opacity="0.3"/>
+  <text x="70" y="790" fill="#10b981" font-family="monospace" font-size="11" font-weight="bold" letter-spacing="1">DELEGATION FLOW</text>
+  <line x1="70" y1="795" x2="210" y2="795" stroke="#10b981" stroke-width="1" opacity="0.3"/>
+  <path d="M 400 400 Q 220 420 250 475" stroke="#10b981" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowGreen)" opacity="0.5" fill="none"/>
+  <text x="288" y="418" fill="#10b981" font-family="monospace" font-size="8" opacity="0.7">delegates</text>
+  <path d="M 800 400 Q 650 420 600 475" stroke="#10b981" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowGreen)" opacity="0.5" fill="none"/>
+  <text x="680" y="418" fill="#10b981" font-family="monospace" font-size="8" opacity="0.7">delegates</text>
+  <text x="70" y="845" fill="#8b5cf6" font-family="monospace" font-size="11" font-weight="bold" letter-spacing="1">RESULT AGGREGATION</text>
+  <line x1="70" y1="850" x2="230" y2="850" stroke="#8b5cf6" stroke-width="1" opacity="0.3"/>
+  <path d="M 250 595 Q 250 240 520 240" stroke="#10b981" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowGreen)" opacity="0.4" fill="none"/>
+  <path d="M 400 595 Q 400 240 555 240" stroke="#10b981" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowGreen)" opacity="0.4" fill="none"/>
+  <path d="M 600 595 Q 600 240 600 240" stroke="#10b981" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowGreen)" opacity="0.4" fill="none"/>
+  <path d="M 800 595 Q 800 240 645 240" stroke="#10b981" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowGreen)" opacity="0.4" fill="none"/>
+  <path d="M 950 595 Q 900 240 680 240" stroke="#10b981" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowGreen)" opacity="0.4" fill="none"/>
+  <rect x="850" y="770" width="300" height="105" rx="10" fill="#1a1f3a" stroke="#2a2f4a" stroke-width="1" opacity="0.95"/>
+  <text x="1000" y="793" text-anchor="middle" fill="#e2e8f0" font-family="monospace" font-size="11" font-weight="bold">LEGEND</text>
+  <line x1="880" y1="800" x2="1120" y2="800" stroke="#2a2f4a" stroke-width="1"/>
+  <rect x="870" y="813" width="12" height="12" rx="3" fill="url(#orchestrator)"/>
+  <text x="895" y="824" fill="#94a3b8" font-family="monospace" font-size="10">Orchestrator</text>
+  <rect x="870" y="835" width="12" height="12" rx="3" fill="url(#agentCEO)"/>
+  <text x="895" y="846" fill="#94a3b8" font-family="monospace" font-size="10">Specialist agent</text>
+  <rect x="870" y="857" width="12" height="12" rx="3" fill="url(#bus)"/>
+  <text x="895" y="868" fill="#94a3b8" font-family="monospace" font-size="10">Message bus</text>
+</svg>

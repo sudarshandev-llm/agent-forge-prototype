@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="50%" stop-color="#1E1B4B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="50%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366F1" stop-opacity="0.15"/>
+      <stop offset="50%" stop-color="#06B6D4" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#6366F1" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#6366F1" stroke-width="0.3" opacity="0.12"/>
+    </pattern>
+    <pattern id="gridLarge" width="160" height="160" patternUnits="userSpaceOnUse">
+      <path d="M 160 0 L 0 0 0 160" fill="none" stroke="#6366F1" stroke-width="0.5" opacity="0.08"/>
+    </pattern>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="60" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1280" height="640" fill="url(#bgGrad)"/>
+
+  <!-- Grid patterns -->
+  <rect width="1280" height="640" fill="url(#grid)"/>
+  <rect width="1280" height="640" fill="url(#gridLarge)"/>
+
+  <!-- Glow orbs -->
+  <circle cx="300" cy="200" r="200" fill="url(#glowGrad)" filter="url(#glow)"/>
+  <circle cx="1000" cy="450" r="180" fill="url(#glowGrad)" filter="url(#glow)"/>
+
+  <!-- Decorative circuit lines -->
+  <g opacity="0.06" stroke="url(#logoGrad)" stroke-width="1.5" fill="none">
+    <path d="M0 120 L200 120 L250 170 L350 170"/>
+    <path d="M1280 520 L1080 520 L1030 470 L930 470"/>
+    <path d="M0 500 L150 500 L200 450 L300 450"/>
+    <path d="M1280 140 L1100 140 L1050 190 L950 190"/>
+    <!-- Connection dots -->
+    <circle cx="200" cy="120" r="3" fill="#6366F1" opacity="0.3"/>
+    <circle cx="250" cy="170" r="3" fill="#8B5CF6" opacity="0.3"/>
+    <circle cx="1080" cy="520" r="3" fill="#6366F1" opacity="0.3"/>
+    <circle cx="1030" cy="470" r="3" fill="#8B5CF6" opacity="0.3"/>
+  </g>
+
+  <!-- Logo Icon -->
+  <g transform="translate(590, 140)">
+    <circle cx="50" cy="50" r="38" fill="none" stroke="url(#logoGrad)" stroke-width="4.5"/>
+    <circle cx="50" cy="50" r="18" fill="url(#logoGrad)" opacity="0.12"/>
+    <circle cx="50" cy="7" r="3.5" fill="#6366F1"/>
+    <circle cx="50" cy="93" r="3.5" fill="#8B5CF6"/>
+    <circle cx="7" cy="50" r="3.5" fill="#6366F1"/>
+    <circle cx="93" cy="50" r="3.5" fill="#8B5CF6"/>
+    <circle cx="22.5" cy="22.5" r="3" fill="#06B6D4"/>
+    <circle cx="77.5" cy="77.5" r="3" fill="#06B6D4"/>
+    <circle cx="22.5" cy="77.5" r="3" fill="#06B6D4"/>
+    <circle cx="77.5" cy="22.5" r="3" fill="#06B6D4"/>
+    <line x1="50" y1="10.5" x2="50" y2="32" stroke="#6366F1" stroke-width="2.5" opacity="0.5"/>
+    <line x1="50" y1="68" x2="50" y2="89.5" stroke="#8B5CF6" stroke-width="2.5" opacity="0.5"/>
+    <line x1="10.5" y1="50" x2="32" y2="50" stroke="#6366F1" stroke-width="2.5" opacity="0.5"/>
+    <line x1="68" y1="50" x2="89.5" y2="50" stroke="#8B5CF6" stroke-width="2.5" opacity="0.5"/>
+    <line x1="50" y1="32" x2="50" y2="42" stroke="#06B6D4" stroke-width="2" opacity="0.6"/>
+    <line x1="50" y1="58" x2="50" y2="68" stroke="#06B6D4" stroke-width="2" opacity="0.6"/>
+    <line x1="32" y1="50" x2="42" y2="50" stroke="#06B6D4" stroke-width="2" opacity="0.6"/>
+    <line x1="58" y1="50" x2="68" y2="50" stroke="#06B6D4" stroke-width="2" opacity="0.6"/>
+    <circle cx="50" cy="50" r="6" fill="url(#logoGrad)"/>
+    <circle cx="48" cy="48" r="2.5" fill="white" opacity="0.35"/>
+  </g>
+
+  <!-- Brand name -->
+  <text x="640" y="300" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="58" font-weight="700" fill="url(#textGrad)" text-anchor="middle" letter-spacing="-1">AgentForge</text>
+
+  <!-- Tagline -->
+  <text x="640" y="370" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="22" fill="#94A3B8" text-anchor="middle" letter-spacing="4" font-weight="400">BUILD INTELLIGENT AI AGENTS</text>
+
+  <!-- Divider -->
+  <line x1="540" y1="400" x2="740" y2="400" stroke="#334155" stroke-width="1" opacity="0.5"/>
+
+  <!-- Bottom bar -->
+  <rect x="0" y="580" width="1280" height="60" fill="#6366F1" opacity="0.06"/>
+  <line x1="0" y1="580" x2="1280" y2="580" stroke="#334155" stroke-width="0.5" opacity="0.3"/>
+
+  <!-- Bottom bar text -->
+  <text x="640" y="615" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" fill="#64748B" text-anchor="middle" letter-spacing="3" font-weight="400">
+    <tspan fill="#6366F1" font-weight="600">Open Source</tspan>
+    <tspan fill="#475569">  •  </tspan>
+    <tspan fill="#8B5CF6" font-weight="600">MIT License</tspan>
+    <tspan fill="#475569">  •  </tspan>
+    <tspan fill="#06B6D4" font-weight="600">Production Ready</tspan>
+  </text>
+</svg>

@@ -1,0 +1,214 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0e27"/>
+      <stop offset="100%" stop-color="#141832"/>
+    </linearGradient>
+    <linearGradient id="input" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="process" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#60a5fa"/>
+    </linearGradient>
+    <linearGradient id="memory" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#14b8a6"/>
+      <stop offset="100%" stop-color="#2dd4bf"/>
+    </linearGradient>
+    <linearGradient id="llm" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#fbbf24"/>
+    </linearGradient>
+    <linearGradient id="decision" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#f87171"/>
+    </linearGradient>
+    <linearGradient id="tool" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#fb923c"/>
+    </linearGradient>
+    <linearGradient id="response" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#34d399"/>
+    </linearGradient>
+    <linearGradient id="output" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+    <linearGradient id="store" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6366f1"/>
+    </marker>
+    <marker id="arrowNo" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ef4444"/>
+    </marker>
+    <marker id="arrowYes" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#10b981"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="900" fill="url(#bg)"/>
+
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e2448" stroke-width="0.5"/>
+  </pattern>
+  <rect width="1200" height="900" fill="url(#grid)" opacity="0.5"/>
+
+  <!-- Title -->
+  <text x="600" y="35" text-anchor="middle" fill="#e2e8f0" font-family="monospace" font-size="20" font-weight="bold" letter-spacing="2">AGENT EXECUTION WORKFLOW</text>
+  <line x1="350" y1="45" x2="850" y2="45" stroke="#6366f1" stroke-width="1" opacity="0.5"/>
+
+  <!-- ==================== FLOW BOXES ==================== -->
+
+  <!-- STEP 1: User Input -->
+  <rect x="475" y="65" width="250" height="50" rx="12" fill="url(#input)" filter="url(#shadow)"/>
+  <text x="600" y="88" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12" font-weight="bold">1️⃣  User Input</text>
+  <text x="600" y="103" text-anchor="middle" fill="#c7d2fe" font-family="monospace" font-size="9">Message from client</text>
+
+  <!-- Arrow 1->2 -->
+  <line x1="600" y1="115" x2="600" y2="160" stroke="#6366f1" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- STEP 2: Agent Service -->
+  <rect x="475" y="165" width="250" height="50" rx="12" fill="url(#process)" filter="url(#shadow)"/>
+  <text x="600" y="188" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12" font-weight="bold">2️⃣  Agent Service</text>
+  <text x="600" y="203" text-anchor="middle" fill="#dbeafe" font-family="monospace" font-size="9">Route to agent handler</text>
+
+  <!-- Arrow 2 -> Memory Retrieval + 2->3 -->
+  <line x1="600" y1="215" x2="600" y2="260" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="600" y1="240" x2="250" y2="240" stroke="#14b8a6" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrow)" opacity="0.6"/>
+
+  <!-- STEP 3: Memory Retrieval -->
+  <rect x="100" y="260" width="250" height="50" rx="12" fill="url(#memory)" filter="url(#shadow)"/>
+  <text x="225" y="283" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12" font-weight="bold">📚 Memory Retrieval</text>
+  <text x="225" y="298" text-anchor="middle" fill="#ccfbf1" font-family="monospace" font-size="9">Vector DB (Pinecone / pgvector)</text>
+
+  <!-- Arrow Memory -> LLM -->
+  <line x1="350" y1="285" x2="475" y2="285" stroke="#14b8a6" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- STEP 4: LLM Provider -->
+  <rect x="475" y="260" width="250" height="50" rx="12" fill="url(#llm)" filter="url(#shadow)"/>
+  <text x="600" y="283" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12" font-weight="bold">3️⃣  LLM Provider</text>
+  <text x="600" y="298" text-anchor="middle" fill="#fef3c7" font-family="monospace" font-size="9">GPT-4 · Claude · Llama</text>
+
+  <!-- Arrow 4 -> 5 -->
+  <line x1="600" y1="310" x2="600" y2="360" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- STEP 5: Tool Detection -->
+  <polygon points="600,365 715,415 600,465 485,415" fill="url(#decision)" filter="url(#shadow)"/>
+  <text x="600" y="412" text-anchor="middle" fill="#fff" font-family="monospace" font-size="11" font-weight="bold">4️⃣  Tool</text>
+  <text x="600" y="427" text-anchor="middle" fill="#fff" font-family="monospace" font-size="11" font-weight="bold">Detected?</text>
+
+  <!-- Arrow YES -> Tool Execution -->
+  <line x1="715" y1="415" x2="850" y2="415" stroke="#10b981" stroke-width="2.5" marker-end="url(#arrowYes)"/>
+  <rect x="820" y="395" width="34" height="16" rx="4" fill="#065f46" opacity="0.9"/>
+  <text x="837" y="407" text-anchor="middle" fill="#6ee7b7" font-family="monospace" font-size="9" font-weight="bold">YES</text>
+
+  <!-- Arrow NO -> Response Formatter -->
+  <line x1="600" y1="465" x2="600" y2="560" stroke="#ef4444" stroke-width="2.5" marker-end="url(#arrowNo)"/>
+  <rect x="550" y="508" width="34" height="16" rx="4" fill="#7f1d1d" opacity="0.9"/>
+  <text x="567" y="520" text-anchor="middle" fill="#fca5a5" font-family="monospace" font-size="9" font-weight="bold">NO</text>
+
+  <!-- STEP 6: Tool Execution -->
+  <rect x="850" y="390" width="250" height="50" rx="12" fill="url(#tool)" filter="url(#shadow)"/>
+  <text x="975" y="413" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12" font-weight="bold">5️⃣  Tool Execution</text>
+  <text x="975" y="428" text-anchor="middle" fill="#ffedd5" font-family="monospace" font-size="9">Code · API · Search · File</text>
+
+  <!-- Arrow: Tool Execution -> Back to LLM -->
+  <path d="M 850 415 L 715 415" stroke="#f97316" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arrow)"/>
+  <rect x="730" y="395" width="80" height="16" rx="4" fill="#7c2d12" opacity="0.9"/>
+  <text x="770" y="407" text-anchor="middle" fill="#fdba74" font-family="monospace" font-size="8" font-weight="bold">LOOP BACK</text>
+
+  <!-- STEP 7: Response Formatter -->
+  <rect x="475" y="570" width="250" height="50" rx="12" fill="url(#response)" filter="url(#shadow)"/>
+  <text x="600" y="593" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12" font-weight="bold">6️⃣  Response Formatter</text>
+  <text x="600" y="608" text-anchor="middle" fill="#d1fae5" font-family="monospace" font-size="9">Format final output</text>
+
+  <!-- Arrow 7 -> Memory Storage -->
+  <line x1="600" y1="620" x2="600" y2="665" stroke="#10b981" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="600" y1="645" x2="250" y2="645" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrow)" opacity="0.6"/>
+
+  <!-- STEP 8: Memory Storage -->
+  <rect x="100" y="630" width="250" height="50" rx="12" fill="url(#store)" filter="url(#shadow)"/>
+  <text x="225" y="653" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12" font-weight="bold">💾 Memory Storage</text>
+  <text x="225" y="668" text-anchor="middle" fill="#cffafe" font-family="monospace" font-size="9">Save to conversation history</text>
+
+  <!-- Arrow 7 -> 9 -->
+  <line x1="600" y1="670" x2="600" y2="730" stroke="#10b981" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- STEP 9: Final Response -->
+  <rect x="475" y="735" width="250" height="50" rx="12" fill="url(#output)" filter="url(#shadow)"/>
+  <text x="600" y="758" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12" font-weight="bold">7️⃣  Final Response</text>
+  <text x="600" y="773" text-anchor="middle" fill="#ddd6fe" font-family="monospace" font-size="9">Structured result</text>
+
+  <!-- Arrow 9 -> User via WebSocket -->
+  <line x1="600" y1="785" x2="600" y2="830" stroke="#8b5cf6" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- STEP 10: User via WebSocket -->
+  <rect x="420" y="835" width="360" height="40" rx="20" fill="url(#input)" filter="url(#shadow)"/>
+  <text x="600" y="855" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12" font-weight="bold">👤  Deliver to Client via WebSocket</text>
+  <text x="600" y="868" text-anchor="middle" fill="#c7d2fe" font-family="monospace" font-size="9">Real-time push</text>
+
+  <!-- ==================== ASIDE: Vector DB Icon ==================== -->
+  <rect x="100" y="490" width="250" height="55" rx="10" fill="#1a1f3a" stroke="#14b8a6" stroke-width="1" filter="url(#shadow)"/>
+  <text x="225" y="512" text-anchor="middle" fill="#2dd4bf" font-family="monospace" font-size="10" font-weight="bold">🗄️ Vector Database</text>
+  <text x="225" y="528" text-anchor="middle" fill="#64748b" font-family="monospace" font-size="9">Semantic memory search</text>
+  <text x="225" y="540" text-anchor="middle" fill="#64748b" font-family="monospace" font-size="9">Pinecone / pgvector / Weaviate</text>
+
+  <line x1="225" y1="310" x2="225" y2="490" stroke="#14b8a6" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow)" opacity="0.4"/>
+  <line x1="225" y1="630" x2="225" y2="545" stroke="#06b6d4" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow)" opacity="0.4"/>
+
+  <!-- ==================== LEGEND ==================== -->
+  <rect x="850" y="570" width="300" height="240" rx="10" fill="#1a1f3a" stroke="#2a2f4a" stroke-width="1" opacity="0.95" filter="url(#shadow)"/>
+  <text x="1000" y="595" text-anchor="middle" fill="#e2e8f0" font-family="monospace" font-size="11" font-weight="bold">LEGEND</text>
+  <line x1="880" y1="602" x2="1120" y2="602" stroke="#2a2f4a" stroke-width="1"/>
+
+  <rect x="870" y="615" width="16" height="16" rx="4" fill="url(#input)"/>
+  <text x="900" y="628" fill="#94a3b8" font-family="monospace" font-size="10">Input / Output</text>
+
+  <rect x="870" y="640" width="16" height="16" rx="4" fill="url(#process)"/>
+  <text x="900" y="653" fill="#94a3b8" font-family="monospace" font-size="10">Processing step</text>
+
+  <rect x="870" y="665" width="16" height="16" rx="4" fill="url(#memory)"/>
+  <text x="900" y="678" fill="#94a3b8" font-family="monospace" font-size="10">Memory (Vector DB)</text>
+
+  <rect x="870" y="690" width="16" height="16" rx="4" fill="url(#llm)"/>
+  <text x="900" y="703" fill="#94a3b8" font-family="monospace" font-size="10">LLM Provider</text>
+
+  <polygon points="878,718 886,710 894,718 886,726" fill="url(#decision)"/>
+  <text x="900" y="722" fill="#94a3b8" font-family="monospace" font-size="10">Decision diamond</text>
+
+  <rect x="870" y="740" width="16" height="16" rx="4" fill="url(#tool)"/>
+  <text x="900" y="753" fill="#94a3b8" font-family="monospace" font-size="10">Tool execution</text>
+
+  <rect x="870" y="765" width="16" height="16" rx="4" fill="url(#store)"/>
+  <text x="900" y="778" fill="#94a3b8" font-family="monospace" font-size="10">Database / Storage</text>
+
+  <line x1="870" y1="790" x2="920" y2="790" stroke="#f97316" stroke-width="2" stroke-dasharray="6,3"/>
+  <text x="900" y="794" fill="#94a3b8" font-family="monospace" font-size="10">Loop / async path</text>
+
+  <!-- Phase labels -->
+  <text x="80" y="105" fill="#64748b" font-family="monospace" font-size="9" letter-spacing="1">PHASE 1: INPUT</text>
+  <text x="80" y="210" fill="#64748b" font-family="monospace" font-size="9" letter-spacing="1">PHASE 2: CONTEXT</text>
+  <text x="80" y="355" fill="#64748b" font-family="monospace" font-size="9" letter-spacing="1">PHASE 3: INFERENCE</text>
+  <text x="80" y="520" fill="#64748b" font-family="monospace" font-size="9" letter-spacing="1">PHASE 4: ACTION</text>
+  <text x="80" y="700" fill="#64748b" font-family="monospace" font-size="9" letter-spacing="1">PHASE 5: OUTPUT</text>
+
+  <!-- Phase lines -->
+  <line x1="80" y1="112" x2="475" y2="112" stroke="#6366f1" stroke-width="0.5" stroke-dasharray="4,4" opacity="0.3"/>
+  <line x1="80" y1="360" x2="475" y2="360" stroke="#f59e0b" stroke-width="0.5" stroke-dasharray="4,4" opacity="0.3"/>
+  <line x1="80" y1="465" x2="475" y2="465" stroke="#ef4444" stroke-width="0.5" stroke-dasharray="4,4" opacity="0.3"/>
+  <line x1="80" y1="670" x2="475" y2="670" stroke="#10b981" stroke-width="0.5" stroke-dasharray="4,4" opacity="0.3"/>
+
+</svg>

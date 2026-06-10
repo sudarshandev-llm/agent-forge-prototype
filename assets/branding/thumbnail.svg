@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#1E1B4B"/>
+    </linearGradient>
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="50%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366F1" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#06B6D4" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="35"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="400" fill="url(#bgGrad)"/>
+
+  <!-- Glow -->
+  <circle cx="200" cy="170" r="140" fill="url(#glowGrad)" filter="url(#glow)"/>
+
+  <!-- Border accent -->
+  <rect x="8" y="8" width="384" height="384" rx="24" fill="none" stroke="#6366F1" stroke-width="1" opacity="0.15"/>
+  <rect x="16" y="16" width="368" height="368" rx="18" fill="none" stroke="#334155" stroke-width="0.5" opacity="0.4"/>
+
+  <!-- Logo Icon -->
+  <g transform="translate(148, 80)">
+    <circle cx="52" cy="52" r="40" fill="none" stroke="url(#logoGrad)" stroke-width="4"/>
+    <circle cx="52" cy="52" r="19" fill="url(#logoGrad)" opacity="0.12"/>
+    <circle cx="52" cy="7" r="4" fill="#6366F1"/>
+    <circle cx="52" cy="97" r="4" fill="#8B5CF6"/>
+    <circle cx="7" cy="52" r="4" fill="#6366F1"/>
+    <circle cx="97" cy="52" r="4" fill="#8B5CF6"/>
+    <circle cx="23.5" cy="23.5" r="3" fill="#06B6D4"/>
+    <circle cx="80.5" cy="80.5" r="3" fill="#06B6D4"/>
+    <circle cx="23.5" cy="80.5" r="3" fill="#06B6D4"/>
+    <circle cx="80.5" cy="23.5" r="3" fill="#06B6D4"/>
+    <line x1="52" y1="11" x2="52" y2="33" stroke="#6366F1" stroke-width="2.5" opacity="0.5"/>
+    <line x1="52" y1="71" x2="52" y2="93" stroke="#8B5CF6" stroke-width="2.5" opacity="0.5"/>
+    <line x1="11" y1="52" x2="33" y2="52" stroke="#6366F1" stroke-width="2.5" opacity="0.5"/>
+    <line x1="71" y1="52" x2="93" y2="52" stroke="#8B5CF6" stroke-width="2.5" opacity="0.5"/>
+    <circle cx="52" cy="52" r="6" fill="url(#logoGrad)"/>
+    <circle cx="50" cy="50" r="2" fill="white" opacity="0.35"/>
+  </g>
+
+  <!-- Brand name -->
+  <text x="200" y="240" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="36" font-weight="700" fill="url(#textGrad)" text-anchor="middle" letter-spacing="-0.5">Agent</text>
+  <text x="200" y="282" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="36" font-weight="300" fill="#64748B" text-anchor="middle" letter-spacing="-0.5">Forge</text>
+
+  <!-- Tagline -->
+  <text x="200" y="330" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#475569" text-anchor="middle" letter-spacing="2.5" font-weight="400">AI AGENT FRAMEWORK</text>
+</svg>

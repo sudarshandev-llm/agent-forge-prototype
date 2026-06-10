@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100" width="400" height="100">
+  <defs>
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="50%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Icon: Stylized gear/brain with interlocking nodes -->
+  <g transform="translate(8, 10)">
+    <!-- Outer ring -->
+    <circle cx="40" cy="40" r="30" fill="none" stroke="url(#logoGrad)" stroke-width="3.5"/>
+    <!-- Inner core -->
+    <circle cx="40" cy="40" r="14" fill="url(#logoGrad)" opacity="0.15"/>
+    <!-- Gear teeth -->
+    <path d="M40 6 L40 14 M40 66 L40 74 M6 40 L14 40 M66 40 L74 40" stroke="url(#logoGrad)" stroke-width="4" stroke-linecap="round"/>
+    <path d="M16 16 L22 22 M58 58 L64 64 M16 64 L22 58 M58 22 L64 16" stroke="url(#logoGrad)" stroke-width="3.5" stroke-linecap="round"/>
+    <!-- Circuit traces from center -->
+    <line x1="40" y1="26" x2="40" y2="34" stroke="#6366F1" stroke-width="2" opacity="0.7"/>
+    <line x1="40" y1="46" x2="40" y2="54" stroke="#8B5CF6" stroke-width="2" opacity="0.7"/>
+    <line x1="26" y1="40" x2="34" y2="40" stroke="#6366F1" stroke-width="2" opacity="0.7"/>
+    <line x1="46" y1="40" x2="54" y2="40" stroke="#8B5CF6" stroke-width="2" opacity="0.7"/>
+    <!-- Corner nodes -->
+    <circle cx="40" cy="14" r="2.5" fill="#6366F1"/>
+    <circle cx="40" cy="66" r="2.5" fill="#8B5CF6"/>
+    <circle cx="14" cy="40" r="2.5" fill="#6366F1"/>
+    <circle cx="66" cy="40" r="2.5" fill="#8B5CF6"/>
+    <circle cx="22" cy="22" r="2" fill="#06B6D4"/>
+    <circle cx="58" cy="58" r="2" fill="#06B6D4"/>
+    <circle cx="22" cy="58" r="2" fill="#06B6D4"/>
+    <circle cx="58" cy="22" r="2" fill="#06B6D4"/>
+    <!-- Center dot -->
+    <circle cx="40" cy="40" r="4" fill="url(#logoGrad)"/>
+  </g>
+
+  <!-- Text -->
+  <g transform="translate(90, 34)">
+    <text x="0" y="0" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="32" font-weight="700" fill="url(#textGrad)" letter-spacing="-0.5">Agent</text>
+    <text x="115" y="0" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="32" font-weight="300" fill="#64748B" letter-spacing="-0.5">Forge</text>
+  </g>
+
+  <!-- Tagline -->
+  <g transform="translate(90, 74)">
+    <text x="0" y="0" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#94A3B8" letter-spacing="2.5" font-weight="400">AI AGENT FRAMEWORK</text>
+  </g>
+</svg>

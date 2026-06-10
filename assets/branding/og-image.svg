@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="50%" stop-color="#1E1B4B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="50%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366F1" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#06B6D4" stop-opacity="0.05"/>
+    </linearGradient>
+    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#6366F1" stroke-width="0.3" opacity="0.1"/>
+    </pattern>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="50" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+
+  <!-- Grid -->
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- Glow -->
+  <circle cx="600" cy="315" r="250" fill="url(#glowGrad)" filter="url(#glow)"/>
+
+  <!-- Decorative network dots -->
+  <g opacity="0.08">
+    <circle cx="100" cy="100" r="4" fill="#6366F1"/>
+    <circle cx="300" cy="80" r="3" fill="#8B5CF6"/>
+    <circle cx="200" cy="200" r="2" fill="#06B6D4"/>
+    <circle cx="1100" cy="530" r="4" fill="#6366F1"/>
+    <circle cx="900" cy="550" r="3" fill="#8B5CF6"/>
+    <circle cx="1000" cy="430" r="2" fill="#06B6D4"/>
+    <circle cx="80" cy="530" r="3" fill="#6366F1"/>
+    <circle cx="1120" cy="100" r="3" fill="#8B5CF6"/>
+  </g>
+
+  <!-- Logo Icon -->
+  <g transform="translate(528, 100)">
+    <circle cx="72" cy="72" r="55" fill="none" stroke="url(#logoGrad)" stroke-width="5"/>
+    <circle cx="72" cy="72" r="26" fill="url(#logoGrad)" opacity="0.12"/>
+    <circle cx="72" cy="10" r="5" fill="#6366F1"/>
+    <circle cx="72" cy="134" r="5" fill="#8B5CF6"/>
+    <circle cx="10" cy="72" r="5" fill="#6366F1"/>
+    <circle cx="134" cy="72" r="5" fill="#8B5CF6"/>
+    <circle cx="32.5" cy="32.5" r="4" fill="#06B6D4"/>
+    <circle cx="111.5" cy="111.5" r="4" fill="#06B6D4"/>
+    <circle cx="32.5" cy="111.5" r="4" fill="#06B6D4"/>
+    <circle cx="111.5" cy="32.5" r="4" fill="#06B6D4"/>
+    <line x1="72" y1="15" x2="72" y2="46" stroke="#6366F1" stroke-width="3" opacity="0.5"/>
+    <line x1="72" y1="98" x2="72" y2="129" stroke="#8B5CF6" stroke-width="3" opacity="0.5"/>
+    <line x1="15" y1="72" x2="46" y2="72" stroke="#6366F1" stroke-width="3" opacity="0.5"/>
+    <line x1="98" y1="72" x2="129" y2="72" stroke="#8B5CF6" stroke-width="3" opacity="0.5"/>
+    <line x1="72" y1="46" x2="72" y2="60" stroke="#06B6D4" stroke-width="2.5" opacity="0.6"/>
+    <line x1="72" y1="84" x2="72" y2="98" stroke="#06B6D4" stroke-width="2.5" opacity="0.6"/>
+    <line x1="46" y1="72" x2="60" y2="72" stroke="#06B6D4" stroke-width="2.5" opacity="0.6"/>
+    <line x1="84" y1="72" x2="98" y2="72" stroke="#06B6D4" stroke-width="2.5" opacity="0.6"/>
+    <circle cx="72" cy="72" r="9" fill="url(#logoGrad)"/>
+    <circle cx="69" cy="69" r="3.5" fill="white" opacity="0.35"/>
+  </g>
+
+  <!-- Brand name -->
+  <text x="600" y="340" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="64" font-weight="700" fill="url(#textGrad)" text-anchor="middle" letter-spacing="-1.5">AgentForge</text>
+
+  <!-- Tagline -->
+  <text x="600" y="410" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="21" fill="#94A3B8" text-anchor="middle" letter-spacing="3.5" font-weight="400">BUILD, DEPLOY, AND SCALE AI AGENTS</text>
+
+  <!-- Divider line -->
+  <line x1="450" y1="445" x2="750" y2="445" stroke="#334155" stroke-width="1" opacity="0.5"/>
+
+  <!-- Bottom tag -->
+  <text x="600" y="510" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#475569" text-anchor="middle" letter-spacing="2" font-weight="400">
+    <tspan fill="#6366F1" font-weight="600">Open Source</tspan>
+    <tspan fill="#475569">  •  </tspan>
+    <tspan fill="#8B5CF6" font-weight="600">MIT License</tspan>
+    <tspan fill="#475569">  •  </tspan>
+    <tspan fill="#06B6D4" font-weight="600">Production Ready</tspan>
+  </text>
+</svg>

@@ -1,0 +1,279 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0e27"/>
+      <stop offset="100%" stop-color="#141832"/>
+    </linearGradient>
+    <linearGradient id="client" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="cdn" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#fbbf24"/>
+    </linearGradient>
+    <linearGradient id="frontend" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#34d399"/>
+    </linearGradient>
+    <linearGradient id="gateway" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+    <linearGradient id="microservice" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#60a5fa"/>
+    </linearGradient>
+    <linearGradient id="queue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#f87171"/>
+    </linearGradient>
+    <linearGradient id="worker" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#fb923c"/>
+    </linearGradient>
+    <linearGradient id="db" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#14b8a6"/>
+      <stop offset="100%" stop-color="#2dd4bf"/>
+    </linearGradient>
+    <linearGradient id="external" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ec4899"/>
+      <stop offset="100%" stop-color="#f472b6"/>
+    </linearGradient>
+    <linearGradient id="ws" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6366f1" opacity="0.6"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#10b981" opacity="0.6"/>
+    </marker>
+    <marker id="arrowPink" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ec4899" opacity="0.6"/>
+    </marker>
+    <marker id="arrowCyan" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#06b6d4" opacity="0.6"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="900" fill="url(#bg)"/>
+
+  <!-- Grid pattern -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e2448" stroke-width="0.5"/>
+  </pattern>
+  <rect width="1200" height="900" fill="url(#grid)" opacity="0.5"/>
+
+  <!-- Title -->
+  <text x="600" y="35" text-anchor="middle" fill="#e2e8f0" font-family="monospace" font-size="20" font-weight="bold" letter-spacing="2">AGENTFORGE SYSTEM ARCHITECTURE</text>
+  <line x1="300" y1="45" x2="900" y2="45" stroke="#6366f1" stroke-width="1" opacity="0.5"/>
+
+  <!-- ==================== Client Layer ==================== -->
+  <text x="70" y="80" fill="#6366f1" font-family="monospace" font-size="11" font-weight="bold" letter-spacing="1">CLIENT LAYER</text>
+  <line x1="70" y1="85" x2="200" y2="85" stroke="#6366f1" stroke-width="1" opacity="0.3"/>
+
+  <rect x="200" y="55" width="180" height="50" rx="10" fill="url(#client)" filter="url(#shadow)" opacity="0.95"/>
+  <text x="290" y="78" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12" font-weight="bold">🌐 Browser / Client</text>
+  <text x="290" y="93" text-anchor="middle" fill="#c7d2fe" font-family="monospace" font-size="9">React SPA / Mobile</text>
+
+  <!-- Arrow: Client -> CDN -->
+  <line x1="380" y1="80" x2="460" y2="80" stroke="#6366f1" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.6"/>
+
+  <!-- ==================== CDN Layer ==================== -->
+  <text x="70" y="150" fill="#f59e0b" font-family="monospace" font-size="11" font-weight="bold" letter-spacing="1">EDGE LAYER</text>
+  <line x1="70" y1="155" x2="180" y2="155" stroke="#f59e0b" stroke-width="1" opacity="0.3"/>
+
+  <rect x="460" y="55" width="180" height="50" rx="10" fill="url(#cdn)" filter="url(#shadow)" opacity="0.95"/>
+  <text x="550" y="78" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12" font-weight="bold">⚡ Vercel Edge</text>
+  <text x="550" y="93" text-anchor="middle" fill="#fef3c7" font-family="monospace" font-size="9">CDN / Edge Functions</text>
+
+  <!-- Arrow: CDN -> Frontend -->
+  <line x1="640" y1="80" x2="720" y2="80" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.6"/>
+
+  <!-- ==================== Frontend Layer ==================== -->
+  <text x="70" y="220" fill="#10b981" font-family="monospace" font-size="11" font-weight="bold" letter-spacing="1">PRESENTATION LAYER</text>
+  <line x1="70" y1="225" x2="230" y2="225" stroke="#10b981" stroke-width="1" opacity="0.3"/>
+
+  <rect x="720" y="55" width="180" height="50" rx="10" fill="url(#frontend)" filter="url(#shadow)" opacity="0.95"/>
+  <text x="810" y="78" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12" font-weight="bold">▲ Next.js Frontend</text>
+  <text x="810" y="93" text-anchor="middle" fill="#d1fae5" font-family="monospace" font-size="9">Server-side Rendering</text>
+
+  <!-- Arrow: Frontend -> Gateway -->
+  <line x1="810" y1="105" x2="810" y2="155" stroke="#10b981" stroke-width="1.5" marker-end="url(#arrowGreen)" opacity="0.5"/>
+  <line x1="290" y1="155" x2="290" y2="195" stroke="#6366f1" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.5"/>
+  <line x1="550" y1="105" x2="550" y2="155" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.5"/>
+
+  <!-- ==================== API Layer ==================== -->
+  <text x="70" y="290" fill="#8b5cf6" font-family="monospace" font-size="11" font-weight="bold" letter-spacing="1">API GATEWAY</text>
+  <line x1="70" y1="295" x2="190" y2="295" stroke="#8b5cf6" stroke-width="1" opacity="0.3"/>
+
+  <rect x="200" y="165" width="260" height="50" rx="10" fill="url(#gateway)" filter="url(#shadow)" opacity="0.95"/>
+  <text x="330" y="188" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12" font-weight="bold">🚪 Express API Gateway</text>
+  <text x="330" y="203" text-anchor="middle" fill="#ddd6fe" font-family="monospace" font-size="9">Authentication · Rate Limiting · Routing</text>
+
+  <!-- Arrow: Gateway -> Microservices -->
+  <line x1="330" y1="215" x2="330" y2="250" stroke="#8b5cf6" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.5"/>
+
+  <!-- ==================== Microservices Layer ==================== -->
+  <text x="70" y="360" fill="#3b82f6" font-family="monospace" font-size="11" font-weight="bold" letter-spacing="1">MICROSERVICES</text>
+  <line x1="70" y1="365" x2="195" y2="365" stroke="#3b82f6" stroke-width="1" opacity="0.3"/>
+
+  <!-- Microservices grid -->
+  <rect x="100" y="260" width="160" height="44" rx="8" fill="url(#microservice)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="180" y="278" text-anchor="middle" fill="#fff" font-family="monospace" font-size="11" font-weight="bold">🤖 Agent Service</text>
+  <text x="180" y="293" text-anchor="middle" fill="#dbeafe" font-family="monospace" font-size="8">Agent lifecycle</text>
+
+  <rect x="280" y="260" width="160" height="44" rx="8" fill="url(#microservice)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="360" y="278" text-anchor="middle" fill="#fff" font-family="monospace" font-size="11" font-weight="bold">👥 Team Service</text>
+  <text x="360" y="293" text-anchor="middle" fill="#dbeafe" font-family="monospace" font-size="8">Team management</text>
+
+  <rect x="460" y="260" width="160" height="44" rx="8" fill="url(#microservice)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="540" y="278" text-anchor="middle" fill="#fff" font-family="monospace" font-size="11" font-weight="bold">🔧 Tool Service</text>
+  <text x="540" y="293" text-anchor="middle" fill="#dbeafe" font-family="monospace" font-size="8">Tool registry</text>
+
+  <rect x="640" y="260" width="160" height="44" rx="8" fill="url(#microservice)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="720" y="278" text-anchor="middle" fill="#fff" font-family="monospace" font-size="11" font-weight="bold">⚙️ Workflow Service</text>
+  <text x="720" y="293" text-anchor="middle" fill="#dbeafe" font-family="monospace" font-size="8">Workflow engine</text>
+
+  <rect x="100" y="315" width="160" height="44" rx="8" fill="url(#microservice)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="180" y="333" text-anchor="middle" fill="#fff" font-family="monospace" font-size="11" font-weight="bold">🏪 Marketplace Service</text>
+  <text x="180" y="348" text-anchor="middle" fill="#dbeafe" font-family="monospace" font-size="8">Agent/template sharing</text>
+
+  <rect x="280" y="315" width="160" height="44" rx="8" fill="url(#microservice)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="360" y="333" text-anchor="middle" fill="#fff" font-family="monospace" font-size="11" font-weight="bold">📊 Analytics Service</text>
+  <text x="360" y="348" text-anchor="middle" fill="#dbeafe" font-family="monospace" font-size="8">Usage metrics</text>
+
+  <!-- Arrows: Services -> Queue -->
+  <line x1="180" y1="315" x2="180" y2="400" stroke="#6366f1" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)" opacity="0.4"/>
+  <line x1="360" y1="315" x2="360" y2="400" stroke="#6366f1" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)" opacity="0.4"/>
+  <line x1="540" y1="304" x2="540" y2="400" stroke="#6366f1" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)" opacity="0.4"/>
+  <line x1="720" y1="304" x2="720" y2="400" stroke="#6366f1" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)" opacity="0.4"/>
+
+  <!-- ==================== Message Queue ==================== -->
+  <text x="70" y="435" fill="#ef4444" font-family="monospace" font-size="11" font-weight="bold" letter-spacing="1">MESSAGE QUEUE</text>
+  <line x1="70" y1="440" x2="210" y2="440" stroke="#ef4444" stroke-width="1" opacity="0.3"/>
+
+  <rect x="300" y="410" width="240" height="44" rx="10" fill="url(#queue)" filter="url(#shadow)" opacity="0.95"/>
+  <text x="420" y="428" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12" font-weight="bold">📨 Message Queue</text>
+  <text x="420" y="443" text-anchor="middle" fill="#fecaca" font-family="monospace" font-size="9">BullMQ / Redis</text>
+
+  <!-- Arrow: Queue -> Workers -->
+  <line x1="420" y1="454" x2="420" y2="485" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arrow)" opacity="0.5"/>
+
+  <!-- ==================== Workers Layer ==================== -->
+  <text x="70" y="510" fill="#f97316" font-family="monospace" font-size="11" font-weight="bold" letter-spacing="1">WORKERS</text>
+  <line x1="70" y1="515" x2="165" y2="515" stroke="#f97316" stroke-width="1" opacity="0.3"/>
+
+  <rect x="100" y="495" width="160" height="44" rx="8" fill="url(#worker)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="180" y="513" text-anchor="middle" fill="#fff" font-family="monospace" font-size="11" font-weight="bold">⚡ Agent Worker</text>
+  <text x="180" y="528" text-anchor="middle" fill="#ffedd5" font-family="monospace" font-size="8">LLM execution</text>
+
+  <rect x="280" y="495" width="160" height="44" rx="8" fill="url(#worker)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="360" y="513" text-anchor="middle" fill="#fff" font-family="monospace" font-size="11" font-weight="bold">🔄 Workflow Worker</text>
+  <text x="360" y="528" text-anchor="middle" fill="#ffedd5" font-family="monospace" font-size="8">Workflow orchestration</text>
+
+  <rect x="460" y="495" width="160" height="44" rx="8" fill="url(#worker)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="540" y="513" text-anchor="middle" fill="#fff" font-family="monospace" font-size="11" font-weight="bold">📧 Email Worker</text>
+  <text x="540" y="528" text-anchor="middle" fill="#ffedd5" font-family="monospace" font-size="8">Notifications</text>
+
+  <!-- Arrows: Workers -> DBs -->
+  <line x1="180" y1="539" x2="180" y2="580" stroke="#f97316" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)" opacity="0.4"/>
+  <line x1="360" y1="539" x2="360" y2="580" stroke="#f97316" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)" opacity="0.4"/>
+  <line x1="540" y1="539" x2="540" y2="580" stroke="#f97316" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)" opacity="0.4"/>
+
+  <!-- ==================== Data / Database Layer ==================== -->
+  <text x="70" y="690" fill="#14b8a6" font-family="monospace" font-size="11" font-weight="bold" letter-spacing="1">DATA LAYER</text>
+  <line x1="70" y1="695" x2="185" y2="695" stroke="#14b8a6" stroke-width="1" opacity="0.3"/>
+
+  <rect x="100" y="590" width="220" height="70" rx="10" fill="url(#db)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="210" y="613" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12" font-weight="bold">🐘 PostgreSQL</text>
+  <text x="210" y="628" text-anchor="middle" fill="#ccfbf1" font-family="monospace" font-size="9">Primary database</text>
+  <text x="210" y="643" text-anchor="middle" fill="#ccfbf1" font-family="monospace" font-size="9">Agents · Users · Workflows</text>
+
+  <rect x="340" y="590" width="220" height="70" rx="10" fill="url(#db)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="450" y="613" text-anchor="middle" fill="#fff" font-family="monospace" font-size="12" font-weight="bold">⚡ Redis Cache</text>
+  <text x="450" y="628" text-anchor="middle" fill="#ccfbf1" font-family="monospace" font-size="9">Session · Rate limit</text>
+  <text x="450" y="643" text-anchor="middle" fill="#ccfbf1" font-family="monospace" font-size="9">Pub/Sub · Job queue</text>
+
+  <!-- ==================== External Services ==================== -->
+  <text x="650" y="360" fill="#ec4899" font-family="monospace" font-size="11" font-weight="bold" letter-spacing="1">EXTERNAL SERVICES</text>
+  <line x1="650" y1="365" x2="810" y2="365" stroke="#ec4899" stroke-width="1" opacity="0.3"/>
+
+  <rect x="640" y="380" width="160" height="36" rx="8" fill="url(#external)" filter="url(#shadow)" opacity="0.85"/>
+  <text x="720" y="403" text-anchor="middle" fill="#fff" font-family="monospace" font-size="10" font-weight="bold">🤖 OpenAI</text>
+
+  <rect x="820" y="380" width="160" height="36" rx="8" fill="url(#external)" filter="url(#shadow)" opacity="0.85"/>
+  <text x="900" y="403" text-anchor="middle" fill="#fff" font-family="monospace" font-size="10" font-weight="bold">🧠 Anthropic</text>
+
+  <rect x="640" y="425" width="160" height="36" rx="8" fill="url(#external)" filter="url(#shadow)" opacity="0.85"/>
+  <text x="720" y="448" text-anchor="middle" fill="#fff" font-family="monospace" font-size="10" font-weight="bold">🦙 Ollama</text>
+
+  <rect x="820" y="425" width="160" height="36" rx="8" fill="url(#external)" filter="url(#shadow)" opacity="0.85"/>
+  <text x="900" y="448" text-anchor="middle" fill="#fff" font-family="monospace" font-size="10" font-weight="bold">🐙 GitHub API</text>
+
+  <rect x="730" y="470" width="160" height="36" rx="8" fill="url(#external)" filter="url(#shadow)" opacity="0.85"/>
+  <text x="810" y="493" text-anchor="middle" fill="#fff" font-family="monospace" font-size="10" font-weight="bold">📦 Supabase</text>
+
+  <!-- Arrows from microservices to external -->
+  <line x1="640" y1="282" x2="640" y2="380" stroke="#ec4899" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrowPink)" opacity="0.35"/>
+  <line x1="640" y1="282" x2="900" y2="380" stroke="#ec4899" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrowPink)" opacity="0.35"/>
+  <line x1="640" y1="337" x2="640" y2="425" stroke="#ec4899" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrowPink)" opacity="0.35"/>
+  <line x1="640" y1="337" x2="900" y2="425" stroke="#ec4899" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrowPink)" opacity="0.35"/>
+  <line x1="640" y1="337" x2="810" y2="470" stroke="#ec4899" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrowPink)" opacity="0.35"/>
+
+  <!-- ==================== WebSocket Connection ==================== -->
+  <text x="950" y="80" fill="#06b6d4" font-family="monospace" font-size="11" font-weight="bold" letter-spacing="1">REAL-TIME</text>
+  <line x1="950" y1="85" x2="1040" y2="85" stroke="#06b6d4" stroke-width="1" opacity="0.3"/>
+
+  <rect x="940" y="160" width="180" height="44" rx="10" fill="url(#ws)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="1030" y="178" text-anchor="middle" fill="#fff" font-family="monospace" font-size="11" font-weight="bold">🔗 WebSocket</text>
+  <text x="1030" y="193" text-anchor="middle" fill="#cffafe" font-family="monospace" font-size="8">Real-time updates</text>
+
+  <!-- WebSocket connections -->
+  <path d="M 940 170 L 900 170" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowCyan)" opacity="0.5"/>
+  <path d="M 940 180 L 900 320" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowCyan)" opacity="0.5"/>
+  <path d="M 940 190 L 500 430" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowCyan)" opacity="0.5"/>
+
+  <!-- Legend -->
+  <rect x="850" y="590" width="280" height="220" rx="10" fill="#1a1f3a" stroke="#2a2f4a" stroke-width="1" opacity="0.9"/>
+  <text x="990" y="615" text-anchor="middle" fill="#e2e8f0" font-family="monospace" font-size="11" font-weight="bold">LEGEND</text>
+  <line x1="880" y1="622" x2="1100" y2="622" stroke="#2a2f4a" stroke-width="1"/>
+
+  <rect x="870" y="635" width="50" height="16" rx="4" fill="url(#client)"/>
+  <text x="935" y="648" fill="#94a3b8" font-family="monospace" font-size="10">Client</text>
+
+  <rect x="870" y="660" width="50" height="16" rx="4" fill="url(#cdn)"/>
+  <text x="935" y="673" fill="#94a3b8" font-family="monospace" font-size="10">CDN / Edge</text>
+
+  <rect x="870" y="685" width="50" height="16" rx="4" fill="url(#frontend)"/>
+  <text x="935" y="698" fill="#94a3b8" font-family="monospace" font-size="10">Frontend</text>
+
+  <rect x="870" y="710" width="50" height="16" rx="4" fill="url(#gateway)"/>
+  <text x="935" y="723" fill="#94a3b8" font-family="monospace" font-size="10">API Gateway</text>
+
+  <rect x="870" y="735" width="50" height="16" rx="4" fill="url(#microservice)"/>
+  <text x="935" y="748" fill="#94a3b8" font-family="monospace" font-size="10">Microservice</text>
+
+  <rect x="870" y="760" width="50" height="16" rx="4" fill="url(#queue)"/>
+  <text x="935" y="773" fill="#94a3b8" font-family="monospace" font-size="10">Message Queue</text>
+
+  <rect x="870" y="785" width="50" height="16" rx="4" fill="url(#worker)"/>
+  <text x="935" y="798" fill="#94a3b8" font-family="monospace" font-size="10">Worker</text>
+
+  <line x1="870" y1="735" x2="920" y2="735" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="935" y="739" fill="#94a3b8" font-family="monospace" font-size="10">Async message</text>
+
+  <line x1="870" y1="760" x2="920" y2="760" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="935" y="764" fill="#94a3b8" font-family="monospace" font-size="10">WebSocket</text>
+
+</svg>
