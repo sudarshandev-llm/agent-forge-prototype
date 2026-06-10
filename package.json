@@ -1,0 +1,32 @@
+{
+  "name": "agentforge",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:web\" \"npm run dev:api\" \"npm run dev:worker\"",
+    "dev:web": "npm run dev -w apps/web",
+    "dev:api": "npm run dev -w apps/api",
+    "dev:worker": "npm run dev -w apps/worker",
+    "build": "npm run build -w packages/shared && npm run build -w apps/api && npm run build -w apps/web && npm run build -w apps/worker",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "test:e2e": "npm run test:e2e -w apps/web",
+    "clean": "turbo run clean",
+    "format": "prettier --write .",
+    "db:migrate": "npm run db:migrate -w apps/api",
+    "db:seed": "npm run db:seed -w apps/api",
+    "docker:dev": "docker-compose -f infra/docker/docker-compose.dev.yml up",
+    "docker:prod": "docker-compose -f infra/docker/docker-compose.prod.yml up",
+    "ci": "npm run lint && npm run test && npm run build"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "prettier": "^3.2.5",
+    "turbo": "^1.13.3",
+    "typescript": "^5.4.5"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
