@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: AgentForge Documentation
+    url: https://agentforge.dev/docs
+    about: Check the documentation for answers to common questions
+  - name: AgentForge Discord Community
+    url: https://discord.gg/agentforge
+    about: Join our Discord for community support and discussions
+  - name: GitHub Discussions
+    url: https://github.com/agentforge/agentforge/discussions
+    about: Ask questions and discuss ideas with the community
+  - name: Security Issues
+    url: https://github.com/agentforge/agentforge/security/policy
+    about: Please report security vulnerabilities here

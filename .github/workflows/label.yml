@@ -1,0 +1,44 @@
+name: Pull Request Labeler
+
+on:
+  - pull_request_target
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/labeler@v5
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          configuration-path: .github/labeler-config.yml
+          sync-labels: true
+
+  size-label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Label PR by size
+        uses: pascalgn/size-label-action@v0.5.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          sizes: >
+            {
+              "0": "XS",
+              "10": "S",
+              "50": "M",
+              "200": "L",
+              "500": "XL",
+              "1000": "XXL"
+            }
+
+  auto-assign:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto-assign PR author
+        uses: kentaro-m/auto-assign-action@v2.0.0
+        with:
+          configuration-path: .github/auto-assign-config.yml
