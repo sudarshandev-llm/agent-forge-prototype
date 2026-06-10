@@ -1,0 +1,32 @@
+FROM node:20-alpine AS base
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+COPY package.json turbo.json .npmrc tsconfig.base.json ./
+COPY packages/shared/package.json packages/shared/
+COPY apps/web/package.json apps/web/
+
+FROM base AS dependencies
+RUN npm ci
+
+FROM dependencies AS build
+COPY packages/shared packages/shared
+COPY apps/web apps/web
+RUN npm run build -w packages/shared
+RUN npm run build -w apps/web
+
+FROM base AS production
+COPY --from=dependencies /app/node_modules /app/node_modules
+COPY --from=build /app/packages/shared/dist /app/packages/shared/dist
+COPY --from=build /app/apps/web/.next /app/apps/web/.next
+COPY --from=build /app/apps/web/public /app/apps/web/public
+COPY --from=build /app/apps/web/next.config.js /app/apps/web/
+COPY --from=build /app/apps/web/package.json /app/apps/web/
+EXPOSE 3000
+ENV NODE_ENV=production
+CMD ["npm", "run", "start", "-w", "apps/web"]
+
+FROM base AS development
+COPY . .
+EXPOSE 3000
+ENV NODE_ENV=development
+CMD ["npm", "run", "dev", "-w", "apps/web"]

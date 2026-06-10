@@ -1,0 +1,86 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+
+env:
+  NODE_VERSION: '20'
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+jobs:
+  deploy-api:
+    name: Deploy API
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build -w packages/shared
+      - run: npm run build -w apps/api
+      - name: Deploy to Railway
+        run: |
+          npm install -g @railway/cli
+          railway up --service api
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
+  deploy-worker:
+    name: Deploy Worker
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build -w packages/shared
+      - run: npm run build -w apps/worker
+      - name: Deploy to Railway
+        run: |
+          npm install -g @railway/cli
+          railway up --service worker
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
+  deploy-web:
+    name: Deploy Web
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build -w packages/shared
+      - name: Deploy to Vercel
+        run: npx vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
+        working-directory: apps/web
+
+  migrate-db:
+    name: Database Migration
+    runs-on: ubuntu-latest
+    environment: production
+    needs: [deploy-api]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      - run: npm ci
+      - name: Run migrations
+        run: npx prisma migrate deploy
+        working-directory: apps/api
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
