@@ -482,7 +482,7 @@ When setting up this repository on GitHub, add these topics:
 ---
 
 <p align="center">
-  Made with ❤️ by the AgentForge Team
+  Made with ❤️ by the Team alum Team
   <br>
   <strong>AgentForge</strong> — Build the future of intelligent automation.
 </p>
