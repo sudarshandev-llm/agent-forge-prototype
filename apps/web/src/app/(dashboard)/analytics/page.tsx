@@ -120,18 +120,20 @@ export default function AnalyticsPage() {
           apiClient.analytics.system(),
         ]);
 
+        const usageData = usageRes.data as any;
+        const systemData = systemRes.data as any;
         setData({
-          usageOverTime: usageRes.data?.usageOverTime || [],
-          agentPerformance: usageRes.data?.agentPerformance || [],
-          modelDistribution: usageRes.data?.modelDistribution || [],
-          topAgents: usageRes.data?.topAgents || [],
+          usageOverTime: usageData?.usageOverTime || [],
+          agentPerformance: usageData?.agentPerformance || [],
+          modelDistribution: usageData?.modelDistribution || [],
+          topAgents: usageData?.topAgents || [],
           summary: {
-            totalExecutions: systemRes.data?.totalExecutions || 0,
-            totalTokens: systemRes.data?.totalTokens || 0,
-            totalCost: systemRes.data?.totalCost || 0,
-            successRate: systemRes.data?.successRate || 0,
-            activeAgents: systemRes.data?.activeAgents || 0,
-            avgDuration: systemRes.data?.avgDuration || 0,
+            totalExecutions: systemData?.totalExecutions || 0,
+            totalTokens: systemData?.totalTokens || 0,
+            totalCost: systemData?.totalCost || 0,
+            successRate: systemData?.successRate || 0,
+            activeAgents: systemData?.activeAgents || 0,
+            avgDuration: systemData?.avgDuration || 0,
           },
         });
       } catch (err) {

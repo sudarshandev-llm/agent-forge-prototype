@@ -19,7 +19,7 @@ async function main() {
     await redis.ping();
     logger.info("Redis connection established");
   } catch (error) {
-    logger.error("Failed to connect to Redis", error);
+    logger.error({ err: error }, "Failed to connect to Redis");
     process.exit(1);
   }
 
@@ -44,7 +44,7 @@ async function main() {
   process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
   process.on("SIGINT", () => gracefulShutdown("SIGINT"));
   process.on("uncaughtException", (error) => {
-    logger.error("Uncaught exception", error);
+    logger.error({ err: error }, "Uncaught exception");
     process.exit(1);
   });
 }

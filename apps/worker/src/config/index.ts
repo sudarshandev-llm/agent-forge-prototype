@@ -9,4 +9,20 @@ export const config = {
   env: process.env.NODE_ENV || "development",
   agentQueueName: process.env.AGENT_QUEUE || "agent:executions",
   workflowQueueName: process.env.WORKFLOW_QUEUE || "workflow:executions",
+  email: {
+    host: process.env.EMAIL_HOST || "smtp.mailtrap.io",
+    port: parseInt(process.env.EMAIL_PORT || "587", 10),
+    user: process.env.EMAIL_USER || "",
+    pass: process.env.EMAIL_PASS || "",
+    from: process.env.EMAIL_FROM || "noreply@agentforge.dev",
+  },
+  llm: {
+    defaultProvider: process.env.LLM_DEFAULT_PROVIDER || "openai",
+    defaultModel: process.env.LLM_DEFAULT_MODEL || "gpt-4",
+    maxRetries: parseInt(process.env.LLM_MAX_RETRIES || "3", 10),
+    timeout: parseInt(process.env.LLM_TIMEOUT || "30000", 10),
+    openai: { apiKey: process.env.OPENAI_API_KEY || "" },
+    anthropic: { apiKey: process.env.ANTHROPIC_API_KEY || "" },
+    ollama: { baseUrl: process.env.OLLAMA_BASE_URL || "http://localhost:11434" },
+  },
 };

@@ -134,7 +134,7 @@ export default function TeamDetailPage() {
               <div className="flex -space-x-2 mb-4">
                 {team.members.slice(0, 5).map((member) => (
                   <Avatar key={member.id} className="h-10 w-10 border-2 border-background">
-                    <AvatarImage src={member.avatar} />
+                    <AvatarImage src={(member as TeamMember).avatar} />
                     <AvatarFallback>{getInitials(member.name)}</AvatarFallback>
                   </Avatar>
                 ))}
@@ -194,7 +194,7 @@ export default function TeamDetailPage() {
                   <div key={member.id} className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <Avatar>
-                        <AvatarImage src={member.avatar} />
+                        <AvatarImage src={(member as TeamMember).avatar} />
                         <AvatarFallback>{getInitials(member.name)}</AvatarFallback>
                       </Avatar>
                       <div>

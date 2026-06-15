@@ -28,10 +28,10 @@ export const executionService = {
         type: ExecutionType.AGENT,
         status: ExecutionStatus.PENDING,
         trigger: 'manual',
-        input: params.input,
+        input: params.input as any,
         ownerId: params.userId,
         agentId: params.agentId,
-        metadata: { stream: params.stream ?? false },
+        metadata: { stream: params.stream ?? false } as any,
       },
     });
 
@@ -112,7 +112,7 @@ export const executionService = {
       if (agent.config && (agent.config as Record<string, unknown>).memoryEnabled) {
         await memoryService.storeMemory({
           agentId,
-          type: 'conversation',
+          type: 'conversation' as any,
           key: `execution:${executionId}`,
           content: JSON.stringify({ input, response: response.content }),
           importance: 0.5,
@@ -130,7 +130,7 @@ export const executionService = {
         where: { id: executionId },
         data: {
           status: ExecutionStatus.COMPLETED,
-          output: { content: response.content, toolResults },
+          output: { content: response.content, toolResults } as any,
           duration,
           tokenUsage,
           cost: tokenUsage.cost,
@@ -247,7 +247,7 @@ export const executionService = {
         level,
         message,
         source: 'execution-engine',
-        data: data ?? null,
+        data: (data ?? null) as any,
       },
     });
   },

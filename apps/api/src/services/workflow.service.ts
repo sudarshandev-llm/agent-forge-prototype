@@ -27,7 +27,7 @@ export const workflowService = {
         name: data.name,
         description: data.description || '',
         triggerType: data.triggerType,
-        triggerConfig: data.triggerConfig ?? {},
+        triggerConfig: (data.triggerConfig ?? {}) as any,
         ownerId: data.ownerId,
         status: WorkflowStatus.DRAFT,
         version: 1,
@@ -42,10 +42,10 @@ export const workflowService = {
             workflowId: workflow.id,
             type: node.type,
             label: node.label,
-            config: node.config,
-            position: node.position,
-            inputMapping: {},
-            outputMapping: {},
+            config: node.config as any,
+            position: node.position as any,
+            inputMapping: {} as any,
+            outputMapping: {} as any,
           },
         });
       }
@@ -166,8 +166,8 @@ export const workflowService = {
         workflowId: id,
         status: ExecutionStatus.PENDING,
         trigger: 'manual',
-        input,
-        nodeResults: {},
+        input: input as any,
+        nodeResults: {} as any,
       },
     });
 
@@ -222,7 +222,7 @@ export const workflowService = {
 
         await prisma.workflowRun.update({
           where: { id: runId },
-          data: { currentNodeId, nodeResults },
+          data: { currentNodeId, nodeResults } as any,
         });
 
         const outgoingEdge = workflow.edges.find((e) => e.sourceNodeId === currentNodeId);
@@ -233,7 +233,7 @@ export const workflowService = {
         where: { id: runId },
         data: {
           status: ExecutionStatus.COMPLETED,
-          output: nodeResults,
+          output: nodeResults as any,
           completedAt: new Date(),
         },
       });

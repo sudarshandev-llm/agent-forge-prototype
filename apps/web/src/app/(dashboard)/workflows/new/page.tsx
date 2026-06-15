@@ -117,7 +117,7 @@ export default function NewWorkflowPage() {
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {templates.map((template) => {
-          const Icon = template.icon;
+          const Icon = template.icon!;
           const selected = selectedTemplate === template.id;
           return (
             <button

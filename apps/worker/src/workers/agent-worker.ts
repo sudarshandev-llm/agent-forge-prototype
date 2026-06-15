@@ -19,7 +19,7 @@ export class AgentWorker {
       config.agentQueueName,
       async (job: Job<AgentJobData>) => this.process(job),
       {
-        connection: getRedis(),
+        connection: getRedis() as any,
         concurrency: 5,
         limiter: { max: 10, duration: 1000 },
       },

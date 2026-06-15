@@ -1,14 +1,14 @@
 import { Worker } from 'bullmq';
 import { config } from './index.js';
-import { redis } from './redis.js';
+import { getRedis } from './redis.js';
 import { processAgentExecution } from '../jobs/agent-execution.job.js';
 import { processWorkflowExecution } from '../jobs/workflow-execution.job.js';
 import { processEmail } from '../jobs/email.job.js';
 import { logger } from './logger.js';
 
-const connection = redis;
+const connection = getRedis() as any;
 
-export function setupWorkers() {
+export function setupWorkers(): { agentWorker: Worker; workflowWorker: Worker; emailWorker: Worker } {
   const agentWorker = new Worker('agent-execution', processAgentExecution, {
     connection,
     concurrency: 5,

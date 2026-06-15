@@ -1,5 +1,5 @@
 import { Card, CardContent } from '@/components/ui/card';
-import { Play, Code, MessageSquare, ArrowRight } from 'lucide-react';
+import { Play, Code, MessageSquare, ArrowRight, Puzzle } from 'lucide-react';
 
 export function Demo() {
   return (

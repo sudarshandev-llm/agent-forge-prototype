@@ -18,7 +18,7 @@ export const agentService = {
         name: data.name,
         description: data.description,
         capabilities: data.capabilities,
-        config: data.config,
+        config: data.config as any,
         ownerId: data.ownerId,
         teamId: data.teamId ?? null,
         avatarUrl: data.avatarUrl ?? null,
@@ -35,8 +35,8 @@ export const agentService = {
       data: {
         agentId: agent.id,
         version: 1,
-        config: data.config,
-        snapshot: agent,
+        config: data.config as any,
+        snapshot: agent as any,
         createdBy: data.ownerId,
       },
     });
@@ -154,7 +154,7 @@ export const agentService = {
       data: {
         agentId: id,
         version: agent.version + 1,
-        config: data.config as Record<string, unknown> ?? {},
+        config: (data.config ?? {}) as any,
         snapshot: updated,
         createdBy: userId,
       },
@@ -194,13 +194,13 @@ export const agentService = {
         name: name || `${original.name} (fork)`,
         description: original.description,
         capabilities: original.capabilities,
-        config: original.config as Record<string, unknown>,
+        config: original.config as any,
         ownerId: userId,
         status: AgentStatus.IDLE,
         avatarUrl: original.avatarUrl,
         isPublic: false,
         version: 1,
-        metadata: { forkedFrom: id },
+        metadata: { forkedFrom: id } as any,
       },
     });
 

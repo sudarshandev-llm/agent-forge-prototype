@@ -12,7 +12,7 @@ export const memoryService = {
       throw new ApiError(404, 'Agent not found');
     }
 
-    return prisma.agentMemory.create({
+    return (prisma.agentMemory as any).create({
       data: {
         agentId: data.agentId,
         type: data.type || MemoryType.CONVERSATION,
@@ -44,7 +44,7 @@ export const memoryService = {
       throw new ApiError(404, 'Memory not found');
     }
 
-    return prisma.agentMemory.update({
+    return (prisma.agentMemory as any).update({
       where: { id },
       data: {
         ...data,

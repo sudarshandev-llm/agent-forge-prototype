@@ -28,7 +28,7 @@ export const useUIStore = create<UIState>((set) => ({
 
   setTheme: (theme) => set({ theme }),
 
-  openModal: (modal, data = null) => set({ activeModal: modal, modalData: data }),
+  openModal: (modal, data) => set({ activeModal: modal, modalData: data ?? null }),
   closeModal: () => set({ activeModal: null, modalData: null }),
 
   addToast: (message, type) => {

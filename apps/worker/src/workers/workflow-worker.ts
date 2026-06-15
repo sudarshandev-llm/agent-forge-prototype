@@ -46,7 +46,7 @@ export class WorkflowWorker {
       config.workflowQueueName,
       async (job: Job<WorkflowJobData>) => this.process(job),
       {
-        connection: getRedis(),
+        connection: getRedis() as any,
         concurrency: 3,
         limiter: { max: 5, duration: 1000 },
       },

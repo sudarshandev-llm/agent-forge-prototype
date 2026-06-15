@@ -3,7 +3,7 @@ import { getRedis } from "../config/redis.js";
 import { config } from "../config/index.js";
 
 export const agentQueue = new Queue(config.agentQueueName, {
-  connection: getRedis(),
+  connection: getRedis() as any,
   defaultJobOptions: {
     attempts: 3,
     backoff: { type: "exponential", delay: 1000 },
@@ -13,7 +13,7 @@ export const agentQueue = new Queue(config.agentQueueName, {
 });
 
 export const workflowQueue = new Queue(config.workflowQueueName, {
-  connection: getRedis(),
+  connection: getRedis() as any,
   defaultJobOptions: {
     attempts: 2,
     backoff: { type: "fixed", delay: 5000 },
@@ -23,9 +23,9 @@ export const workflowQueue = new Queue(config.workflowQueueName, {
 });
 
 export const agentQueueEvents = new QueueEvents(config.agentQueueName, {
-  connection: getRedis(),
+  connection: getRedis() as any,
 });
 
 export const workflowQueueEvents = new QueueEvents(config.workflowQueueName, {
-  connection: getRedis(),
+  connection: getRedis() as any,
 });

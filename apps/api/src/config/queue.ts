@@ -3,7 +3,7 @@ import { config } from './index.js';
 import { redis } from './redis.js';
 import { logger } from '../utils/logger.js';
 
-const connection = redis;
+const connection = redis as any;
 
 export const executionQueue = new Queue('agent-execution', {
   connection,

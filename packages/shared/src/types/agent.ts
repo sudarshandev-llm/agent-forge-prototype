@@ -1,3 +1,5 @@
+import { MemoryType } from './memory';
+
 export enum AgentStatus {
   IDLE = 'idle',
   RUNNING = 'running',

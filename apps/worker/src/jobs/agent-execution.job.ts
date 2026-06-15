@@ -70,7 +70,7 @@ export async function processAgentExecution(job: Job<AgentExecutionPayload>) {
       where: { id: executionId },
       data: {
         status: 'completed',
-        output: { content: llmResponse.content, toolResults },
+        output: { content: llmResponse.content, toolResults } as any,
         duration: Date.now() - new Date(job.timestamp).getTime(),
         tokenUsage: llmResponse.usage,
         completedAt: new Date(),

@@ -49,7 +49,7 @@ export async function processWorkflowExecution(job: Job<WorkflowExecutionPayload
 
       await prisma.workflowRun.update({
         where: { id: runId },
-        data: { currentNodeId, nodeResults },
+        data: { currentNodeId, nodeResults } as any,
       });
 
       const edge = workflow.edges.find((e) => e.sourceNodeId === currentNodeId);
@@ -60,7 +60,7 @@ export async function processWorkflowExecution(job: Job<WorkflowExecutionPayload
       where: { id: runId },
       data: {
         status: 'completed',
-        output: nodeResults,
+        output: nodeResults as any,
         completedAt: new Date(),
       },
     });
@@ -84,7 +84,7 @@ export async function processWorkflowExecution(job: Job<WorkflowExecutionPayload
 }
 
 async function executeNode(
-  node: { type: string; config: Record<string, unknown>; label: string },
+  node: { type: string; config: any; label: string },
   input: Record<string, unknown>,
   previousResults: Record<string, unknown>,
 ): Promise<unknown> {

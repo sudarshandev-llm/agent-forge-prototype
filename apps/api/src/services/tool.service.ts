@@ -17,7 +17,7 @@ export const toolService = {
         name: data.name,
         description: data.description,
         type: data.type,
-        config: data.config,
+        config: data.config as any,
         category: data.category || 'general',
         ownerId: data.ownerId,
         isPublic: data.isPublic ?? false,
@@ -168,9 +168,9 @@ export const toolService = {
           type: 'tool' as never,
           status: 'running' as never,
           trigger: 'manual',
-          input: parameters,
+          input: parameters as any,
           ownerId: userId,
-          metadata: { toolId: tool.id, toolName: tool.name },
+          metadata: { toolId: tool.id, toolName: tool.name } as any,
         },
       });
 
@@ -196,7 +196,7 @@ export const toolService = {
         where: { id: execution.id },
         data: {
           status: 'completed' as never,
-          output: result as Record<string, unknown>,
+          output: result as any,
           duration,
           completedAt: new Date(),
         },

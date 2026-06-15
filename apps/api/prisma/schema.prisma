@@ -23,6 +23,8 @@ model User {
   executions  Execution[]
   workflows   Workflow[]
   notifications Notification[]
+  marketplaceListings MarketplaceListing[]
+  marketplaceReviews MarketplaceReview[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -59,6 +61,7 @@ model Team {
   owner   User         @relation("TeamOwner", fields: [ownerId], references: [id])
   members TeamMember[]
   agents  Agent[]
+  workflows Workflow[]
 
   metadata Json?
   createdAt DateTime  @default(now())
