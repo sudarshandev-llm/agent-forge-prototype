@@ -1,5 +1,6 @@
 import { Job } from 'bullmq';
 import { PrismaClient } from '@prisma/client';
+import type { WorkflowNode, WorkflowEdge } from '@prisma/client';
 import { logger } from '../config/logger.js';
 
 const prisma = new PrismaClient();
@@ -32,7 +33,7 @@ export async function processWorkflowExecution(job: Job<WorkflowExecutionPayload
 
     if (!workflow) throw new Error(`Workflow ${workflowId} not found`);
 
-    const startNode = workflow.nodes.find((n) => n.type === 'start');
+    const startNode = workflow.nodes.find((n: WorkflowNode) => n.type === 'start');
     if (!startNode) throw new Error('No start node in workflow');
 
     let currentNodeId = startNode.id;
@@ -41,7 +42,7 @@ export async function processWorkflowExecution(job: Job<WorkflowExecutionPayload
 
     while (currentNodeId && !visited.has(currentNodeId)) {
       visited.add(currentNodeId);
-      const node = workflow.nodes.find((n) => n.id === currentNodeId);
+      const node = workflow.nodes.find((n: WorkflowNode) => n.id === currentNodeId);
       if (!node) break;
 
       const result = await executeNode(node, input, nodeResults);
@@ -52,7 +53,7 @@ export async function processWorkflowExecution(job: Job<WorkflowExecutionPayload
         data: { currentNodeId, nodeResults } as any,
       });
 
-      const edge = workflow.edges.find((e) => e.sourceNodeId === currentNodeId);
+      const edge = workflow.edges.find((e: WorkflowEdge) => e.sourceNodeId === currentNodeId);
       currentNodeId = edge?.targetNodeId ?? '';
     }
 
