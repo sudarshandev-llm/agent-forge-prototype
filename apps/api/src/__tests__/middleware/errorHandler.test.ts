@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { errorHandler, ApiError } from '../../middleware/errorHandler.js';
 import { ZodError } from 'zod';
-import { Prisma } from '@prisma/client';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { logger } from '../../utils/logger.js';
 
 vi.mock('../../utils/logger.js', () => ({
@@ -84,7 +84,7 @@ describe('errorHandler', () => {
   });
 
   it('should handle Prisma P2002 unique constraint error', () => {
-    const prismaErr = new Prisma.PrismaClientKnownRequestError('Unique constraint', {
+    const prismaErr = new PrismaClientKnownRequestError('Unique constraint', {
       code: 'P2002',
       clientVersion: '5.0',
       meta: { target: ['email'] },
@@ -102,7 +102,7 @@ describe('errorHandler', () => {
   });
 
   it('should handle Prisma P2025 not found error', () => {
-    const prismaErr = new Prisma.PrismaClientKnownRequestError('Record not found', {
+    const prismaErr = new PrismaClientKnownRequestError('Record not found', {
       code: 'P2025',
       clientVersion: '5.0',
     });
@@ -119,7 +119,7 @@ describe('errorHandler', () => {
   });
 
   it('should handle other Prisma errors as 500', () => {
-    const prismaErr = new Prisma.PrismaClientKnownRequestError('DB error', {
+    const prismaErr = new PrismaClientKnownRequestError('DB error', {
       code: 'P2000',
       clientVersion: '5.0',
     });
