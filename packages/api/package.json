@@ -1,5 +1,5 @@
 {
-  "name": "@agentforge/api",
+  "name": "@agentforge/trpc",
   "version": "1.0.0",
   "private": true,
   "type": "module",
