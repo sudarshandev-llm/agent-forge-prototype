@@ -21,11 +21,11 @@ jobs:
       - run: npm ci
       - run: npm run build -w apps/api
       - name: Deploy to Railway
-        uses: bervProject/railway-deploy@v1
-        with:
-          railway_token: ${{ secrets.RAILWAY_TOKEN }}
-          service: api
-          directory: apps/api
+        run: |
+          npm install -g @railway/cli
+          railway up --service api
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 
   deploy-web:
     name: Deploy Web to Vercel
