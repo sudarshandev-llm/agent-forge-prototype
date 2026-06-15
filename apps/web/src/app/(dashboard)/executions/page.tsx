@@ -16,7 +16,16 @@ import {
 } from '@/components/ui/select';
 import { apiClient } from '@/lib/api-client';
 import { formatDate, formatNumber } from '@/lib/utils';
-import { CheckCircle2, XCircle, Loader2, Clock, Search, Activity, RefreshCw, ArrowRight } from 'lucide-react';
+import {
+  CheckCircle2,
+  XCircle,
+  Loader2,
+  Clock,
+  Search,
+  Activity,
+  RefreshCw,
+  ArrowRight,
+} from 'lucide-react';
 
 interface Execution {
   id: string;
@@ -68,10 +77,14 @@ export default function ExecutionsPage() {
 
   const statusIcon = (status: Execution['status']) => {
     switch (status) {
-      case 'success': return <CheckCircle2 className="h-5 w-5 text-green-500" />;
-      case 'failed': return <XCircle className="h-5 w-5 text-red-500" />;
-      case 'running': return <Loader2 className="h-5 w-5 animate-spin text-blue-500" />;
-      case 'pending': return <Clock className="h-5 w-5 text-muted-foreground" />;
+      case 'success':
+        return <CheckCircle2 className="h-5 w-5 text-green-500" />;
+      case 'failed':
+        return <XCircle className="h-5 w-5 text-red-500" />;
+      case 'running':
+        return <Loader2 className="h-5 w-5 animate-spin text-blue-500" />;
+      case 'pending':
+        return <Clock className="h-5 w-5 text-muted-foreground" />;
     }
   };
 
@@ -123,7 +136,9 @@ export default function ExecutionsPage() {
             <Activity className="mx-auto h-12 w-12 text-muted-foreground" />
             <h3 className="mt-4 text-lg font-semibold">Failed to load executions</h3>
             <p className="text-sm text-muted-foreground">{error}</p>
-            <Button variant="outline" className="mt-4" onClick={fetchExecutions}>Retry</Button>
+            <Button variant="outline" className="mt-4" onClick={fetchExecutions}>
+              Retry
+            </Button>
           </div>
         </div>
       ) : executions.length === 0 ? (
@@ -150,9 +165,7 @@ export default function ExecutionsPage() {
                         <Badge variant="outline" className="text-[10px]">
                           {exec.status}
                         </Badge>
-                        <span className="text-xs text-muted-foreground">
-                          {exec.steps} steps
-                        </span>
+                        <span className="text-xs text-muted-foreground">{exec.steps} steps</span>
                       </div>
                       <p className="text-sm text-muted-foreground truncate">{exec.input}</p>
                     </div>
@@ -172,13 +185,23 @@ export default function ExecutionsPage() {
 
       {totalPages > 1 && (
         <div className="flex items-center justify-center gap-2">
-          <Button variant="outline" size="sm" disabled={page <= 1} onClick={() => setPage(page - 1)}>
+          <Button
+            variant="outline"
+            size="sm"
+            disabled={page <= 1}
+            onClick={() => setPage(page - 1)}
+          >
             Previous
           </Button>
           <span className="text-sm text-muted-foreground">
             Page {page} of {totalPages}
           </span>
-          <Button variant="outline" size="sm" disabled={page >= totalPages} onClick={() => setPage(page + 1)}>
+          <Button
+            variant="outline"
+            size="sm"
+            disabled={page >= totalPages}
+            onClick={() => setPage(page + 1)}
+          >
             Next
           </Button>
         </div>

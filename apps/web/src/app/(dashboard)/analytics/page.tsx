@@ -43,11 +43,25 @@ import {
   Area,
 } from 'recharts';
 
-const COLORS = ['hsl(var(--primary))', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#06b6d4', '#84cc16'];
+const COLORS = [
+  'hsl(var(--primary))',
+  '#10b981',
+  '#f59e0b',
+  '#ef4444',
+  '#8b5cf6',
+  '#ec4899',
+  '#06b6d4',
+  '#84cc16',
+];
 
 interface AnalyticsData {
   usageOverTime: Array<{ date: string; executions: number; tokens: number; cost: number }>;
-  agentPerformance: Array<{ name: string; executions: number; successRate: number; avgDuration: number }>;
+  agentPerformance: Array<{
+    name: string;
+    executions: number;
+    successRate: number;
+    avgDuration: number;
+  }>;
   modelDistribution: Array<{ name: string; value: number }>;
   topAgents: Array<{ name: string; executions: number }>;
   summary: {
@@ -193,7 +207,9 @@ export default function AnalyticsPage() {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Total Executions</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Total Executions
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-center gap-2">
@@ -201,13 +217,17 @@ export default function AnalyticsPage() {
               <span className="text-2xl font-bold">{formatNumber(summary.totalExecutions)}</span>
             </div>
             <p className="text-xs text-muted-foreground mt-1">
-              {summary.successRate > 0 ? `${summary.successRate.toFixed(1)}% success rate` : 'No data'}
+              {summary.successRate > 0
+                ? `${summary.successRate.toFixed(1)}% success rate`
+                : 'No data'}
             </p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Total Tokens</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Total Tokens
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-center gap-2">
@@ -229,7 +249,9 @@ export default function AnalyticsPage() {
         </Card>
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Active Agents</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Active Agents
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-center gap-2">
@@ -272,7 +294,9 @@ export default function AnalyticsPage() {
                     <XAxis
                       dataKey="date"
                       className="text-xs"
-                      tickFormatter={(v) => new Date(v).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                      tickFormatter={(v) =>
+                        new Date(v).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+                      }
                     />
                     <YAxis className="text-xs" />
                     <Tooltip
@@ -282,8 +306,20 @@ export default function AnalyticsPage() {
                         borderRadius: 'var(--radius)',
                       }}
                     />
-                    <Area type="monotone" dataKey="executions" stroke="hsl(var(--primary))" fill="url(#executionsGradient)" strokeWidth={2} />
-                    <Area type="monotone" dataKey="tokens" stroke="#10b981" fill="url(#tokensGradient)" strokeWidth={2} />
+                    <Area
+                      type="monotone"
+                      dataKey="executions"
+                      stroke="hsl(var(--primary))"
+                      fill="url(#executionsGradient)"
+                      strokeWidth={2}
+                    />
+                    <Area
+                      type="monotone"
+                      dataKey="tokens"
+                      stroke="#10b981"
+                      fill="url(#tokensGradient)"
+                      strokeWidth={2}
+                    />
                   </AreaChart>
                 </ResponsiveContainer>
               </div>
@@ -311,8 +347,18 @@ export default function AnalyticsPage() {
                         borderRadius: 'var(--radius)',
                       }}
                     />
-                    <Bar dataKey="successRate" name="Success Rate (%)" fill="hsl(var(--primary))" radius={[0, 4, 4, 0]} />
-                    <Bar dataKey="avgDuration" name="Avg Duration (ms)" fill="#10b981" radius={[0, 4, 4, 0]} />
+                    <Bar
+                      dataKey="successRate"
+                      name="Success Rate (%)"
+                      fill="hsl(var(--primary))"
+                      radius={[0, 4, 4, 0]}
+                    />
+                    <Bar
+                      dataKey="avgDuration"
+                      name="Avg Duration (ms)"
+                      fill="#10b981"
+                      radius={[0, 4, 4, 0]}
+                    />
                   </BarChart>
                 </ResponsiveContainer>
               </div>

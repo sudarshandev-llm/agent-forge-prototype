@@ -8,7 +8,11 @@ import { logger } from './logger.js';
 
 const connection = getRedis() as any;
 
-export function setupWorkers(): { agentWorker: Worker; workflowWorker: Worker; emailWorker: Worker } {
+export function setupWorkers(): {
+  agentWorker: Worker;
+  workflowWorker: Worker;
+  emailWorker: Worker;
+} {
   const agentWorker = new Worker('agent-execution', processAgentExecution, {
     connection,
     concurrency: 5,

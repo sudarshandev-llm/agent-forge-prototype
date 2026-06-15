@@ -15,8 +15,16 @@ import {
 } from '@/components/ui/select';
 import { cn, formatDate, formatNumber } from '@/lib/utils';
 import {
-  Workflow, Plus, Search, Play, MoreHorizontal, Copy, Trash2,
-  CheckCircle2, AlertCircle, Clock,
+  Workflow,
+  Plus,
+  Search,
+  Play,
+  MoreHorizontal,
+  Copy,
+  Trash2,
+  CheckCircle2,
+  AlertCircle,
+  Clock,
 } from 'lucide-react';
 
 interface WorkflowItem {
@@ -32,11 +40,60 @@ interface WorkflowItem {
 }
 
 const mockWorkflows: WorkflowItem[] = [
-  { id: '1', name: 'Customer Onboarding', description: 'Automated onboarding flow with email verification and profile setup.', status: 'active', nodeCount: 8, runCount: 1523, lastRun: '2024-06-10T09:15:00Z', trigger: 'webhook', updatedAt: '2024-06-08T14:00:00Z' },
-  { id: '2', name: 'Content Review Pipeline', description: 'Multi-stage content review with AI analysis and human approval gates.', status: 'active', nodeCount: 12, runCount: 892, lastRun: '2024-06-09T16:30:00Z', trigger: 'manual', updatedAt: '2024-06-07T10:00:00Z' },
-  { id: '3', name: 'Data Sync Workflow', description: 'Synchronize data between CRM, ERP, and analytics platforms.', status: 'draft', nodeCount: 5, runCount: 0, trigger: 'scheduled', updatedAt: '2024-06-05T08:00:00Z' },
-  { id: '4', name: 'Incident Response', description: 'Automated incident detection, alerting, and response coordination.', status: 'error', nodeCount: 15, runCount: 234, lastRun: '2024-06-09T22:00:00Z', trigger: 'webhook', updatedAt: '2024-06-09T22:05:00Z' },
-  { id: '5', name: 'Lead Qualification', description: 'Score and route leads based on behavior, firmographics, and intent.', status: 'active', nodeCount: 6, runCount: 3456, lastRun: '2024-06-10T08:00:00Z', trigger: 'webhook', updatedAt: '2024-06-10T08:01:00Z' },
+  {
+    id: '1',
+    name: 'Customer Onboarding',
+    description: 'Automated onboarding flow with email verification and profile setup.',
+    status: 'active',
+    nodeCount: 8,
+    runCount: 1523,
+    lastRun: '2024-06-10T09:15:00Z',
+    trigger: 'webhook',
+    updatedAt: '2024-06-08T14:00:00Z',
+  },
+  {
+    id: '2',
+    name: 'Content Review Pipeline',
+    description: 'Multi-stage content review with AI analysis and human approval gates.',
+    status: 'active',
+    nodeCount: 12,
+    runCount: 892,
+    lastRun: '2024-06-09T16:30:00Z',
+    trigger: 'manual',
+    updatedAt: '2024-06-07T10:00:00Z',
+  },
+  {
+    id: '3',
+    name: 'Data Sync Workflow',
+    description: 'Synchronize data between CRM, ERP, and analytics platforms.',
+    status: 'draft',
+    nodeCount: 5,
+    runCount: 0,
+    trigger: 'scheduled',
+    updatedAt: '2024-06-05T08:00:00Z',
+  },
+  {
+    id: '4',
+    name: 'Incident Response',
+    description: 'Automated incident detection, alerting, and response coordination.',
+    status: 'error',
+    nodeCount: 15,
+    runCount: 234,
+    lastRun: '2024-06-09T22:00:00Z',
+    trigger: 'webhook',
+    updatedAt: '2024-06-09T22:05:00Z',
+  },
+  {
+    id: '5',
+    name: 'Lead Qualification',
+    description: 'Score and route leads based on behavior, firmographics, and intent.',
+    status: 'active',
+    nodeCount: 6,
+    runCount: 3456,
+    lastRun: '2024-06-10T08:00:00Z',
+    trigger: 'webhook',
+    updatedAt: '2024-06-10T08:01:00Z',
+  },
 ];
 
 const statusConfig = {
@@ -58,7 +115,8 @@ export default function WorkflowsPage() {
 
   const filtered = useMemo(() => {
     return workflows.filter((w) => {
-      const matchesSearch = w.name.toLowerCase().includes(search.toLowerCase()) ||
+      const matchesSearch =
+        w.name.toLowerCase().includes(search.toLowerCase()) ||
         w.description.toLowerCase().includes(search.toLowerCase());
       const matchesStatus = statusFilter === 'all' || w.status === statusFilter;
       return matchesSearch && matchesStatus;
@@ -107,7 +165,9 @@ export default function WorkflowsPage() {
           <Workflow className="h-12 w-12 text-muted-foreground/30 mb-4" />
           <h3 className="text-lg font-semibold">No workflows found</h3>
           <p className="text-sm text-muted-foreground mt-1 max-w-sm">
-            {search ? 'Try a different search term' : 'Create your first workflow to automate agent tasks.'}
+            {search
+              ? 'Try a different search term'
+              : 'Create your first workflow to automate agent tasks.'}
           </p>
           {!search && (
             <Link href="/workflows/new">
@@ -134,7 +194,9 @@ export default function WorkflowsPage() {
                     <CardTitle className="text-lg group-hover:text-primary transition-colors mt-2">
                       {workflow.name}
                     </CardTitle>
-                    <CardDescription className="line-clamp-2">{workflow.description}</CardDescription>
+                    <CardDescription className="line-clamp-2">
+                      {workflow.description}
+                    </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="flex items-center justify-between text-sm">
@@ -142,7 +204,9 @@ export default function WorkflowsPage() {
                         <StatusIcon className={cn('h-4 w-4', status.color)} />
                         <span className={cn('font-medium', status.color)}>{status.label}</span>
                       </div>
-                      <Badge variant="outline" className="text-[10px]">{triggerLabels[workflow.trigger]}</Badge>
+                      <Badge variant="outline" className="text-[10px]">
+                        {triggerLabels[workflow.trigger]}
+                      </Badge>
                     </div>
                     <div className="mt-3 flex items-center justify-between text-xs text-muted-foreground">
                       <span>{workflow.nodeCount} nodes</span>

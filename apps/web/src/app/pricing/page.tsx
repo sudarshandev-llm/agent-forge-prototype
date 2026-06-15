@@ -4,7 +4,14 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import { Check, Bot, Minus } from 'lucide-react';
 
@@ -72,12 +79,32 @@ const comparisons = [
   { feature: 'API Calls / Month', free: '100', pro: '10,000', enterprise: '100,000' },
   { feature: 'Workflows', free: '1', pro: 'Unlimited', enterprise: 'Unlimited' },
   { feature: 'Team Members', free: '1', pro: '5', enterprise: 'Unlimited' },
-  { feature: 'Custom Tools', free: <Minus className="h-4 w-4 mx-auto" />, pro: <Check className="h-4 w-4 mx-auto text-green-500" />, enterprise: <Check className="h-4 w-4 mx-auto text-green-500" /> },
+  {
+    feature: 'Custom Tools',
+    free: <Minus className="h-4 w-4 mx-auto" />,
+    pro: <Check className="h-4 w-4 mx-auto text-green-500" />,
+    enterprise: <Check className="h-4 w-4 mx-auto text-green-500" />,
+  },
   { feature: 'Analytics', free: 'Basic', pro: 'Advanced', enterprise: 'Advanced' },
   { feature: 'Support', free: 'Community', pro: 'Priority', enterprise: 'Dedicated' },
-  { feature: 'SSO / SAML', free: <Minus className="h-4 w-4 mx-auto" />, pro: <Minus className="h-4 w-4 mx-auto" />, enterprise: <Check className="h-4 w-4 mx-auto text-green-500" /> },
-  { feature: 'Audit Logs', free: <Minus className="h-4 w-4 mx-auto" />, pro: <Minus className="h-4 w-4 mx-auto" />, enterprise: <Check className="h-4 w-4 mx-auto text-green-500" /> },
-  { feature: 'SLA', free: <Minus className="h-4 w-4 mx-auto" />, pro: <Minus className="h-4 w-4 mx-auto" />, enterprise: <Check className="h-4 w-4 mx-auto text-green-500" /> },
+  {
+    feature: 'SSO / SAML',
+    free: <Minus className="h-4 w-4 mx-auto" />,
+    pro: <Minus className="h-4 w-4 mx-auto" />,
+    enterprise: <Check className="h-4 w-4 mx-auto text-green-500" />,
+  },
+  {
+    feature: 'Audit Logs',
+    free: <Minus className="h-4 w-4 mx-auto" />,
+    pro: <Minus className="h-4 w-4 mx-auto" />,
+    enterprise: <Check className="h-4 w-4 mx-auto text-green-500" />,
+  },
+  {
+    feature: 'SLA',
+    free: <Minus className="h-4 w-4 mx-auto" />,
+    pro: <Minus className="h-4 w-4 mx-auto" />,
+    enterprise: <Check className="h-4 w-4 mx-auto text-green-500" />,
+  },
 ];
 
 export default function PricingPage() {
@@ -153,9 +180,7 @@ export default function PricingPage() {
                   <span className="text-4xl font-bold">
                     ${annual ? plan.price.yearly : plan.price.monthly}
                   </span>
-                  <span className="text-muted-foreground ml-1">
-                    /{annual ? 'year' : 'month'}
-                  </span>
+                  <span className="text-muted-foreground ml-1">/{annual ? 'year' : 'month'}</span>
                   {plan.price.monthly === 0 && (
                     <span className="text-muted-foreground ml-1">forever</span>
                   )}
@@ -172,11 +197,7 @@ export default function PricingPage() {
                 </ul>
               </CardContent>
               <CardFooter>
-                <Button
-                  className="w-full"
-                  variant={plan.popular ? 'default' : 'outline'}
-                  asChild
-                >
+                <Button className="w-full" variant={plan.popular ? 'default' : 'outline'} asChild>
                   <Link href={plan.name === 'Enterprise' ? '/contact' : '/sign-up'}>
                     {plan.cta}
                   </Link>
@@ -202,7 +223,9 @@ export default function PricingPage() {
                 {comparisons.map((row) => (
                   <tr key={row.feature} className="border-b hover:bg-muted/50">
                     <td className="py-3 px-4 text-sm">{row.feature}</td>
-                    <td className="py-3 px-4 text-sm text-center text-muted-foreground">{row.free}</td>
+                    <td className="py-3 px-4 text-sm text-center text-muted-foreground">
+                      {row.free}
+                    </td>
                     <td className="py-3 px-4 text-sm text-center">{row.pro}</td>
                     <td className="py-3 px-4 text-sm text-center">{row.enterprise}</td>
                   </tr>
@@ -215,7 +238,8 @@ export default function PricingPage() {
         <div className="mt-24 text-center">
           <h2 className="text-2xl font-bold mb-4">Need a custom plan?</h2>
           <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-            Contact our sales team for custom pricing, dedicated infrastructure, and enterprise-grade support.
+            Contact our sales team for custom pricing, dedicated infrastructure, and
+            enterprise-grade support.
           </p>
           <Button size="lg" variant="outline" asChild>
             <Link href="/contact">Contact Sales</Link>

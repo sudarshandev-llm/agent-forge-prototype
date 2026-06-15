@@ -12,7 +12,17 @@ import { Separator } from '@/components/ui/separator';
 import { apiClient } from '@/lib/api-client';
 import { formatDate, getInitials, truncate } from '@/lib/utils';
 import { useUIStore } from '@/store/ui-store';
-import { ArrowLeft, Bot, Users, Activity, UserPlus, Settings, Mail, Clock, Shield } from 'lucide-react';
+import {
+  ArrowLeft,
+  Bot,
+  Users,
+  Activity,
+  UserPlus,
+  Settings,
+  Mail,
+  Clock,
+  Shield,
+} from 'lucide-react';
 
 interface TeamMember {
   id: string;
@@ -86,7 +96,11 @@ export default function TeamDetailPage() {
           <Users className="mx-auto h-12 w-12 text-muted-foreground" />
           <h3 className="mt-4 text-lg font-semibold">Team not found</h3>
           <p className="text-sm text-muted-foreground">{error || 'This team does not exist'}</p>
-          <Button variant="outline" className="mt-4" onClick={() => router.push('/dashboard/teams')}>
+          <Button
+            variant="outline"
+            className="mt-4"
+            onClick={() => router.push('/dashboard/teams')}
+          >
             <ArrowLeft className="mr-2 h-4 w-4" /> Back to Teams
           </Button>
         </div>
@@ -218,13 +232,18 @@ export default function TeamDetailPage() {
                       <Bot className="h-5 w-5 text-primary" />
                       <div>
                         <p className="font-medium">{agent.name}</p>
-                        <p className="text-sm text-muted-foreground">{truncate(agent.description, 80)}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {truncate(agent.description, 80)}
+                        </p>
                       </div>
                     </div>
                     <Badge
                       variant={
-                        agent.status === 'active' ? 'success' :
-                        agent.status === 'error' ? 'destructive' : 'secondary'
+                        agent.status === 'active'
+                          ? 'success'
+                          : agent.status === 'error'
+                            ? 'destructive'
+                            : 'secondary'
                       }
                     >
                       {agent.status}
@@ -232,7 +251,9 @@ export default function TeamDetailPage() {
                   </div>
                 ))}
                 {(!team.agents || team.agents.length === 0) && (
-                  <p className="text-sm text-muted-foreground text-center py-8">No agents assigned</p>
+                  <p className="text-sm text-muted-foreground text-center py-8">
+                    No agents assigned
+                  </p>
                 )}
               </div>
             </CardContent>

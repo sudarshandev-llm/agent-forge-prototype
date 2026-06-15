@@ -24,7 +24,12 @@ interface ExecutionLogProps {
 const stepConfig = {
   thought: { icon: Brain, label: 'Thought', color: 'text-blue-500', border: 'border-blue-500' },
   action: { icon: Zap, label: 'Action', color: 'text-amber-500', border: 'border-amber-500' },
-  observation: { icon: Eye, label: 'Observation', color: 'text-purple-500', border: 'border-purple-500' },
+  observation: {
+    icon: Eye,
+    label: 'Observation',
+    color: 'text-purple-500',
+    border: 'border-purple-500',
+  },
   result: { icon: Check, label: 'Result', color: 'text-green-500', border: 'border-green-500' },
 };
 
@@ -78,7 +83,9 @@ export function ExecutionLog({ steps, className }: ExecutionLogProps) {
                   {step.duration && (
                     <span className="text-xs text-muted-foreground ml-auto">{step.duration}ms</span>
                   )}
-                  <span className="text-xs text-muted-foreground">{formatDate(step.timestamp, 'relative')}</span>
+                  <span className="text-xs text-muted-foreground">
+                    {formatDate(step.timestamp, 'relative')}
+                  </span>
                 </div>
                 <p className="text-sm text-muted-foreground">{step.content}</p>
                 {step.details && (

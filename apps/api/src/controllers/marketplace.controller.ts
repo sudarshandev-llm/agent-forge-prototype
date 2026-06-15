@@ -41,7 +41,11 @@ export async function listListingsHandler(req: Request, res: Response, next: Nex
 
 export async function updateListingHandler(req: Request, res: Response, next: NextFunction) {
   try {
-    const listing = await marketplaceService.updateListing(req.params.id, req.user!.userId, req.body);
+    const listing = await marketplaceService.updateListing(
+      req.params.id,
+      req.user!.userId,
+      req.body,
+    );
     res.status(200).json({ success: true, data: listing });
   } catch (error) {
     next(error);

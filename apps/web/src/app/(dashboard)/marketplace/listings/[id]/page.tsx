@@ -59,7 +59,8 @@ const mockListing = {
       userId: 'u1',
       userName: 'Sarah Johnson',
       rating: 5,
-      comment: 'Incredible tool! Cut our content creation time by 80%. The SEO features are game-changing.',
+      comment:
+        'Incredible tool! Cut our content creation time by 80%. The SEO features are game-changing.',
       createdAt: '2024-06-01T08:00:00Z',
     },
     {
@@ -142,9 +143,7 @@ export default function ListingDetailPage() {
                 <Download className="h-4 w-4" />
                 {formatNumber(listing.downloads)} downloads
               </div>
-              <div className="text-muted-foreground">
-                Version {listing.version}
-              </div>
+              <div className="text-muted-foreground">Version {listing.version}</div>
               <div className="text-muted-foreground">
                 Updated {formatDate(listing.updatedAt, 'relative')}
               </div>
@@ -175,7 +174,10 @@ export default function ListingDetailPage() {
                   <h4 className="text-sm font-medium mb-2">Requirements</h4>
                   <ul className="space-y-1">
                     {listing.requirements.map((req) => (
-                      <li key={req} className="text-sm text-muted-foreground flex items-center gap-2">
+                      <li
+                        key={req}
+                        className="text-sm text-muted-foreground flex items-center gap-2"
+                      >
                         <Shield className="h-3 w-3 text-muted-foreground/60" />
                         {req}
                       </li>
@@ -257,9 +259,7 @@ export default function ListingDetailPage() {
                   <p className="text-xs text-muted-foreground">Publisher</p>
                 </div>
               </div>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                {listing.author.bio}
-              </p>
+              <p className="text-xs text-muted-foreground leading-relaxed">{listing.author.bio}</p>
               <Button variant="outline" size="sm" className="w-full">
                 View Profile
               </Button>

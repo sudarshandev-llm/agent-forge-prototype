@@ -48,7 +48,12 @@ const statusVariants: Record<string, 'success' | 'warning' | 'destructive'> = {
 export function AgentCard({ agent, onRun, onEdit, onDelete, className }: AgentCardProps) {
   return (
     <Link href={`/agents/${agent.id}`} className="block">
-      <Card className={cn('group transition-all hover:shadow-md hover:border-primary/50 h-full', className)}>
+      <Card
+        className={cn(
+          'group transition-all hover:shadow-md hover:border-primary/50 h-full',
+          className,
+        )}
+      >
         <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-2">
           <div className="flex items-center gap-3">
             <Avatar className="h-10 w-10">
@@ -68,18 +73,32 @@ export function AgentCard({ agent, onRun, onEdit, onDelete, className }: AgentCa
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild onClick={(e) => e.preventDefault()}>
-              <Button variant="ghost" size="icon" className="h-8 w-8 opacity-0 group-hover:opacity-100">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8 opacity-0 group-hover:opacity-100"
+              >
                 <MoreHorizontal className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               {onRun && (
-                <DropdownMenuItem onClick={(e) => { e.preventDefault(); onRun(agent.id); }}>
+                <DropdownMenuItem
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onRun(agent.id);
+                  }}
+                >
                   <Play className="mr-2 h-4 w-4" /> Run
                 </DropdownMenuItem>
               )}
               {onEdit && (
-                <DropdownMenuItem onClick={(e) => { e.preventDefault(); onEdit(agent.id); }}>
+                <DropdownMenuItem
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onEdit(agent.id);
+                  }}
+                >
                   <Pencil className="mr-2 h-4 w-4" /> Edit
                 </DropdownMenuItem>
               )}
@@ -87,7 +106,10 @@ export function AgentCard({ agent, onRun, onEdit, onDelete, className }: AgentCa
               {onDelete && (
                 <DropdownMenuItem
                   className="text-destructive"
-                  onClick={(e) => { e.preventDefault(); onDelete(agent.id); }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onDelete(agent.id);
+                  }}
                 >
                   <Trash2 className="mr-2 h-4 w-4" /> Delete
                 </DropdownMenuItem>
@@ -96,7 +118,9 @@ export function AgentCard({ agent, onRun, onEdit, onDelete, className }: AgentCa
           </DropdownMenu>
         </CardHeader>
         <CardContent>
-          <p className="text-sm text-muted-foreground line-clamp-2">{truncate(agent.description, 100)}</p>
+          <p className="text-sm text-muted-foreground line-clamp-2">
+            {truncate(agent.description, 100)}
+          </p>
           <div className="mt-3 flex items-center gap-2 text-xs text-muted-foreground">
             <Cpu className="h-3.5 w-3.5" />
             <span>{agent.model}</span>
@@ -116,14 +140,19 @@ export function AgentCard({ agent, onRun, onEdit, onDelete, className }: AgentCa
           </div>
           <div className="flex items-center gap-2">
             {agent.lastRun && (
-              <span className="text-xs text-muted-foreground">{formatDate(agent.lastRun, 'relative')}</span>
+              <span className="text-xs text-muted-foreground">
+                {formatDate(agent.lastRun, 'relative')}
+              </span>
             )}
             {onRun && (
               <Button
                 variant="ghost"
                 size="icon"
                 className="h-7 w-7"
-                onClick={(e) => { e.preventDefault(); onRun(agent.id); }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onRun(agent.id);
+                }}
               >
                 <Play className="h-3.5 w-3.5" />
               </Button>

@@ -22,14 +22,24 @@ const mockTeam = {
 };
 
 vi.mock('../../controllers/team.controller.js', () => ({
-  createTeamHandler: vi.fn((_req: any, res: any) => res.status(201).json({ success: true, data: mockTeam })),
-  getTeamHandler: vi.fn((req: any, res: any) => res.json({ success: true, data: { ...mockTeam, id: req.params.id } })),
+  createTeamHandler: vi.fn((_req: any, res: any) =>
+    res.status(201).json({ success: true, data: mockTeam }),
+  ),
+  getTeamHandler: vi.fn((req: any, res: any) =>
+    res.json({ success: true, data: { ...mockTeam, id: req.params.id } }),
+  ),
   listTeamsHandler: vi.fn((_req: any, res: any) => res.json({ success: true, data: [mockTeam] })),
-  updateTeamHandler: vi.fn((req: any, res: any) => res.json({ success: true, data: { ...mockTeam, ...req.body } })),
+  updateTeamHandler: vi.fn((req: any, res: any) =>
+    res.json({ success: true, data: { ...mockTeam, ...req.body } }),
+  ),
   deleteTeamHandler: vi.fn((_req: any, res: any) => res.status(204).send()),
-  addMemberHandler: vi.fn((_req: any, res: any) => res.status(201).json({ success: true, data: { userId: 'user-2', role: 'member' } })),
+  addMemberHandler: vi.fn((_req: any, res: any) =>
+    res.status(201).json({ success: true, data: { userId: 'user-2', role: 'member' } }),
+  ),
   removeMemberHandler: vi.fn((_req: any, res: any) => res.status(204).send()),
-  updateMemberRoleHandler: vi.fn((req: any, res: any) => res.json({ success: true, data: { userId: req.params.userId, role: req.body.role } })),
+  updateMemberRoleHandler: vi.fn((req: any, res: any) =>
+    res.json({ success: true, data: { userId: req.params.userId, role: req.body.role } }),
+  ),
   getTeamAgentsHandler: vi.fn((_req: any, res: any) => res.json({ success: true, data: [] })),
 }));
 
@@ -71,7 +81,10 @@ describe('Team Routes', () => {
   });
 
   it('POST /api/v1/teams/:id/members should add member', async () => {
-    const res = await makeRequest('POST', '/api/v1/teams/team-1/members', { userId: 'user-2', role: 'member' });
+    const res = await makeRequest('POST', '/api/v1/teams/team-1/members', {
+      userId: 'user-2',
+      role: 'member',
+    });
     expect(res.status).toBe(201);
   });
 
@@ -92,18 +105,36 @@ describe('Team Routes', () => {
   });
 });
 
-async function makeRequest(method: string, path: string, body?: any): Promise<{ status: number; body: string }> {
+async function makeRequest(
+  method: string,
+  path: string,
+  body?: any,
+): Promise<{ status: number; body: string }> {
   return new Promise((resolve, reject) => {
     const server = (app as any).listen(0, () => {
       const port = server.address().port;
       const http = require('http');
-      const options = { hostname: 'localhost', port, path, method, headers: { 'Content-Type': 'application/json' } };
+      const options = {
+        hostname: 'localhost',
+        port,
+        path,
+        method,
+        headers: { 'Content-Type': 'application/json' },
+      };
       const clientReq = http.request(options, (res: any) => {
         let data = '';
-        res.on('data', (chunk: string) => { data += chunk; });
-        res.on('end', () => { server.close(); resolve({ status: res.statusCode || 200, body: data }); });
+        res.on('data', (chunk: string) => {
+          data += chunk;
+        });
+        res.on('end', () => {
+          server.close();
+          resolve({ status: res.statusCode || 200, body: data });
+        });
       });
-      clientReq.on('error', (err: Error) => { server.close(); reject(err); });
+      clientReq.on('error', (err: Error) => {
+        server.close();
+        reject(err);
+      });
       if (body) clientReq.write(JSON.stringify(body));
       clientReq.end();
     });

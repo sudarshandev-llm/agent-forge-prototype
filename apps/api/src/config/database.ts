@@ -14,9 +14,12 @@ export function getPrismaClient(): PrismaClient {
       ],
     });
 
-    prismaInstance.$on('query' as never, (e: { query: string; params: string; duration: number }) => {
-      logger.debug('Prisma query', { query: e.query, params: e.params, duration: e.duration });
-    });
+    prismaInstance.$on(
+      'query' as never,
+      (e: { query: string; params: string; duration: number }) => {
+        logger.debug('Prisma query', { query: e.query, params: e.params, duration: e.duration });
+      },
+    );
   }
 
   return prismaInstance;

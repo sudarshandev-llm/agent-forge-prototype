@@ -15,10 +15,7 @@ export async function getAgentAnalyticsHandler(req: Request, res: Response, next
 
 export async function getTeamAnalyticsHandler(req: Request, res: Response, next: NextFunction) {
   try {
-    const analytics = await analyticsService.getTeamAnalytics(
-      req.params.teamId,
-      req.user!.userId,
-    );
+    const analytics = await analyticsService.getTeamAnalytics(req.params.teamId, req.user!.userId);
     res.status(200).json({ success: true, data: analytics });
   } catch (error) {
     next(error);

@@ -1,6 +1,6 @@
-import { initTRPC, TRPCError } from "@trpc/server";
-import superjson from "superjson";
-import { ZodError } from "zod";
+import { initTRPC, TRPCError } from '@trpc/server';
+import superjson from 'superjson';
+import { ZodError } from 'zod';
 
 export interface TRPCContext {
   userId?: string;
@@ -30,17 +30,17 @@ export function createTRPCContext(): TRPCContext {
 
 export const authProcedure = t.procedure.use(async ({ ctx, next }) => {
   if (!ctx.userId) {
-    throw new TRPCError({ code: "UNAUTHORIZED" });
+    throw new TRPCError({ code: 'UNAUTHORIZED' });
   }
   return next({ ctx: { ...ctx, user: ctx.user } });
 });
 
 export const adminProcedure = t.procedure.use(async ({ ctx, next }) => {
   if (!ctx.userId) {
-    throw new TRPCError({ code: "UNAUTHORIZED" });
+    throw new TRPCError({ code: 'UNAUTHORIZED' });
   }
-  if (!ctx.user?.roles.includes("admin")) {
-    throw new TRPCError({ code: "FORBIDDEN" });
+  if (!ctx.user?.roles.includes('admin')) {
+    throw new TRPCError({ code: 'FORBIDDEN' });
   }
   return next({ ctx: { ...ctx, user: ctx.user } });
 });

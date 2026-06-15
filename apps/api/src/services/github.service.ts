@@ -78,15 +78,12 @@ export const githubService = {
     repo: string,
     path: string = '',
   ): Promise<GitHubFile[]> {
-    const response = await fetch(
-      `https://api.github.com/repos/${owner}/${repo}/contents/${path}`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          Accept: 'application/vnd.github.v3+json',
-        },
+    const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        Accept: 'application/vnd.github.v3+json',
       },
-    );
+    });
 
     if (!response.ok) {
       throw new ApiError(502, 'Failed to fetch repo contents');
@@ -101,15 +98,12 @@ export const githubService = {
     repo: string,
     path: string,
   ): Promise<GitHubFile> {
-    const response = await fetch(
-      `https://api.github.com/repos/${owner}/${repo}/contents/${path}`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          Accept: 'application/vnd.github.v3+json',
-        },
+    const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        Accept: 'application/vnd.github.v3+json',
       },
-    );
+    });
 
     if (!response.ok) {
       throw new ApiError(502, 'Failed to fetch file content');
@@ -148,26 +142,23 @@ export const githubService = {
     webhookUrl: string,
     events: string[] = ['push', 'pull_request'],
   ): Promise<void> {
-    const response = await fetch(
-      `https://api.github.com/repos/${owner}/${repo}/hooks`,
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          Accept: 'application/vnd.github.v3+json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: 'web',
-          active: true,
-          events,
-          config: {
-            url: webhookUrl,
-            content_type: 'json',
-          },
-        }),
+    const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/hooks`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        Accept: 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json',
       },
-    );
+      body: JSON.stringify({
+        name: 'web',
+        active: true,
+        events,
+        config: {
+          url: webhookUrl,
+          content_type: 'json',
+        },
+      }),
+    });
 
     if (!response.ok) {
       const error = await response.text();

@@ -71,7 +71,11 @@ export const teamService = {
     });
   },
 
-  async updateTeam(id: string, userId: string, data: { name?: string; description?: string; avatarUrl?: string }) {
+  async updateTeam(
+    id: string,
+    userId: string,
+    data: { name?: string; description?: string; avatarUrl?: string },
+  ) {
     const team = await this.getTeamById(id, userId);
     const member = team.members.find((m) => m.userId === userId);
 

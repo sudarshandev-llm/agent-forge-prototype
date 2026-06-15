@@ -145,7 +145,11 @@ describe('toolService', () => {
   describe('updateTool', () => {
     it('should update owned tool and increment version', async () => {
       vi.mocked(prisma.tool.findFirst).mockResolvedValue(mockTool);
-      vi.mocked(prisma.tool.update).mockResolvedValue({ ...mockTool, description: 'Updated', version: 2 });
+      vi.mocked(prisma.tool.update).mockResolvedValue({
+        ...mockTool,
+        description: 'Updated',
+        version: 2,
+      });
 
       const result = await toolService.updateTool('tool-1', 'user-1', { description: 'Updated' });
 
@@ -160,7 +164,9 @@ describe('toolService', () => {
       const ownedTool = { ...mockTool, ownerId: 'user-2' };
       vi.mocked(prisma.tool.findFirst).mockResolvedValue(ownedTool);
 
-      await expect(toolService.updateTool('tool-1', 'user-1', { name: 'hack' })).rejects.toThrow(ApiError);
+      await expect(toolService.updateTool('tool-1', 'user-1', { name: 'hack' })).rejects.toThrow(
+        ApiError,
+      );
     });
   });
 
@@ -189,7 +195,11 @@ describe('toolService', () => {
       vi.mocked(prisma.execution.create).mockResolvedValue({ id: 'exec-1' } as any);
       vi.mocked(prisma.execution.update).mockResolvedValue({} as any);
 
-      const result = await toolService.executeTool({ toolId: 'tool-1', userId: 'user-1', parameters: { query: 'test' } });
+      const result = await toolService.executeTool({
+        toolId: 'tool-1',
+        userId: 'user-1',
+        parameters: { query: 'test' },
+      });
 
       expect(result.success).toBe(true);
       expect(result.duration).toBeGreaterThanOrEqual(0);
@@ -202,7 +212,9 @@ describe('toolService', () => {
       vi.mocked(prisma.execution.create).mockResolvedValue({ id: 'exec-1' } as any);
       vi.mocked(prisma.execution.update).mockResolvedValue({} as any);
 
-      const result = await toolService.executeToolByName('web_search', 'user-1', { query: 'weather' });
+      const result = await toolService.executeToolByName('web_search', 'user-1', {
+        query: 'weather',
+      });
 
       expect(result).toBeDefined();
     });
@@ -210,7 +222,9 @@ describe('toolService', () => {
     it('should throw 404 when tool not found', async () => {
       vi.mocked(prisma.tool.findFirst).mockResolvedValue(null);
 
-      await expect(toolService.executeToolByName('nonexistent', 'user-1', {})).rejects.toThrow(ApiError);
+      await expect(toolService.executeToolByName('nonexistent', 'user-1', {})).rejects.toThrow(
+        ApiError,
+      );
     });
   });
 
@@ -218,7 +232,9 @@ describe('toolService', () => {
     it('should handle api_call type', async () => {
       vi.mocked(prisma.execution.create).mockResolvedValue({ id: 'exec-1' } as any);
       vi.mocked(prisma.execution.update).mockResolvedValue({} as any);
-      global.fetch = vi.fn().mockResolvedValue({ json: vi.fn().mockResolvedValue({ weather: 'sunny' }) });
+      global.fetch = vi
+        .fn()
+        .mockResolvedValue({ json: vi.fn().mockResolvedValue({ weather: 'sunny' }) });
 
       const result = await toolService.runToolExecution(
         mockApiTool as any,
@@ -235,7 +251,11 @@ describe('toolService', () => {
       vi.mocked(prisma.execution.update).mockResolvedValue({} as any);
 
       const codeTool = { ...mockTool, config: { type: 'code_execution' } };
-      const result = await toolService.runToolExecution(codeTool as any, { code: 'console.log(1)' }, 'user-1');
+      const result = await toolService.runToolExecution(
+        codeTool as any,
+        { code: 'console.log(1)' },
+        'user-1',
+      );
 
       expect(result.success).toBe(true);
       expect(result.data).toHaveProperty('message', 'Code execution sandbox');
@@ -246,7 +266,11 @@ describe('toolService', () => {
       vi.mocked(prisma.execution.update).mockResolvedValue({} as any);
 
       const searchTool = { ...mockTool, config: { type: 'web_search' } };
-      const result = await toolService.runToolExecution(searchTool as any, { query: 'test' }, 'user-1');
+      const result = await toolService.runToolExecution(
+        searchTool as any,
+        { query: 'test' },
+        'user-1',
+      );
 
       expect(result.success).toBe(true);
       expect(result.data).toEqual({ query: 'test', results: [] });
@@ -293,7 +317,10 @@ describe('toolService', () => {
     it('should POST with body', async () => {
       global.fetch = vi.fn().mockResolvedValue({ json: vi.fn().mockResolvedValue({}) });
 
-      await toolService.executeApiCall({ endpoint: 'https://api.example.com', method: 'POST' }, { key: 'val' });
+      await toolService.executeApiCall(
+        { endpoint: 'https://api.example.com', method: 'POST' },
+        { key: 'val' },
+      );
 
       expect(fetch).toHaveBeenCalledWith(
         'https://api.example.com',

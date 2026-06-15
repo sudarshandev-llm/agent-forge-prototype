@@ -15,9 +15,7 @@ describe('Hero', () => {
 
   it('renders the description paragraph', () => {
     render(<Hero />);
-    expect(
-      screen.getByText(/Create, deploy, and manage AI agents with ease/i),
-    ).toBeInTheDocument();
+    expect(screen.getByText(/Create, deploy, and manage AI agents with ease/i)).toBeInTheDocument();
   });
 
   it('renders the badge with build text', () => {
@@ -41,9 +39,7 @@ describe('Hero', () => {
 
   it('renders the no credit card disclaimer', () => {
     render(<Hero />);
-    expect(
-      screen.getByText(/No credit card required/i),
-    ).toBeInTheDocument();
+    expect(screen.getByText(/No credit card required/i)).toBeInTheDocument();
   });
 
   it('renders the Bot icon', () => {

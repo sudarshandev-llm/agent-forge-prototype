@@ -110,9 +110,7 @@ export default function NewWorkflowPage() {
 
       <div className="space-y-2">
         <h1 className="text-3xl font-bold tracking-tight">Create Workflow</h1>
-        <p className="text-muted-foreground">
-          Start with a template or build from scratch.
-        </p>
+        <p className="text-muted-foreground">Start with a template or build from scratch.</p>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -143,12 +141,8 @@ export default function NewWorkflowPage() {
                     <Icon className="h-5 w-5" />
                   </div>
                   <h3 className="font-semibold text-sm">{template.name}</h3>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    {template.description}
-                  </p>
-                  <p className="text-xs text-muted-foreground mt-2">
-                    {template.nodes} nodes
-                  </p>
+                  <p className="text-xs text-muted-foreground mt-1">{template.description}</p>
+                  <p className="text-xs text-muted-foreground mt-2">{template.nodes} nodes</p>
                 </CardContent>
               </Card>
             </button>
@@ -167,14 +161,8 @@ export default function NewWorkflowPage() {
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="name">Name</Label>
-              <Input
-                id="name"
-                placeholder="e.g. Customer Onboarding"
-                {...register('name')}
-              />
-              {errors.name && (
-                <p className="text-sm text-destructive">{errors.name.message}</p>
-              )}
+              <Input id="name" placeholder="e.g. Customer Onboarding" {...register('name')} />
+              {errors.name && <p className="text-sm text-destructive">{errors.name.message}</p>}
             </div>
 
             <div className="space-y-2">
@@ -193,10 +181,7 @@ export default function NewWorkflowPage() {
 
             <div className="space-y-2">
               <Label htmlFor="trigger">Trigger Type</Label>
-              <Select
-                onValueChange={(v) => setValue('trigger', v)}
-                defaultValue="manual"
-              >
+              <Select onValueChange={(v) => setValue('trigger', v)} defaultValue="manual">
                 <SelectTrigger>
                   <SelectValue placeholder="Select trigger" />
                 </SelectTrigger>

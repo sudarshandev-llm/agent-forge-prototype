@@ -39,7 +39,8 @@ const mockListings: Listing[] = [
   {
     id: '1',
     title: 'Content Writer Pro',
-    description: 'Generate high-quality blog posts, articles, and marketing copy with AI-powered content creation.',
+    description:
+      'Generate high-quality blog posts, articles, and marketing copy with AI-powered content creation.',
     price: 0,
     category: 'Content Writing',
     rating: 4.8,
@@ -85,7 +86,8 @@ const mockListings: Listing[] = [
   {
     id: '5',
     title: 'Image Creator',
-    description: 'Generate stunning images and artwork from text descriptions using advanced AI models.',
+    description:
+      'Generate stunning images and artwork from text descriptions using advanced AI models.',
     price: 19,
     category: 'Image Generation',
     rating: 4.5,
@@ -96,7 +98,8 @@ const mockListings: Listing[] = [
   {
     id: '6',
     title: 'Research Assistant',
-    description: 'Conduct deep research, summarize papers, and extract key insights from any topic.',
+    description:
+      'Conduct deep research, summarize papers, and extract key insights from any topic.',
     price: 39,
     category: 'Research',
     rating: 4.4,

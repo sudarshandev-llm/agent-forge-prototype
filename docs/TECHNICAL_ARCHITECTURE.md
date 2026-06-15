@@ -94,21 +94,21 @@
 
 ## 2. Technology Stack Rationale
 
-| Technology | Version | Rationale |
-|---|---|---|
-| **Next.js 14** | 14.x | Full-stack React framework with App Router, React Server Components, streaming SSR, and server actions. Chosen over Remix for its mature ecosystem and Vercel-first deployment model. App Router provides nested layouts and fine-grained loading states. |
-| **React 18** | 18.x | Concurrent features, `Suspense`, `useTransition`, and automatic batching. Required by Next.js 14. |
-| **TypeScript** | 5.x | Static typing across the entire stack. Catches class of bugs at compile time, improves DX with IntelliSense, and serves as living documentation. |
-| **Express.js** | 4.x | Mature, minimalist Node.js framework. Chosen over Fastify due to larger middleware ecosystem and simpler custom middleware. Lightweight enough to pair with edge-caching layers. |
-| **Socket.IO** | 4.x | Bidirectional real-time communication with automatic fallback (WebSocket → polling). Chosen over raw WebSocket for built-in rooms, acknowledgements, and reconnection handling. |
-| **PostgreSQL** | 16.x | ACID-compliant, advanced indexing (GiST, GIN, partial), JSONB for semi-structured agent configurations. Chosen over MySQL for superior extensibility and analytical query support. |
-| **Redis** | 7.x | In-memory data store used for caching, session storage, BullMQ job queue backend, and pub/sub. Chosen over Memcached for versatility beyond simple key-value cache. |
-| **BullMQ** | 5.x | Redis-backed job queue with delayed jobs, priority, rate limiting, and scheduler patterns. Chosen over Agenda/Bull for native TypeScript, ESM support, and rich dashboard (Bull Board). |
-| **Zustand** | 4.x | Lightweight state management for React. Chosen over Redux for minimal boilerplate, no providers, and straightforward subscription model. Used for UI state only. |
-| **React Query (TanStack Query)** | 5.x | Server state synchronization. Chosen over SWR for richer dev tools, infinite queries, optimistic updates, and first-class mutation handling. |
-| **Clerk** | — | Authentication provider handling OAuth (Google, GitHub), MFA, session management, orgs. Chosen over Auth.js for lower self-hosted complexity and built-in webhooks. |
-| **Drizzle ORM** | 0.30+ | Type-safe SQL ORM for TypeScript. Chosen over Prisma for better performance (no binary engine), SQL-like syntax, and superior migration tooling. |
-| **Docker** | 24+ | Containerization for reproducible dev/staging/prod environments. Multi-stage builds keep production images slim. |
+| Technology                       | Version | Rationale                                                                                                                                                                                                                                                 |
+| -------------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Next.js 14**                   | 14.x    | Full-stack React framework with App Router, React Server Components, streaming SSR, and server actions. Chosen over Remix for its mature ecosystem and Vercel-first deployment model. App Router provides nested layouts and fine-grained loading states. |
+| **React 18**                     | 18.x    | Concurrent features, `Suspense`, `useTransition`, and automatic batching. Required by Next.js 14.                                                                                                                                                         |
+| **TypeScript**                   | 5.x     | Static typing across the entire stack. Catches class of bugs at compile time, improves DX with IntelliSense, and serves as living documentation.                                                                                                          |
+| **Express.js**                   | 4.x     | Mature, minimalist Node.js framework. Chosen over Fastify due to larger middleware ecosystem and simpler custom middleware. Lightweight enough to pair with edge-caching layers.                                                                          |
+| **Socket.IO**                    | 4.x     | Bidirectional real-time communication with automatic fallback (WebSocket → polling). Chosen over raw WebSocket for built-in rooms, acknowledgements, and reconnection handling.                                                                           |
+| **PostgreSQL**                   | 16.x    | ACID-compliant, advanced indexing (GiST, GIN, partial), JSONB for semi-structured agent configurations. Chosen over MySQL for superior extensibility and analytical query support.                                                                        |
+| **Redis**                        | 7.x     | In-memory data store used for caching, session storage, BullMQ job queue backend, and pub/sub. Chosen over Memcached for versatility beyond simple key-value cache.                                                                                       |
+| **BullMQ**                       | 5.x     | Redis-backed job queue with delayed jobs, priority, rate limiting, and scheduler patterns. Chosen over Agenda/Bull for native TypeScript, ESM support, and rich dashboard (Bull Board).                                                                   |
+| **Zustand**                      | 4.x     | Lightweight state management for React. Chosen over Redux for minimal boilerplate, no providers, and straightforward subscription model. Used for UI state only.                                                                                          |
+| **React Query (TanStack Query)** | 5.x     | Server state synchronization. Chosen over SWR for richer dev tools, infinite queries, optimistic updates, and first-class mutation handling.                                                                                                              |
+| **Clerk**                        | —       | Authentication provider handling OAuth (Google, GitHub), MFA, session management, orgs. Chosen over Auth.js for lower self-hosted complexity and built-in webhooks.                                                                                       |
+| **Drizzle ORM**                  | 0.30+   | Type-safe SQL ORM for TypeScript. Chosen over Prisma for better performance (no binary engine), SQL-like syntax, and superior migration tooling.                                                                                                          |
+| **Docker**                       | 24+     | Containerization for reproducible dev/staging/prod environments. Multi-stage builds keep production images slim.                                                                                                                                          |
 
 ---
 
@@ -151,6 +151,7 @@ app/
 ```
 
 **Key patterns:**
+
 - **Route Groups** (`(auth)`, `(dashboard)`) provide different layouts for public vs. authenticated sections.
 - **Parallel Routes** (`@sidebar`, `@main`) for complex dashboard views.
 - **Intercepting Routes** for modals (e.g., quick agent preview).
@@ -239,6 +240,7 @@ app/
 ```
 
 **Data flow rules:**
+
 1. **Server state** (agents, workflows, logs, API keys) → always React Query. Mutations go through `useMutation`, which invalidates queries on success.
 2. **UI state** (sidebar, modals, theme, input drafts) → Zustand. No server involvement.
 3. **Ephemeral state** (form fields) → local `useState` / `useForm` (React Hook Form).
@@ -298,6 +300,7 @@ src/lib/api-client.ts
 ```
 
 **Clerk integration points:**
+
 - **Frontend:** `<ClerkProvider>` wraps the app. `useAuth()`, `useUser()`, `useOrganization()` hooks.
 - **Next.js middleware:** `authMiddleware()` protects `/dashboard/*` routes, redirects to `/sign-in`.
 - **Backend:** Clerk SDK's `clerkClient.verifyToken()` in Express middleware validates session JWTs.
@@ -327,6 +330,7 @@ Request Flow (top to bottom):
 ```
 
 **Error response format:**
+
 ```json
 {
   "error": {
@@ -356,6 +360,7 @@ src/
 ```
 
 **Service rules:**
+
 - Services accept typed params, return typed results.
 - Services **do not** depend on Express `req`/`res` objects.
 - Services use **dependency injection** (constructor injection via simple factory pattern or `tsyringe`).
@@ -385,6 +390,7 @@ src/
 ```
 
 **Repository pattern rules:**
+
 - Each repository maps to one primary table (may JOIN other tables for reads).
 - Repositories return plain objects (no ORM proxy objects).
 - Write operations are wrapped in transactions via `db.transaction()`.
@@ -420,11 +426,13 @@ src/
 ```
 
 **Rooms:**
+
 - `user:{userId}` — personal notifications, any event for the user.
 - `org:{orgId}` — org-wide events (member joined, agent shared).
 - `agent:{agentId}` — agent runtime events (status, logs, streaming output).
 
 **Scaling (horizontal):**
+
 - Socket.IO **Adapter**: `@socket.io/redis-adapter` for cross-process message broadcasting.
 - Redis pub/sub channels: `socket.io#/#` (default).
 - Sticky sessions required (or use a shared adapter).
@@ -641,6 +649,7 @@ CREATE INDEX idx_workflow_exec_status   ON workflow_executions(workflow_id, stat
 ```
 
 **Partitioning:**
+
 - `agent_logs` — **partition by RANGE on `created_at`** (monthly partitions) for efficient time-range pruning and easy archival.
 - `messages` — partition by RANGE on `created_at` if volume exceeds ~50M rows.
 
@@ -711,15 +720,15 @@ Production rules:
 
 **Cacheable vs. non-cacheable data:**
 
-| Data | Cache TTL | Strategy |
-|---|---|---|
-| Agent config (system prompt, tools, model) | 300s | Write-through |
-| Session message list (last N messages) | 60s | Cache-aside |
-| API key → org mapping | 600s | Cache-aside |
-| Org member list | 120s | Write-through |
-| Usage quotas / rate limits | sliding window | Redis sorted sets |
-| Chat streaming tokens | — | **Not cached** (real-time) |
-| Agent execution logs | — | **Not cached** (write-heavy) |
+| Data                                       | Cache TTL      | Strategy                     |
+| ------------------------------------------ | -------------- | ---------------------------- |
+| Agent config (system prompt, tools, model) | 300s           | Write-through                |
+| Session message list (last N messages)     | 60s            | Cache-aside                  |
+| API key → org mapping                      | 600s           | Cache-aside                  |
+| Org member list                            | 120s           | Write-through                |
+| Usage quotas / rate limits                 | sliding window | Redis sorted sets            |
+| Chat streaming tokens                      | —              | **Not cached** (real-time)   |
+| Agent execution logs                       | —              | **Not cached** (write-heavy) |
 
 ### 6.2 Session Management
 
@@ -982,6 +991,7 @@ Authorization:  Bearer <clerk_jwt>  or  X-API-Key <api_key>
 ```
 
 **Pagination:**
+
 ```json
 // Request:  GET /agents?cursor=abc&limit=20&status=active
 // Response:
@@ -996,6 +1006,7 @@ Authorization:  Bearer <clerk_jwt>  or  X-API-Key <api_key>
 ```
 
 **Filtering/search:**
+
 ```json
 // Syntax:  ?search=keyword&status=active&model=gpt-4o
 // Search applies full-text search on name + description (GIN index)
@@ -1006,24 +1017,34 @@ Authorization:  Bearer <clerk_jwt>  or  X-API-Key <api_key>
 ```typescript
 // ── Client → Server ──────────────────────────────────────────────
 interface ClientEvents {
-  'room:join':      (room: string) => void;           // Join agent room
-  'room:leave':     (room: string) => void;           // Leave agent room
-  'chat:send':      (data: { sessionId: string; message: string; files?: File[] }) => void;
-  'agent:stop':     (data: { agentId: string }) => void;
-  'typing:start':   (data: { sessionId: string }) => void;
-  'typing:stop':    (data: { sessionId: string }) => void;
+  'room:join': (room: string) => void; // Join agent room
+  'room:leave': (room: string) => void; // Leave agent room
+  'chat:send': (data: { sessionId: string; message: string; files?: File[] }) => void;
+  'agent:stop': (data: { agentId: string }) => void;
+  'typing:start': (data: { sessionId: string }) => void;
+  'typing:stop': (data: { sessionId: string }) => void;
 }
 
 // ── Server → Client ──────────────────────────────────────────────
 interface ServerEvents {
-  'agent:status':   (data: { agentId: string; status: string; error?: string }) => void;
-  'agent:log':      (data: { agentId: string; level: string; message: string; timestamp: string }) => void;
-  'chat:message':   (data: { sessionId: string; message: Message }) => void;
-  'chat:token':     (data: { sessionId: string; token: string }) => void;   // SSE/streaming
-  'chat:error':     (data: { sessionId: string; error: string }) => void;
-  'workflow:update': (data: { executionId: string; stepId: string; status: string; output?: any }) => void;
-  'notification':   (data: { id: string; type: string; title: string; body: string }) => void;
-  'error':          (data: { code: string; message: string }) => void;
+  'agent:status': (data: { agentId: string; status: string; error?: string }) => void;
+  'agent:log': (data: {
+    agentId: string;
+    level: string;
+    message: string;
+    timestamp: string;
+  }) => void;
+  'chat:message': (data: { sessionId: string; message: Message }) => void;
+  'chat:token': (data: { sessionId: string; token: string }) => void; // SSE/streaming
+  'chat:error': (data: { sessionId: string; error: string }) => void;
+  'workflow:update': (data: {
+    executionId: string;
+    stepId: string;
+    status: string;
+    output?: any;
+  }) => void;
+  notification: (data: { id: string; type: string; title: string; body: string }) => void;
+  error: (data: { code: string; message: string }) => void;
 }
 ```
 
@@ -1327,7 +1348,7 @@ services:
       redis:
         condition: service_healthy
     volumes:
-      - ./apps/api/src:/app/src  # Hot-reload in dev
+      - ./apps/api/src:/app/src # Hot-reload in dev
     restart: unless-stopped
 
   # ── Workers ───────────────────────────────────────────────
@@ -1348,7 +1369,7 @@ services:
         condition: service_healthy
     restart: unless-stopped
     deploy:
-      replicas: 2      # Scale workers independently
+      replicas: 2 # Scale workers independently
 
   # ── PostgreSQL ────────────────────────────────────────────
   postgres:
@@ -1911,39 +1932,39 @@ agentforge/
 
 ## Appendix A: Key Architectural Decisions (ADRs)
 
-| ID | Decision | Rationale |
-|---|---|---|
-| ADR-001 | **Drizzle ORM over Prisma** | No binary engine, faster DX, SQL-like syntax, better migration tooling |
-| ADR-002 | **Zustand over Redux** | Minimal boilerplate, no providers, sufficient for UI-only state |
-| ADR-003 | **Clerk over Auth.js** | Lower self-hosted complexity, built-in MFA + orgs, webhook support |
-| ADR-004 | **BullMQ over Agenda** | Native ESM + TypeScript, richer job control, Bull Board dashboard |
-| ADR-005 | **Socket.IO over raw WebSocket** | Rooms, auto-reconnect, fallback transport, acknowledgement support |
-| ADR-006 | **PostgreSQL JSONB for config** | Flexible agent/workflow config without schema migrations, GIN indexing |
-| ADR-007 | **Multi-stage Docker builds** | Minimal production images (no dev deps, no source code) |
-| ADR-008 | **Cursor-based pagination** | Stable under active writes, no offset drift, better performance at scale |
+| ID      | Decision                         | Rationale                                                                |
+| ------- | -------------------------------- | ------------------------------------------------------------------------ |
+| ADR-001 | **Drizzle ORM over Prisma**      | No binary engine, faster DX, SQL-like syntax, better migration tooling   |
+| ADR-002 | **Zustand over Redux**           | Minimal boilerplate, no providers, sufficient for UI-only state          |
+| ADR-003 | **Clerk over Auth.js**           | Lower self-hosted complexity, built-in MFA + orgs, webhook support       |
+| ADR-004 | **BullMQ over Agenda**           | Native ESM + TypeScript, richer job control, Bull Board dashboard        |
+| ADR-005 | **Socket.IO over raw WebSocket** | Rooms, auto-reconnect, fallback transport, acknowledgement support       |
+| ADR-006 | **PostgreSQL JSONB for config**  | Flexible agent/workflow config without schema migrations, GIN indexing   |
+| ADR-007 | **Multi-stage Docker builds**    | Minimal production images (no dev deps, no source code)                  |
+| ADR-008 | **Cursor-based pagination**      | Stable under active writes, no offset drift, better performance at scale |
 
 ## Appendix B: Performance Budgets
 
-| Metric | Target | Measurement |
-|---|---|---|
-| API response time (p50) | < 50ms (cached), < 500ms (DB) | OpenTelemetry |
-| API response time (p99) | < 200ms (cached), < 2s (DB) | OpenTelemetry |
-| LLM first token latency | < 2s | Client-side + server timing |
-| WebSocket message delivery | < 100ms p99 | Socket.IO metrics |
-| Page load (LCP) | < 2s | Lighthouse CI |
-| DB query time (p99) | < 100ms | pg_stat_statements |
-| Cache hit ratio | > 80% | Redis INFO / metrics |
-| Queue job latency | < 5s for urgent queues | BullMQ metrics |
+| Metric                     | Target                        | Measurement                 |
+| -------------------------- | ----------------------------- | --------------------------- |
+| API response time (p50)    | < 50ms (cached), < 500ms (DB) | OpenTelemetry               |
+| API response time (p99)    | < 200ms (cached), < 2s (DB)   | OpenTelemetry               |
+| LLM first token latency    | < 2s                          | Client-side + server timing |
+| WebSocket message delivery | < 100ms p99                   | Socket.IO metrics           |
+| Page load (LCP)            | < 2s                          | Lighthouse CI               |
+| DB query time (p99)        | < 100ms                       | pg_stat_statements          |
+| Cache hit ratio            | > 80%                         | Redis INFO / metrics        |
+| Queue job latency          | < 5s for urgent queues        | BullMQ metrics              |
 
 ## Appendix C: Monitoring & Observability
 
-| Concern | Tool | Integration |
-|---|---|---|
-| Application metrics | Prometheus + Grafana | OpenTelemetry SDK exports metrics |
-| Distributed tracing | OpenTelemetry / Jaeger | Trace context propagated across services |
-| Log aggregation | Grafana Loki / SigNoz | Pino logger outputs structured JSON |
-| Error tracking | Sentry | Captures unhandled rejections, Express errors |
-| Uptime monitoring | Checkly / BetterStack | Synthetic checks every 1 minute |
-| Database monitoring | pg_stat_statements, pghero | Query performance, index usage |
-| Queue monitoring | Bull Board | Web UI at /admin/queues |
-| LLM cost tracking | Custom (usage_events table) | Aggregated per org per billing period |
+| Concern             | Tool                        | Integration                                   |
+| ------------------- | --------------------------- | --------------------------------------------- |
+| Application metrics | Prometheus + Grafana        | OpenTelemetry SDK exports metrics             |
+| Distributed tracing | OpenTelemetry / Jaeger      | Trace context propagated across services      |
+| Log aggregation     | Grafana Loki / SigNoz       | Pino logger outputs structured JSON           |
+| Error tracking      | Sentry                      | Captures unhandled rejections, Express errors |
+| Uptime monitoring   | Checkly / BetterStack       | Synthetic checks every 1 minute               |
+| Database monitoring | pg_stat_statements, pghero  | Query performance, index usage                |
+| Queue monitoring    | Bull Board                  | Web UI at /admin/queues                       |
+| LLM cost tracking   | Custom (usage_events table) | Aggregated per org per billing period         |

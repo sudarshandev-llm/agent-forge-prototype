@@ -126,14 +126,8 @@ export default function PublishPage() {
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="title">Title</Label>
-              <Input
-                id="title"
-                placeholder="e.g. Content Writer Pro"
-                {...register('title')}
-              />
-              {errors.title && (
-                <p className="text-sm text-destructive">{errors.title.message}</p>
-              )}
+              <Input id="title" placeholder="e.g. Content Writer Pro" {...register('title')} />
+              {errors.title && <p className="text-sm text-destructive">{errors.title.message}</p>}
             </div>
 
             <div className="space-y-2">
@@ -153,10 +147,7 @@ export default function PublishPage() {
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="category">Category</Label>
-                <Select
-                  onValueChange={(v) => setValue('category', v)}
-                  defaultValue=""
-                >
+                <Select onValueChange={(v) => setValue('category', v)} defaultValue="">
                   <SelectTrigger>
                     <SelectValue placeholder="Select category" />
                   </SelectTrigger>
@@ -177,16 +168,8 @@ export default function PublishPage() {
                 <Label htmlFor="price">
                   Price ($) <span className="text-muted-foreground font-normal">(0 = free)</span>
                 </Label>
-                <Input
-                  id="price"
-                  type="number"
-                  min={0}
-                  step={0.99}
-                  {...register('price')}
-                />
-                {errors.price && (
-                  <p className="text-sm text-destructive">{errors.price.message}</p>
-                )}
+                <Input id="price" type="number" min={0} step={0.99} {...register('price')} />
+                {errors.price && <p className="text-sm text-destructive">{errors.price.message}</p>}
               </div>
             </div>
           </CardContent>
@@ -249,16 +232,18 @@ export default function PublishPage() {
                       className="inline-flex items-center gap-1 rounded-full border bg-secondary px-2.5 py-0.5 text-xs font-medium"
                     >
                       {tag}
-                      <button type="button" onClick={() => removeTag(tag)} className="hover:text-destructive">
+                      <button
+                        type="button"
+                        onClick={() => removeTag(tag)}
+                        className="hover:text-destructive"
+                      >
                         <X className="h-3 w-3" />
                       </button>
                     </span>
                   ))}
                 </div>
               )}
-              {errors.tags && (
-                <p className="text-sm text-destructive">{errors.tags.message}</p>
-              )}
+              {errors.tags && <p className="text-sm text-destructive">{errors.tags.message}</p>}
             </div>
           </CardContent>
         </Card>
@@ -271,11 +256,7 @@ export default function PublishPage() {
           <CardContent className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="version">Version</Label>
-              <Input
-                id="version"
-                placeholder="1.0.0"
-                {...register('version')}
-              />
+              <Input id="version" placeholder="1.0.0" {...register('version')} />
               {errors.version && (
                 <p className="text-sm text-destructive">{errors.version.message}</p>
               )}
@@ -283,10 +264,7 @@ export default function PublishPage() {
 
             <div className="space-y-2">
               <Label htmlFor="license">License</Label>
-              <Select
-                onValueChange={(v) => setValue('license', v)}
-                defaultValue="mit"
-              >
+              <Select onValueChange={(v) => setValue('license', v)} defaultValue="mit">
                 <SelectTrigger>
                   <SelectValue placeholder="Select license" />
                 </SelectTrigger>

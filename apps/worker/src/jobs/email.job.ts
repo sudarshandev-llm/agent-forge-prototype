@@ -53,7 +53,9 @@ export async function processEmail(job: Job<EmailPayload>) {
     logger.info(`Email sent successfully to ${to}: ${info.messageId}`);
     return info;
   } catch (error) {
-    logger.error(`Failed to send email to ${to}: ${error instanceof Error ? error.message : 'Unknown'}`);
+    logger.error(
+      `Failed to send email to ${to}: ${error instanceof Error ? error.message : 'Unknown'}`,
+    );
     throw error;
   }
 }

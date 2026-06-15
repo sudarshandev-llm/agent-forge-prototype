@@ -41,15 +41,12 @@ export function ReviewList({ reviews, className }: ReviewListProps) {
       <div className={cn('flex flex-col items-center justify-center py-12 text-center', className)}>
         <Star className="h-12 w-12 text-muted-foreground/30 mb-4" />
         <h3 className="text-lg font-semibold">No reviews yet</h3>
-        <p className="text-sm text-muted-foreground mt-1">
-          Be the first to review this listing.
-        </p>
+        <p className="text-sm text-muted-foreground mt-1">Be the first to review this listing.</p>
       </div>
     );
   }
 
-  const averageRating =
-    reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length;
+  const averageRating = reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length;
 
   return (
     <div className={cn('space-y-6', className)}>

@@ -74,7 +74,9 @@ export function AgentConfig({ values, onChange, errors }: AgentConfigProps) {
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <Label htmlFor="temperature">Temperature: {values.temperature}</Label>
-              <span className="text-xs text-muted-foreground">{values.temperature < 0.5 ? 'More deterministic' : 'More creative'}</span>
+              <span className="text-xs text-muted-foreground">
+                {values.temperature < 0.5 ? 'More deterministic' : 'More creative'}
+              </span>
             </div>
             <Slider
               id="temperature"
@@ -84,7 +86,9 @@ export function AgentConfig({ values, onChange, errors }: AgentConfigProps) {
               value={[values.temperature]}
               onValueChange={([v]) => update('temperature', v)}
             />
-            {errors?.temperature && <p className="text-sm text-destructive">{errors.temperature}</p>}
+            {errors?.temperature && (
+              <p className="text-sm text-destructive">{errors.temperature}</p>
+            )}
           </div>
 
           <div className="space-y-2">
@@ -134,7 +138,9 @@ export function AgentConfig({ values, onChange, errors }: AgentConfigProps) {
               value={values.systemPrompt}
               onChange={(e) => update('systemPrompt', e.target.value)}
             />
-            {errors?.systemPrompt && <p className="text-sm text-destructive">{errors.systemPrompt}</p>}
+            {errors?.systemPrompt && (
+              <p className="text-sm text-destructive">{errors.systemPrompt}</p>
+            )}
           </div>
         </CardContent>
       </Card>
@@ -156,7 +162,9 @@ export function AgentConfig({ values, onChange, errors }: AgentConfigProps) {
             <p className="text-xs text-muted-foreground">
               Sequences where the model will stop generating further tokens.
             </p>
-            {errors?.stopSequences && <p className="text-sm text-destructive">{errors.stopSequences}</p>}
+            {errors?.stopSequences && (
+              <p className="text-sm text-destructive">{errors.stopSequences}</p>
+            )}
           </div>
         </CardContent>
       </Card>

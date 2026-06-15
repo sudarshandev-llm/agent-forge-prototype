@@ -29,12 +29,59 @@ interface Agent {
 }
 
 const mockAgents: Agent[] = [
-  { id: '1', name: 'Customer Support Agent', description: 'Handles customer inquiries and support tickets with contextual responses.', status: 'active', model: 'gpt-4o', lastRun: new Date(Date.now() - 300000).toISOString(), tools: 4 },
-  { id: '2', name: 'Data Analyst', description: 'Analyzes datasets and generates visual reports.', status: 'active', model: 'claude-3-5-sonnet', lastRun: new Date(Date.now() - 7200000).toISOString(), tools: 3 },
-  { id: '3', name: 'Code Reviewer', description: 'Reviews pull requests and suggests improvements.', status: 'idle', model: 'gpt-4-turbo', lastRun: new Date(Date.now() - 86400000).toISOString(), tools: 2 },
-  { id: '4', name: 'Web Scraper', description: 'Extracts and structures data from websites.', status: 'error', model: 'llama-3-70b', lastRun: new Date(Date.now() - 3600000).toISOString(), tools: 5 },
-  { id: '5', name: 'Email Assistant', description: 'Drafts, summarizes, and manages email communications.', status: 'idle', model: 'gpt-3.5-turbo', tools: 2 },
-  { id: '6', name: 'Research Agent', description: 'Conducts deep research on topics and compiles findings.', status: 'active', model: 'claude-3-opus', lastRun: new Date(Date.now() - 600000).toISOString(), tools: 6 },
+  {
+    id: '1',
+    name: 'Customer Support Agent',
+    description: 'Handles customer inquiries and support tickets with contextual responses.',
+    status: 'active',
+    model: 'gpt-4o',
+    lastRun: new Date(Date.now() - 300000).toISOString(),
+    tools: 4,
+  },
+  {
+    id: '2',
+    name: 'Data Analyst',
+    description: 'Analyzes datasets and generates visual reports.',
+    status: 'active',
+    model: 'claude-3-5-sonnet',
+    lastRun: new Date(Date.now() - 7200000).toISOString(),
+    tools: 3,
+  },
+  {
+    id: '3',
+    name: 'Code Reviewer',
+    description: 'Reviews pull requests and suggests improvements.',
+    status: 'idle',
+    model: 'gpt-4-turbo',
+    lastRun: new Date(Date.now() - 86400000).toISOString(),
+    tools: 2,
+  },
+  {
+    id: '4',
+    name: 'Web Scraper',
+    description: 'Extracts and structures data from websites.',
+    status: 'error',
+    model: 'llama-3-70b',
+    lastRun: new Date(Date.now() - 3600000).toISOString(),
+    tools: 5,
+  },
+  {
+    id: '5',
+    name: 'Email Assistant',
+    description: 'Drafts, summarizes, and manages email communications.',
+    status: 'idle',
+    model: 'gpt-3.5-turbo',
+    tools: 2,
+  },
+  {
+    id: '6',
+    name: 'Research Agent',
+    description: 'Conducts deep research on topics and compiles findings.',
+    status: 'active',
+    model: 'claude-3-opus',
+    lastRun: new Date(Date.now() - 600000).toISOString(),
+    tools: 6,
+  },
 ];
 
 export default function AgentsPage() {
@@ -47,7 +94,8 @@ export default function AgentsPage() {
 
   const filtered = useMemo(() => {
     return agents.filter((agent) => {
-      const matchesSearch = agent.name.toLowerCase().includes(search.toLowerCase()) ||
+      const matchesSearch =
+        agent.name.toLowerCase().includes(search.toLowerCase()) ||
         agent.description.toLowerCase().includes(search.toLowerCase());
       const matchesStatus = statusFilter === 'all' || agent.status === statusFilter;
       return matchesSearch && matchesStatus;

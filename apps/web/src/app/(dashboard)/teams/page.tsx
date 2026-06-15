@@ -118,7 +118,9 @@ export default function TeamsPage() {
             <Users className="mx-auto h-12 w-12 text-muted-foreground" />
             <h3 className="mt-4 text-lg font-semibold">Failed to load teams</h3>
             <p className="text-sm text-muted-foreground">{error}</p>
-            <Button variant="outline" className="mt-4" onClick={fetchTeams}>Retry</Button>
+            <Button variant="outline" className="mt-4" onClick={fetchTeams}>
+              Retry
+            </Button>
           </div>
         </div>
       ) : filtered.length === 0 ? (
@@ -154,7 +156,10 @@ export default function TeamsPage() {
                           <Copy className="mr-2 h-4 w-4" /> Duplicate
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem className="text-destructive" onClick={() => handleDelete(team.id)}>
+                        <DropdownMenuItem
+                          className="text-destructive"
+                          onClick={() => handleDelete(team.id)}
+                        >
                           <Trash2 className="mr-2 h-4 w-4" /> Delete
                         </DropdownMenuItem>
                       </DropdownMenuContent>
@@ -178,7 +183,9 @@ export default function TeamsPage() {
                   <div className="flex -space-x-2">
                     {team.members?.slice(0, 5).map((member) => (
                       <Avatar key={member.id} className="h-8 w-8 border-2 border-background">
-                        <AvatarFallback className="text-xs">{getInitials(member.name)}</AvatarFallback>
+                        <AvatarFallback className="text-xs">
+                          {getInitials(member.name)}
+                        </AvatarFallback>
                       </Avatar>
                     ))}
                     {(team.memberCount || 0) > 5 && (

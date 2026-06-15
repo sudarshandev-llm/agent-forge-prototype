@@ -21,7 +21,14 @@ interface DashboardData {
   };
   activity: Array<{
     id: string;
-    type: 'agent_created' | 'agent_executed' | 'team_updated' | 'workflow_run' | 'settings_changed' | 'error' | 'success';
+    type:
+      | 'agent_created'
+      | 'agent_executed'
+      | 'team_updated'
+      | 'workflow_run'
+      | 'settings_changed'
+      | 'error'
+      | 'success';
     user: { name: string; avatar?: string };
     description: string;
     timestamp: string;
@@ -175,7 +182,13 @@ export default function DashboardPage() {
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={usageData}>
                   <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-                  <XAxis dataKey="date" className="text-xs" tickFormatter={(v) => new Date(v).toLocaleDateString('en-US', { weekday: 'short' })} />
+                  <XAxis
+                    dataKey="date"
+                    className="text-xs"
+                    tickFormatter={(v) =>
+                      new Date(v).toLocaleDateString('en-US', { weekday: 'short' })
+                    }
+                  />
                   <YAxis className="text-xs" />
                   <Tooltip
                     contentStyle={{

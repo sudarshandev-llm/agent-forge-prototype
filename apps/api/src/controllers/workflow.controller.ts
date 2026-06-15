@@ -33,7 +33,11 @@ export async function listWorkflowsHandler(req: Request, res: Response, next: Ne
 
 export async function updateWorkflowHandler(req: Request, res: Response, next: NextFunction) {
   try {
-    const workflow = await workflowService.updateWorkflow(req.params.id, req.user!.userId, req.body);
+    const workflow = await workflowService.updateWorkflow(
+      req.params.id,
+      req.user!.userId,
+      req.body,
+    );
     res.status(200).json({ success: true, data: workflow });
   } catch (error) {
     next(error);
@@ -69,7 +73,11 @@ export async function pauseWorkflowHandler(req: Request, res: Response, next: Ne
 
 export async function runWorkflowHandler(req: Request, res: Response, next: NextFunction) {
   try {
-    const result = await workflowService.runWorkflow(req.params.id, req.user!.userId, req.body.input);
+    const result = await workflowService.runWorkflow(
+      req.params.id,
+      req.user!.userId,
+      req.body.input,
+    );
     res.status(200).json({ success: true, data: result });
   } catch (error) {
     next(error);

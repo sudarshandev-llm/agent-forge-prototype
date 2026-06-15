@@ -14,7 +14,14 @@ interface StatsCardProps {
   className?: string;
 }
 
-export function StatsCard({ title, value, description, icon: Icon, trend, className }: StatsCardProps) {
+export function StatsCard({
+  title,
+  value,
+  description,
+  icon: Icon,
+  trend,
+  className,
+}: StatsCardProps) {
   return (
     <Card className={cn('relative overflow-hidden', className)}>
       <CardContent className="p-6">
@@ -22,9 +29,7 @@ export function StatsCard({ title, value, description, icon: Icon, trend, classN
           <div className="space-y-1">
             <p className="text-sm font-medium text-muted-foreground">{title}</p>
             <p className="text-3xl font-bold tracking-tight">{value}</p>
-            {description && (
-              <p className="text-xs text-muted-foreground">{description}</p>
-            )}
+            {description && <p className="text-xs text-muted-foreground">{description}</p>}
           </div>
           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
             <Icon className="h-6 w-6 text-primary" />
@@ -37,8 +42,14 @@ export function StatsCard({ title, value, description, icon: Icon, trend, classN
             ) : (
               <TrendingDown className="h-4 w-4 text-red-500" />
             )}
-            <span className={cn('text-sm font-medium', trend.isPositive ? 'text-green-500' : 'text-red-500')}>
-              {trend.isPositive ? '+' : ''}{trend.value}%
+            <span
+              className={cn(
+                'text-sm font-medium',
+                trend.isPositive ? 'text-green-500' : 'text-red-500',
+              )}
+            >
+              {trend.isPositive ? '+' : ''}
+              {trend.value}%
             </span>
             <span className="text-xs text-muted-foreground">vs last month</span>
           </div>

@@ -142,7 +142,9 @@ export const analyticsService = {
     userId: string,
     params: { from?: string; to?: string; granularity?: string },
   ) {
-    const from = params.from ? new Date(params.from) : new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+    const from = params.from
+      ? new Date(params.from)
+      : new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
     const to = params.to ? new Date(params.to) : new Date();
 
     const executions = await prisma.execution.findMany({
@@ -166,7 +168,8 @@ export const analyticsService = {
         totalExecutions: executions.length,
         totalTokens,
         totalCost,
-        averageTokensPerExecution: executions.length > 0 ? Math.round(totalTokens / executions.length) : 0,
+        averageTokensPerExecution:
+          executions.length > 0 ? Math.round(totalTokens / executions.length) : 0,
       },
       executionsByType: {
         agent: executions.filter((e) => e.type === 'agent').length,
@@ -183,11 +186,10 @@ export const analyticsService = {
     };
   },
 
-  async getCostReport(
-    userId: string,
-    params: { from?: string; to?: string },
-  ) {
-    const from = params.from ? new Date(params.from) : new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+  async getCostReport(userId: string, params: { from?: string; to?: string }) {
+    const from = params.from
+      ? new Date(params.from)
+      : new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
     const to = params.to ? new Date(params.to) : new Date();
 
     const executions = await prisma.execution.findMany({

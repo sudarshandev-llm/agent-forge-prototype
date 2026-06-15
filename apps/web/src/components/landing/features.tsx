@@ -5,7 +5,8 @@ const features = [
   {
     icon: Bot,
     title: 'AI Agent Builder',
-    description: 'Create custom AI agents with configurable models, system prompts, and capabilities.',
+    description:
+      'Create custom AI agents with configurable models, system prompts, and capabilities.',
   },
   {
     icon: Workflow,

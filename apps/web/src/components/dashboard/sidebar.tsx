@@ -66,7 +66,10 @@ export function Sidebar() {
               <Link key={item.href} href={item.href}>
                 <Button
                   variant={isActive ? 'secondary' : 'ghost'}
-                  className={cn('w-full justify-start gap-3', !sidebarOpen && 'justify-center px-2')}
+                  className={cn(
+                    'w-full justify-start gap-3',
+                    !sidebarOpen && 'justify-center px-2',
+                  )}
                 >
                   <item.icon className="h-5 w-5 shrink-0" />
                   {sidebarOpen && <span>{item.label}</span>}

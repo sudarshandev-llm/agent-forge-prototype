@@ -3,6 +3,7 @@
 ## [1.0.0] - 2026-06-10
 
 ### Added
+
 - Initial release of AgentForge AI Agent Development Platform
 - Core Agent Engine with ReAct loop (think → act → observe), streaming, retry logic
 - Multi-LLM provider support (OpenAI, Anthropic, Google, Groq)

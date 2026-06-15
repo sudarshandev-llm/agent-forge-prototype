@@ -165,7 +165,11 @@ export default function AgentDetailPage() {
           <Bot className="mx-auto h-12 w-12 text-muted-foreground" />
           <h3 className="mt-4 text-lg font-semibold">Agent not found</h3>
           <p className="text-sm text-muted-foreground">{error || 'This agent does not exist'}</p>
-          <Button variant="outline" className="mt-4" onClick={() => router.push('/dashboard/agents')}>
+          <Button
+            variant="outline"
+            className="mt-4"
+            onClick={() => router.push('/dashboard/agents')}
+          >
             <ArrowLeft className="mr-2 h-4 w-4" /> Back to Agents
           </Button>
         </div>
@@ -185,9 +189,13 @@ export default function AgentDetailPage() {
               <h1 className="text-3xl font-bold tracking-tight">{agent.name}</h1>
               <Badge
                 variant={
-                  agent.status === 'active' ? 'success' :
-                  agent.status === 'error' ? 'destructive' :
-                  agent.status === 'draft' ? 'warning' : 'secondary'
+                  agent.status === 'active'
+                    ? 'success'
+                    : agent.status === 'error'
+                      ? 'destructive'
+                      : agent.status === 'draft'
+                        ? 'warning'
+                        : 'secondary'
                 }
               >
                 {agent.status}
@@ -200,7 +208,10 @@ export default function AgentDetailPage() {
           <Button variant="outline" onClick={handleDuplicate}>
             <Copy className="mr-2 h-4 w-4" /> Duplicate
           </Button>
-          <Button variant="outline" onClick={() => router.push(`/dashboard/agents/${params.id}/edit`)}>
+          <Button
+            variant="outline"
+            onClick={() => router.push(`/dashboard/agents/${params.id}/edit`)}
+          >
             <Pencil className="mr-2 h-4 w-4" /> Edit
           </Button>
           <Button variant="destructive" onClick={handleDelete}>
@@ -287,7 +298,9 @@ export default function AgentDetailPage() {
             <CardContent>
               <div className="flex flex-wrap gap-2">
                 {agent.capabilities.map((cap) => (
-                  <Badge key={cap} variant="secondary">{cap}</Badge>
+                  <Badge key={cap} variant="secondary">
+                    {cap}
+                  </Badge>
                 ))}
               </div>
             </CardContent>
@@ -359,9 +372,7 @@ export default function AgentDetailPage() {
                     )}
                     <span className="text-xs text-muted-foreground">{exec.duration}ms</span>
                   </div>
-                  <p className="text-xs text-muted-foreground line-clamp-2">
-                    {exec.input}
-                  </p>
+                  <p className="text-xs text-muted-foreground line-clamp-2">{exec.input}</p>
                   <p className="text-xs text-muted-foreground mt-1">
                     {formatDate(exec.createdAt, 'relative')}
                   </p>
@@ -385,8 +396,11 @@ export default function AgentDetailPage() {
                 </div>
                 <Badge
                   variant={
-                    selectedExecution.status === 'success' ? 'success' :
-                    selectedExecution.status === 'failed' ? 'destructive' : 'secondary'
+                    selectedExecution.status === 'success'
+                      ? 'success'
+                      : selectedExecution.status === 'failed'
+                        ? 'destructive'
+                        : 'secondary'
                   }
                 >
                   {selectedExecution.status}

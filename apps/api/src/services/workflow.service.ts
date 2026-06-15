@@ -71,10 +71,7 @@ export const workflowService = {
     const workflow = await prisma.workflow.findFirst({
       where: {
         id,
-        OR: [
-          { ownerId: userId },
-          { team: { members: { some: { userId } } } },
-        ],
+        OR: [{ ownerId: userId }, { team: { members: { some: { userId } } } }],
         deletedAt: null,
       },
       include: {
@@ -93,10 +90,7 @@ export const workflowService = {
   async listWorkflows(userId: string) {
     return prisma.workflow.findMany({
       where: {
-        OR: [
-          { ownerId: userId },
-          { team: { members: { some: { userId } } } },
-        ],
+        OR: [{ ownerId: userId }, { team: { members: { some: { userId } } } }],
         deletedAt: null,
       },
       include: {

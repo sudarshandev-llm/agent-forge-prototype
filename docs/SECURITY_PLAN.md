@@ -8,15 +8,15 @@
 
 ## 1. Security Principles
 
-| Principle | Application |
-|---|---|
-| **Least Privilege** | Every service, container, and human actor receives only the permissions required to perform its function. No standing admin access to production. |
-| **Defense in Depth** | Multiple overlapping security controls at every layer: network, application, data, and identity. Failure of one control does not expose the system. |
-| **Secure by Default** | All features ship with the most restrictive posture. Opt-in for less secure configurations. No secrets in code. |
-| **Fail Secure** | If a component fails (auth service, rate limiter, database), the system denies access by default rather than allowing unauthenticated passthrough. |
-| **Separation of Duties** | No single person can deploy code, approve a change, and access production data. Code review + deploy approval required. |
-| **Zero Trust** | No implicit trust for any request, regardless of network origin. Every request is authenticated, authorized, and validated. |
-| **Continuous Verification** | Security controls are validated in CI/CD pipelines and monitored at runtime. Compliance is automated where possible. |
+| Principle                   | Application                                                                                                                                         |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Least Privilege**         | Every service, container, and human actor receives only the permissions required to perform its function. No standing admin access to production.   |
+| **Defense in Depth**        | Multiple overlapping security controls at every layer: network, application, data, and identity. Failure of one control does not expose the system. |
+| **Secure by Default**       | All features ship with the most restrictive posture. Opt-in for less secure configurations. No secrets in code.                                     |
+| **Fail Secure**             | If a component fails (auth service, rate limiter, database), the system denies access by default rather than allowing unauthenticated passthrough.  |
+| **Separation of Duties**    | No single person can deploy code, approve a change, and access production data. Code review + deploy approval required.                             |
+| **Zero Trust**              | No implicit trust for any request, regardless of network origin. Every request is authenticated, authorized, and validated.                         |
+| **Continuous Verification** | Security controls are validated in CI/CD pipelines and monitored at runtime. Compliance is automated where possible.                                |
 
 ---
 
@@ -42,22 +42,22 @@
 
 ### 2.3 API Key Management
 
-| Concern | Mechanism |
-|---|---|
-| Generation | `crypto.randomBytes(32)` → base64url-encoded, prefixed with `af_` |
-| Storage | bcrypt hash (cost factor 12) — only the hash is stored |
-| Rotation | Keys expire every 90 days; a 7-day grace period allows overlapping keys |
+| Concern    | Mechanism                                                                     |
+| ---------- | ----------------------------------------------------------------------------- |
+| Generation | `crypto.randomBytes(32)` → base64url-encoded, prefixed with `af_`             |
+| Storage    | bcrypt hash (cost factor 12) — only the hash is stored                        |
+| Rotation   | Keys expire every 90 days; a 7-day grace period allows overlapping keys       |
 | Revocation | Immediate invalidation via a deny-list in Redis with 5-second TTL propagation |
-| Scoping | Each key is bound to exactly one organization and one role set |
+| Scoping    | Each key is bound to exactly one organization and one role set                |
 
 ### 2.4 Role-Based Access Control (RBAC)
 
-| Role | Scope | Permissions |
-|---|---|---|
-| `admin` | Organization | Full CRUD on agents, API keys, billing, team members |
-| `developer` | Organization | Create/edit agents, view logs, manage own keys |
-| `viewer` | Organization | Read-only access to agents, dashboards, and logs |
-| `agent` | Agent-level | Execute the assigned agent's workflow (used for agent-to-agent calls) |
+| Role        | Scope        | Permissions                                                           |
+| ----------- | ------------ | --------------------------------------------------------------------- |
+| `admin`     | Organization | Full CRUD on agents, API keys, billing, team members                  |
+| `developer` | Organization | Create/edit agents, view logs, manage own keys                        |
+| `viewer`    | Organization | Read-only access to agents, dashboards, and logs                      |
+| `agent`     | Agent-level  | Execute the assigned agent's workflow (used for agent-to-agent calls) |
 
 - RBAC is enforced at the API gateway via a middleware that decodes the JWT, resolves the role, and checks the requested resource against a Casbin policy file.
 - Deny rules override allow rules.
@@ -89,13 +89,13 @@
 
 ### 3.4 PII Handling
 
-| Data Type | Classification | Treatment |
-|---|---|---|
-| Email address | PII | Encrypted at rest, masked in logs, never exposed in API responses |
-| IP address | PII | Anonymised after 30 days (last octet zeroed) |
-| API Keys | Secret | Hashed before storage, masked in UI (`af_•••••abc`) |
+| Data Type             | Classification   | Treatment                                                                 |
+| --------------------- | ---------------- | ------------------------------------------------------------------------- |
+| Email address         | PII              | Encrypted at rest, masked in logs, never exposed in API responses         |
+| IP address            | PII              | Anonymised after 30 days (last octet zeroed)                              |
+| API Keys              | Secret           | Hashed before storage, masked in UI (`af_•••••abc`)                       |
 | Agent prompts/outputs | Customer Content | Encrypted at rest, never used for model training, deleted on org deletion |
-| Billing info | PCI (via Stripe) | Never touches our servers — tokenized client-side by Stripe |
+| Billing info          | PCI (via Stripe) | Never touches our servers — tokenized client-side by Stripe               |
 
 - Data Retention Policy: Logs containing PII are purged after 90 days. Customer content is retained until org deletion or a maximum of 365 days after last activity.
 - Data Subject Access Requests (DSARs) can be fulfilled via an admin API endpoint within 30 days.
@@ -106,13 +106,13 @@
 
 ### 4.1 Rate Limiting
 
-| Layer | Limit | Backend |
-|---|---|---|
-| Global (per IP) | 100 req/s | Envoy + Redis |
-| Authenticated (per API key) | 1 000 req/min | Envoy + Redis |
+| Layer                       | Limit              | Backend                |
+| --------------------------- | ------------------ | ---------------------- |
+| Global (per IP)             | 100 req/s          | Envoy + Redis          |
+| Authenticated (per API key) | 1 000 req/min      | Envoy + Redis          |
 | Agent execution (per agent) | 10 concurrent runs | Application middleware |
-| LLM inference (per key) | 50 req/min | Application middleware |
-| Auth endpoints (per IP) | 10 req/min | Cloudflare WAF |
+| LLM inference (per key)     | 50 req/min         | Application middleware |
+| Auth endpoints (per IP)     | 10 req/min         | Cloudflare WAF         |
 
 - Rate limit headers (`X-RateLimit-Remaining`, `X-RateLimit-Reset`) are returned on every response.
 - Burst allowance of 20 % above the limit before hard rejection with `429 Too Many Requests`.
@@ -194,12 +194,12 @@
 
 ### 5.4 Rate Limiting for LLM Calls
 
-| Dimension | Limit | Granularity |
-|---|---|---|
-| Per agent | 50 calls / min | Rolling window |
-| Per organization | 5 000 calls / hour | Rolling window |
+| Dimension          | Limit                     | Granularity            |
+| ------------------ | ------------------------- | ---------------------- |
+| Per agent          | 50 calls / min            | Rolling window         |
+| Per organization   | 5 000 calls / hour        | Rolling window         |
 | Per model (pooled) | Configurable by plan tier | Static quota per month |
-| Concurrent | 20 per deployment | Application + DB lock |
+| Concurrent         | 20 per deployment         | Application + DB lock  |
 
 - Exceeded limits return `429 Too Many Requests` with a `Retry-After` header.
 - Limits are enforced at the API gateway before the request reaches the LLM provider.
@@ -225,7 +225,7 @@
     runAsNonRoot: true
     runAsUser: 10001
     capabilities:
-      drop: ["ALL"]
+      drop: ['ALL']
     allowPrivilegeEscalation: false
     seccompProfile:
       type: RuntimeDefault
@@ -236,15 +236,15 @@
 
 ### 6.3 Network Policies
 
-| Rule | Policy |
-|---|---|
-| Default ingress | Deny all |
-| Default egress | Deny all (except DNS on UDP 53) |
-| Allow from ingress controller | Port 8080, namespace `ingress-nginx` |
-| Allow to database | Only from `api` and `migration` pods, port 5432, TCP |
-| Allow to Redis | Only from `api` and `worker` pods, port 6379, TCP |
-| Allow to LLM providers | Egress to known provider CIDR ranges (OpenAI, Anthropic, etc.) |
-| Allow metrics scrape | Port 9090 from `monitoring` namespace |
+| Rule                          | Policy                                                         |
+| ----------------------------- | -------------------------------------------------------------- |
+| Default ingress               | Deny all                                                       |
+| Default egress                | Deny all (except DNS on UDP 53)                                |
+| Allow from ingress controller | Port 8080, namespace `ingress-nginx`                           |
+| Allow to database             | Only from `api` and `migration` pods, port 5432, TCP           |
+| Allow to Redis                | Only from `api` and `worker` pods, port 6379, TCP              |
+| Allow to LLM providers        | Egress to known provider CIDR ranges (OpenAI, Anthropic, etc.) |
+| Allow metrics scrape          | Port 9090 from `monitoring` namespace                          |
 
 - All policies are stored in Git and applied via CI/CD — no ad-hoc changes.
 
@@ -287,14 +287,14 @@
 
 ### 7.3 Data Retention Policies
 
-| Data Type | Retention | Deletion Method |
-|---|---|---|
-| Application logs | 90 days | Automated purge (CronJob) |
-| Audit logs | 365 days | Cold storage (S3 Glacier) then deletion |
-| Agent execution history | 90 days (extendable per org) | Soft delete → hard delete after 30 days |
-| User accounts | Until org deletion + 30 days grace | Hard delete |
-| LLM prompt/output content | 30 days | Hard delete |
-| Billing records | 7 years (legal requirement) | Encrypted archive |
+| Data Type                 | Retention                          | Deletion Method                         |
+| ------------------------- | ---------------------------------- | --------------------------------------- |
+| Application logs          | 90 days                            | Automated purge (CronJob)               |
+| Audit logs                | 365 days                           | Cold storage (S3 Glacier) then deletion |
+| Agent execution history   | 90 days (extendable per org)       | Soft delete → hard delete after 30 days |
+| User accounts             | Until org deletion + 30 days grace | Hard delete                             |
+| LLM prompt/output content | 30 days                            | Hard delete                             |
+| Billing records           | 7 years (legal requirement)        | Encrypted archive                       |
 
 ### 7.4 Audit Logging
 
@@ -313,21 +313,21 @@
 
 ### 8.1 Detection
 
-| Source | Tools |
-|---|---|
-| Application errors | Sentry + PagerDuty alerts; error rate spikes > 5 % |
-| Security events | Falco (runtime security) + OSSEC (host IDS) |
-| Anomalous API usage | Custom Prometheus rules (e.g., 10× normal 401 rate) |
-| Infrastructure metrics | Grafana on-call; CPU/memory/disk anomalies |
-| External reports | security@agentforge.io inbox; Bug Bounty platform |
+| Source                 | Tools                                               |
+| ---------------------- | --------------------------------------------------- |
+| Application errors     | Sentry + PagerDuty alerts; error rate spikes > 5 %  |
+| Security events        | Falco (runtime security) + OSSEC (host IDS)         |
+| Anomalous API usage    | Custom Prometheus rules (e.g., 10× normal 401 rate) |
+| Infrastructure metrics | Grafana on-call; CPU/memory/disk anomalies          |
+| External reports       | security@agentforge.io inbox; Bug Bounty platform   |
 
 ### 8.2 Containment
 
-| Triage Severity | Response Time | Actions |
-|---|---|---|
-| **SEV-1** (data breach, service down) | ≤ 15 minutes | Isolate affected service, revoke keys, rotate secrets, block IPs via WAF |
-| **SEV-2** (degradation, suspicious activity) | ≤ 1 hour | Throttle endpoint, increase logging, engage on-call engineer |
-| **SEV-3** (minor vulnerability, best practice gap) | ≤ 1 week | Patch in next release cycle |
+| Triage Severity                                    | Response Time | Actions                                                                  |
+| -------------------------------------------------- | ------------- | ------------------------------------------------------------------------ |
+| **SEV-1** (data breach, service down)              | ≤ 15 minutes  | Isolate affected service, revoke keys, rotate secrets, block IPs via WAF |
+| **SEV-2** (degradation, suspicious activity)       | ≤ 1 hour      | Throttle endpoint, increase logging, engage on-call engineer             |
+| **SEV-3** (minor vulnerability, best practice gap) | ≤ 1 week      | Patch in next release cycle                                              |
 
 1. Identify the affected component and disconnect it from the mesh (Kubernetes network policy deny-all).
 2. Snapshot logs, traffic captures, and pod state.
@@ -355,6 +355,7 @@
 Before promoting any build to production, verify all items:
 
 ### Application
+
 - [ ] No secrets, API keys, or tokens in the codebase (confirmed by `git secrets` / truffleHog scan)
 - [ ] Dependency scan (npm audit / pip-audit / trivy fs) passes with zero CRITICAL/HIGH
 - [ ] Static analysis (ESLint security plugin, Semgrep rules) passes
@@ -364,6 +365,7 @@ Before promoting any build to production, verify all items:
 - [ ] CSRF protection enabled on all state-changing dashboard endpoints
 
 ### Infrastructure
+
 - [ ] Docker image scan (Trivy) passes
 - [ ] Kubernetes manifests pass `kube-score` and `polaris` audits
 - [ ] Network policies are updated to include any new service
@@ -373,6 +375,7 @@ Before promoting any build to production, verify all items:
 - [ ] Backup retention policy is applied to new volumes
 
 ### Network
+
 - [ ] TLS 1.3 enforced; TLS 1.0/1.1 disabled
 - [ ] CORS restricted to known origins
 - [ ] Rate limiting configured and tested with `k6` load test
@@ -380,12 +383,14 @@ Before promoting any build to production, verify all items:
 - [ ] DDoS protection enabled
 
 ### Monitoring
+
 - [ ] New endpoints are instrumented with metrics (request rate, error rate, latency)
 - [ ] Audit logging is confirmed for new resources
 - [ ] Alert thresholds are configured in PagerDuty / Grafana
 - [ ] Dashboard has a working health-check endpoint (`/healthz`, `/readyz`)
 
 ### People
+
 - [ ] Code reviewed and approved by a different team member
 - [ ] Deploy approved by the security lead (for production)
 - [ ] Release notes published with a security-relevant changes section
@@ -408,12 +413,12 @@ AgentForge runs a **paid bug bounty program** to encourage responsible disclosur
 
 ### Rewards
 
-| Severity | Reward |
-|---|---|
-| Critical (RCE, auth bypass, data exfiltration) | $5 000 – $15 000 |
-| High (SQL injection, privilege escalation) | $2 000 – $5 000 |
-| Medium (XSS, CSRF on sensitive actions) | $500 – $2 000 |
-| Low (info leak, missing headers, fingerprinting) | $100 – $500 |
+| Severity                                         | Reward           |
+| ------------------------------------------------ | ---------------- |
+| Critical (RCE, auth bypass, data exfiltration)   | $5 000 – $15 000 |
+| High (SQL injection, privilege escalation)       | $2 000 – $5 000  |
+| Medium (XSS, CSRF on sensitive actions)          | $500 – $2 000    |
+| Low (info leak, missing headers, fingerprinting) | $100 – $500      |
 
 - Rewards are paid in USD via Stripe or bank transfer.
 - Duplicate reports are not rewarded (first reporter receives the bounty).
@@ -437,26 +442,26 @@ AgentForge runs a **paid bug bounty program** to encourage responsible disclosur
 
 ## Appendix A — Security Contacts
 
-| Role | Contact |
-|---|---|
-| Security Team | security@agentforge.io |
-| Data Protection Officer | dpo@agentforge.io |
-| Bug Bounty | Same as security@ — prefix subject with `[BUG BOUNTY]` |
-| Emergency (SEV-1) | On-call rotation via PagerDuty (contact from security@agentforge.io) |
+| Role                    | Contact                                                              |
+| ----------------------- | -------------------------------------------------------------------- |
+| Security Team           | security@agentforge.io                                               |
+| Data Protection Officer | dpo@agentforge.io                                                    |
+| Bug Bounty              | Same as security@ — prefix subject with `[BUG BOUNTY]`               |
+| Emergency (SEV-1)       | On-call rotation via PagerDuty (contact from security@agentforge.io) |
 
 ---
 
 ## Appendix B — Review Cadence
 
-| Document | Owner | Review Cycle |
-|---|---|---|
-| Security Plan | CISO / Security Lead | Quarterly |
-| Incident Response Plan | Security Team | Quarterly + after every drill or real incident |
-| Data Retention Policy | DPO | Annually |
-| SOC 2 Controls | Compliance Team | Annually (during audit) |
-| Bug Bounty Tiers | Product + Security | Bi-annually |
-| Dependency whitelist | Engineering | Monthly (automated via Renovate + advisory DB) |
+| Document               | Owner                | Review Cycle                                   |
+| ---------------------- | -------------------- | ---------------------------------------------- |
+| Security Plan          | CISO / Security Lead | Quarterly                                      |
+| Incident Response Plan | Security Team        | Quarterly + after every drill or real incident |
+| Data Retention Policy  | DPO                  | Annually                                       |
+| SOC 2 Controls         | Compliance Team      | Annually (during audit)                        |
+| Bug Bounty Tiers       | Product + Security   | Bi-annually                                    |
+| Dependency whitelist   | Engineering          | Monthly (automated via Renovate + advisory DB) |
 
 ---
 
-*This document is maintained by the AgentForge Security Team. Suggestions and improvements are welcome via pull request or email to security@agentforge.io.*
+_This document is maintained by the AgentForge Security Team. Suggestions and improvements are welcome via pull request or email to security@agentforge.io._

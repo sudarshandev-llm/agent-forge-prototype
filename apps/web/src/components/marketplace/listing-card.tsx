@@ -78,9 +78,7 @@ export function ListingCard({ listing, className }: ListingCardProps) {
               )}
             </div>
           </div>
-          <p className="text-sm text-muted-foreground line-clamp-2 mt-1">
-            {listing.description}
-          </p>
+          <p className="text-sm text-muted-foreground line-clamp-2 mt-1">{listing.description}</p>
         </CardHeader>
 
         <CardContent className="px-4 pb-2">

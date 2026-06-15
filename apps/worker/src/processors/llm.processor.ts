@@ -55,7 +55,7 @@ export const llmProcessor = {
       throw new Error(`OpenAI error: ${err}`);
     }
 
-    const data = await response.json() as {
+    const data = (await response.json()) as {
       choices: Array<{ message: { content: string } }>;
       usage: { prompt_tokens: number; completion_tokens: number; total_tokens: number };
       model: string;
@@ -100,7 +100,7 @@ export const llmProcessor = {
       throw new Error(`Anthropic error: ${err}`);
     }
 
-    const data = await response.json() as {
+    const data = (await response.json()) as {
       content: Array<{ text: string }>;
       usage: { input_tokens: number; output_tokens: number };
       model: string;
@@ -136,7 +136,7 @@ export const llmProcessor = {
       throw new Error(`Ollama error: ${err}`);
     }
 
-    const data = await response.json() as {
+    const data = (await response.json()) as {
       message: { content: string };
       prompt_eval_count: number;
       eval_count: number;

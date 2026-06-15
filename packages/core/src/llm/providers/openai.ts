@@ -20,10 +20,7 @@ export class OpenAIProvider extends LLMProvider {
     return 'openai';
   }
 
-  async complete(
-    messages: LLMMessage[],
-    options?: Record<string, unknown>,
-  ): Promise<LLMResponse> {
+  async complete(messages: LLMMessage[], options?: Record<string, unknown>): Promise<LLMResponse> {
     const response = await this.client.chat.completions.create({
       model: this.model,
       messages: messages.map((m) => ({
@@ -34,7 +31,9 @@ export class OpenAIProvider extends LLMProvider {
       })) as OpenAI.Chat.Completions.ChatCompletionMessageParam[],
       temperature: (options?.temperature as number) ?? 0.7,
       max_tokens: (options?.maxTokens as number) ?? 4096,
-      ...(options?.tools ? { tools: options.tools as OpenAI.Chat.Completions.ChatCompletionTool[] } : {}),
+      ...(options?.tools
+        ? { tools: options.tools as OpenAI.Chat.Completions.ChatCompletionTool[] }
+        : {}),
     });
 
     const choice = response.choices[0];
@@ -79,7 +78,9 @@ export class OpenAIProvider extends LLMProvider {
       temperature: (options?.temperature as number) ?? 0.7,
       max_tokens: (options?.maxTokens as number) ?? 4096,
       stream: true,
-      ...(options?.tools ? { tools: options.tools as OpenAI.Chat.Completions.ChatCompletionTool[] } : {}),
+      ...(options?.tools
+        ? { tools: options.tools as OpenAI.Chat.Completions.ChatCompletionTool[] }
+        : {}),
     });
 
     for await (const chunk of stream) {

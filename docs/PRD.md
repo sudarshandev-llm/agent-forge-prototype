@@ -38,12 +38,15 @@ The global AI agent market is projected to reach $47.1B by 2030 (CAGR 43.6%). Ex
 ## 2. Product Overview
 
 ### 2.1 Vision
+
 Democratize autonomous AI agent development — make building intelligent, reliable multi-agent systems as easy as dragging blocks on a canvas, while retaining full code-level control for power users.
 
 ### 2.2 Mission
+
 Provide the most intuitive, extensible, and production-ready platform for designing, testing, deploying, and monitoring AI agents — from a single prototype to a swarm of coordinated agents serving millions of users.
 
 ### 2.3 Product Statement
+
 AgentForge is an open-source (AGPLv3) AI Agent Development Platform with premium cloud-hosted and on-premise enterprise tiers. It combines a visual workflow builder, agent team orchestration, memory subsystem, tool marketplace, GitHub CI/CD integration, and universal LLM support (local via Ollama/LM Studio, cloud via OpenAI/Anthropic/Google/Mistral/AWS Bedrock).
 
 ### 2.4 Platform Architecture (High-Level)
@@ -78,16 +81,16 @@ AgentForge is an open-source (AGPLv3) AI Agent Development Platform with premium
 
 Building production-grade AI agents today requires stitching together 5–10 disparate tools and frameworks:
 
-| Need | Current State | Pain Point |
-|------|---------------|------------|
-| Agent logic | LangChain / LlamaIndex | High learning curve; breaking API changes |
-| Multi-agent coordination | CrewAI / AutoGen | No visual debugging; complex event handling |
-| Memory | Pinecone / Chroma / custom | No unified abstraction; context management manual |
-| Tools ecosystem | Custom code per tool | No marketplace; every team rebuilds integrations |
-| CI/CD for agents | Does not exist | No testing/staging/rollback workflows for agent behavior |
-| Browser automation | Playwright / Puppeteer | No agent-native wrapper |
-| LLM flexibility | Vendor lock-in common | Switching models requires code rewrites |
-| Visual debugging | None | Agents are black boxes in production |
+| Need                     | Current State              | Pain Point                                               |
+| ------------------------ | -------------------------- | -------------------------------------------------------- |
+| Agent logic              | LangChain / LlamaIndex     | High learning curve; breaking API changes                |
+| Multi-agent coordination | CrewAI / AutoGen           | No visual debugging; complex event handling              |
+| Memory                   | Pinecone / Chroma / custom | No unified abstraction; context management manual        |
+| Tools ecosystem          | Custom code per tool       | No marketplace; every team rebuilds integrations         |
+| CI/CD for agents         | Does not exist             | No testing/staging/rollback workflows for agent behavior |
+| Browser automation       | Playwright / Puppeteer     | No agent-native wrapper                                  |
+| LLM flexibility          | Vendor lock-in common      | Switching models requires code rewrites                  |
+| Visual debugging         | None                       | Agents are black boxes in production                     |
 
 ### 3.2 Root Causes
 
@@ -108,12 +111,12 @@ Building production-grade AI agents today requires stitching together 5–10 dis
 
 ### 4.1 Primary Segments
 
-| Segment | Description | TAM (Global) | Adoption Trigger |
-|---------|-------------|--------------|------------------|
-| **Individual Developers** | Solo devs, indie hackers, AI hobbyists | 2.5M | Free tier; local LLM support; quick prototyping |
-| **Startups (Seed–Series B)** | 5–50 person engineering teams building AI features | 120K companies | Open-source core; fast iteration; marketplace |
-| **Mid-Market (50–500 employees)** | Engineering teams in regulated industries (fintech, healthcare, legal) | 45K companies | Self-hosted option; RBAC; audit logs; compliance |
-| **Enterprise (500+ employees)** | Central AI/ML platforms, automation CoEs | 8K companies | SSO/SAML; on-premise; SLA; dedicated support; custom contracts |
+| Segment                           | Description                                                            | TAM (Global)   | Adoption Trigger                                               |
+| --------------------------------- | ---------------------------------------------------------------------- | -------------- | -------------------------------------------------------------- |
+| **Individual Developers**         | Solo devs, indie hackers, AI hobbyists                                 | 2.5M           | Free tier; local LLM support; quick prototyping                |
+| **Startups (Seed–Series B)**      | 5–50 person engineering teams building AI features                     | 120K companies | Open-source core; fast iteration; marketplace                  |
+| **Mid-Market (50–500 employees)** | Engineering teams in regulated industries (fintech, healthcare, legal) | 45K companies  | Self-hosted option; RBAC; audit logs; compliance               |
+| **Enterprise (500+ employees)**   | Central AI/ML platforms, automation CoEs                               | 8K companies   | SSO/SAML; on-premise; SLA; dedicated support; custom contracts |
 
 ### 4.2 Secondary Segments
 
@@ -127,69 +130,69 @@ Building production-grade AI agents today requires stitching together 5–10 dis
 
 ### 5.1 Indie Hacker Alex
 
-| Attribute | Detail |
-|-----------|--------|
-| **Role** | Solo full-stack developer, building 3 SaaS products |
-| **Background** | 8 years experience; knows Python, React, basic ML |
-| **Goal** | Build a personal AI research assistant that scrapes blogs, summarizes, and emails a daily digest |
-| **Pain Points** | LangChain is too complex; wants something visual but with code escape hatch; runs Llama 3 locally on M4 Mac to avoid API costs |
+| Attribute                | Detail                                                                                                                                            |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Role**                 | Solo full-stack developer, building 3 SaaS products                                                                                               |
+| **Background**           | 8 years experience; knows Python, React, basic ML                                                                                                 |
+| **Goal**                 | Build a personal AI research assistant that scrapes blogs, summarizes, and emails a daily digest                                                  |
+| **Pain Points**          | LangChain is too complex; wants something visual but with code escape hatch; runs Llama 3 locally on M4 Mac to avoid API costs                    |
 | **How AgentForge Helps** | Visual workflow builder for the pipeline; local Ollama support; pre-built browser automation + email tool; single `agentforge deploy` CLI command |
-| **Willingness to Pay** | $0 (free tier); might upgrade to Pro ($29/mo) for cloud deployment |
+| **Willingness to Pay**   | $0 (free tier); might upgrade to Pro ($29/mo) for cloud deployment                                                                                |
 
 ### 5.2 Startup CTO Maya
 
-| Attribute | Detail |
-|-----------|--------|
-| **Role** | CTO at a 15-person fintech startup (seed stage) |
-| **Background** | Ex-FAANG engineer; strong in distributed systems |
-| **Goal** | Deploy an AI customer support triage system that routes tickets, drafts responses, and escalates — must be auditable for compliance |
-| **Pain Points** | Needs observability (why did the agent do X?); needs RBAC for 3 contractors; needs to pin the LLM version for regulatory reproducibility |
-| **How AgentForge Helps** | Full agent trace/replay; RBAC built-in; versioned workflow snapshots; self-host on their AWS account |
-| **Willingness to Pay** | $299/mo (Team plan, self-hosted); would pay $999/mo for SLA |
+| Attribute                | Detail                                                                                                                                   |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| **Role**                 | CTO at a 15-person fintech startup (seed stage)                                                                                          |
+| **Background**           | Ex-FAANG engineer; strong in distributed systems                                                                                         |
+| **Goal**                 | Deploy an AI customer support triage system that routes tickets, drafts responses, and escalates — must be auditable for compliance      |
+| **Pain Points**          | Needs observability (why did the agent do X?); needs RBAC for 3 contractors; needs to pin the LLM version for regulatory reproducibility |
+| **How AgentForge Helps** | Full agent trace/replay; RBAC built-in; versioned workflow snapshots; self-host on their AWS account                                     |
+| **Willingness to Pay**   | $299/mo (Team plan, self-hosted); would pay $999/mo for SLA                                                                              |
 
 ### 5.3 Enterprise Architect David
 
-| Attribute | Detail |
-|-----------|--------|
-| **Role** | Director of AI Platform at a Fortune 500 insurance company |
-| **Background** | 20 years in enterprise architecture; runs 200+ microservices |
-| **Goal** | Build an underwriting automation system with 15 specialized agents — must integrate with SAP, Salesforce, and internal document DB |
-| **Pain Points** | Security review for every vendor; needs on-premise deployment in air-gapped DC; requires SSO/SAML, SOC 2 Type II, GDPR compliance |
+| Attribute                | Detail                                                                                                                                         |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Role**                 | Director of AI Platform at a Fortune 500 insurance company                                                                                     |
+| **Background**           | 20 years in enterprise architecture; runs 200+ microservices                                                                                   |
+| **Goal**                 | Build an underwriting automation system with 15 specialized agents — must integrate with SAP, Salesforce, and internal document DB             |
+| **Pain Points**          | Security review for every vendor; needs on-premise deployment in air-gapped DC; requires SSO/SAML, SOC 2 Type II, GDPR compliance              |
 | **How AgentForge Helps** | On-premise Helm chart; air-gapped installation; SSO/SAML via Dex; audit logging to their Splunk instance; custom tool SDK for internal systems |
-| **Willingness to Pay** | $15K–$50K/yr (Enterprise); premium support contract |
+| **Willingness to Pay**   | $15K–$50K/yr (Enterprise); premium support contract                                                                                            |
 
 ### 5.4 AI Consultant Priya
 
-| Attribute | Detail |
-|-----------|--------|
-| **Role** | Independent AI consultant, builds PoCs for mid-market clients |
-| **Background** | Data scientist turned AI engineer; 6 years experience |
-| **Goal** | Rapidly prototype multi-agent PoCs for clients; hand off to their teams |
-| **Pain Points** | Each client has different infra (AWS, GCP, on-prem); needs to white-label the agent interface; needs to share read-only project access |
-| **How AgentForge Helps** | Infra-agnostic deployment; white-label theme support; read-only sharing with public links; template export/import for reuse |
-| **Willingness to Pay** | $99/mo (Pro); would resell Enterprise plans to clients |
+| Attribute                | Detail                                                                                                                                 |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+| **Role**                 | Independent AI consultant, builds PoCs for mid-market clients                                                                          |
+| **Background**           | Data scientist turned AI engineer; 6 years experience                                                                                  |
+| **Goal**                 | Rapidly prototype multi-agent PoCs for clients; hand off to their teams                                                                |
+| **Pain Points**          | Each client has different infra (AWS, GCP, on-prem); needs to white-label the agent interface; needs to share read-only project access |
+| **How AgentForge Helps** | Infra-agnostic deployment; white-label theme support; read-only sharing with public links; template export/import for reuse            |
+| **Willingness to Pay**   | $99/mo (Pro); would resell Enterprise plans to clients                                                                                 |
 
 ### 5.5 Open-Source Contributor Marcus
 
-| Attribute | Detail |
-|-----------|--------|
-| **Role** | ML engineer at a big tech company; contributes to open source on weekends |
-| **Background** | PyTorch contributor; built several LangChain custom tools |
-| **Goal** | Build and publish a "web research agent" template + custom tools to the AgentForge marketplace |
-| **Pain Points** | No existing marketplace has good developer experience for publishing; wants attribution, analytics, and potential monetization |
-| **How AgentForge Helps** | `agentforge publish` CLI; marketplace with versioning, ratings, attribution; revenue share for premium tools (70/30 split) |
-| **Willingness to Pay** | $0; motivated by reputation and marketplace revenue share |
+| Attribute                | Detail                                                                                                                         |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| **Role**                 | ML engineer at a big tech company; contributes to open source on weekends                                                      |
+| **Background**           | PyTorch contributor; built several LangChain custom tools                                                                      |
+| **Goal**                 | Build and publish a "web research agent" template + custom tools to the AgentForge marketplace                                 |
+| **Pain Points**          | No existing marketplace has good developer experience for publishing; wants attribution, analytics, and potential monetization |
+| **How AgentForge Helps** | `agentforge publish` CLI; marketplace with versioning, ratings, attribution; revenue share for premium tools (70/30 split)     |
+| **Willingness to Pay**   | $0; motivated by reputation and marketplace revenue share                                                                      |
 
 ### 5.6 Product Manager Elena
 
-| Attribute | Detail |
-|-----------|--------|
-| **Role** | Product Manager at a B2B SaaS company evaluating agent automation |
-| **Background** | Non-technical; defines agent behavior in natural language |
-| **Goal** | Prototype an "intelligent onboarding" flow that guides new users through product setup with contextual help |
-| **Pain Points** | Can't write code; needs to describe behavior in natural language; wants to A/B test different agent prompts and behaviors |
+| Attribute                | Detail                                                                                                                                          |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Role**                 | Product Manager at a B2B SaaS company evaluating agent automation                                                                               |
+| **Background**           | Non-technical; defines agent behavior in natural language                                                                                       |
+| **Goal**                 | Prototype an "intelligent onboarding" flow that guides new users through product setup with contextual help                                     |
+| **Pain Points**          | Can't write code; needs to describe behavior in natural language; wants to A/B test different agent prompts and behaviors                       |
 | **How AgentForge Helps** | Natural-language prompt editor; A/B testing framework for agent behavior; analytics dashboard with conversion metrics; no-code workflow builder |
-| **Willingness to Pay** | $299/mo (Team plan); needs her engineers to also have access |
+| **Willingness to Pay**   | $299/mo (Team plan); needs her engineers to also have access                                                                                    |
 
 ---
 
@@ -215,6 +218,7 @@ Building production-grade AI agents today requires stitching together 5–10 dis
 - **API:** CRUD endpoints for agents with webhook notifications on state changes
 
 **Acceptance Criteria:**
+
 - User can create an agent in < 3 minutes without writing code
 - Agent YAML config is < 50 lines for a basic agent
 - Rollback to any previous version restores exact behavior (prompt + tools + settings)
@@ -240,6 +244,7 @@ Building production-grade AI agents today requires stitching together 5–10 dis
 - **Visual memory inspector:** See what an agent "remembers" in the web studio — inspect vector store contents, adjust relevance scores
 
 **Acceptance Criteria:**
+
 - Agent can recall information from > 10K turns ago with > 90% relevance precision
 - Memory retrieval adds < 200ms latency (P99) to agent response time
 - PII redaction runs as a configurable pre-write hook with regex and LLM-based modes
@@ -267,6 +272,7 @@ Building production-grade AI agents today requires stitching together 5–10 dis
 - **Visual team designer:** Drag-and-drop topology editor in web studio; real-time simulation mode
 
 **Acceptance Criteria:**
+
 - User can compose a 5-agent team in < 5 minutes using the visual designer
 - Inter-agent message latency < 50ms (P99) within the same process, < 200ms across network
 - Team can handle 100+ agents per supervisor without degradation
@@ -305,6 +311,7 @@ Building production-grade AI agents today requires stitching together 5–10 dis
   - Secret injection via environment variables from vault (never exposed in logs)
 
 **Acceptance Criteria:**
+
 - A custom tool can be written in < 20 lines of Python
 - Tool execution overhead (sandbox + routing) < 50ms
 - Marketplace tool install is a single click, zero config
@@ -336,6 +343,7 @@ Building production-grade AI agents today requires stitching together 5–10 dis
   - Agent that generates release notes from merged PRs
 
 **Acceptance Criteria:**
+
 - Full agent deployment pipeline from PR merge to production in < 5 minutes
 - PR-review agent catches 80%+ of common code issues (lint, security, formatting)
 - GitHub App setup completes in < 2 minutes via OAuth flow
@@ -371,6 +379,7 @@ Building production-grade AI agents today requires stitching together 5–10 dis
   - Request/response interception and modification
 
 **Acceptance Criteria:**
+
 - Agent can complete a multi-step web workflow (login → search → extract → navigate) with > 95% success
 - Page load + extraction completes in < 5 seconds (P95)
 - Session recording stores full trace of all DOM events, network requests, and agent decisions
@@ -404,6 +413,7 @@ Building production-grade AI agents today requires stitching together 5–10 dis
   - Enterprise licensing for private/internal marketplaces
 
 **Acceptance Criteria:**
+
 - Marketplace reaches 500+ assets within 6 months of launch
 - Developer publishing flow takes < 10 minutes end-to-end
 - Security scan catches 95%+ of common vulnerabilities in published tools
@@ -444,6 +454,7 @@ Building production-grade AI agents today requires stitching together 5–10 dis
   - Template variables exposed in the UI for non-technical users
 
 **Acceptance Criteria:**
+
 - A 10-node workflow can be built in < 5 minutes by a first-time user
 - Debug mode allows stepping forward/backward and inspecting all data at each node
 - Workflow execution overhead (scheduling + routing) < 10ms per node
@@ -478,6 +489,7 @@ Building production-grade AI agents today requires stitching together 5–10 dis
   - Message inspector: browse all messages in the system with search, filter, and detail views
 
 **Acceptance Criteria:**
+
 - Latency for inter-agent message delivery < 10ms (same host), < 100ms (network)
 - Throughput > 10,000 messages per second per team on standard hardware
 - 100% message delivery guarantee (at-least-once) under normal operation
@@ -515,6 +527,7 @@ Building production-grade AI agents today requires stitching together 5–10 dis
   - Model downloading, caching, and hot-swapping
 
 **Acceptance Criteria:**
+
 - Switching an agent from OpenAI to Anthropic requires changing 1 config field; no code changes
 - Fallback from primary to secondary model completes in < 5 seconds (including retry detection)
 - Local Llama 3 70B via Ollama responds in < 2 seconds on an RTX 4090 or M4 Ultra
@@ -526,56 +539,57 @@ Building production-grade AI agents today requires stitching together 5–10 dis
 
 ### 7.1 Performance
 
-| Metric | Target | Measurement Method |
-|--------|--------|--------------------|
-| Agent response time (cloud LLM) | < 3s P95 (excluding LLM inference) | Synthetic monitoring every 5 min |
-| Workflow execution overhead | < 50ms P99 for a 10-node graph | Internal benchmark suite |
-| Tool execution sandbox bootstrap | < 3s P95 for Docker sandbox | Cold-start measurement |
-| Visual Studio page load | < 2s P90 on a 50 Mbps connection | Lighthouse / WebPageTest |
-| API latency (p99) | < 100ms for CRUD operations | Request metrics via Prometheus |
-| Concurrent agents per instance | 500+ on a single 8-core / 32GB node | Stress test with synthetic workload |
-| Inter-agent message throughput | 10,000+ msg/s on a single node | Benchmark with NATS/Redis Streams |
-| Vector store query latency | < 50ms P99 for top-10 ANN search | Internal benchmark |
+| Metric                           | Target                              | Measurement Method                  |
+| -------------------------------- | ----------------------------------- | ----------------------------------- |
+| Agent response time (cloud LLM)  | < 3s P95 (excluding LLM inference)  | Synthetic monitoring every 5 min    |
+| Workflow execution overhead      | < 50ms P99 for a 10-node graph      | Internal benchmark suite            |
+| Tool execution sandbox bootstrap | < 3s P95 for Docker sandbox         | Cold-start measurement              |
+| Visual Studio page load          | < 2s P90 on a 50 Mbps connection    | Lighthouse / WebPageTest            |
+| API latency (p99)                | < 100ms for CRUD operations         | Request metrics via Prometheus      |
+| Concurrent agents per instance   | 500+ on a single 8-core / 32GB node | Stress test with synthetic workload |
+| Inter-agent message throughput   | 10,000+ msg/s on a single node      | Benchmark with NATS/Redis Streams   |
+| Vector store query latency       | < 50ms P99 for top-10 ANN search    | Internal benchmark                  |
 
 ### 7.2 Security
 
-| Requirement | Specification |
-|-------------|---------------|
-| **Authentication** | OAuth 2.0 / OIDC; support for Google, GitHub, Microsoft, Okta, Keycloak; optional email+password with MFA |
-| **Authorization** | RBAC with predefined roles (Admin, Developer, Viewer, Auditor) and custom roles; attribute-based access control (ABAC) for enterprise |
-| **API security** | API keys (with rotation policies), JWT (RS256 or Ed25519), mTLS for enterprise; rate limiting per key (1000 req/min default) |
-| **Secrets management** | Integration with HashiCorp Vault, AWS Secrets Manager, Azure Key Vault, GCP Secret Manager; secrets never stored in DB or logs |
-| **Data encryption** | At rest: AES-256-GCM; in transit: TLS 1.3; per-tenant encryption keys for enterprise |
-| **Audit logging** | All agent actions, config changes, tool executions, and user authentications logged to immutable audit trail; integration with Splunk, Datadog, Sumo Logic |
-| **Tool sandboxing** | gVisor or Docker container with no network (by default), read-only filesystem, CPU/memory limits, seccomp profile |
-| **LLM prompt injection** | Built-in detection using ML classifier + regex patterns; configurable action (block, log, flag for review) |
-| **PII redaction** | Regex + ML-based PII detection; configurable redaction strategies (mask, hash, drop) before memory storage |
-| **Penetration testing** | Annual third-party pentest; SAST in CI/CD pipeline (Semgrep, CodeQL); DAST for deployed instances |
+| Requirement              | Specification                                                                                                                                              |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Authentication**       | OAuth 2.0 / OIDC; support for Google, GitHub, Microsoft, Okta, Keycloak; optional email+password with MFA                                                  |
+| **Authorization**        | RBAC with predefined roles (Admin, Developer, Viewer, Auditor) and custom roles; attribute-based access control (ABAC) for enterprise                      |
+| **API security**         | API keys (with rotation policies), JWT (RS256 or Ed25519), mTLS for enterprise; rate limiting per key (1000 req/min default)                               |
+| **Secrets management**   | Integration with HashiCorp Vault, AWS Secrets Manager, Azure Key Vault, GCP Secret Manager; secrets never stored in DB or logs                             |
+| **Data encryption**      | At rest: AES-256-GCM; in transit: TLS 1.3; per-tenant encryption keys for enterprise                                                                       |
+| **Audit logging**        | All agent actions, config changes, tool executions, and user authentications logged to immutable audit trail; integration with Splunk, Datadog, Sumo Logic |
+| **Tool sandboxing**      | gVisor or Docker container with no network (by default), read-only filesystem, CPU/memory limits, seccomp profile                                          |
+| **LLM prompt injection** | Built-in detection using ML classifier + regex patterns; configurable action (block, log, flag for review)                                                 |
+| **PII redaction**        | Regex + ML-based PII detection; configurable redaction strategies (mask, hash, drop) before memory storage                                                 |
+| **Penetration testing**  | Annual third-party pentest; SAST in CI/CD pipeline (Semgrep, CodeQL); DAST for deployed instances                                                          |
 
 ### 7.3 Scalability
 
-| Dimension | Strategy | Target |
-|-----------|----------|--------|
-| **Horizontal scaling** | Stateless API servers behind load balancer; state stored in Redis/PostgreSQL | Linear scaling up to 100 nodes |
-| **Vector store** | Qdrant/Milvus with horizontal sharding and replication factor = 3 | 1B+ vectors per cluster |
-| **Message queue** | NATS JetStream or Redis Streams with consumer groups | 100K+ msg/s sustained |
-| **File storage** | S3-compatible (MinIO / AWS S3 / GCS) with CDN for public assets | Unlimited, pay-per-use |
-| **Database** | PostgreSQL with read replicas, connection pooling (PgBouncer), and sharding for multi-tenant | 10K+ concurrent connections |
-| **Agent runtime** | Per-agent process pooling; auto-scaling based on queue depth; warm standby agents for critical paths | 10K+ active agents per cluster |
-| **Caching** | Redis cluster with LRU eviction; CDN for static assets | < 10ms cache hit P99 |
-| **Multi-region** | Active-passive with global traffic manager; cross-region replication for PostgreSQL and Qdrant | < 1s RPO, < 30s RTO |
+| Dimension              | Strategy                                                                                             | Target                         |
+| ---------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------ |
+| **Horizontal scaling** | Stateless API servers behind load balancer; state stored in Redis/PostgreSQL                         | Linear scaling up to 100 nodes |
+| **Vector store**       | Qdrant/Milvus with horizontal sharding and replication factor = 3                                    | 1B+ vectors per cluster        |
+| **Message queue**      | NATS JetStream or Redis Streams with consumer groups                                                 | 100K+ msg/s sustained          |
+| **File storage**       | S3-compatible (MinIO / AWS S3 / GCS) with CDN for public assets                                      | Unlimited, pay-per-use         |
+| **Database**           | PostgreSQL with read replicas, connection pooling (PgBouncer), and sharding for multi-tenant         | 10K+ concurrent connections    |
+| **Agent runtime**      | Per-agent process pooling; auto-scaling based on queue depth; warm standby agents for critical paths | 10K+ active agents per cluster |
+| **Caching**            | Redis cluster with LRU eviction; CDN for static assets                                               | < 10ms cache hit P99           |
+| **Multi-region**       | Active-passive with global traffic manager; cross-region replication for PostgreSQL and Qdrant       | < 1s RPO, < 30s RTO            |
 
 ### 7.4 Availability
 
-| Tier | Uptime SLA | Monthly Max Downtime | Support Response |
-|------|-----------|---------------------|------------------|
-| Free | No SLA | N/A | Community Discord |
-| Pro | 99.5% | 3.6 hours | 8 business hours, email |
-| Team | 99.9% | 43 minutes | 4 hours, chat + email |
-| Enterprise (self-hosted) | N/A (customer managed) | N/A | 1 hour, 24/7, phone + dedicated Slack |
-| Enterprise (cloud) | 99.95% | 21 minutes | 30 minutes, 24/7, phone + Slack |
+| Tier                     | Uptime SLA             | Monthly Max Downtime | Support Response                      |
+| ------------------------ | ---------------------- | -------------------- | ------------------------------------- |
+| Free                     | No SLA                 | N/A                  | Community Discord                     |
+| Pro                      | 99.5%                  | 3.6 hours            | 8 business hours, email               |
+| Team                     | 99.9%                  | 43 minutes           | 4 hours, chat + email                 |
+| Enterprise (self-hosted) | N/A (customer managed) | N/A                  | 1 hour, 24/7, phone + dedicated Slack |
+| Enterprise (cloud)       | 99.95%                 | 21 minutes           | 30 minutes, 24/7, phone + Slack       |
 
 **HA architecture:**
+
 - Multi-AZ deployment in AWS (us-east-1, eu-west-1, ap-southeast-1) with automatic failover
 - Database: PostgreSQL with Patroni + HAProxy for automatic failover (< 30s RTO)
 - Cache: Redis Cluster with replicas; automatic failover via Redis Sentinel
@@ -584,25 +598,25 @@ Building production-grade AI agents today requires stitching together 5–10 dis
 
 ### 7.5 Reliability
 
-| Area | Requirement |
-|------|-------------|
-| Agent execution | Automatic retry with exponential backoff (max 3 retries); idempotent tool execution |
-| Workflow execution | Exactly-once semantics for critical workflows; checkpoint after every node |
-| Message delivery | At-least-once delivery with idempotency; dead letter queue after 5 failed delivery attempts |
-| Error reporting | Structured error codes with human-readable messages; error aggregation in dashboard |
-| Graceful degradation | If LLM provider is down, use fallback model; if all models down, queue tasks for later |
-| Backup | Automated daily backups with 30-day retention; point-in-time recovery for PostgreSQL |
+| Area                 | Requirement                                                                                 |
+| -------------------- | ------------------------------------------------------------------------------------------- |
+| Agent execution      | Automatic retry with exponential backoff (max 3 retries); idempotent tool execution         |
+| Workflow execution   | Exactly-once semantics for critical workflows; checkpoint after every node                  |
+| Message delivery     | At-least-once delivery with idempotency; dead letter queue after 5 failed delivery attempts |
+| Error reporting      | Structured error codes with human-readable messages; error aggregation in dashboard         |
+| Graceful degradation | If LLM provider is down, use fallback model; if all models down, queue tasks for later      |
+| Backup               | Automated daily backups with 30-day retention; point-in-time recovery for PostgreSQL        |
 
 ### 7.6 Observability
 
-| Component | Tooling |
-|-----------|---------|
-| Metrics | Prometheus + Grafana dashboards (agent latency, error rates, token usage, cost) |
-| Logging | Structured JSON logging to stdout; collectors for Loki, ELK, Datadog, Splunk |
-| Tracing | OpenTelemetry distributed tracing across agents, tools, and LLM calls |
-| Alerting | Grafana alerts with PagerDuty, Slack, email integration |
+| Component        | Tooling                                                                                    |
+| ---------------- | ------------------------------------------------------------------------------------------ |
+| Metrics          | Prometheus + Grafana dashboards (agent latency, error rates, token usage, cost)            |
+| Logging          | Structured JSON logging to stdout; collectors for Loki, ELK, Datadog, Splunk               |
+| Tracing          | OpenTelemetry distributed tracing across agents, tools, and LLM calls                      |
+| Alerting         | Grafana alerts with PagerDuty, Slack, email integration                                    |
 | Agent monitoring | Per-agent dashboard with response time, error rate, cost, tool usage, conversation history |
-| Cost analytics | Daily/weekly/monthly cost reports by agent, team, project, model, provider |
+| Cost analytics   | Daily/weekly/monthly cost reports by agent, team, project, model, provider                 |
 
 ---
 
@@ -610,34 +624,34 @@ Building production-grade AI agents today requires stitching together 5–10 dis
 
 ### 8.1 Technical Constraints
 
-| # | Constraint | Rationale |
-|---|-----------|-----------|
-| C1 | Local LLM support requires user-provided hardware (GPU with >= 8GB VRAM for 7B models, >= 24GB for 70B) | Running LLMs locally is inherently hardware-bound; platform cannot subsidize compute |
-| C2 | Web Studio requires modern browser (Chrome 110+, Firefox 115+, Edge 110+, Safari 16+) | Leverages Canvas API, Web Workers, and SharedArrayBuffer for performance |
-| C3 | Self-hosted deployment requires Kubernetes (v1.25+) or Docker Compose | Target enterprise infra is K8s; Docker Compose is for development/evaluation only |
-| C4 | Python 3.11+ for agent runtime; TypeScript (React) for frontend | Team expertise and ecosystem maturity |
-| C5 | PostgreSQL >= 15 with pgvector extension | Primary datastore for structured data and vector embeddings |
-| C6 | Maximum agent response timeout of 600 seconds (10 minutes) | Prevent runaway agents; longer tasks should use async workflow patterns |
+| #   | Constraint                                                                                              | Rationale                                                                            |
+| --- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| C1  | Local LLM support requires user-provided hardware (GPU with >= 8GB VRAM for 7B models, >= 24GB for 70B) | Running LLMs locally is inherently hardware-bound; platform cannot subsidize compute |
+| C2  | Web Studio requires modern browser (Chrome 110+, Firefox 115+, Edge 110+, Safari 16+)                   | Leverages Canvas API, Web Workers, and SharedArrayBuffer for performance             |
+| C3  | Self-hosted deployment requires Kubernetes (v1.25+) or Docker Compose                                   | Target enterprise infra is K8s; Docker Compose is for development/evaluation only    |
+| C4  | Python 3.11+ for agent runtime; TypeScript (React) for frontend                                         | Team expertise and ecosystem maturity                                                |
+| C5  | PostgreSQL >= 15 with pgvector extension                                                                | Primary datastore for structured data and vector embeddings                          |
+| C6  | Maximum agent response timeout of 600 seconds (10 minutes)                                              | Prevent runaway agents; longer tasks should use async workflow patterns              |
 
 ### 8.2 Business Constraints
 
-| # | Constraint | Rationale |
-|---|-----------|-----------|
-| B1 | Open-source core under AGPLv3 | Strong copyleft ensures improvements flow back to community; commercial license available for proprietary use |
-| B2 | First 6 months: focus on individual developers and startups | Enterprise sales cycles are 9–12 months; need product-market fit before enterprise push |
-| B3 | Team size capped at 15 FTE for first year | Bootstrapped / seed-funded; lean team required |
-| B4 | Marketplace revenue share: 70% creator, 30% platform | Industry standard for developer marketplaces (similar to GitHub Marketplace, Shopify) |
+| #   | Constraint                                                  | Rationale                                                                                                     |
+| --- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| B1  | Open-source core under AGPLv3                               | Strong copyleft ensures improvements flow back to community; commercial license available for proprietary use |
+| B2  | First 6 months: focus on individual developers and startups | Enterprise sales cycles are 9–12 months; need product-market fit before enterprise push                       |
+| B3  | Team size capped at 15 FTE for first year                   | Bootstrapped / seed-funded; lean team required                                                                |
+| B4  | Marketplace revenue share: 70% creator, 30% platform        | Industry standard for developer marketplaces (similar to GitHub Marketplace, Shopify)                         |
 
 ### 8.3 Assumptions
 
-| # | Assumption | Risk if False |
-|---|-----------|---------------|
-| A1 | LLM API costs will continue to decrease (~10–20% YoY) | Budget model may break if costs rise; need to build in margin |
-| A2 | Local LLM quality will reach parity with cloud models for most tasks within 12 months | Local-first value prop diminishes if gap persists |
-| A3 | Developers prefer visual tooling but want code escape hatch | Pure no-code users may be underserved; pure code users may find visual layer limiting |
-| A4 | Enterprise customers will self-host for compliance reasons | If enterprises prefer SaaS, need to invest in multi-tenant cloud earlier |
-| A5 | Open-source community will contribute tools and templates | Slow community growth may require in-house asset creation |
-| A6 | Browser automation remains a critical agent capability | If websites increasingly block automated access, this feature's value diminishes |
+| #   | Assumption                                                                            | Risk if False                                                                         |
+| --- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| A1  | LLM API costs will continue to decrease (~10–20% YoY)                                 | Budget model may break if costs rise; need to build in margin                         |
+| A2  | Local LLM quality will reach parity with cloud models for most tasks within 12 months | Local-first value prop diminishes if gap persists                                     |
+| A3  | Developers prefer visual tooling but want code escape hatch                           | Pure no-code users may be underserved; pure code users may find visual layer limiting |
+| A4  | Enterprise customers will self-host for compliance reasons                            | If enterprises prefer SaaS, need to invest in multi-tenant cloud earlier              |
+| A5  | Open-source community will contribute tools and templates                             | Slow community growth may require in-house asset creation                             |
+| A6  | Browser automation remains a critical agent capability                                | If websites increasingly block automated access, this feature's value diminishes      |
 
 ---
 
@@ -645,80 +659,80 @@ Building production-grade AI agents today requires stitching together 5–10 dis
 
 ### 9.1 Acquisition Metrics
 
-| Metric | Target (Year 1) | Target (Year 2) |
-|--------|-----------------|-----------------|
-| Website visitors (unique/month) | 100K | 500K |
-| GitHub stars | 10K | 40K |
-| Docker pulls | 50K | 250K |
-| Sign-ups (total) | 20K | 100K |
-| Active community contributors | 100 | 500 |
-| Enterprise leads generated | 200 | 1,000 |
+| Metric                          | Target (Year 1) | Target (Year 2) |
+| ------------------------------- | --------------- | --------------- |
+| Website visitors (unique/month) | 100K            | 500K            |
+| GitHub stars                    | 10K             | 40K             |
+| Docker pulls                    | 50K             | 250K            |
+| Sign-ups (total)                | 20K             | 100K            |
+| Active community contributors   | 100             | 500             |
+| Enterprise leads generated      | 200             | 1,000           |
 
 ### 9.2 Activation Metrics
 
-| Metric | Target |
-|--------|--------|
-| Users who create first agent within 7 days | > 40% of sign-ups |
-| Users who deploy first agent to production | > 15% of sign-ups |
-| Time to first deployed agent (median) | < 15 minutes |
-| Workflow builder completion rate (start → deploy) | > 60% |
+| Metric                                            | Target            |
+| ------------------------------------------------- | ----------------- |
+| Users who create first agent within 7 days        | > 40% of sign-ups |
+| Users who deploy first agent to production        | > 15% of sign-ups |
+| Time to first deployed agent (median)             | < 15 minutes      |
+| Workflow builder completion rate (start → deploy) | > 60%             |
 
 ### 9.3 Engagement Metrics
 
-| Metric | Target (Monthly) |
-|--------|------------------|
-| DAU / MAU ratio | > 25% |
-| Active agents per paying team | > 10 |
-| Workflow executions per active user | > 100 |
-| Average session duration | > 12 minutes |
-| Tools installed from marketplace (per paid user) | > 3 |
-| Team collaboration: agents shared per team | > 5 |
+| Metric                                           | Target (Monthly) |
+| ------------------------------------------------ | ---------------- |
+| DAU / MAU ratio                                  | > 25%            |
+| Active agents per paying team                    | > 10             |
+| Workflow executions per active user              | > 100            |
+| Average session duration                         | > 12 minutes     |
+| Tools installed from marketplace (per paid user) | > 3              |
+| Team collaboration: agents shared per team       | > 5              |
 
 ### 9.4 Retention Metrics
 
-| Metric | Target |
-|--------|--------|
-| Week-1 retention | > 50% |
-| Week-4 retention | > 30% |
-| Paid user retention (monthly) | > 95% |
-| Paid user annual renewal rate | > 85% |
-| Net Revenue Retention (NRR) | > 120% |
+| Metric                        | Target |
+| ----------------------------- | ------ |
+| Week-1 retention              | > 50%  |
+| Week-4 retention              | > 30%  |
+| Paid user retention (monthly) | > 95%  |
+| Paid user annual renewal rate | > 85%  |
+| Net Revenue Retention (NRR)   | > 120% |
 
 ### 9.5 Revenue Metrics
 
-| Metric | Target (Year 1) | Target (Year 2) |
-|--------|-----------------|-----------------|
-| Annual Recurring Revenue (ARR) | $2.4M | $12M |
-| Number of paid teams | 400 | 2,000 |
-| Average Revenue Per Account (ARPA) | $6,000/yr | $6,000/yr |
-| Enterprise ACV | $25,000/yr | $35,000/yr |
-| Marketplace GMV | $120K/yr | $1.2M/yr |
-| Gross margin (cloud tier) | > 80% | > 85% |
-| Customer Acquisition Cost (CAC) | < $1,500 | < $1,000 |
-| Lifetime Value (LTV) | $18,000 | $24,000 |
-| LTV:CAC ratio | > 12:1 | > 24:1 |
+| Metric                             | Target (Year 1) | Target (Year 2) |
+| ---------------------------------- | --------------- | --------------- |
+| Annual Recurring Revenue (ARR)     | $2.4M           | $12M            |
+| Number of paid teams               | 400             | 2,000           |
+| Average Revenue Per Account (ARPA) | $6,000/yr       | $6,000/yr       |
+| Enterprise ACV                     | $25,000/yr      | $35,000/yr      |
+| Marketplace GMV                    | $120K/yr        | $1.2M/yr        |
+| Gross margin (cloud tier)          | > 80%           | > 85%           |
+| Customer Acquisition Cost (CAC)    | < $1,500        | < $1,000        |
+| Lifetime Value (LTV)               | $18,000         | $24,000         |
+| LTV:CAC ratio                      | > 12:1          | > 24:1          |
 
 ### 9.6 Quality Metrics
 
-| Metric | Target |
-|--------|--------|
-| Agent success rate (user-defined task completion) | > 85% |
-| Tool execution success rate | > 99% |
-| Platform uptime (paid tiers) | > 99.9% |
-| P95 API latency | < 200ms |
-| Bug escape rate (bugs found in production) | < 5% of total bugs |
-| NPS (Net Promoter Score) | > 50 |
-| CSAT (Customer Satisfaction) | > 4.5 / 5.0 |
+| Metric                                            | Target             |
+| ------------------------------------------------- | ------------------ |
+| Agent success rate (user-defined task completion) | > 85%              |
+| Tool execution success rate                       | > 99%              |
+| Platform uptime (paid tiers)                      | > 99.9%            |
+| P95 API latency                                   | < 200ms            |
+| Bug escape rate (bugs found in production)        | < 5% of total bugs |
+| NPS (Net Promoter Score)                          | > 50               |
+| CSAT (Customer Satisfaction)                      | > 4.5 / 5.0        |
 
 ### 9.7 Community Metrics
 
-| Metric | Target |
-|--------|--------|
-| Marketplace assets published | 500+ |
-| Community-created agent templates | 200+ |
-| Non-employee code contributions/month | 50+ |
-| Discord / Forum active members | 5,000+ |
-| Meetup / conference talks about AgentForge | 20+ |
+| Metric                                     | Target |
+| ------------------------------------------ | ------ |
+| Marketplace assets published               | 500+   |
+| Community-created agent templates          | 200+   |
+| Non-employee code contributions/month      | 50+    |
+| Discord / Forum active members             | 5,000+ |
+| Meetup / conference talks about AgentForge | 20+    |
 
 ---
 
@@ -726,41 +740,46 @@ Building production-grade AI agents today requires stitching together 5–10 dis
 
 ### 10.1 Competitive Landscape Overview
 
-| Product | Type | Open Source | Visual Builder | Multi-Agent | Memory | Local LLM | Marketplace | Pricing |
-|---------|------|-------------|---------------|-------------|--------|-----------|-------------|---------|
-| **AgentForge** | Platform | ✅ AGPLv3 | ✅ | ✅ | ✅ | ✅ | ✅ | Open-core + Premium |
-| **LangChain / LangGraph** | Framework | ✅ MIT | ❌ (LangSmith has basic traces) | ✅ | ⚠️ (3rd party) | ✅ | ❌ | Free (OSS); LangSmith paid |
-| **CrewAI** | Framework | ✅ MIT | ❌ | ✅ | ❌ | ✅ | ❌ | Free (OSS) |
-| **AutoGPT** | Application | ✅ MIT | ❌ | ❌ | ⚠️ (basic) | ✅ | ❌ | Free (OSS); desktop app paid |
-| **n8n** | Workflow Automation | ✅ Sustainable Use | ✅ | ❌ | ❌ | ❌ | ✅ | Open-core + Cloud |
-| **OpenHands** | Application | ✅ MIT | ❌ | ❌ | ⚠️ (basic) | ✅ | ❌ | Free (OSS) |
-| **Dify** | Platform | ✅ Apache 2.0 | ✅ | ⚠️ (basic) | ✅ | ✅ | ✅ | Open-core + Cloud |
-| **Flowise** | Platform | ✅ Apache 2.0 | ✅ | ❌ | ⚠️ (basic) | ✅ | ❌ | Open-core + Cloud |
-| **Julep** | Platform | ✅ Apache 2.0 | ❌ | ✅ | ✅ | ✅ | ❌ | Open-core + Cloud |
+| Product                   | Type                | Open Source        | Visual Builder                  | Multi-Agent | Memory         | Local LLM | Marketplace | Pricing                      |
+| ------------------------- | ------------------- | ------------------ | ------------------------------- | ----------- | -------------- | --------- | ----------- | ---------------------------- |
+| **AgentForge**            | Platform            | ✅ AGPLv3          | ✅                              | ✅          | ✅             | ✅        | ✅          | Open-core + Premium          |
+| **LangChain / LangGraph** | Framework           | ✅ MIT             | ❌ (LangSmith has basic traces) | ✅          | ⚠️ (3rd party) | ✅        | ❌          | Free (OSS); LangSmith paid   |
+| **CrewAI**                | Framework           | ✅ MIT             | ❌                              | ✅          | ❌             | ✅        | ❌          | Free (OSS)                   |
+| **AutoGPT**               | Application         | ✅ MIT             | ❌                              | ❌          | ⚠️ (basic)     | ✅        | ❌          | Free (OSS); desktop app paid |
+| **n8n**                   | Workflow Automation | ✅ Sustainable Use | ✅                              | ❌          | ❌             | ❌        | ✅          | Open-core + Cloud            |
+| **OpenHands**             | Application         | ✅ MIT             | ❌                              | ❌          | ⚠️ (basic)     | ✅        | ❌          | Free (OSS)                   |
+| **Dify**                  | Platform            | ✅ Apache 2.0      | ✅                              | ⚠️ (basic)  | ✅             | ✅        | ✅          | Open-core + Cloud            |
+| **Flowise**               | Platform            | ✅ Apache 2.0      | ✅                              | ❌          | ⚠️ (basic)     | ✅        | ❌          | Open-core + Cloud            |
+| **Julep**                 | Platform            | ✅ Apache 2.0      | ❌                              | ✅          | ✅             | ✅        | ❌          | Open-core + Cloud            |
 
 ### 10.2 Head-to-Head Analysis
 
 #### vs LangChain/LangGraph
+
 - **Advantage:** Visual workflow builder; unified memory abstraction; no API instability (LangChain has frequent breaking changes); integrated deployment
 - **Disadvantage:** Smaller ecosystem; fewer integrations at launch; less established trust
 - **Strategy:** Offer one-click import from LangChain projects; highlight DX superiority (visual debugging, workflow builder)
 
 #### vs CrewAI
+
 - **Advantage:** Visual team topology designer; built-in memory; marketplace; enterprise features (RBAC, audit, SSO)
 - **Disadvantage:** CrewAI is simpler to get started for pure-Python users
 - **Strategy:** CrewAI is a framework, not a platform — emphasize the "batteries included" value of AgentForge (deployment, monitoring, collaboration)
 
 #### vs AutoGPT
+
 - **Advantage:** Multi-agent orchestration; enterprise-grade security; visual debugging; team collaboration
 - **Disadvantage:** AutoGPT has strong brand recognition as the first AI agent
 - **Strategy:** Position as "AutoGPT for professionals" — same autonomous capability but with testing, observability, and team workflows
 
 #### vs n8n
+
 - **Advantage:** Native agent intelligence (not just API calls); LLM-native tool calling; memory; multi-agent communication
 - **Disadvantage:** n8n has 5+ years of maturity and 2,000+ integrations
 - **Strategy:** n8n is workflow automation; AgentForge is agent orchestration. Different paradigms — n8n connects SaaS tools, AgentForge connects intelligent agents.
 
 #### vs OpenHands
+
 - **Advantage:** Multi-agent teams; visual debugging; platform features (deployment, monitoring, marketplace)
 - **Disadvantage:** OpenHands excels at software development tasks (code generation, debugging)
 - **Strategy:** OpenHands is a single-purpose coding agent; AgentForge is a general-purpose agent platform. Co-exist rather than compete.
@@ -775,12 +794,14 @@ Building production-grade AI agents today requires stitching together 5–10 dis
 
 ### 10.4 Market Positioning
 
-**Tagline:** *"Build intelligent agents. Not infrastructure."*
+**Tagline:** _"Build intelligent agents. Not infrastructure."_
 
 **Positioning statement:**
+
 > AgentForge is the open-source platform that lets you design, deploy, and monitor AI agents — from a single prototype on your laptop to a multi-agent team serving millions — without stitching together a dozen tools.
 
 **Key differentiators in order of priority:**
+
 1. Visual workflow builder + code escape hatch (tension resolved)
 2. Unified memory subsystem (no other platform has this holistically)
 3. Multi-agent team orchestration with visual topology designer
@@ -796,26 +817,26 @@ Building production-grade AI agents today requires stitching together 5–10 dis
 
 AgentForge uses an open-core business model: the core platform is free and open-source (AGPLv3), with premium features available in paid tiers and a commercial license for proprietary use.
 
-| Feature Area | Free (OSS) | Pro ($29/mo) | Team ($299/mo) | Enterprise (Custom) |
-|-------------|-----------|--------------|----------------|---------------------|
-| **Agent creation** | Unlimited | Unlimited | Unlimited | Unlimited |
-| **Workflow builder** | ✅ | ✅ | ✅ | ✅ |
-| **Local LLM support** | ✅ | ✅ | ✅ | ✅ |
-| **Cloud LLM adapters** | OpenAI, Anthropic | All cloud providers | All cloud providers | All cloud providers |
-| **Memory** | Short-term + Long-term (1K vectors) | Short + Long (10K vectors) | Unlimited memory | Unlimited memory |
-| **Agent teams** | 2 agents max | 5 agents per team | 20 agents per team | Unlimited |
-| **Tools** | Built-in only | Built-in + marketplace | All tools + custom SDK | All tools + custom SDK |
-| **GitHub integration** | ❌ | ✅ (3 repos) | ✅ (unlimited) | ✅ (unlimited) |
-| **Browser automation** | ❌ | 100 min/month | 1,000 min/month | Unlimited |
-| **Human-in-the-loop** | ❌ | ✅ | ✅ | ✅ |
-| **RBAC** | ❌ | ❌ | ✅ | ✅ |
-| **SSO/SAML** | ❌ | ❌ | ❌ | ✅ |
-| **Audit logging** | ❌ | ❌ | 30-day retention | Unlimited retention |
-| **Self-hosted** | ✅ (Docker Compose) | ❌ | ✅ (Kubernetes) | ✅ (Kubernetes + air-gapped) |
-| **SLA** | ❌ | 99.5% | 99.9% | 99.95% |
-| **Support** | Community Discord | Email (8hr) | Chat + Email (4hr) | 24/7 Phone + Slack |
-| **Commercial license** | ❌ | ❌ | ❌ | ✅ |
-| **Seats** | 1 | 3 | 10 | Unlimited |
+| Feature Area           | Free (OSS)                          | Pro ($29/mo)               | Team ($299/mo)         | Enterprise (Custom)          |
+| ---------------------- | ----------------------------------- | -------------------------- | ---------------------- | ---------------------------- |
+| **Agent creation**     | Unlimited                           | Unlimited                  | Unlimited              | Unlimited                    |
+| **Workflow builder**   | ✅                                  | ✅                         | ✅                     | ✅                           |
+| **Local LLM support**  | ✅                                  | ✅                         | ✅                     | ✅                           |
+| **Cloud LLM adapters** | OpenAI, Anthropic                   | All cloud providers        | All cloud providers    | All cloud providers          |
+| **Memory**             | Short-term + Long-term (1K vectors) | Short + Long (10K vectors) | Unlimited memory       | Unlimited memory             |
+| **Agent teams**        | 2 agents max                        | 5 agents per team          | 20 agents per team     | Unlimited                    |
+| **Tools**              | Built-in only                       | Built-in + marketplace     | All tools + custom SDK | All tools + custom SDK       |
+| **GitHub integration** | ❌                                  | ✅ (3 repos)               | ✅ (unlimited)         | ✅ (unlimited)               |
+| **Browser automation** | ❌                                  | 100 min/month              | 1,000 min/month        | Unlimited                    |
+| **Human-in-the-loop**  | ❌                                  | ✅                         | ✅                     | ✅                           |
+| **RBAC**               | ❌                                  | ❌                         | ✅                     | ✅                           |
+| **SSO/SAML**           | ❌                                  | ❌                         | ❌                     | ✅                           |
+| **Audit logging**      | ❌                                  | ❌                         | 30-day retention       | Unlimited retention          |
+| **Self-hosted**        | ✅ (Docker Compose)                 | ❌                         | ✅ (Kubernetes)        | ✅ (Kubernetes + air-gapped) |
+| **SLA**                | ❌                                  | 99.5%                      | 99.9%                  | 99.95%                       |
+| **Support**            | Community Discord                   | Email (8hr)                | Chat + Email (4hr)     | 24/7 Phone + Slack           |
+| **Commercial license** | ❌                                  | ❌                         | ❌                     | ✅                           |
+| **Seats**              | 1                                   | 3                          | 10                     | Unlimited                    |
 
 ### 11.2 Premium Feature Gating Logic
 
@@ -825,14 +846,14 @@ AgentForge uses an open-core business model: the core platform is free and open-
 
 ### 11.3 Revenue Projections
 
-| Revenue Stream | Year 1 | Year 2 | Year 3 |
-|---------------|--------|--------|--------|
-| Pro subscriptions | $174K (500 users × $29 × 12) | $696K (2,000 × $29 × 12) | $1.7M (5,000 × $29 × 12) |
-| Team subscriptions | $1.08M (300 teams × $299 × 12) | $3.6M (1,000 × $299 × 12) | $7.2M (2,000 × $299 × 12) |
-| Enterprise contracts | $600K (20 deals × $30K avg) | $3.5M (70 deals × $50K avg) | $10M (200 deals × $50K avg) |
-| Marketplace revenue share | $36K (30% of $120K GMV) | $360K (30% of $1.2M GMV) | $1.5M (30% of $5M GMV) |
-| Professional services | $500K (custom consulting, training) | $1M | $2M |
-| **Total ARR** | **$2.39M** | **$9.16M** | **$22.4M** |
+| Revenue Stream            | Year 1                              | Year 2                      | Year 3                      |
+| ------------------------- | ----------------------------------- | --------------------------- | --------------------------- |
+| Pro subscriptions         | $174K (500 users × $29 × 12)        | $696K (2,000 × $29 × 12)    | $1.7M (5,000 × $29 × 12)    |
+| Team subscriptions        | $1.08M (300 teams × $299 × 12)      | $3.6M (1,000 × $299 × 12)   | $7.2M (2,000 × $299 × 12)   |
+| Enterprise contracts      | $600K (20 deals × $30K avg)         | $3.5M (70 deals × $50K avg) | $10M (200 deals × $50K avg) |
+| Marketplace revenue share | $36K (30% of $120K GMV)             | $360K (30% of $1.2M GMV)    | $1.5M (30% of $5M GMV)      |
+| Professional services     | $500K (custom consulting, training) | $1M                         | $2M                         |
+| **Total ARR**             | **$2.39M**                          | **$9.16M**                  | **$22.4M**                  |
 
 ### 11.4 Pricing Philosophy
 
@@ -855,33 +876,34 @@ For companies that want to use AgentForge in proprietary products without AGPLv3
 
 ### 12.1 Data Protection Regulations
 
-| Regulation | Applicability | Requirements | Implementation |
-|-----------|--------------|--------------|----------------|
-| **GDPR** (EU) | All customers with EU users | Right to erasure, data portability, consent, DPA, DPO | Self-serve data deletion API; JSON export of all user data; Data Processing Agreement in signup flow; appointed DPO |
-| **CCPA/CPRA** (California) | Customers with CA users | Right to know, delete, opt-out of sale | Data inventory map; consumer request portal; do-not-sell signal handling |
-| **LGPD** (Brazil) | Customers with Brazilian users | Similar to GDPR (consent, rights, DPO) | Unified privacy framework extending GDPR implementation |
-| **PIPEDA** (Canada) | Customers with Canadian users | Consent, access, correction, accountability | Privacy policy; consent management; data governance board |
+| Regulation                 | Applicability                  | Requirements                                          | Implementation                                                                                                      |
+| -------------------------- | ------------------------------ | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **GDPR** (EU)              | All customers with EU users    | Right to erasure, data portability, consent, DPA, DPO | Self-serve data deletion API; JSON export of all user data; Data Processing Agreement in signup flow; appointed DPO |
+| **CCPA/CPRA** (California) | Customers with CA users        | Right to know, delete, opt-out of sale                | Data inventory map; consumer request portal; do-not-sell signal handling                                            |
+| **LGPD** (Brazil)          | Customers with Brazilian users | Similar to GDPR (consent, rights, DPO)                | Unified privacy framework extending GDPR implementation                                                             |
+| **PIPEDA** (Canada)        | Customers with Canadian users  | Consent, access, correction, accountability           | Privacy policy; consent management; data governance board                                                           |
 
 ### 12.2 Industry-Specific Compliance
 
-| Standard | Applicability | Key Controls |
-|----------|--------------|--------------|
-| **SOC 2 Type II** | All paid customers (target certification: Q4 2027) | Security, availability, processing integrity, confidentiality, privacy controls |
-| **HIPAA** | Healthcare customers (self-hosted) | BA agreement, PHI encryption, access controls, audit logs, minimum necessary access |
-| **PCI DSS** | Customers processing payment data via agents | AgentForge is not a payment processor; agents must not handle raw PAN; guidance provided |
-| **ISO 27001** | Enterprise customers | ISMS, risk management, incident response, business continuity |
-| **FedRAMP** | US government customers | Moderate baseline (target: Year 3) |
+| Standard          | Applicability                                      | Key Controls                                                                             |
+| ----------------- | -------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| **SOC 2 Type II** | All paid customers (target certification: Q4 2027) | Security, availability, processing integrity, confidentiality, privacy controls          |
+| **HIPAA**         | Healthcare customers (self-hosted)                 | BA agreement, PHI encryption, access controls, audit logs, minimum necessary access      |
+| **PCI DSS**       | Customers processing payment data via agents       | AgentForge is not a payment processor; agents must not handle raw PAN; guidance provided |
+| **ISO 27001**     | Enterprise customers                               | ISMS, risk management, incident response, business continuity                            |
+| **FedRAMP**       | US government customers                            | Moderate baseline (target: Year 3)                                                       |
 
 ### 12.3 AI-Specific Regulations
 
-| Regulation | Status | Impact on AgentForge |
-|-----------|--------|----------------------|
-| **EU AI Act** | In effect (phased 2025–2027) | AgentForge is a "general-purpose AI system" provider; must provide transparency documentation, model cards, and allow deployers to comply with obligations |
-| **Executive Order 14110** (US) | Active | Developers of dual-use foundation models must report training data sources, red-teaming results to NIST |
-| **China AI Regulation** | Active | Generative AI services must undergo security assessment; content must align with socialist core values |
-| **Canada AIDA** | Proposed | Impact assessment for high-impact systems; transparency requirements |
+| Regulation                     | Status                       | Impact on AgentForge                                                                                                                                       |
+| ------------------------------ | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **EU AI Act**                  | In effect (phased 2025–2027) | AgentForge is a "general-purpose AI system" provider; must provide transparency documentation, model cards, and allow deployers to comply with obligations |
+| **Executive Order 14110** (US) | Active                       | Developers of dual-use foundation models must report training data sources, red-teaming results to NIST                                                    |
+| **China AI Regulation**        | Active                       | Generative AI services must undergo security assessment; content must align with socialist core values                                                     |
+| **Canada AIDA**                | Proposed                     | Impact assessment for high-impact systems; transparency requirements                                                                                       |
 
 **Implementation:**
+
 - Agent behavior transparency report (auto-generated for every deployed agent)
 - Configurable content filters (block violent, hateful, or otherwise restricted content)
 - Watermarking for AI-generated content (optional, per-agent setting)
@@ -899,62 +921,62 @@ For companies that want to use AgentForge in proprietary products without AGPLv3
 
 ## 13. Glossary of Terms
 
-| Term | Definition |
-|------|------------|
-| **Agent** | An autonomous AI entity that perceives its environment, makes decisions, and takes actions using LLMs, tools, and memory to achieve goals |
-| **Agent Team** | A group of agents that communicate and collaborate to accomplish complex tasks, with defined communication topology and coordination patterns |
-| **Workflow** | A directed acyclic graph (DAG) of nodes (agents, tools, LLM calls, conditions, loops) that defines a multi-step process |
-| **Workflow Builder** | The visual drag-and-drop interface for creating, editing, and debugging workflows |
-| **Memory (Short-term)** | A configurable window of recent conversation history stored in-memory for immediate context |
-| **Memory (Long-term)** | Persistent storage of past interactions in a vector database, retrievable via semantic search |
-| **Memory (Episodic)** | Structured logs of agent actions, tool calls, and decisions, indexed for replay, debugging, and analysis |
-| **Memory (Working)** | An explicit key-value store for intermediate results during task execution |
-| **Tool** | A function or API that an agent can invoke to interact with external systems (web, databases, files, APIs) |
-| **Tool SDK** | The Python framework for creating, testing, and publishing custom tools (`@tool` decorator, Pydantic schemas) |
-| **Marketplace** | A community-driven directory of agent templates, tools, workflows, and team configurations |
-| **LLM Adapter** | A unified abstraction layer that translates between platform-internal interfaces and various LLM provider APIs |
-| **Local LLM** | A language model running on the user's own hardware (via Ollama, LM Studio, vLLM, etc.) rather than a cloud API |
-| **Fallback** | Automatic failover from a primary LLM provider to secondary/tertiary providers based on configurable rules |
-| **Circuit Breaker** | A failure detection pattern that temporarily stops sending requests to a failing provider after a threshold of errors |
-| **Supervisor/Worker** | A team topology where one managing agent delegates tasks to specialized worker agents |
-| **Debate/Ensemble** | A team topology where multiple agents independently propose solutions and a judge selects the best |
-| **Human-in-the-Loop (HITL)** | A workflow node that pauses execution and requests human input, approval, or review before proceeding |
-| **Agent-as-Code** | The practice of versioning all agent configurations, tools, and workflows in a git repository |
-| **Agent CI/CD** | Continuous integration and deployment pipelines for testing, validating, and promoting agent changes across environments |
-| **Sandbox** | An isolated execution environment (Docker/gVisor) for running untrusted tools with resource constraints and network controls |
-| **RBAC** | Role-Based Access Control — assigning permissions to users based on their role within an organization |
-| **SSO/SAML** | Single Sign-On / Security Assertion Markup Language — enterprise authentication protocol |
-| **Open-Core** | A business model where a core product is open-source (AGPLv3) and premium features are offered under a commercial license |
-| **AGPLv3** | GNU Affero General Public License v3 — a strong copyleft license that requires source code distribution for network services |
-| **Vector Store** | A database optimized for storing and querying high-dimensional vector embeddings (e.g., Qdrant, Milvus, pgvector) |
-| **RPO / RTO** | Recovery Point Objective (maximum data loss) / Recovery Time Objective (maximum downtime) in disaster recovery |
-| **NRR** | Net Revenue Retention — recurring revenue from existing customers including upgrades, downgrades, and churn |
-| **ACV** | Annual Contract Value — the average annual value of a customer contract |
-| **CAC** | Customer Acquisition Cost — total sales and marketing cost divided by number of new customers acquired |
-| **LTV** | Lifetime Value — total revenue expected from a customer over their entire relationship with the company |
+| Term                         | Definition                                                                                                                                    |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Agent**                    | An autonomous AI entity that perceives its environment, makes decisions, and takes actions using LLMs, tools, and memory to achieve goals     |
+| **Agent Team**               | A group of agents that communicate and collaborate to accomplish complex tasks, with defined communication topology and coordination patterns |
+| **Workflow**                 | A directed acyclic graph (DAG) of nodes (agents, tools, LLM calls, conditions, loops) that defines a multi-step process                       |
+| **Workflow Builder**         | The visual drag-and-drop interface for creating, editing, and debugging workflows                                                             |
+| **Memory (Short-term)**      | A configurable window of recent conversation history stored in-memory for immediate context                                                   |
+| **Memory (Long-term)**       | Persistent storage of past interactions in a vector database, retrievable via semantic search                                                 |
+| **Memory (Episodic)**        | Structured logs of agent actions, tool calls, and decisions, indexed for replay, debugging, and analysis                                      |
+| **Memory (Working)**         | An explicit key-value store for intermediate results during task execution                                                                    |
+| **Tool**                     | A function or API that an agent can invoke to interact with external systems (web, databases, files, APIs)                                    |
+| **Tool SDK**                 | The Python framework for creating, testing, and publishing custom tools (`@tool` decorator, Pydantic schemas)                                 |
+| **Marketplace**              | A community-driven directory of agent templates, tools, workflows, and team configurations                                                    |
+| **LLM Adapter**              | A unified abstraction layer that translates between platform-internal interfaces and various LLM provider APIs                                |
+| **Local LLM**                | A language model running on the user's own hardware (via Ollama, LM Studio, vLLM, etc.) rather than a cloud API                               |
+| **Fallback**                 | Automatic failover from a primary LLM provider to secondary/tertiary providers based on configurable rules                                    |
+| **Circuit Breaker**          | A failure detection pattern that temporarily stops sending requests to a failing provider after a threshold of errors                         |
+| **Supervisor/Worker**        | A team topology where one managing agent delegates tasks to specialized worker agents                                                         |
+| **Debate/Ensemble**          | A team topology where multiple agents independently propose solutions and a judge selects the best                                            |
+| **Human-in-the-Loop (HITL)** | A workflow node that pauses execution and requests human input, approval, or review before proceeding                                         |
+| **Agent-as-Code**            | The practice of versioning all agent configurations, tools, and workflows in a git repository                                                 |
+| **Agent CI/CD**              | Continuous integration and deployment pipelines for testing, validating, and promoting agent changes across environments                      |
+| **Sandbox**                  | An isolated execution environment (Docker/gVisor) for running untrusted tools with resource constraints and network controls                  |
+| **RBAC**                     | Role-Based Access Control — assigning permissions to users based on their role within an organization                                         |
+| **SSO/SAML**                 | Single Sign-On / Security Assertion Markup Language — enterprise authentication protocol                                                      |
+| **Open-Core**                | A business model where a core product is open-source (AGPLv3) and premium features are offered under a commercial license                     |
+| **AGPLv3**                   | GNU Affero General Public License v3 — a strong copyleft license that requires source code distribution for network services                  |
+| **Vector Store**             | A database optimized for storing and querying high-dimensional vector embeddings (e.g., Qdrant, Milvus, pgvector)                             |
+| **RPO / RTO**                | Recovery Point Objective (maximum data loss) / Recovery Time Objective (maximum downtime) in disaster recovery                                |
+| **NRR**                      | Net Revenue Retention — recurring revenue from existing customers including upgrades, downgrades, and churn                                   |
+| **ACV**                      | Annual Contract Value — the average annual value of a customer contract                                                                       |
+| **CAC**                      | Customer Acquisition Cost — total sales and marketing cost divided by number of new customers acquired                                        |
+| **LTV**                      | Lifetime Value — total revenue expected from a customer over their entire relationship with the company                                       |
 
 ---
 
 ## Appendix A: Open Questions
 
-| # | Question | Owner | Deadline |
-|---|----------|-------|----------|
-| Q1 | Should the free tier include browser automation (limited minutes) or exclude it entirely? | Product | June 30 |
-| Q2 | Should we build our own vector DB abstraction or default to Qdrant as the primary? | Engineering | July 15 |
-| Q3 | What is the minimum supported Docker version for self-hosted deployment? | Engineering | July 1 |
-| Q4 | Do we need a no-code plan for non-technical users, or is the visual builder sufficient? | Product | Aug 15 |
-| Q5 | Should marketplace moderation be automated (AI-based) or human-reviewed? | Community | Aug 1 |
+| #   | Question                                                                                  | Owner       | Deadline |
+| --- | ----------------------------------------------------------------------------------------- | ----------- | -------- |
+| Q1  | Should the free tier include browser automation (limited minutes) or exclude it entirely? | Product     | June 30  |
+| Q2  | Should we build our own vector DB abstraction or default to Qdrant as the primary?        | Engineering | July 15  |
+| Q3  | What is the minimum supported Docker version for self-hosted deployment?                  | Engineering | July 1   |
+| Q4  | Do we need a no-code plan for non-technical users, or is the visual builder sufficient?   | Product     | Aug 15   |
+| Q5  | Should marketplace moderation be automated (AI-based) or human-reviewed?                  | Community   | Aug 1    |
 
 ## Appendix B: Release Roadmap (High-Level)
 
-| Phase | Timeline | Focus |
-|-------|----------|-------|
-| **Alpha** | Q3 2026 | Core agent creation, workflow builder, local + OpenAI LLM, short-term memory, 10 built-in tools |
-| **Beta** | Q4 2026 | Team topologies (supervisor/worker), long-term memory (pgvector), marketplace MVP, GitHub integration, browser automation |
-| **v1.0 Launch** | Q1 2027 | All P0 features, 50+ built-in tools, 200+ marketplace assets, Team plan, SOC 2 Type I |
-| **v1.5** | Q2 2027 | Enterprise features (SSO, RBAC, audit, air-gapped), HIPAA guidance, multi-region HA |
-| **v2.0** | Q3 2027 | Advanced team topologies, fine-tuning integration, A/B testing framework, SOC 2 Type II |
+| Phase           | Timeline | Focus                                                                                                                     |
+| --------------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |
+| **Alpha**       | Q3 2026  | Core agent creation, workflow builder, local + OpenAI LLM, short-term memory, 10 built-in tools                           |
+| **Beta**        | Q4 2026  | Team topologies (supervisor/worker), long-term memory (pgvector), marketplace MVP, GitHub integration, browser automation |
+| **v1.0 Launch** | Q1 2027  | All P0 features, 50+ built-in tools, 200+ marketplace assets, Team plan, SOC 2 Type I                                     |
+| **v1.5**        | Q2 2027  | Enterprise features (SSO, RBAC, audit, air-gapped), HIPAA guidance, multi-region HA                                       |
+| **v2.0**        | Q3 2027  | Advanced team topologies, fine-tuning integration, A/B testing framework, SOC 2 Type II                                   |
 
 ---
 
-*This document is a living specification. Updates require approval from the Product Director and CTO. All feature priorities are subject to change based on user research and market feedback.*
+_This document is a living specification. Updates require approval from the Product Director and CTO. All feature priorities are subject to change based on user research and market feedback._

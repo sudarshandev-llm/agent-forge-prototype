@@ -1,6 +1,12 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import jwt from 'jsonwebtoken';
-import { authenticate, optionalAuth, requireRole, requireApiKey, AuthPayload } from '../../middleware/auth.js';
+import {
+  authenticate,
+  optionalAuth,
+  requireRole,
+  requireApiKey,
+  AuthPayload,
+} from '../../middleware/auth.js';
 import { config } from '../../config/index.js';
 import { ApiError } from '../../middleware/errorHandler.js';
 
@@ -55,7 +61,9 @@ describe('auth middleware', () => {
       const req = { headers: { authorization: 'InvalidFormat' } } as any;
       const next = vi.fn();
 
-      expect(() => authenticate(req, mockRes(), next)).toThrow('Invalid authorization header format');
+      expect(() => authenticate(req, mockRes(), next)).toThrow(
+        'Invalid authorization header format',
+      );
     });
 
     it('should throw 401 on expired token', () => {

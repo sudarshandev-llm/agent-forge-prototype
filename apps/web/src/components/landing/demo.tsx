@@ -6,9 +6,7 @@ export function Demo() {
     <section className="px-6 py-24 sm:py-32 lg:px-8 bg-muted/30" id="demo">
       <div className="mx-auto max-w-7xl">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            See it in action
-          </h2>
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">See it in action</h2>
           <p className="mt-4 text-lg text-muted-foreground">
             Create an agent, configure tools, and run it in seconds.
           </p>
@@ -57,7 +55,9 @@ export function Demo() {
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-green-500/10">
               <div className="h-3 w-3 rounded-full bg-green-500" />
             </div>
-            <span className="text-sm font-medium text-green-600 dark:text-green-400">Agent Running</span>
+            <span className="text-sm font-medium text-green-600 dark:text-green-400">
+              Agent Running
+            </span>
           </div>
           <div className="space-y-4">
             <div className="rounded-lg bg-muted p-4">
@@ -70,10 +70,10 @@ export function Demo() {
             <div className="rounded-lg bg-primary/5 p-4 border border-primary/10">
               <p className="text-sm text-muted-foreground mb-2">Agent response:</p>
               <p className="leading-relaxed">
-                I found several recent developments in quantum computing. IBM announced their
-                1,000+ qubit processor, while Google demonstrated quantum error correction at scale.
-                The field is advancing rapidly with significant investments from both private and
-                public sectors.
+                I found several recent developments in quantum computing. IBM announced their 1,000+
+                qubit processor, while Google demonstrated quantum error correction at scale. The
+                field is advancing rapidly with significant investments from both private and public
+                sectors.
               </p>
             </div>
           </div>

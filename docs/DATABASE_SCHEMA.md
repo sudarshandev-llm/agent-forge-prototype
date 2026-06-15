@@ -23,15 +23,15 @@ CREATE EXTENSION IF NOT EXISTS "pg_trgm";
 
 Core identity table. Each row maps to a Clerk authentication user.
 
-| Column | Type | Constraints | Default |
-|---|---|---|---|
-| `id` | `UUID` | `PRIMARY KEY` | `gen_random_uuid()` |
-| `email` | `VARCHAR(320)` | `NOT NULL`, `UNIQUE` | — |
-| `name` | `VARCHAR(255)` | `NOT NULL` | — |
-| `avatar_url` | `TEXT` | — | `NULL` |
-| `clerk_id` | `VARCHAR(255)` | `NOT NULL`, `UNIQUE` | — |
-| `created_at` | `TIMESTAMPTZ` | `NOT NULL` | `now()` |
-| `updated_at` | `TIMESTAMPTZ` | `NOT NULL` | `now()` |
+| Column       | Type           | Constraints          | Default             |
+| ------------ | -------------- | -------------------- | ------------------- |
+| `id`         | `UUID`         | `PRIMARY KEY`        | `gen_random_uuid()` |
+| `email`      | `VARCHAR(320)` | `NOT NULL`, `UNIQUE` | —                   |
+| `name`       | `VARCHAR(255)` | `NOT NULL`           | —                   |
+| `avatar_url` | `TEXT`         | —                    | `NULL`              |
+| `clerk_id`   | `VARCHAR(255)` | `NOT NULL`, `UNIQUE` | —                   |
+| `created_at` | `TIMESTAMPTZ`  | `NOT NULL`           | `now()`             |
+| `updated_at` | `TIMESTAMPTZ`  | `NOT NULL`           | `now()`             |
 
 ```sql
 CREATE TABLE users (
@@ -57,16 +57,16 @@ CREATE INDEX idx_users_created_at ON users (created_at);
 
 Scoped API keys for programmatic access (AgentForge SDK / API consumers).
 
-| Column | Type | Constraints | Default |
-|---|---|---|---|
-| `id` | `UUID` | `PRIMARY KEY` | `gen_random_uuid()` |
-| `user_id` | `UUID` | `NOT NULL`, `FK → users.id` | — |
-| `name` | `VARCHAR(255)` | `NOT NULL` | — |
-| `key_hash` | `VARCHAR(255)` | `NOT NULL`, `UNIQUE` | — |
-| `permissions` | `TEXT[]` | `NOT NULL` | `'{}'` |
-| `last_used_at` | `TIMESTAMPTZ` | — | `NULL` |
-| `expires_at` | `TIMESTAMPTZ` | — | `NULL` |
-| `created_at` | `TIMESTAMPTZ` | `NOT NULL` | `now()` |
+| Column         | Type           | Constraints                 | Default             |
+| -------------- | -------------- | --------------------------- | ------------------- |
+| `id`           | `UUID`         | `PRIMARY KEY`               | `gen_random_uuid()` |
+| `user_id`      | `UUID`         | `NOT NULL`, `FK → users.id` | —                   |
+| `name`         | `VARCHAR(255)` | `NOT NULL`                  | —                   |
+| `key_hash`     | `VARCHAR(255)` | `NOT NULL`, `UNIQUE`        | —                   |
+| `permissions`  | `TEXT[]`       | `NOT NULL`                  | `'{}'`              |
+| `last_used_at` | `TIMESTAMPTZ`  | —                           | `NULL`              |
+| `expires_at`   | `TIMESTAMPTZ`  | —                           | `NULL`              |
+| `created_at`   | `TIMESTAMPTZ`  | `NOT NULL`                  | `now()`             |
 
 ```sql
 CREATE TABLE api_keys (
@@ -92,14 +92,14 @@ CREATE INDEX idx_api_keys_expires_at ON api_keys (expires_at);
 
 Collaboration groups that own agents and workflows.
 
-| Column | Type | Constraints | Default |
-|---|---|---|---|
-| `id` | `UUID` | `PRIMARY KEY` | `gen_random_uuid()` |
-| `name` | `VARCHAR(255)` | `NOT NULL` | — |
-| `description` | `TEXT` | — | — |
-| `owner_id` | `UUID` | `NOT NULL`, `FK → users.id` | — |
-| `created_at` | `TIMESTAMPTZ` | `NOT NULL` | `now()` |
-| `updated_at` | `TIMESTAMPTZ` | `NOT NULL` | `now()` |
+| Column        | Type           | Constraints                 | Default             |
+| ------------- | -------------- | --------------------------- | ------------------- |
+| `id`          | `UUID`         | `PRIMARY KEY`               | `gen_random_uuid()` |
+| `name`        | `VARCHAR(255)` | `NOT NULL`                  | —                   |
+| `description` | `TEXT`         | —                           | —                   |
+| `owner_id`    | `UUID`         | `NOT NULL`, `FK → users.id` | —                   |
+| `created_at`  | `TIMESTAMPTZ`  | `NOT NULL`                  | `now()`             |
+| `updated_at`  | `TIMESTAMPTZ`  | `NOT NULL`                  | `now()`             |
 
 ```sql
 CREATE TABLE teams (
@@ -121,13 +121,13 @@ CREATE INDEX idx_teams_owner_id ON teams (owner_id);
 
 Membership & role assignments within teams.
 
-| Column | Type | Constraints | Default |
-|---|---|---|---|
-| `id` | `UUID` | `PRIMARY KEY` | `gen_random_uuid()` |
-| `team_id` | `UUID` | `NOT NULL`, `FK → teams.id` | — |
-| `user_id` | `UUID` | `NOT NULL`, `FK → users.id` | — |
-| `role` | `VARCHAR(20)` | `NOT NULL` | `'member'` |
-| `created_at` | `TIMESTAMPTZ` | `NOT NULL` | `now()` |
+| Column       | Type          | Constraints                 | Default             |
+| ------------ | ------------- | --------------------------- | ------------------- |
+| `id`         | `UUID`        | `PRIMARY KEY`               | `gen_random_uuid()` |
+| `team_id`    | `UUID`        | `NOT NULL`, `FK → teams.id` | —                   |
+| `user_id`    | `UUID`        | `NOT NULL`, `FK → users.id` | —                   |
+| `role`       | `VARCHAR(20)` | `NOT NULL`                  | `'member'`          |
+| `created_at` | `TIMESTAMPTZ` | `NOT NULL`                  | `now()`             |
 
 `role` CHECK: `IN ('admin', 'member', 'viewer')`
 
@@ -155,26 +155,26 @@ CREATE INDEX idx_team_members_user_id ON team_members (user_id);
 
 The core entity — an AI agent with its configuration, system prompt, and model settings.
 
-| Column | Type | Constraints | Default |
-|---|---|---|---|
-| `id` | `UUID` | `PRIMARY KEY` | `gen_random_uuid()` |
-| `name` | `VARCHAR(255)` | `NOT NULL` | — |
-| `description` | `TEXT` | — | — |
-| `role` | `VARCHAR(100)` | `NOT NULL` | — |
-| `goal` | `TEXT` | — | — |
-| `system_prompt` | `TEXT` | — | — |
-| `model_provider` | `VARCHAR(50)` | `NOT NULL` | `'openai'` |
-| `model_name` | `VARCHAR(100)` | `NOT NULL` | — |
-| `temperature` | `NUMERIC(3,2)` | — | `0.7` |
-| `max_tokens` | `INTEGER` | — | `4096` |
-| `memory_config` | `JSONB` | — | `'{}'` |
-| `tools_config` | `JSONB` | — | `'{}'` |
-| `status` | `VARCHAR(20)` | `NOT NULL` | `'draft'` |
-| `user_id` | `UUID` | —, `FK → users.id` | — |
-| `team_id` | `UUID` | —, `FK → teams.id` | — |
-| `version` | `INTEGER` | `NOT NULL` | `1` |
-| `created_at` | `TIMESTAMPTZ` | `NOT NULL` | `now()` |
-| `updated_at` | `TIMESTAMPTZ` | `NOT NULL` | `now()` |
+| Column           | Type           | Constraints        | Default             |
+| ---------------- | -------------- | ------------------ | ------------------- |
+| `id`             | `UUID`         | `PRIMARY KEY`      | `gen_random_uuid()` |
+| `name`           | `VARCHAR(255)` | `NOT NULL`         | —                   |
+| `description`    | `TEXT`         | —                  | —                   |
+| `role`           | `VARCHAR(100)` | `NOT NULL`         | —                   |
+| `goal`           | `TEXT`         | —                  | —                   |
+| `system_prompt`  | `TEXT`         | —                  | —                   |
+| `model_provider` | `VARCHAR(50)`  | `NOT NULL`         | `'openai'`          |
+| `model_name`     | `VARCHAR(100)` | `NOT NULL`         | —                   |
+| `temperature`    | `NUMERIC(3,2)` | —                  | `0.7`               |
+| `max_tokens`     | `INTEGER`      | —                  | `4096`              |
+| `memory_config`  | `JSONB`        | —                  | `'{}'`              |
+| `tools_config`   | `JSONB`        | —                  | `'{}'`              |
+| `status`         | `VARCHAR(20)`  | `NOT NULL`         | `'draft'`           |
+| `user_id`        | `UUID`         | —, `FK → users.id` | —                   |
+| `team_id`        | `UUID`         | —, `FK → teams.id` | —                   |
+| `version`        | `INTEGER`      | `NOT NULL`         | `1`                 |
+| `created_at`     | `TIMESTAMPTZ`  | `NOT NULL`         | `now()`             |
+| `updated_at`     | `TIMESTAMPTZ`  | `NOT NULL`         | `now()`             |
 
 `status` CHECK: `IN ('draft', 'active', 'paused', 'archived')`
 
@@ -225,13 +225,13 @@ CREATE INDEX idx_agents_search ON agents USING GIN (search_vector);
 
 Immutable history of agent configuration snapshots.
 
-| Column | Type | Constraints | Default |
-|---|---|---|---|
-| `id` | `UUID` | `PRIMARY KEY` | `gen_random_uuid()` |
-| `agent_id` | `UUID` | `NOT NULL`, `FK → agents.id` | — |
-| `version` | `INTEGER` | `NOT NULL` | — |
-| `config` | `JSONB` | `NOT NULL` | — |
-| `created_at` | `TIMESTAMPTZ` | `NOT NULL` | `now()` |
+| Column       | Type          | Constraints                  | Default             |
+| ------------ | ------------- | ---------------------------- | ------------------- |
+| `id`         | `UUID`        | `PRIMARY KEY`                | `gen_random_uuid()` |
+| `agent_id`   | `UUID`        | `NOT NULL`, `FK → agents.id` | —                   |
+| `version`    | `INTEGER`     | `NOT NULL`                   | —                   |
+| `config`     | `JSONB`       | `NOT NULL`                   | —                   |
+| `created_at` | `TIMESTAMPTZ` | `NOT NULL`                   | `now()`             |
 
 ```sql
 CREATE TABLE agent_versions (
@@ -253,15 +253,15 @@ CREATE INDEX idx_agent_versions_agent_id ON agent_versions (agent_id);
 
 Registry of capability plugins available to agents.
 
-| Column | Type | Constraints | Default |
-|---|---|---|---|
-| `id` | `UUID` | `PRIMARY KEY` | `gen_random_uuid()` |
-| `name` | `VARCHAR(255)` | `NOT NULL` | — |
-| `description` | `TEXT` | — | — |
-| `type` | `VARCHAR(50)` | `NOT NULL` | — |
-| `config` | `JSONB` | — | `'{}'` |
-| `schema` | `JSONB` | — | — |
-| `created_at` | `TIMESTAMPTZ` | `NOT NULL` | `now()` |
+| Column        | Type           | Constraints   | Default             |
+| ------------- | -------------- | ------------- | ------------------- |
+| `id`          | `UUID`         | `PRIMARY KEY` | `gen_random_uuid()` |
+| `name`        | `VARCHAR(255)` | `NOT NULL`    | —                   |
+| `description` | `TEXT`         | —             | —                   |
+| `type`        | `VARCHAR(50)`  | `NOT NULL`    | —                   |
+| `config`      | `JSONB`        | —             | `'{}'`              |
+| `schema`      | `JSONB`        | —             | —                   |
+| `created_at`  | `TIMESTAMPTZ`  | `NOT NULL`    | `now()`             |
 
 `type` CHECK: `IN ('file_system', 'github', 'terminal', 'browser', 'search', 'database', 'custom')`
 
@@ -290,14 +290,14 @@ CREATE INDEX idx_tools_type ON tools (type);
 
 Many-to-many join between agents and tools with per-association overrides.
 
-| Column | Type | Constraints | Default |
-|---|---|---|---|
-| `id` | `UUID` | `PRIMARY KEY` | `gen_random_uuid()` |
-| `agent_id` | `UUID` | `NOT NULL`, `FK → agents.id` | — |
-| `tool_id` | `UUID` | `NOT NULL`, `FK → tools.id` | — |
-| `config` | `JSONB` | — | `'{}'` |
-| `enabled` | `BOOLEAN` | `NOT NULL` | `true` |
-| `created_at` | `TIMESTAMPTZ` | `NOT NULL` | `now()` |
+| Column       | Type          | Constraints                  | Default             |
+| ------------ | ------------- | ---------------------------- | ------------------- |
+| `id`         | `UUID`        | `PRIMARY KEY`                | `gen_random_uuid()` |
+| `agent_id`   | `UUID`        | `NOT NULL`, `FK → agents.id` | —                   |
+| `tool_id`    | `UUID`        | `NOT NULL`, `FK → tools.id`  | —                   |
+| `config`     | `JSONB`       | —                            | `'{}'`              |
+| `enabled`    | `BOOLEAN`     | `NOT NULL`                   | `true`              |
+| `created_at` | `TIMESTAMPTZ` | `NOT NULL`                   | `now()`             |
 
 ```sql
 CREATE TABLE agent_tools (
@@ -322,16 +322,16 @@ CREATE INDEX idx_agent_tools_tool_id ON agent_tools (tool_id);
 
 Session containers for message exchanges with agents.
 
-| Column | Type | Constraints | Default |
-|---|---|---|---|
-| `id` | `UUID` | `PRIMARY KEY` | `gen_random_uuid()` |
-| `agent_id` | `UUID` | `NOT NULL`, `FK → agents.id` | — |
-| `user_id` | `UUID` | —, `FK → users.id` | — |
-| `session_id` | `VARCHAR(255)` | —, `UNIQUE` | — |
-| `title` | `VARCHAR(500)` | — | — |
-| `metadata` | `JSONB` | — | `'{}'` |
-| `created_at` | `TIMESTAMPTZ` | `NOT NULL` | `now()` |
-| `updated_at` | `TIMESTAMPTZ` | `NOT NULL` | `now()` |
+| Column       | Type           | Constraints                  | Default             |
+| ------------ | -------------- | ---------------------------- | ------------------- |
+| `id`         | `UUID`         | `PRIMARY KEY`                | `gen_random_uuid()` |
+| `agent_id`   | `UUID`         | `NOT NULL`, `FK → agents.id` | —                   |
+| `user_id`    | `UUID`         | —, `FK → users.id`           | —                   |
+| `session_id` | `VARCHAR(255)` | —, `UNIQUE`                  | —                   |
+| `title`      | `VARCHAR(500)` | —                            | —                   |
+| `metadata`   | `JSONB`        | —                            | `'{}'`              |
+| `created_at` | `TIMESTAMPTZ`  | `NOT NULL`                   | `now()`             |
+| `updated_at` | `TIMESTAMPTZ`  | `NOT NULL`                   | `now()`             |
 
 ```sql
 CREATE TABLE conversations (
@@ -359,16 +359,16 @@ CREATE INDEX idx_conversations_updated_at ON conversations (updated_at DESC);
 
 Individual turns within a conversation.
 
-| Column | Type | Constraints | Default |
-|---|---|---|---|
-| `id` | `UUID` | `PRIMARY KEY` | `gen_random_uuid()` |
-| `conversation_id` | `UUID` | `NOT NULL`, `FK → conversations.id` | — |
-| `role` | `VARCHAR(20)` | `NOT NULL` | — |
-| `content` | `TEXT` | — | — |
-| `tool_calls` | `JSONB` | — | — |
-| `tool_results` | `JSONB` | — | — |
-| `tokens_used` | `INTEGER` | — | — |
-| `created_at` | `TIMESTAMPTZ` | `NOT NULL` | `now()` |
+| Column            | Type          | Constraints                         | Default             |
+| ----------------- | ------------- | ----------------------------------- | ------------------- |
+| `id`              | `UUID`        | `PRIMARY KEY`                       | `gen_random_uuid()` |
+| `conversation_id` | `UUID`        | `NOT NULL`, `FK → conversations.id` | —                   |
+| `role`            | `VARCHAR(20)` | `NOT NULL`                          | —                   |
+| `content`         | `TEXT`        | —                                   | —                   |
+| `tool_calls`      | `JSONB`       | —                                   | —                   |
+| `tool_results`    | `JSONB`       | —                                   | —                   |
+| `tokens_used`     | `INTEGER`     | —                                   | —                   |
+| `created_at`      | `TIMESTAMPTZ` | `NOT NULL`                          | `now()`             |
 
 `role` CHECK: `IN ('user', 'assistant', 'system', 'tool')`
 
@@ -398,17 +398,17 @@ CREATE INDEX idx_messages_created_at ON messages (conversation_id, created_at);
 
 Vector-optimised memory store for agents (short-term, long-term, episodic, semantic).
 
-| Column | Type | Constraints | Default |
-|---|---|---|---|
-| `id` | `UUID` | `PRIMARY KEY` | `gen_random_uuid()` |
-| `agent_id` | `UUID` | `NOT NULL`, `FK → agents.id` | — |
-| `type` | `VARCHAR(20)` | `NOT NULL` | — |
-| `key` | `VARCHAR(500)` | `NOT NULL` | — |
-| `value` | `TEXT` | `NOT NULL` | — |
-| `embedding` | `VECTOR(1536)` | — | — |
-| `metadata` | `JSONB` | — | `'{}'` |
-| `created_at` | `TIMESTAMPTZ` | `NOT NULL` | `now()` |
-| `expires_at` | `TIMESTAMPTZ` | — | — |
+| Column       | Type           | Constraints                  | Default             |
+| ------------ | -------------- | ---------------------------- | ------------------- |
+| `id`         | `UUID`         | `PRIMARY KEY`                | `gen_random_uuid()` |
+| `agent_id`   | `UUID`         | `NOT NULL`, `FK → agents.id` | —                   |
+| `type`       | `VARCHAR(20)`  | `NOT NULL`                   | —                   |
+| `key`        | `VARCHAR(500)` | `NOT NULL`                   | —                   |
+| `value`      | `TEXT`         | `NOT NULL`                   | —                   |
+| `embedding`  | `VECTOR(1536)` | —                            | —                   |
+| `metadata`   | `JSONB`        | —                            | `'{}'`              |
+| `created_at` | `TIMESTAMPTZ`  | `NOT NULL`                   | `now()`             |
+| `expires_at` | `TIMESTAMPTZ`  | —                            | —                   |
 
 `type` CHECK: `IN ('short_term', 'long_term', 'episodic', 'semantic')`
 
@@ -444,19 +444,19 @@ CREATE INDEX idx_agent_memory_embedding ON agent_memory USING ivfflat (embedding
 
 Records of agent execution runs (invocations).
 
-| Column | Type | Constraints | Default |
-|---|---|---|---|
-| `id` | `UUID` | `PRIMARY KEY` | `gen_random_uuid()` |
-| `agent_id` | `UUID` | `NOT NULL`, `FK → agents.id` | — |
-| `user_id` | `UUID` | —, `FK → users.id` | — |
-| `status` | `VARCHAR(20)` | `NOT NULL` | `'pending'` |
-| `input` | `JSONB` | — | — |
-| `output` | `TEXT` | — | — |
-| `tokens_used` | `INTEGER` | — | — |
-| `duration_ms` | `INTEGER` | — | — |
-| `error` | `TEXT` | — | — |
-| `created_at` | `TIMESTAMPTZ` | `NOT NULL` | `now()` |
-| `completed_at` | `TIMESTAMPTZ` | — | — |
+| Column         | Type          | Constraints                  | Default             |
+| -------------- | ------------- | ---------------------------- | ------------------- |
+| `id`           | `UUID`        | `PRIMARY KEY`                | `gen_random_uuid()` |
+| `agent_id`     | `UUID`        | `NOT NULL`, `FK → agents.id` | —                   |
+| `user_id`      | `UUID`        | —, `FK → users.id`           | —                   |
+| `status`       | `VARCHAR(20)` | `NOT NULL`                   | `'pending'`         |
+| `input`        | `JSONB`       | —                            | —                   |
+| `output`       | `TEXT`        | —                            | —                   |
+| `tokens_used`  | `INTEGER`     | —                            | —                   |
+| `duration_ms`  | `INTEGER`     | —                            | —                   |
+| `error`        | `TEXT`        | —                            | —                   |
+| `created_at`   | `TIMESTAMPTZ` | `NOT NULL`                   | `now()`             |
+| `completed_at` | `TIMESTAMPTZ` | —                            | —                   |
 
 `status` CHECK: `IN ('pending', 'running', 'completed', 'failed')`
 
@@ -493,16 +493,16 @@ CREATE INDEX idx_executions_created_at ON executions (created_at DESC);
 
 Detailed step-by-step logs for each execution.
 
-| Column | Type | Constraints | Default |
-|---|---|---|---|
-| `id` | `UUID` | `PRIMARY KEY` | `gen_random_uuid()` |
-| `execution_id` | `UUID` | `NOT NULL`, `FK → executions.id` | — |
-| `step` | `INTEGER` | `NOT NULL` | — |
-| `action` | `VARCHAR(255)` | `NOT NULL` | — |
-| `input` | `JSONB` | — | — |
-| `output` | `TEXT` | — | — |
-| `duration_ms` | `INTEGER` | — | — |
-| `created_at` | `TIMESTAMPTZ` | `NOT NULL` | `now()` |
+| Column         | Type           | Constraints                      | Default             |
+| -------------- | -------------- | -------------------------------- | ------------------- |
+| `id`           | `UUID`         | `PRIMARY KEY`                    | `gen_random_uuid()` |
+| `execution_id` | `UUID`         | `NOT NULL`, `FK → executions.id` | —                   |
+| `step`         | `INTEGER`      | `NOT NULL`                       | —                   |
+| `action`       | `VARCHAR(255)` | `NOT NULL`                       | —                   |
+| `input`        | `JSONB`        | —                                | —                   |
+| `output`       | `TEXT`         | —                                | —                   |
+| `duration_ms`  | `INTEGER`      | —                                | —                   |
+| `created_at`   | `TIMESTAMPTZ`  | `NOT NULL`                       | `now()`             |
 
 ```sql
 CREATE TABLE execution_logs (
@@ -527,19 +527,19 @@ CREATE INDEX idx_execution_logs_execution_id ON execution_logs (execution_id);
 
 Directed-graph workflows composed of agent nodes and edges.
 
-| Column | Type | Constraints | Default |
-|---|---|---|---|
-| `id` | `UUID` | `PRIMARY KEY` | `gen_random_uuid()` |
-| `name` | `VARCHAR(255)` | `NOT NULL` | — |
-| `description` | `TEXT` | — | — |
-| `nodes` | `JSONB` | `NOT NULL` | — |
-| `edges` | `JSONB` | `NOT NULL` | — |
-| `user_id` | `UUID` | —, `FK → users.id` | — |
-| `team_id` | `UUID` | —, `FK → teams.id` | — |
-| `status` | `VARCHAR(20)` | `NOT NULL` | `'draft'` |
-| `version` | `INTEGER` | `NOT NULL` | `1` |
-| `created_at` | `TIMESTAMPTZ` | `NOT NULL` | `now()` |
-| `updated_at` | `TIMESTAMPTZ` | `NOT NULL` | `now()` |
+| Column        | Type           | Constraints        | Default             |
+| ------------- | -------------- | ------------------ | ------------------- |
+| `id`          | `UUID`         | `PRIMARY KEY`      | `gen_random_uuid()` |
+| `name`        | `VARCHAR(255)` | `NOT NULL`         | —                   |
+| `description` | `TEXT`         | —                  | —                   |
+| `nodes`       | `JSONB`        | `NOT NULL`         | —                   |
+| `edges`       | `JSONB`        | `NOT NULL`         | —                   |
+| `user_id`     | `UUID`         | —, `FK → users.id` | —                   |
+| `team_id`     | `UUID`         | —, `FK → teams.id` | —                   |
+| `status`      | `VARCHAR(20)`  | `NOT NULL`         | `'draft'`           |
+| `version`     | `INTEGER`      | `NOT NULL`         | `1`                 |
+| `created_at`  | `TIMESTAMPTZ`  | `NOT NULL`         | `now()`             |
+| `updated_at`  | `TIMESTAMPTZ`  | `NOT NULL`         | `now()`             |
 
 `status` CHECK: `IN ('draft', 'active', 'paused', 'archived')`
 
@@ -573,15 +573,15 @@ CREATE INDEX idx_workflows_status ON workflows (status);
 
 Execution records of published workflows.
 
-| Column | Type | Constraints | Default |
-|---|---|---|---|
-| `id` | `UUID` | `PRIMARY KEY` | `gen_random_uuid()` |
-| `workflow_id` | `UUID` | `NOT NULL`, `FK → workflows.id` | — |
-| `status` | `VARCHAR(20)` | `NOT NULL` | `'pending'` |
-| `trigger` | `JSONB` | — | — |
-| `results` | `JSONB` | — | — |
-| `started_at` | `TIMESTAMPTZ` | — | — |
-| `completed_at` | `TIMESTAMPTZ` | — | — |
+| Column         | Type          | Constraints                     | Default             |
+| -------------- | ------------- | ------------------------------- | ------------------- |
+| `id`           | `UUID`        | `PRIMARY KEY`                   | `gen_random_uuid()` |
+| `workflow_id`  | `UUID`        | `NOT NULL`, `FK → workflows.id` | —                   |
+| `status`       | `VARCHAR(20)` | `NOT NULL`                      | `'pending'`         |
+| `trigger`      | `JSONB`       | —                               | —                   |
+| `results`      | `JSONB`       | —                               | —                   |
+| `started_at`   | `TIMESTAMPTZ` | —                               | —                   |
+| `completed_at` | `TIMESTAMPTZ` | —                               | —                   |
 
 `status` CHECK: `IN ('pending', 'running', 'completed', 'failed', 'cancelled')`
 
@@ -610,22 +610,22 @@ CREATE INDEX idx_workflow_runs_started_at ON workflow_runs (started_at DESC);
 
 Published agent listings in the AgentForge marketplace.
 
-| Column | Type | Constraints | Default |
-|---|---|---|---|
-| `id` | `UUID` | `PRIMARY KEY` | `gen_random_uuid()` |
-| `agent_id` | `UUID` | `NOT NULL`, `FK → agents.id` | — |
-| `user_id` | `UUID` | `NOT NULL`, `FK → users.id` | — |
-| `name` | `VARCHAR(255)` | `NOT NULL` | — |
-| `description` | `TEXT` | — | — |
-| `price` | `NUMERIC(10,2)` | `NOT NULL` | `0.00` |
-| `category` | `VARCHAR(100)` | — | — |
-| `tags` | `TEXT[]` | — | `'{}'` |
-| `rating_avg` | `NUMERIC(3,2)` | — | `0.00` |
-| `rating_count` | `INTEGER` | `NOT NULL` | `0` |
-| `download_count` | `INTEGER` | `NOT NULL` | `0` |
-| `published` | `BOOLEAN` | `NOT NULL` | `false` |
-| `created_at` | `TIMESTAMPTZ` | `NOT NULL` | `now()` |
-| `updated_at` | `TIMESTAMPTZ` | `NOT NULL` | `now()` |
+| Column           | Type            | Constraints                  | Default             |
+| ---------------- | --------------- | ---------------------------- | ------------------- |
+| `id`             | `UUID`          | `PRIMARY KEY`                | `gen_random_uuid()` |
+| `agent_id`       | `UUID`          | `NOT NULL`, `FK → agents.id` | —                   |
+| `user_id`        | `UUID`          | `NOT NULL`, `FK → users.id`  | —                   |
+| `name`           | `VARCHAR(255)`  | `NOT NULL`                   | —                   |
+| `description`    | `TEXT`          | —                            | —                   |
+| `price`          | `NUMERIC(10,2)` | `NOT NULL`                   | `0.00`              |
+| `category`       | `VARCHAR(100)`  | —                            | —                   |
+| `tags`           | `TEXT[]`        | —                            | `'{}'`              |
+| `rating_avg`     | `NUMERIC(3,2)`  | —                            | `0.00`              |
+| `rating_count`   | `INTEGER`       | `NOT NULL`                   | `0`                 |
+| `download_count` | `INTEGER`       | `NOT NULL`                   | `0`                 |
+| `published`      | `BOOLEAN`       | `NOT NULL`                   | `false`             |
+| `created_at`     | `TIMESTAMPTZ`   | `NOT NULL`                   | `now()`             |
+| `updated_at`     | `TIMESTAMPTZ`   | `NOT NULL`                   | `now()`             |
 
 ```sql
 CREATE TABLE marketplace_listings (
@@ -669,14 +669,14 @@ CREATE INDEX idx_marketplace_listings_search ON marketplace_listings USING GIN (
 
 User-submitted reviews for marketplace listings.
 
-| Column | Type | Constraints | Default |
-|---|---|---|---|
-| `id` | `UUID` | `PRIMARY KEY` | `gen_random_uuid()` |
-| `listing_id` | `UUID` | `NOT NULL`, `FK → marketplace_listings.id` | — |
-| `user_id` | `UUID` | `NOT NULL`, `FK → users.id` | — |
-| `rating` | `INTEGER` | `NOT NULL` | — |
-| `review` | `TEXT` | — | — |
-| `created_at` | `TIMESTAMPTZ` | `NOT NULL` | `now()` |
+| Column       | Type          | Constraints                                | Default             |
+| ------------ | ------------- | ------------------------------------------ | ------------------- |
+| `id`         | `UUID`        | `PRIMARY KEY`                              | `gen_random_uuid()` |
+| `listing_id` | `UUID`        | `NOT NULL`, `FK → marketplace_listings.id` | —                   |
+| `user_id`    | `UUID`        | `NOT NULL`, `FK → users.id`                | —                   |
+| `rating`     | `INTEGER`     | `NOT NULL`                                 | —                   |
+| `review`     | `TEXT`        | —                                          | —                   |
+| `created_at` | `TIMESTAMPTZ` | `NOT NULL`                                 | `now()`             |
 
 ```sql
 CREATE TABLE marketplace_reviews (
@@ -702,16 +702,16 @@ CREATE INDEX idx_marketplace_reviews_user_id ON marketplace_reviews (user_id);
 
 In-app notification delivery.
 
-| Column | Type | Constraints | Default |
-|---|---|---|---|
-| `id` | `UUID` | `PRIMARY KEY` | `gen_random_uuid()` |
-| `user_id` | `UUID` | `NOT NULL`, `FK → users.id` | — |
-| `type` | `VARCHAR(50)` | `NOT NULL` | — |
-| `title` | `VARCHAR(500)` | `NOT NULL` | — |
-| `message` | `TEXT` | — | — |
-| `data` | `JSONB` | — | `'{}'` |
-| `read` | `BOOLEAN` | `NOT NULL` | `false` |
-| `created_at` | `TIMESTAMPTZ` | `NOT NULL` | `now()` |
+| Column       | Type           | Constraints                 | Default             |
+| ------------ | -------------- | --------------------------- | ------------------- |
+| `id`         | `UUID`         | `PRIMARY KEY`               | `gen_random_uuid()` |
+| `user_id`    | `UUID`         | `NOT NULL`, `FK → users.id` | —                   |
+| `type`       | `VARCHAR(50)`  | `NOT NULL`                  | —                   |
+| `title`      | `VARCHAR(500)` | `NOT NULL`                  | —                   |
+| `message`    | `TEXT`         | —                           | —                   |
+| `data`       | `JSONB`        | —                           | `'{}'`              |
+| `read`       | `BOOLEAN`      | `NOT NULL`                  | `false`             |
+| `created_at` | `TIMESTAMPTZ`  | `NOT NULL`                  | `now()`             |
 
 ```sql
 CREATE TABLE notifications (
@@ -737,16 +737,16 @@ CREATE INDEX idx_notifications_created_at ON notifications (user_id, created_at 
 
 Immutable audit trail for compliance and security investigations.
 
-| Column | Type | Constraints | Default |
-|---|---|---|---|
-| `id` | `UUID` | `PRIMARY KEY` | `gen_random_uuid()` |
-| `user_id` | `UUID` | —, `FK → users.id` | — |
-| `action` | `VARCHAR(100)` | `NOT NULL` | — |
-| `resource_type` | `VARCHAR(50)` | `NOT NULL` | — |
-| `resource_id` | `VARCHAR(255)` | — | — |
-| `details` | `JSONB` | — | — |
-| `ip_address` | `INET` | — | — |
-| `created_at` | `TIMESTAMPTZ` | `NOT NULL` | `now()` |
+| Column          | Type           | Constraints        | Default             |
+| --------------- | -------------- | ------------------ | ------------------- |
+| `id`            | `UUID`         | `PRIMARY KEY`      | `gen_random_uuid()` |
+| `user_id`       | `UUID`         | —, `FK → users.id` | —                   |
+| `action`        | `VARCHAR(100)` | `NOT NULL`         | —                   |
+| `resource_type` | `VARCHAR(50)`  | `NOT NULL`         | —                   |
+| `resource_id`   | `VARCHAR(255)` | —                  | —                   |
+| `details`       | `JSONB`        | —                  | —                   |
+| `ip_address`    | `INET`         | —                  | —                   |
+| `created_at`    | `TIMESTAMPTZ`  | `NOT NULL`         | `now()`             |
 
 ```sql
 CREATE TABLE audit_logs (
@@ -774,34 +774,34 @@ CREATE INDEX idx_audit_logs_created_at ON audit_logs (created_at DESC);
 
 ### 3.1 Performance Indexes
 
-| Table | Index | Type | Rationale |
-|---|---|---|---|
-| `users` | `email`, `clerk_id` | B-tree (unique) | Auth lookups |
-| `api_keys` | `user_id` | B-tree | List keys by user |
-| `api_keys` | `key_hash` | B-tree (unique) | API key authentication |
-| `agents` | `user_id`, `team_id` | B-tree | Ownership queries |
-| `agents` | `status` | B-tree | Filter by status |
-| `agents` | `search_vector` | GIN | Full-text search |
-| `conversations` | `(agent_id, updated_at DESC)` | Composite B-tree | Feed queries |
-| `messages` | `(conversation_id, created_at)` | Composite B-tree | Chat history order |
-| `executions` | `(agent_id, created_at DESC)` | Composite B-tree | Recent runs |
-| `executions` | `status` | B-tree | Queue polling |
-| `marketplace_listings` | `published` WHERE `published = true` | Partial B-tree | Public listings |
-| `marketplace_listings` | `tags` | GIN | Array containment |
-| `notifications` | `(user_id, read)` WHERE `read = false` | Partial B-tree | Unread badge |
+| Table                  | Index                                  | Type             | Rationale              |
+| ---------------------- | -------------------------------------- | ---------------- | ---------------------- |
+| `users`                | `email`, `clerk_id`                    | B-tree (unique)  | Auth lookups           |
+| `api_keys`             | `user_id`                              | B-tree           | List keys by user      |
+| `api_keys`             | `key_hash`                             | B-tree (unique)  | API key authentication |
+| `agents`               | `user_id`, `team_id`                   | B-tree           | Ownership queries      |
+| `agents`               | `status`                               | B-tree           | Filter by status       |
+| `agents`               | `search_vector`                        | GIN              | Full-text search       |
+| `conversations`        | `(agent_id, updated_at DESC)`          | Composite B-tree | Feed queries           |
+| `messages`             | `(conversation_id, created_at)`        | Composite B-tree | Chat history order     |
+| `executions`           | `(agent_id, created_at DESC)`          | Composite B-tree | Recent runs            |
+| `executions`           | `status`                               | B-tree           | Queue polling          |
+| `marketplace_listings` | `published` WHERE `published = true`   | Partial B-tree   | Public listings        |
+| `marketplace_listings` | `tags`                                 | GIN              | Array containment      |
+| `notifications`        | `(user_id, read)` WHERE `read = false` | Partial B-tree   | Unread badge           |
 
 ### 3.2 Vector Indexes
 
-| Table | Column | Index Type | Distance |
-|---|---|---|---|
+| Table          | Column      | Index Type          | Distance            |
+| -------------- | ----------- | ------------------- | ------------------- |
 | `agent_memory` | `embedding` | IVFFlat (lists=100) | `vector_cosine_ops` |
 
 ### 3.3 Text Search Indexes
 
-| Table | Expression |
-|---|---|
-| `agents` | `to_tsvector('english', name \|\| ' ' \|\| description \|\| ' ' \|\| role)` |
-| `marketplace_listings` | `to_tsvector('english', name \|\| ' ' \|\| description)` |
+| Table                  | Expression                                                                  |
+| ---------------------- | --------------------------------------------------------------------------- |
+| `agents`               | `to_tsvector('english', name \|\| ' ' \|\| description \|\| ' ' \|\| role)` |
+| `marketplace_listings` | `to_tsvector('english', name \|\| ' ' \|\| description)`                    |
 
 ---
 

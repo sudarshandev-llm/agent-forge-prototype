@@ -16,8 +16,8 @@ export function Hero() {
           <span className="block text-primary">AI Agents</span>
         </h1>
         <p className="mt-6 text-lg leading-8 text-muted-foreground max-w-2xl mx-auto">
-          Create, deploy, and manage AI agents with ease. Build custom workflows, integrate powerful tools,
-          and orchestrate multi-agent teams—all from a single platform.
+          Create, deploy, and manage AI agents with ease. Build custom workflows, integrate powerful
+          tools, and orchestrate multi-agent teams—all from a single platform.
         </p>
         <div className="mt-10 flex items-center justify-center gap-4">
           <Link href="/sign-up">
@@ -31,7 +31,9 @@ export function Hero() {
             </Button>
           </Link>
         </div>
-        <p className="mt-4 text-sm text-muted-foreground">No credit card required. Free tier included.</p>
+        <p className="mt-4 text-sm text-muted-foreground">
+          No credit card required. Free tier included.
+        </p>
       </div>
     </section>
   );

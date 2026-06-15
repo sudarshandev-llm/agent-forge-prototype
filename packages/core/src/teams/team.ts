@@ -38,7 +38,10 @@ export class Team {
     return this.leader;
   }
 
-  async run(input: string, options?: { stream?: boolean }): Promise<{
+  async run(
+    input: string,
+    options?: { stream?: boolean },
+  ): Promise<{
     output: string;
     contributions: Array<{ agentId: string; role: AgentRole; output: string }>;
     duration: number;
@@ -70,9 +73,10 @@ export class Team {
 
     const executionResults: string[] = [];
     if (executors.length > 0) {
-      const execInput = researchResults.length > 0
-        ? `Based on this research:\n${researchResults.join('\n')}\n\nExecute: ${input}`
-        : input;
+      const execInput =
+        researchResults.length > 0
+          ? `Based on this research:\n${researchResults.join('\n')}\n\nExecute: ${input}`
+          : input;
 
       for (const { agent } of executors) {
         const result = await agent.run(execInput, options);

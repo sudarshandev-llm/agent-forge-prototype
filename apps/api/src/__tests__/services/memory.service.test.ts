@@ -129,7 +129,9 @@ describe('memoryService', () => {
     it('should throw 404 when memory not found', async () => {
       vi.mocked(prisma.agentMemory.findUnique).mockResolvedValue(null);
 
-      await expect(memoryService.updateMemory('bad-id', { content: 'x' })).rejects.toThrow(ApiError);
+      await expect(memoryService.updateMemory('bad-id', { content: 'x' })).rejects.toThrow(
+        ApiError,
+      );
     });
   });
 
@@ -151,7 +153,10 @@ describe('memoryService', () => {
 
   describe('listMemories', () => {
     it('should list memories for an agent ordered by importance', async () => {
-      vi.mocked(prisma.agentMemory.findMany).mockResolvedValue([mockMemory, { ...mockMemory, id: 'mem-2' }]);
+      vi.mocked(prisma.agentMemory.findMany).mockResolvedValue([
+        mockMemory,
+        { ...mockMemory, id: 'mem-2' },
+      ]);
 
       const result = await memoryService.listMemories('agent-1');
 

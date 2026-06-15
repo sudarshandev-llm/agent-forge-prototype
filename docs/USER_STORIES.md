@@ -26,28 +26,28 @@
 
 ## Epics Overview
 
-| #  | Epic                         | Stories | Total SP | Key Users                  |
-|----|------------------------------|---------|----------|----------------------------|
-| 1  | User Authentication & Onboarding | 12   | 48       | Developer, Admin           |
-| 2  | Agent Creation & Configuration  | 15   | 74       | Developer                  |
-| 3  | Agent Memory Management         | 12   | 60       | Developer, Admin           |
-| 4  | Agent Teams & Collaboration     | 14   | 68       | Developer, Team Lead       |
-| 5  | Tool Integration & Usage        | 14   | 72       | Developer                  |
-| 6  | GitHub Integration              | 13   | 62       | Developer, OSS Maintainer  |
-| 7  | Browser Automation              | 12   | 64       | QA Engineer, Developer     |
-| 8  | Agent Marketplace               | 14   | 56       | Developer, End User        |
-| 9  | Workflow Builder                | 15   | 80       | Developer, Business Analyst|
-| 10 | Dashboard & Analytics           | 12   | 52       | Admin, Team Lead           |
+| #   | Epic                             | Stories | Total SP | Key Users                   |
+| --- | -------------------------------- | ------- | -------- | --------------------------- |
+| 1   | User Authentication & Onboarding | 12      | 48       | Developer, Admin            |
+| 2   | Agent Creation & Configuration   | 15      | 74       | Developer                   |
+| 3   | Agent Memory Management          | 12      | 60       | Developer, Admin            |
+| 4   | Agent Teams & Collaboration      | 14      | 68       | Developer, Team Lead        |
+| 5   | Tool Integration & Usage         | 14      | 72       | Developer                   |
+| 6   | GitHub Integration               | 13      | 62       | Developer, OSS Maintainer   |
+| 7   | Browser Automation               | 12      | 64       | QA Engineer, Developer      |
+| 8   | Agent Marketplace                | 14      | 56       | Developer, End User         |
+| 9   | Workflow Builder                 | 15      | 80       | Developer, Business Analyst |
+| 10  | Dashboard & Analytics            | 12      | 52       | Admin, Team Lead            |
 
 **Total Stories:** 133  
-**Total Story Points (est.):** 636  
+**Total Story Points (est.):** 636
 
 ---
 
 ## Priority Scale
 
-| Label | Definition                                                     |
-|-------|----------------------------------------------------------------|
+| Label  | Definition                                                     |
+| ------ | -------------------------------------------------------------- |
 | **P0** | Critical — must ship for MVP; blocks all other work if missing |
 | **P1** | High — core experience; ship in first release                  |
 | **P2** | Medium — important but can wait for a minor release            |
@@ -57,20 +57,21 @@
 
 ## Story Points Guideline
 
-| Points | Effort                                                |
-|--------|-------------------------------------------------------|
-| 1      | Trivial (minutes)                                     |
-| 2      | Simple (hours)                                        |
-| 3      | Moderate (half a day)                                 |
-| 5      | Complex (full day)                                    |
-| 8      | Very complex (multiple days)                          |
-| 13     | Epic-sized (needs decomposition)                      |
+| Points | Effort                           |
+| ------ | -------------------------------- |
+| 1      | Trivial (minutes)                |
+| 2      | Simple (hours)                   |
+| 3      | Moderate (half a day)            |
+| 5      | Complex (full day)               |
+| 8      | Very complex (multiple days)     |
+| 13     | Epic-sized (needs decomposition) |
 
 ---
 
 ## Epic 1: User Authentication & Onboarding
 
 ### Story 1.1 — Sign up with email & password
+
 - **As a** developer, **I want** to create an account with my email and password **so that** I can securely access the platform.
 - **Acceptance Criteria:**
   1. User can navigate to `/signup` and see a registration form with email, password, and confirm-password fields.
@@ -81,6 +82,7 @@
 - **Priority:** P0
 
 ### Story 1.2 — Email verification
+
 - **As a** developer, **I want** to verify my email address via a confirmation link **so that** I can activate my account.
 - **Acceptance Criteria:**
   1. Verification link expires after 24 hours.
@@ -90,6 +92,7 @@
 - **Priority:** P0
 
 ### Story 1.3 — Login with email & password
+
 - **As a** developer, **I want** to log in using my email and password **so that** I can access my workspace.
 - **Acceptance Criteria:**
   1. Login form accepts email and password; supports "Remember me" (extended session).
@@ -100,6 +103,7 @@
 - **Priority:** P0
 
 ### Story 1.4 — Social login (Google / GitHub)
+
 - **As a** developer, **I want** to sign in with my Google or GitHub account **so that** I can onboard faster without creating a new password.
 - **Acceptance Criteria:**
   1. "Sign in with Google" and "Sign in with GitHub" buttons appear on the login page.
@@ -109,6 +113,7 @@
 - **Priority:** P1
 
 ### Story 1.5 — Password reset
+
 - **As a** developer, **I want** to reset my password via a "Forgot Password" flow **so that** I can regain access if I forget my credentials.
 - **Acceptance Criteria:**
   1. User enters email and receives a reset link valid for 1 hour.
@@ -118,6 +123,7 @@
 - **Priority:** P0
 
 ### Story 1.6 — Profile management
+
 - **As a** developer, **I want** to update my display name, avatar, and preferences **so that** my profile reflects my identity.
 - **Acceptance Criteria:**
   1. User can upload a profile image (PNG/JPG, max 2 MB).
@@ -127,6 +133,7 @@
 - **Priority:** P2
 
 ### Story 1.7 — Multi-factor authentication (TOTP)
+
 - **As a** developer, **I want** to enable TOTP-based two-factor authentication **so that** my account is protected against credential theft.
 - **Acceptance Criteria:**
   1. User can enroll a TOTP device by scanning a QR code.
@@ -136,6 +143,7 @@
 - **Priority:** P1
 
 ### Story 1.8 — Onboarding wizard
+
 - **As a** developer, **I want** a step-by-step onboarding wizard after first login **so that** I understand the platform's capabilities.
 - **Acceptance Criteria:**
   1. Wizard shows 4 steps: Create an Agent, Integrate a Tool, Run a Task, Explore Templates.
@@ -145,6 +153,7 @@
 - **Priority:** P2
 
 ### Story 1.9 — API key management
+
 - **As a** developer, **I want** to generate and revoke API keys **so that** I can authenticate programmatic access to AgentForge.
 - **Acceptance Criteria:**
   1. API keys page shows existing keys with name, prefix, creation date, and last used.
@@ -154,6 +163,7 @@
 - **Priority:** P1
 
 ### Story 1.10 — Session management
+
 - **As a** developer, **I want** to view and terminate active sessions **so that** I can control where my account is logged in.
 - **Acceptance Criteria:**
   1. Session list shows device type, IP, last activity timestamp.
@@ -163,6 +173,7 @@
 - **Priority:** P2
 
 ### Story 1.11 — Account deletion
+
 - **As a** developer, **I want** to permanently delete my account and all associated data **so that** I can exercise my right to be forgotten.
 - **Acceptance Criteria:**
   1. User must re-enter password to confirm deletion.
@@ -172,6 +183,7 @@
 - **Priority:** P1
 
 ### Story 1.12 — Role-based access control (RBAC) scaffolding
+
 - **As an** admin, **I want** to assign roles (Admin, Member, Viewer) to users **so that** I can control permissions across the workspace.
 - **Acceptance Criteria:**
   1. Three roles exist: `admin`, `member`, `viewer`.
@@ -185,6 +197,7 @@
 ## Epic 2: Agent Creation & Configuration
 
 ### Story 2.1 — Create an agent from scratch
+
 - **As a** developer, **I want** to create a new AI agent with a name, description, and system prompt **so that** I can define its purpose and behavior.
 - **Acceptance Criteria:**
   1. "Create Agent" button on the dashboard opens a creation form.
@@ -194,6 +207,7 @@
 - **Priority:** P0
 
 ### Story 2.2 — Choose LLM provider & model
+
 - **As a** developer, **I want** to select which LLM provider and model my agent uses (OpenAI, Anthropic, Ollama, etc.) **so that** I can optimize for cost, speed, or capability.
 - **Acceptance Criteria:**
   1. Model selection dropdown groups providers and their available models.
@@ -203,6 +217,7 @@
 - **Priority:** P0
 
 ### Story 2.3 — Configure agent parameters
+
 - **As a** developer, **I want** to set parameters like temperature, top-p, max tokens, and frequency penalty **so that** I can tune the agent's output behavior.
 - **Acceptance Criteria:**
   1. Parameter sliders/inputs with sensible defaults (temperature 0.7, max tokens 2048, etc.).
@@ -212,6 +227,7 @@
 - **Priority:** P1
 
 ### Story 2.4 — Clone an existing agent
+
 - **As a** developer, **I want** to clone an existing agent **so that** I can quickly prototype variations without starting from scratch.
 - **Acceptance Criteria:**
   1. Clone button on agent detail page creates a deep copy.
@@ -221,6 +237,7 @@
 - **Priority:** P1
 
 ### Story 2.5 — Version history for agents
+
 - **As a** developer, **I want** to view and restore previous versions of my agent's configuration **so that** I can roll back breaking changes.
 - **Acceptance Criteria:**
   1. Each save creates an immutable version snapshot.
@@ -230,6 +247,7 @@
 - **Priority:** P2
 
 ### Story 2.6 — Agent tagging & categorization
+
 - **As a** developer, **I want** to tag agents with custom labels and categories **so that** I can organize them across large workspaces.
 - **Acceptance Criteria:**
   1. Tags are free-form text with auto-complete from existing tags.
@@ -239,6 +257,7 @@
 - **Priority:** P2
 
 ### Story 2.7 — Agent pause & resume
+
 - **As a** developer, **I want** to pause and resume an agent **so that** I can temporarily halt execution without losing its memory or configuration.
 - **Acceptance Criteria:**
   1. Pause button transitions agent to `paused` state.
@@ -248,6 +267,7 @@
 - **Priority:** P1
 
 ### Story 2.8 — Environment variables for agents
+
 - **As a** developer, **I want** to define environment variables for my agent **so that** I can inject API keys and configuration without hardcoding.
 - **Acceptance Criteria:**
   1. Key-value editor with masked values for secrets.
@@ -257,6 +277,7 @@
 - **Priority:** P1
 
 ### Story 2.9 — Custom system prompt templates
+
 - **As a** developer, **I want** to save and reuse system prompt templates **so that** I can standardize agent behavior across my team.
 - **Acceptance Criteria:**
   1. "Save as Template" button in the agent editor.
@@ -266,6 +287,7 @@
 - **Priority:** P2
 
 ### Story 2.10 — Agent deletion & archiving
+
 - **As a** developer, **I want** to delete or archive agents **so that** I can keep my workspace clean.
 - **Acceptance Criteria:**
   1. Deleting an agent permanently removes it after a 30-day trash period.
@@ -275,6 +297,7 @@
 - **Priority:** P1
 
 ### Story 2.11 — Import/export agent configuration
+
 - **As a** developer, **I want** to export an agent as a JSON file and import it into another workspace **so that** I can share agents across environments.
 - **Acceptance Criteria:**
   1. Export includes all config, tool bindings, and memory settings (not raw memory content unless requested).
@@ -284,6 +307,7 @@
 - **Priority:** P2
 
 ### Story 2.12 — Multi-language agent description
+
 - **As a** developer, **I want** to provide agent descriptions in multiple languages **so that** the agent can be published on a global marketplace.
 - **Acceptance Criteria:**
   1. Locale selector in agent settings to add translated name and description.
@@ -293,6 +317,7 @@
 - **Priority:** P3
 
 ### Story 2.13 — Agent execution mode: streaming vs. batch
+
 - **As a** developer, **I want** to choose between streaming and batch execution mode **so that** I can decide between real-time output and cost efficiency.
 - **Acceptance Criteria:**
   1. Streaming mode emits tokens via SSE as they are generated.
@@ -302,6 +327,7 @@
 - **Priority:** P1
 
 ### Story 2.14 — Custom stop sequences
+
 - **As a** developer, **I want** to define custom stop sequences for my agent **so that** the model halts generation at precise boundaries.
 - **Acceptance Criteria:**
   1. Text input for comma-separated or newline-separated stop sequences.
@@ -311,6 +337,7 @@
 - **Priority:** P2
 
 ### Story 2.15 — Agent scheduling (cron triggers)
+
 - **As a** developer, **I want** to schedule my agent to run on a cron expression **so that** it can perform recurring tasks autonomously.
 - **Acceptance Criteria:**
   1. Cron expression input with a helper UI (presets: hourly, daily, weekdays).
@@ -324,6 +351,7 @@
 ## Epic 3: Agent Memory Management
 
 ### Story 3.1 — Short-term conversation memory
+
 - **As a** developer, **I want** my agent to retain recent conversation history within a session **so that** it can maintain context during multi-turn interactions.
 - **Acceptance Criteria:**
   1. Session history window is configurable (default 20 turns).
@@ -333,6 +361,7 @@
 - **Priority:** P0
 
 ### Story 3.2 — Long-term vector memory
+
 - **As a** developer, **I want** my agent to store and retrieve relevant information across sessions using vector embeddings **so that** it can recall facts and past conversations indefinitely.
 - **Acceptance Criteria:**
   1. Text is embedded via the configured LLM provider and upserted into a vector store (Pinecone / Qdrant / pgvector).
@@ -342,6 +371,7 @@
 - **Priority:** P0
 
 ### Story 3.3 — Memory summarization
+
 - **As a** developer, **I want** my agent to periodically summarize long conversations into a compressed memory **so that** it retains key context without exceeding context windows.
 - **Acceptance Criteria:**
   1. After N turns (configurable, default 10), a summarization LLM call condenses the recent history.
@@ -351,6 +381,7 @@
 - **Priority:** P1
 
 ### Story 3.4 — Manual memory editing
+
 - **As a** developer, **I want** to manually add, edit, or delete specific memory entries **so that** I can correct incorrect or outdated information the agent has stored.
 - **Acceptance Criteria:**
   1. Memory browser UI lists entries with content, timestamp, and source.
@@ -360,6 +391,7 @@
 - **Priority:** P1
 
 ### Story 3.5 — Memory search & exploration
+
 - **As a** developer, **I want** to search through the agent's long-term memory using natural language queries **so that** I can audit what the agent remembers.
 - **Acceptance Criteria:**
   1. Search bar in the memory browser performs semantic search over all entries.
@@ -369,6 +401,7 @@
 - **Priority:** P2
 
 ### Story 3.6 — Memory export
+
 - **As a** developer, **I want** to export all agent memories as JSON or CSV **so that** I can back up or analyze the data externally.
 - **Acceptance Criteria:**
   1. Export button triggers a download in the chosen format.
@@ -378,6 +411,7 @@
 - **Priority:** P2
 
 ### Story 3.7 — Memory retention policies
+
 - **As a** developer, **I want** to configure automatic memory expiration (e.g., TTL per memory entry) **so that** old, irrelevant information is pruned automatically.
 - **Acceptance Criteria:**
   1. TTL setting in agent memory config (default: never expire).
@@ -387,6 +421,7 @@
 - **Priority:** P1
 
 ### Story 3.8 — Memory namespaces / compartments
+
 - **As a** developer, **I want** to organize memory into named compartments **so that** I can separate domain-specific knowledge (e.g., "Product Knowledge" vs. "User Preferences").
 - **Acceptance Criteria:**
   1. Memory compartments can be created, renamed, and deleted.
@@ -396,6 +431,7 @@
 - **Priority:** P2
 
 ### Story 3.9 — Memory conflict resolution
+
 - **As a** developer, **I want** the agent to detect and flag conflicting memories **so that** I can resolve contradictions before they cause incorrect behavior.
 - **Acceptance Criteria:**
   1. When a new memory contradicts an existing one, a conflict is logged.
@@ -405,6 +441,7 @@
 - **Priority:** P3
 
 ### Story 3.10 — Episodic vs. semantic memory toggle
+
 - **As a** developer, **I want** to choose between episodic (event-sequence) and semantic (fact-based) memory modes **so that** I can optimize for the agent's use case.
 - **Acceptance Criteria:**
   1. Toggle in agent memory settings with explanation of both modes.
@@ -414,6 +451,7 @@
 - **Priority:** P3
 
 ### Story 3.11 — Memory import from documents
+
 - **As a** developer, **I want** to upload documents (PDF, DOCX, TXT) to be ingested into the agent's long-term memory **so that** the agent is pre-loaded with domain knowledge.
 - **Acceptance Criteria:**
   1. Supported formats: PDF, DOCX, TXT, Markdown (max 50 MB per file).
@@ -423,6 +461,7 @@
 - **Priority:** P1
 
 ### Story 3.12 — Memory usage dashboard
+
 - **As a** developer, **I want** a dashboard showing memory usage (entries count, total tokens, storage size) **so that** I can monitor and optimize memory consumption.
 - **Acceptance Criteria:**
   1. Cards displaying total entries, vector store size, token count.
@@ -436,6 +475,7 @@
 ## Epic 4: Agent Teams & Collaboration
 
 ### Story 4.1 — Create an agent team
+
 - **As a** team lead, **I want** to group multiple agents into a named team **so that** they can collaborate on complex tasks.
 - **Acceptance Criteria:**
   1. "Create Team" form with name, description, and optional avatar.
@@ -445,6 +485,7 @@
 - **Priority:** P0
 
 ### Story 4.2 — Add/remove agents from a team
+
 - **As a** team lead, **I want** to add or remove agents from a team **so that** I can reconfigure collaboration groups as needs evolve.
 - **Acceptance Criteria:**
   1. Searchable dropdown of available agents for adding.
@@ -454,6 +495,7 @@
 - **Priority:** P0
 
 ### Story 4.3 — Assign roles to team agents
+
 - **As a** team lead, **I want** to assign specific roles to agents within a team (e.g., Researcher, Writer, Reviewer) **so that** each agent has a clear responsibility.
 - **Acceptance Criteria:**
   1. Predefined role templates plus custom role description.
@@ -463,6 +505,7 @@
 - **Priority:** P1
 
 ### Story 4.4 — Team-level conversation routing
+
 - **As a** team lead, **I want** incoming task messages to be routed to the appropriate agent based on intent classification **so that** the right agent handles the right request.
 - **Acceptance Criteria:**
   1. Router agent (or classifier model) inspects the message and delegates.
@@ -472,6 +515,7 @@
 - **Priority:** P1
 
 ### Story 4.5 — Inter-agent communication protocol
+
 - **As a** team lead, **I want** agents within a team to exchange messages and intermediate results **so that** they can collaborate on multi-step workflows.
 - **Acceptance Criteria:**
   1. Agents can emit structured messages addressed to specific agents or broadcast.
@@ -481,6 +525,7 @@
 - **Priority:** P1
 
 ### Story 4.6 — Team execution plan visualization
+
 - **As a** team lead, **I want** to see a visual graph of the team's execution plan showing which agent works on what and in what order **so that** I can understand and debug the flow.
 - **Acceptance Criteria:**
   1. DAG (directed acyclic graph) rendered on the team detail page.
@@ -490,6 +535,7 @@
 - **Priority:** P2
 
 ### Story 4.7 — Team templates
+
 - **As a** team lead, **I want** to save a team composition as a template **so that** I can quickly spin up standardized teams for common scenarios.
 - **Acceptance Criteria:**
   1. "Save as Template" on any team's configuration page.
@@ -499,6 +545,7 @@
 - **Priority:** P2
 
 ### Story 4.8 — Approval gates in team workflows
+
 - **As a** team lead, **I want** to insert human-in-the-loop approval gates between agents **so that** sensitive outputs are reviewed before proceeding.
 - **Acceptance Criteria:**
   1. Gate node in the team graph pauses execution until approved/rejected.
@@ -508,6 +555,7 @@
 - **Priority:** P1
 
 ### Story 4.9 — Team-level memory sharing
+
 - **As a** team lead, **I want** agents in a team to optionally share a common memory store **so that** they all benefit from collective knowledge.
 - **Acceptance Criteria:**
   1. Toggle to enable "Shared Team Memory" in team settings.
@@ -517,6 +565,7 @@
 - **Priority:** P2
 
 ### Story 4.10 — Agent handoff
+
 - **As a** developer, **I want** Agent A to hand off a conversation to Agent B with full context **so that** the handover is seamless with no loss of state.
 - **Acceptance Criteria:**
   1. Handoff is triggered by Agent A calling a `handoff(agentId, context)` tool.
@@ -526,6 +575,7 @@
 - **Priority:** P1
 
 ### Story 4.11 — Sub-team nesting
+
 - **As a** team lead, **I want** to nest teams inside other teams **so that** I can create hierarchical organizational structures.
 - **Acceptance Criteria:**
   1. Team membership accepts both agents and sub-teams.
@@ -535,6 +585,7 @@
 - **Priority:** P3
 
 ### Story 4.12 — Team performance benchmarking
+
 - **As a** team lead, **I want** to run benchmark tasks against a team and compare results across team configurations **so that** I can optimize collaboration.
 - **Acceptance Criteria:**
   1. Benchmark suite allows defining test inputs and expected outputs.
@@ -544,6 +595,7 @@
 - **Priority:** P3
 
 ### Story 4.13 — Team event hooks (webhooks)
+
 - **As a** developer, **I want** to configure webhooks for team-level events (task start, completion, failure) **so that** I can integrate with external monitoring.
 - **Acceptance Criteria:**
   1. Webhook URL, secret, and event type selection UI.
@@ -553,6 +605,7 @@
 - **Priority:** P2
 
 ### Story 4.14 — Team-level logging & observability
+
 - **As a** team lead, **I want** aggregated logs for all agents in a team with timelines and filtering **so that** I can debug complex multi-agent interactions.
 - **Acceptance Criteria:**
   1. Logs from all team members displayed on a unified timeline.
@@ -566,6 +619,7 @@
 ## Epic 5: Tool Integration & Usage
 
 ### Story 5.1 — Tool registry / marketplace
+
 - **As a** developer, **I want** to browse a built-in registry of available tools **so that** I can discover what capabilities I can attach to my agent.
 - **Acceptance Criteria:**
   1. Tool registry page lists each tool with name, description, version, and author.
@@ -575,6 +629,7 @@
 - **Priority:** P0
 
 ### Story 5.2 — Attach a tool to an agent
+
 - **As a** developer, **I want** to attach one or more tools from the registry to my agent **so that** my agent gains the ability to perform external actions.
 - **Acceptance Criteria:**
   1. Tool selection UI with multi-select checkboxes in agent settings.
@@ -584,6 +639,7 @@
 - **Priority:** P0
 
 ### Story 5.3 — Tool configuration per agent
+
 - **As a** developer, **I want** to configure tool-specific settings (e.g., API endpoint, credentials) per agent **so that** each agent can use the same tool differently.
 - **Acceptance Criteria:**
   1. Expandable configuration panel for each attached tool.
@@ -593,6 +649,7 @@
 - **Priority:** P1
 
 ### Story 5.4 — Custom tool SDK / OpenAPI import
+
 - **As a** developer, **I want** to create a custom tool by importing an OpenAPI spec or using the AgentForge tool SDK **so that** I can integrate any external API.
 - **Acceptance Criteria:**
   1. OpenAPI 3.0/3.1 spec upload auto-generates tool definitions.
@@ -602,6 +659,7 @@
 - **Priority:** P1
 
 ### Story 5.5 — Tool secrets & credential management
+
 - **As a** developer, **I want** to store tool credentials in a secure, encrypted vault **so that** sensitive keys are never exposed.
 - **Acceptance Criteria:**
   1. Secrets are encrypted with AES-256-GCM at rest.
@@ -611,6 +669,7 @@
 - **Priority:** P0
 
 ### Story 5.6 — Tool output schema validation
+
 - **As a** developer, **I want** tool outputs to be validated against a JSON schema **so that** malformed responses are caught early.
 - **Acceptance Criteria:**
   1. Each tool declares an output schema in its definition.
@@ -620,6 +679,7 @@
 - **Priority:** P1
 
 ### Story 5.7 — Rate limiting & usage quotas per tool
+
 - **As a** developer, **I want** to enforce rate limits per tool per agent **so that** I can avoid hitting API provider limits or unexpected costs.
 - **Acceptance Criteria:**
   1. Configurable RPM (requests per minute) and TPD (tasks per day) limits.
@@ -629,6 +689,7 @@
 - **Priority:** P1
 
 ### Story 5.8 — Tool execution timeout
+
 - **As a** developer, **I want** to set a timeout for each tool call **so that** long-running or hanging external requests don't block the agent.
 - **Acceptance Criteria:**
   1. Default timeout is 30 seconds; configurable per tool in agent settings.
@@ -638,6 +699,7 @@
 - **Priority:** P1
 
 ### Story 5.9 — Tool failure handling strategies
+
 - **As a** developer, **I want** to configure how the agent handles tool failures (retry, fallback, halt) **so that** the agent's behavior is predictable in error scenarios.
 - **Acceptance Criteria:**
   1. Three strategies: Retry (N times with backoff), Fallback (use alt tool), Halt (stop execution).
@@ -647,6 +709,7 @@
 - **Priority:** P2
 
 ### Story 5.10 — Tool usage cost tracking
+
 - **As a** developer, **I want** to see the estimated cost of each tool call **so that** I can manage my API budget.
 - **Acceptance Criteria:**
   1. Cost is computed from (input tokens × price) + (output tokens × price) for LLM-based tools.
@@ -656,6 +719,7 @@
 - **Priority:** P2
 
 ### Story 5.11 — Disabled / deprecated tool detection
+
 - **As a** developer, **I want** to see a warning when an attached tool has been deprecated or disabled **so that** I know to migrate to an alternative.
 - **Acceptance Criteria:**
   1. Tool registry marks deprecated tools with a badge and removal date.
@@ -665,6 +729,7 @@
 - **Priority:** P2
 
 ### Story 5.12 — Tool execution sandboxing
+
 - **As an** admin, **I want** tool execution (especially code-execution tools) to run in an isolated sandbox **so that** the platform is protected from malicious or buggy code.
 - **Acceptance Criteria:**
   1. Code execution tools run in gVisor / Firecracker micro-VMs with no network access by default.
@@ -674,6 +739,7 @@
 - **Priority:** P0
 
 ### Story 5.13 — Tool composition (creating meta-tools)
+
 - **As a** developer, **I want** to compose multiple tools into a single "meta-tool" **so that** I can create higher-level abstractions for my agents.
 - **Acceptance Criteria:**
   1. Meta-tool editor allows chaining tools where output of one feeds input of the next.
@@ -683,6 +749,7 @@
 - **Priority:** P3
 
 ### Story 5.14 — Tool usage analytics
+
 - **As a** developer, **I want** analytics on tool usage frequency, success rate, and average latency **so that** I can identify underperforming integrations.
 - **Acceptance Criteria:**
   1. Per-tool dashboard with sparklines for daily usage.
@@ -696,6 +763,7 @@
 ## Epic 6: GitHub Integration
 
 ### Story 6.1 — Authenticate with GitHub
+
 - **As a** developer, **I want** to connect my GitHub account via OAuth **so that** AgentForge can interact with my repositories.
 - **Acceptance Criteria:**
   1. GitHub OAuth flow with scopes: `repo`, `issues`, `pull_requests`, `workflows`.
@@ -705,6 +773,7 @@
 - **Priority:** P0
 
 ### Story 6.2 — Repository browser
+
 - **As a** developer, **I want** to browse and select repositories from my GitHub account **so that** I can link them to my agents.
 - **Acceptance Criteria:**
   1. Repository list shows all repos the authenticated user has access to.
@@ -714,6 +783,7 @@
 - **Priority:** P0
 
 ### Story 6.3 — Agent reads repository code
+
 - **As a** developer, **I want** my agent to read files from a GitHub repository **so that** it can analyze, review, or answer questions about the codebase.
 - **Acceptance Criteria:**
   1. Agent can fetch file content via tool (supports syntax highlighting in viewer).
@@ -723,6 +793,7 @@
 - **Priority:** P0
 
 ### Story 6.4 — Agent creates issues
+
 - **As a** developer, **I want** my agent to create GitHub issues with title, body, labels, and assignees **so that** it can file bug reports or feature requests autonomously.
 - **Acceptance Criteria:**
   1. Agent calls `create_issue` tool with required parameters.
@@ -732,6 +803,7 @@
 - **Priority:** P1
 
 ### Story 6.5 — Agent manages pull requests
+
 - **As a** developer, **I want** my agent to create, review, and merge pull requests **so that** it can participate in the full development lifecycle.
 - **Acceptance Criteria:**
   1. Agent can create PRs with title, body, base, and head branches.
@@ -741,6 +813,7 @@
 - **Priority:** P1
 
 ### Story 6.6 — Agent reviews code changes
+
 - **As a** developer, **I want** my agent to review pull request diffs and leave inline comments **so that** it provides automated code review.
 - **Acceptance Criteria:**
   1. Agent fetches PR diff and analyzes changed files.
@@ -750,6 +823,7 @@
 - **Priority:** P1
 
 ### Story 6.7 — Agent runs GitHub Actions
+
 - **As a** developer, **I want** my agent to trigger GitHub Actions workflows and report back the results **so that** it can integrate CI/CD into its workflow.
 - **Acceptance Criteria:**
   1. Agent can dispatch a workflow_dispatch event with inputs.
@@ -759,6 +833,7 @@
 - **Priority:** P2
 
 ### Story 6.8 — Agent manages branches
+
 - **As a** developer, **I want** my agent to create, delete, and list branches in a repository **so that** it can manage code organization.
 - **Acceptance Criteria:**
   1. Create branch from any existing ref.
@@ -768,6 +843,7 @@
 - **Priority:** P2
 
 ### Story 6.9 — Webhook-driven agent triggers
+
 - **As a** developer, **I want** my agent to be triggered automatically by GitHub webhook events (push, PR opened, issue created) **so that** it acts immediately on repository activity.
 - **Acceptance Criteria:**
   1. Webhook configuration UI maps event types to agent actions.
@@ -777,6 +853,7 @@
 - **Priority:** P1
 
 ### Story 6.10 — Multi-repo workspace
+
 - **As a** developer, **I want** to link multiple repositories to a single agent **so that** the agent can work across a microservice architecture.
 - **Acceptance Criteria:**
   1. Agent settings allow adding multiple GitHub repos.
@@ -786,6 +863,7 @@
 - **Priority:** P2
 
 ### Story 6.11 — GitHub commit signing via agent
+
 - **As a** developer, **I want** commits made by my agent to be signed with my GPG key **so that** they are verified on GitHub.
 - **Acceptance Criteria:**
   1. User can upload a GPG public key in integration settings.
@@ -795,6 +873,7 @@
 - **Priority:** P3
 
 ### Story 6.12 — Rate limit-aware scheduling
+
 - **As a** developer, **I want** the agent to be aware of GitHub API rate limits and schedule requests accordingly **so that** it doesn't get throttled.
 - **Acceptance Criteria:**
   1. Agent checks remaining rate limit before each API call.
@@ -804,6 +883,7 @@
 - **Priority:** P2
 
 ### Story 6.13 — Repository statistics agent
+
 - **As a** developer, **I want** my agent to generate weekly reports on repository activity (commits, PRs, issues) **so that** I can track project health.
 - **Acceptance Criteria:**
   1. Scheduled report generation via agent cron trigger.
@@ -817,6 +897,7 @@
 ## Epic 7: Browser Automation
 
 ### Story 7.1 — Headless browser session
+
 - **As a** developer, **I want** my agent to spawn a headless browser session **so that** it can interact with web pages programmatically.
 - **Acceptance Criteria:**
   1. Agent can call `browser.navigate(url)` to open a page.
@@ -826,6 +907,7 @@
 - **Priority:** P0
 
 ### Story 7.2 — Element interaction
+
 - **As a** developer, **I want** my agent to click buttons, fill forms, and select dropdowns **so that** it can perform complex web interactions.
 - **Acceptance Criteria:**
   1. Agent can locate elements by CSS selector, XPath, or visible text.
@@ -835,6 +917,7 @@
 - **Priority:** P0
 
 ### Story 7.3 — Screenshot & visual capture
+
 - **As a** developer, **I want** my agent to take screenshots of pages or specific elements **so that** it can capture visual evidence.
 - **Acceptance Criteria:**
   1. Full-page and viewport screenshot modes.
@@ -844,6 +927,7 @@
 - **Priority:** P1
 
 ### Story 7.4 — DOM extraction & querying
+
 - **As a** developer, **I want** my agent to extract and query the page DOM **so that** it can retrieve structured data from web pages.
 - **Acceptance Criteria:**
   1. `getHTML()` returns full page HTML.
@@ -853,6 +937,7 @@
 - **Priority:** P0
 
 ### Story 7.5 — Form auto-fill from structured data
+
 - **As a** developer, **I want** my agent to auto-fill web forms from a JSON object **so that** it can automate data entry workflows.
 - **Acceptance Criteria:**
   1. Agent maps JSON keys to form fields by label, name, or id.
@@ -862,6 +947,7 @@
 - **Priority:** P1
 
 ### Story 7.6 — Cookie & session management
+
 - **As a** developer, **I want** my agent to manage browser cookies and local storage **so that** it can maintain authenticated sessions across pages.
 - **Acceptance Criteria:**
   1. Agent can get, set, and delete cookies.
@@ -871,6 +957,7 @@
 - **Priority:** P1
 
 ### Story 7.7 — Wait strategies (explicit, implicit, network idle)
+
 - **As a** developer, **I want** my agent to wait for specific conditions before proceeding **so that** interactions are reliable on slow or dynamic pages.
 - **Acceptance Criteria:**
   1. `waitForSelector(selector, timeout)` — waits for element to appear.
@@ -880,6 +967,7 @@
 - **Priority:** P1
 
 ### Story 7.8 — Multi-tab / multi-window management
+
 - **As a** developer, **I want** my agent to open and switch between multiple tabs **so that** it can work across several pages simultaneously.
 - **Acceptance Criteria:**
   1. `newTab(url)` opens a page in a new tab.
@@ -889,6 +977,7 @@
 - **Priority:** P2
 
 ### Story 7.9 — Network request interception
+
 - **As a** developer, **I want** my agent to intercept, block, or modify network requests **so that** it can mock API responses or block ads.
 - **Acceptance Criteria:**
   1. Request patterns are matched by URL glob or regex.
@@ -898,6 +987,7 @@
 - **Priority:** P2
 
 ### Story 7.10 — Console log capture
+
 - **As a** developer, **I want** my agent to capture browser console logs (log, warn, error) **so that** it can debug web application issues.
 - **Acceptance Criteria:**
   1. Console entries are captured with timestamp, level, and arguments.
@@ -907,6 +997,7 @@
 - **Priority:** P2
 
 ### Story 7.11 — PDF generation from pages
+
 - **As a** developer, **I want** my agent to generate PDFs of web pages **so that** it can create printable reports.
 - **Acceptance Criteria:**
   1. `generatePDF(options)` supports page size, margins, landscape/portrait.
@@ -916,6 +1007,7 @@
 - **Priority:** P2
 
 ### Story 7.12 — Browser session recording & replay
+
 - **As a** developer, **I want** browser automation sessions to be recorded and replayable **so that** I can debug failures and audit agent behavior.
 - **Acceptance Criteria:**
   1. Each session records a video/JSON event log of all interactions.
@@ -929,6 +1021,7 @@
 ## Epic 8: Agent Marketplace
 
 ### Story 8.1 — Browse marketplace
+
 - **As a** developer, **I want** to browse published agents in a marketplace **so that** I can discover pre-built agents for common use cases.
 - **Acceptance Criteria:**
   1. Marketplace page lists agents with name, description, author, rating, and install count.
@@ -938,6 +1031,7 @@
 - **Priority:** P0
 
 ### Story 8.2 — Install an agent from marketplace
+
 - **As a** developer, **I want** to install a marketplace agent into my workspace **so that** I can use it immediately without configuring from scratch.
 - **Acceptance Criteria:**
   1. "Install" button copies the agent configuration into the user's workspace.
@@ -947,6 +1041,7 @@
 - **Priority:** P0
 
 ### Story 8.3 — Publish an agent to marketplace
+
 - **As a** developer, **I want** to publish my agent to the marketplace **so that** other users can discover and use it.
 - **Acceptance Criteria:**
   1. Publish flow: select visibility (public / private to organization), set pricing, write description.
@@ -956,6 +1051,7 @@
 - **Priority:** P1
 
 ### Story 8.4 — Versioning & update channel
+
 - **As a** developer, **I want** to publish updates to my marketplace agent **so that** users receive improvements.
 - **Acceptance Criteria:**
   1. Semantic versioning (MAJOR.MINOR.PATCH) is enforced.
@@ -965,6 +1061,7 @@
 - **Priority:** P2
 
 ### Story 8.5 — Agent rating & reviews
+
 - **As a** developer, **I want** to rate and review agents I've installed **so that** the community can make informed decisions.
 - **Acceptance Criteria:**
   1. 5-star rating system with optional written review.
@@ -974,6 +1071,7 @@
 - **Priority:** P1
 
 ### Story 8.6 — Marketplace analytics for publishers
+
 - **As a** developer, **I want** analytics on my published agents (installs, active users, ratings) **so that** I can measure adoption.
 - **Acceptance Criteria:**
   1. Publisher dashboard shows install counts, uninstall rates, and active users.
@@ -983,6 +1081,7 @@
 - **Priority:** P2
 
 ### Story 8.7 — Free vs. paid agent models
+
 - **As a** developer, **I want** to publish agents as free, one-time purchase, or subscription **so that** I can monetize my work.
 - **Acceptance Criteria:**
   1. Pricing model selection during publication: Free, Paid (one-time), Subscription (monthly/yearly).
@@ -992,6 +1091,7 @@
 - **Priority:** P2
 
 ### Story 8.8 — Agent collection / bundles
+
 - **As a** developer, **I want** to create curated collections of marketplace agents **so that** users can install a full toolchain in one click.
 - **Acceptance Criteria:**
   1. Collection editor: name, description, list of agents with optional versions.
@@ -1001,6 +1101,7 @@
 - **Priority:** P3
 
 ### Story 8.9 — Screenshots & demo video
+
 - **As a** developer, **I want** to add screenshots and a demo video to my marketplace listing **so that** users can see the agent in action.
 - **Acceptance Criteria:**
   1. Up to 5 screenshots (PNG/JPG, max 5 MB each).
@@ -1010,6 +1111,7 @@
 - **Priority:** P2
 
 ### Story 8.10 — Dependency & compatibility checker
+
 - **As a** developer, **I want** the marketplace to check compatibility before install **so that** I don't install an agent that requires unavailable tools or models.
 - **Acceptance Criteria:**
   1. Before install, a compatibility report lists: required tools, models, and platform version.
@@ -1019,6 +1121,7 @@
 - **Priority:** P1
 
 ### Story 8.11 — Reporting & takedown
+
 - **As an** admin, **I want** to review reported agents and issue takedowns **so that** the marketplace remains safe and compliant.
 - **Acceptance Criteria:**
   1. Users can report agents for policy violations (spam, malware, copyright).
@@ -1028,6 +1131,7 @@
 - **Priority:** P0
 
 ### Story 8.12 — Featured & promoted slots
+
 - **As an** admin, **I want** to feature or promote specific agents on the marketplace homepage **so that** I can highlight high-quality or strategic agents.
 - **Acceptance Criteria:**
   1. Admin can toggle "Featured" on any published agent.
@@ -1037,6 +1141,7 @@
 - **Priority:** P2
 
 ### Story 8.13 — Marketplace localizations
+
 - **As an** admin, **I want** the marketplace UI and agent listings to support multiple languages **so that** the platform is accessible globally.
 - **Acceptance Criteria:**
   1. Marketplace UI uses i18n (English, Spanish, Japanese, German, French at launch).
@@ -1046,6 +1151,7 @@
 - **Priority:** P3
 
 ### Story 8.14 — End-user license agreement (EULA) management
+
 - **As a** developer, **I want** to attach a EULA to my marketplace agent **so that** legal terms are accepted before installation.
 - **Acceptance Criteria:**
   1. EULA can be uploaded as text or markdown during publication.
@@ -1059,6 +1165,7 @@
 ## Epic 9: Workflow Builder
 
 ### Story 9.1 — Visual workflow canvas
+
 - **As a** developer, **I want** a drag-and-drop visual canvas to build workflows **so that** I can design multi-step automation without writing code.
 - **Acceptance Criteria:**
   1. Canvas supports drag-and-drop of nodes from a palette.
@@ -1068,6 +1175,7 @@
 - **Priority:** P0
 
 ### Story 9.2 — Node types (Start, Action, Condition, End)
+
 - **As a** developer, **I want** different node types for triggering, executing, branching, and ending workflows **so that** I can express all common flow patterns.
 - **Acceptance Criteria:**
   1. Start node: manual trigger, cron, or webhook.
@@ -1078,6 +1186,7 @@
 - **Priority:** P0
 
 ### Story 9.3 — Variable & data flow between nodes
+
 - **As a** developer, **I want** to pass variables between workflow nodes **so that** output from one step can be used as input to the next.
 - **Acceptance Criteria:**
   1. Each node declares input and output variables.
@@ -1087,6 +1196,7 @@
 - **Priority:** P0
 
 ### Story 9.4 — Parallel execution branches
+
 - **As a** developer, **I want** to run multiple branches in parallel **so that** I can speed up workflows with independent tasks.
 - **Acceptance Criteria:**
   1. Condition nodes can fork into multiple parallel paths.
@@ -1096,6 +1206,7 @@
 - **Priority:** P1
 
 ### Story 9.5 — Loops & iteration
+
 - **As a** developer, **I want** to iterate over arrays or repeat a sub-workflow N times **so that** I can process batches of data.
 - **Acceptance Criteria:**
   1. For-each node iterates over an array input, executing its child workflow per item.
@@ -1105,6 +1216,7 @@
 - **Priority:** P1
 
 ### Story 9.6 — Sub-workflow / workflow composition
+
 - **As a** developer, **I want** to call one workflow from another **so that** I can reuse common workflow patterns.
 - **Acceptance Criteria:**
   1. "Call Workflow" action node accepts a workflow ID and input parameters.
@@ -1114,6 +1226,7 @@
 - **Priority:** P2
 
 ### Story 9.7 — Error handling per node
+
 - **As a** developer, **I want** to configure error handling per node (retry, continue, abort) **so that** workflows are resilient to transient failures.
 - **Acceptance Criteria:**
   1. Error handler tab in each node's configuration panel.
@@ -1123,6 +1236,7 @@
 - **Priority:** P1
 
 ### Story 9.8 — Workflow templates
+
 - **As a** developer, **I want** to start from pre-built workflow templates **so that** I don't have to design common patterns from scratch.
 - **Acceptance Criteria:**
   1. Template gallery with categories: Data Pipeline, CI/CD, Reporting, Monitoring.
@@ -1132,6 +1246,7 @@
 - **Priority:** P1
 
 ### Story 9.9 — Workflow testing & debug mode
+
 - **As a** developer, **I want** to run a workflow in debug mode with step-through execution **so that** I can inspect state at each node and fix issues.
 - **Acceptance Criteria:**
   1. Debug mode pauses execution at each node.
@@ -1141,6 +1256,7 @@
 - **Priority:** P1
 
 ### Story 9.10 — Schedule & triggers
+
 - **As a** developer, **I want** to trigger workflows on a schedule, via webhook, or on an event **so that** workflows run automatically when conditions are met.
 - **Acceptance Criteria:**
   1. Schedule: cron expression with timezone selector.
@@ -1150,6 +1266,7 @@
 - **Priority:** P1
 
 ### Story 9.11 — Workflow versioning & rollback
+
 - **As a** developer, **I want** workflow versions to be automatically saved and allow rollback **so that** I can revert breaking changes.
 - **Acceptance Criteria:**
   1. Each publish creates an immutable version snapshot.
@@ -1159,6 +1276,7 @@
 - **Priority:** P2
 
 ### Story 9.12 — Notification nodes
+
 - **As a** developer, **I want** notification nodes that send alerts via Slack, email, or SMS **so that** I am informed of workflow results.
 - **Acceptance Criteria:**
   1. Slack node: message text, channel, optional file attachment.
@@ -1168,6 +1286,7 @@
 - **Priority:** P2
 
 ### Story 9.13 — Human approval step
+
 - **As a** developer, **I want** a human approval node that pauses the workflow until a designated person approves or rejects **so that** critical decisions require human judgment.
 - **Acceptance Criteria:**
   1. Approval node sends notification to approver with context.
@@ -1177,6 +1296,7 @@
 - **Priority:** P1
 
 ### Story 9.14 — Workflow export/import
+
 - **As a** developer, **I want** to export a workflow as a JSON file and import it into another workspace **so that** I can share workflows across environments.
 - **Acceptance Criteria:**
   1. Export includes all nodes, edges, variable mappings, and configurations.
@@ -1186,6 +1306,7 @@
 - **Priority:** P2
 
 ### Story 9.15 — Execution history & replay
+
 - **As a** developer, **I want** to view the execution history of all workflow runs and replay any past run **so that** I can audit behavior and reproduce issues.
 - **Acceptance Criteria:**
   1. Execution history list with status, duration, trigger type, and start time.
@@ -1199,6 +1320,7 @@
 ## Epic 10: Dashboard & Analytics
 
 ### Story 10.1 — Home dashboard overview
+
 - **As a** developer, **I want** a home dashboard showing key metrics at a glance **so that** I can quickly assess platform health and activity.
 - **Acceptance Criteria:**
   1. Widgets: active agents, tasks today, success rate, total cost.
@@ -1208,6 +1330,7 @@
 - **Priority:** P0
 
 ### Story 10.2 — Agent-level analytics
+
 - **As a** developer, **I want** a per-agent analytics page with usage metrics **so that** I can evaluate each agent's performance and cost.
 - **Acceptance Criteria:**
   1. Metrics: task count, token usage (input/output), cost, average latency, error rate.
@@ -1217,6 +1340,7 @@
 - **Priority:** P1
 
 ### Story 10.3 — Cost tracking & budget alerts
+
 - **As an** admin, **I want** to set workspace-level budgets and receive alerts when thresholds are exceeded **so that** I can control spending.
 - **Acceptance Criteria:**
   1. Monthly budget input (USD) in workspace settings.
@@ -1226,6 +1350,7 @@
 - **Priority:** P1
 
 ### Story 10.4 — Token usage breakdown
+
 - **As a** developer, **I want** a token usage breakdown by agent, tool, and model **so that** I can identify the biggest cost drivers.
 - **Acceptance Criteria:**
   1. Stacked bar chart: input vs. output tokens per entity.
@@ -1235,6 +1360,7 @@
 - **Priority:** P2
 
 ### Story 10.5 — Error & failure analytics
+
 - **As a** developer, **I want** an error analytics page showing failure rates and common error types **so that** I can prioritize debugging.
 - **Acceptance Criteria:**
   1. Error rate trend chart.
@@ -1244,6 +1370,7 @@
 - **Priority:** P1
 
 ### Story 10.6 — Real-time activity feed
+
 - **As a** developer, **I want** a real-time activity feed showing task starts, completions, and failures **so that** I can monitor live operations.
 - **Acceptance Criteria:**
   1. Feed updates via SSE (server-sent events) with no page refresh.
@@ -1253,6 +1380,7 @@
 - **Priority:** P1
 
 ### Story 10.7 — Custom dashboard widgets
+
 - **As a** developer, **I want** to create custom dashboards with the widgets I choose **so that** I can tailor my view to my priorities.
 - **Acceptance Criteria:**
   1. Add/remove/rearrange widgets via a grid layout editor.
@@ -1262,6 +1390,7 @@
 - **Priority:** P2
 
 ### Story 10.8 — Scheduled report delivery
+
 - **As an** admin, **I want** to schedule periodic analytics reports to be emailed to stakeholders **so that** the team stays informed without logging in.
 - **Acceptance Criteria:**
   1. Report builder: select metrics, time range, format (PDF/CSV), recipients.
@@ -1271,6 +1400,7 @@
 - **Priority:** P2
 
 ### Story 10.9 — Audit log
+
 - **As an** admin, **I want** a searchable audit log of all user actions (create, update, delete) **so that** I can track changes for compliance.
 - **Acceptance Criteria:**
   1. Log entries: timestamp, user, action type, resource, old/new values (diff).
@@ -1280,6 +1410,7 @@
 - **Priority:** P1
 
 ### Story 10.10 — LLM response quality scoring
+
 - **As a** developer, **I want** to view a quality score for my agent's responses based on automated evaluation (helpfulness, accuracy, safety) **so that** I can monitor output quality.
 - **Acceptance Criteria:**
   1. Automated evaluator compares agent responses against reference criteria.
@@ -1289,6 +1420,7 @@
 - **Priority:** P3
 
 ### Story 10.11 — Team workspace usage report
+
 - **As an** admin, **I want** a workspace usage report showing activity by team member **so that** I can see how the team is utilizing the platform.
 - **Acceptance Criteria:**
   1. Per-user metrics: agents created, tasks run, tokens consumed, tools used.
@@ -1298,6 +1430,7 @@
 - **Priority:** P2
 
 ### Story 10.12 — Export analytics to external tools
+
 - **As a** developer, **I want** to export analytics data to external tools (Datadog, Grafana, Prometheus) **so that** I can correlate agent metrics with my infrastructure.
 - **Acceptance Criteria:**
   1. Prometheus metrics endpoint exposing key counters and histograms.
@@ -1308,4 +1441,4 @@
 
 ---
 
-*End of User Stories v1.0*
+_End of User Stories v1.0_

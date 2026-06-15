@@ -43,10 +43,7 @@ export class AgentManager {
     return this.agents.delete(id);
   }
 
-  async run(
-    config: Omit<AgentConfig, 'id'>,
-    input: string,
-  ): Promise<AgentRunResult> {
+  async run(config: Omit<AgentConfig, 'id'>, input: string): Promise<AgentRunResult> {
     const id = nanoid();
     const fullConfig: AgentConfig = { ...config, id };
     const agent = this.create(fullConfig);

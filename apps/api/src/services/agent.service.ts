@@ -48,11 +48,7 @@ export const agentService = {
     const agent = await prisma.agent.findFirst({
       where: {
         id,
-        OR: [
-          { ownerId: userId },
-          { team: { members: { some: { userId } } } },
-          { isPublic: true },
-        ],
+        OR: [{ ownerId: userId }, { team: { members: { some: { userId } } } }, { isPublic: true }],
         deletedAt: null,
       },
       include: {

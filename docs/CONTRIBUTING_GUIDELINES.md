@@ -38,14 +38,15 @@ Instances of abusive, harassing, or otherwise unacceptable behavior may be repor
 
 ### 2.1 Prerequisites
 
-| Dependency | Version   | Purpose                         |
-|------------|-----------|---------------------------------|
-| Node.js    | >= 22.x   | Runtime for frontend & backend  |
-| pnpm       | >= 9.x    | Package manager (monorepo)      |
-| Docker     | >= 24.x   | Local PostgreSQL, Redis         |
-| Git        | >= 2.40   | Version control                 |
+| Dependency | Version | Purpose                        |
+| ---------- | ------- | ------------------------------ |
+| Node.js    | >= 22.x | Runtime for frontend & backend |
+| pnpm       | >= 9.x  | Package manager (monorepo)     |
+| Docker     | >= 24.x | Local PostgreSQL, Redis        |
+| Git        | >= 2.40 | Version control                |
 
 Optional but recommended:
+
 - **Ollama** — For running local LLMs during development
 - **Docker Compose** — For spinning up the full stack locally
 
@@ -97,14 +98,14 @@ git checkout -b feat/my-feature-name
 
 Branch naming convention:
 
-| Prefix       | Purpose                       | Example                        |
-|--------------|-------------------------------|--------------------------------|
-| `feat/`      | New feature                   | `feat/agent-memory-persistence`|
-| `fix/`       | Bug fix                       | `fix/rate-limit-header`        |
-| `docs/`      | Documentation changes         | `docs/api-memory-endpoint`     |
-| `chore/`     | Maintenance, deps, config     | `chore/update-docker-compose`  |
-| `refactor/`  | Code restructuring            | `refactor/execution-engine`    |
-| `test/`      | Adding or fixing tests        | `test/agent-service-unit`      |
+| Prefix      | Purpose                   | Example                         |
+| ----------- | ------------------------- | ------------------------------- |
+| `feat/`     | New feature               | `feat/agent-memory-persistence` |
+| `fix/`      | Bug fix                   | `fix/rate-limit-header`         |
+| `docs/`     | Documentation changes     | `docs/api-memory-endpoint`      |
+| `chore/`    | Maintenance, deps, config | `chore/update-docker-compose`   |
+| `refactor/` | Code restructuring        | `refactor/execution-engine`     |
+| `test/`     | Adding or fixing tests    | `test/agent-service-unit`       |
 
 ### 3.3 Make Your Changes
 
@@ -192,11 +193,11 @@ We require tests for all new code. We use **Vitest** as our test runner and **Pl
 
 ### 5.1 Test Types
 
-| Type           | Location                        | Coverage Target | Run Command             |
-|----------------|---------------------------------|-----------------|-------------------------|
-| Unit tests     | Co-located (`*.test.ts`)        | >= 80%          | `pnpm test`             |
-| Integration    | `packages/*/tests/integration/` | Critical paths  | `pnpm test:integration` |
-| E2E            | `e2e/`                          | Core flows      | `pnpm test:e2e`         |
+| Type        | Location                        | Coverage Target | Run Command             |
+| ----------- | ------------------------------- | --------------- | ----------------------- |
+| Unit tests  | Co-located (`*.test.ts`)        | >= 80%          | `pnpm test`             |
+| Integration | `packages/*/tests/integration/` | Critical paths  | `pnpm test:integration` |
+| E2E         | `e2e/`                          | Core flows      | `pnpm test:e2e`         |
 
 ### 5.2 Writing Tests
 
@@ -307,17 +308,17 @@ We enforce **Conventional Commits** (v1.0.0) specification for all commits. This
 
 ### 8.2 Types
 
-| Type       | Usage                                       |
-|------------|---------------------------------------------|
-| `feat`     | A new feature                               |
-| `fix`      | A bug fix                                   |
-| `docs`     | Documentation only changes                  |
-| `style`    | Formatting, missing semicolons, etc.        |
-| `refactor` | Code restructuring without behavior change  |
-| `perf`     | Performance improvement                     |
-| `test`     | Adding or fixing tests                      |
-| `chore`    | Build process, dependencies, tooling        |
-| `ci`       | CI/CD configuration changes                 |
+| Type       | Usage                                      |
+| ---------- | ------------------------------------------ |
+| `feat`     | A new feature                              |
+| `fix`      | A bug fix                                  |
+| `docs`     | Documentation only changes                 |
+| `style`    | Formatting, missing semicolons, etc.       |
+| `refactor` | Code restructuring without behavior change |
+| `perf`     | Performance improvement                    |
+| `test`     | Adding or fixing tests                     |
+| `chore`    | Build process, dependencies, tooling       |
+| `ci`       | CI/CD configuration changes                |
 
 ### 8.3 Scopes
 
@@ -380,7 +381,7 @@ Use the **Bug Report** template. Include:
 Maintainers will apply labels:
 
 | Label                | Meaning                               |
-|----------------------|---------------------------------------|
+| -------------------- | ------------------------------------- |
 | `bug`                | Confirmed bug                         |
 | `good first issue`   | Suitable for new contributors         |
 | `help wanted`        | Needs community help                  |
@@ -419,12 +420,12 @@ A feature request is accepted when:
 
 ### 11.1 Communication Channels
 
-| Channel        | Purpose                                | Link                                    |
-|----------------|----------------------------------------|-----------------------------------------|
-| GitHub Issues  | Bug reports, feature requests          | [github.com/agentforge/agentforge/issues](https://github.com/agentforge/agentforge/issues) |
-| GitHub Discussions | Q&A, ideas, general chat           | [github.com/agentforge/agentforge/discussions](https://github.com/agentforge/agentforge/discussions) |
-| Discord        | Real-time chat, contributor hangouts   | [discord.gg/agentforge](https://discord.gg/agentforge) |
-| Twitter / X    | Announcements                          | [@agentforge](https://twitter.com/agentforge) |
+| Channel            | Purpose                              | Link                                                                                                 |
+| ------------------ | ------------------------------------ | ---------------------------------------------------------------------------------------------------- |
+| GitHub Issues      | Bug reports, feature requests        | [github.com/agentforge/agentforge/issues](https://github.com/agentforge/agentforge/issues)           |
+| GitHub Discussions | Q&A, ideas, general chat             | [github.com/agentforge/agentforge/discussions](https://github.com/agentforge/agentforge/discussions) |
+| Discord            | Real-time chat, contributor hangouts | [discord.gg/agentforge](https://discord.gg/agentforge)                                               |
+| Twitter / X        | Announcements                        | [@agentforge](https://twitter.com/agentforge)                                                        |
 
 ### 11.2 Contribution Etiquette
 
@@ -450,12 +451,12 @@ We believe in celebrating our contributors.
 
 ### 12.2 Badges & Swag
 
-| Milestone                              | Recognition                        |
-|----------------------------------------|------------------------------------|
-| First PR merged                        | Contributor badge on GitHub + shoutout in Discord |
-| 5+ PRs merged                          | Contributor tier on website        |
-| 10+ PRs merged / Significant RFC       | Limited-edition AgentForge T-shirt or hoodie |
-| Core maintainer                        | Invitation to maintainer team, swag pack, and conference travel support |
+| Milestone                        | Recognition                                                             |
+| -------------------------------- | ----------------------------------------------------------------------- |
+| First PR merged                  | Contributor badge on GitHub + shoutout in Discord                       |
+| 5+ PRs merged                    | Contributor tier on website                                             |
+| 10+ PRs merged / Significant RFC | Limited-edition AgentForge T-shirt or hoodie                            |
+| Core maintainer                  | Invitation to maintainer team, swag pack, and conference travel support |
 
 ### 12.3 Maintainer Track
 
@@ -463,4 +464,4 @@ Consistent high-quality contributors may be invited to become **maintainers**, w
 
 ---
 
-*Thank you for being part of AgentForge. Every contribution — no matter how small — makes this project better for everyone. Happy coding!*
+_Thank you for being part of AgentForge. Every contribution — no matter how small — makes this project better for everyone. Happy coding!_

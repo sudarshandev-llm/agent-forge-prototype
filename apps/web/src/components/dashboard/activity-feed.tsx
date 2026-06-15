@@ -5,11 +5,27 @@ import { formatDate } from '@/lib/utils';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-import { Bot, Users, Workflow, Play, Settings, AlertCircle, CheckCircle2, LucideIcon } from 'lucide-react';
+import {
+  Bot,
+  Users,
+  Workflow,
+  Play,
+  Settings,
+  AlertCircle,
+  CheckCircle2,
+  LucideIcon,
+} from 'lucide-react';
 
 interface Activity {
   id: string;
-  type: 'agent_created' | 'agent_executed' | 'team_updated' | 'workflow_run' | 'settings_changed' | 'error' | 'success';
+  type:
+    | 'agent_created'
+    | 'agent_executed'
+    | 'team_updated'
+    | 'workflow_run'
+    | 'settings_changed'
+    | 'error'
+    | 'success';
   user: {
     name: string;
     avatar?: string;
@@ -48,7 +64,11 @@ export function ActivityFeed({ activities, className }: ActivityFeedProps) {
               <Avatar className="h-8 w-8">
                 <AvatarImage src={activity.user.avatar} />
                 <AvatarFallback className="text-xs">
-                  {activity.user.name.split(' ').map(n => n[0]).join('').toUpperCase()}
+                  {activity.user.name
+                    .split(' ')
+                    .map((n) => n[0])
+                    .join('')
+                    .toUpperCase()}
                 </AvatarFallback>
               </Avatar>
               <div className="flex-1 space-y-1">
@@ -58,8 +78,11 @@ export function ActivityFeed({ activities, className }: ActivityFeedProps) {
                   {activity.status && (
                     <Badge
                       variant={
-                        activity.status === 'success' ? 'success' :
-                        activity.status === 'failed' ? 'destructive' : 'secondary'
+                        activity.status === 'success'
+                          ? 'success'
+                          : activity.status === 'failed'
+                            ? 'destructive'
+                            : 'secondary'
                       }
                       className="ml-auto text-[10px]"
                     >

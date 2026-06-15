@@ -97,14 +97,18 @@ export default function WorkflowDetailPage() {
               <h1 className="text-lg font-semibold">Customer Onboarding</h1>
               <Badge variant="success">Active</Badge>
             </div>
-            <p className="text-xs text-muted-foreground">
-              Automated onboarding with verification
-            </p>
+            <p className="text-xs text-muted-foreground">Automated onboarding with verification</p>
           </div>
         </div>
 
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" className="gap-2" onClick={handleSave} disabled={isSaving}>
+          <Button
+            variant="outline"
+            size="sm"
+            className="gap-2"
+            onClick={handleSave}
+            disabled={isSaving}
+          >
             <Save className="h-4 w-4" />
             {isSaving ? 'Saving...' : 'Save'}
           </Button>
@@ -144,11 +148,7 @@ export default function WorkflowDetailPage() {
           </div>
         </aside>
 
-        <WorkflowCanvas
-          nodes={nodes}
-          onNodesChange={setNodes}
-          onNodeSelect={setSelectedNode}
-        />
+        <WorkflowCanvas nodes={nodes} onNodesChange={setNodes} onNodeSelect={setSelectedNode} />
 
         {selectedNodeData && (
           <aside className="hidden w-80 shrink-0 border-l bg-muted/30 lg:block">
@@ -169,7 +169,9 @@ export default function WorkflowDetailPage() {
 
               <div className="space-y-1">
                 <label className="text-xs font-medium text-muted-foreground">Type</label>
-                <p className="text-sm capitalize">{selectedNodeData.type.replace(/([A-Z])/g, ' $1').trim()}</p>
+                <p className="text-sm capitalize">
+                  {selectedNodeData.type.replace(/([A-Z])/g, ' $1').trim()}
+                </p>
               </div>
 
               <div className="space-y-1">

@@ -38,28 +38,33 @@ Enhancement suggestions are tracked as GitHub issues. When creating an enhanceme
 ### Local Development
 
 1. Fork and clone the repository:
+
    ```bash
    git clone https://github.com/your-username/AgentForge.git
    cd AgentForge
    ```
 
 2. Install dependencies:
+
    ```bash
    pnpm install
    ```
 
 3. Set up environment variables:
+
    ```bash
    cp .env.example .env.local
    # Edit .env.local with your configuration
    ```
 
 4. Run database migrations:
+
    ```bash
    pnpm db:migrate
    ```
 
 5. Seed development data (optional):
+
    ```bash
    pnpm db:seed
    ```
@@ -138,17 +143,17 @@ We follow **Conventional Commits** specification:
 
 ### Types
 
-| Type       | Description                                    |
-| ---------- | ---------------------------------------------- |
-| `feat`     | A new feature                                  |
-| `fix`      | A bug fix                                      |
-| `docs`     | Documentation only changes                     |
-| `style`    | Changes that do not affect the meaning of code |
+| Type       | Description                                               |
+| ---------- | --------------------------------------------------------- |
+| `feat`     | A new feature                                             |
+| `fix`      | A bug fix                                                 |
+| `docs`     | Documentation only changes                                |
+| `style`    | Changes that do not affect the meaning of code            |
 | `refactor` | A code change that neither fixes a bug nor adds a feature |
-| `perf`     | A code change that improves performance        |
-| `test`     | Adding missing or correcting existing tests    |
-| `chore`    | Changes to build process or auxiliary tools    |
-| `ci`       | Changes to CI configuration files and scripts  |
+| `perf`     | A code change that improves performance                   |
+| `test`     | Adding missing or correcting existing tests               |
+| `chore`    | Changes to build process or auxiliary tools               |
+| `ci`       | Changes to CI configuration files and scripts             |
 
 ### Examples
 
@@ -162,6 +167,7 @@ test(workflows): add integration tests for branching
 ## Pull Request Process
 
 1. Create a feature branch from `main`:
+
    ```bash
    git checkout -b feat/your-feature-name
    ```
@@ -171,21 +177,25 @@ test(workflows): add integration tests for branching
 3. Write or update tests as needed
 
 4. Ensure all tests pass:
+
    ```bash
    pnpm test
    ```
 
 5. Run linting and type checking:
+
    ```bash
    pnpm lint && pnpm typecheck
    ```
 
 6. Commit your changes using conventional commit messages:
+
    ```bash
    git commit -m "feat(scope): your message"
    ```
 
 7. Push to your fork and submit a pull request:
+
    ```bash
    git push origin feat/your-feature-name
    ```
@@ -222,6 +232,7 @@ For significant architectural decisions, please create an **Architecture Decisio
 ## Questions?
 
 If you have questions about contributing, feel free to:
+
 - Open a [Discussion](https://github.com/agentforge/agentforge/discussions)
 - Join our [Discord community](https://discord.gg/agentforge)
 - Email us at contributors@agentforge.dev

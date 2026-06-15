@@ -1,4 +1,3 @@
-
 <p align="center">
   <pre>
     _    ____  _  _    ___   __ _  ___   ___   ___
@@ -136,21 +135,21 @@ AgentForge follows a **modular, microservices-inspired architecture** built on a
 
 ## 🛠 Tech Stack
 
-| Layer | Technology | Purpose |
-|-------|-----------|---------|
-| **Frontend** | Next.js 15 (App Router), React 19, Tailwind CSS, Radix UI | Web application UI |
-| **Type Safety** | TypeScript (Strict), tRPC, Zod | End-to-end type safety |
-| **Backend** | Express.js, tRPC, Node.js 20+ | API and server logic |
-| **Database** | PostgreSQL 15+, Drizzle ORM, pgvector | Primary data store & vector embeddings |
-| **Cache** | Redis 7+ (Upstash/ioredis) | Session cache, rate limiting, pub/sub |
-| **Queue** | BullMQ | Async job processing & scheduling |
-| **Auth** | NextAuth.js v5, JWT, OAuth | Authentication & authorization |
-| **Storage** | Local filesystem, S3-compatible (AWS, R2, MinIO) | File & asset storage |
-| **LLM Clients** | AI SDK (Vercel), LangChain, OpenRouter | Multi-provider LLM integration |
-| **Monitoring** | OpenTelemetry, Sentry, Pino | Logging, tracing, error tracking |
-| **Testing** | Vitest, Playwright, MSW | Unit, E2E, and API mocking |
-| **CI/CD** | GitHub Actions, Docker, Docker Compose | Build, test, deploy |
-| **Deployment** | Docker, Vercel, Railway, Render, self-hosted | Platform deployment |
+| Layer           | Technology                                                | Purpose                                |
+| --------------- | --------------------------------------------------------- | -------------------------------------- |
+| **Frontend**    | Next.js 15 (App Router), React 19, Tailwind CSS, Radix UI | Web application UI                     |
+| **Type Safety** | TypeScript (Strict), tRPC, Zod                            | End-to-end type safety                 |
+| **Backend**     | Express.js, tRPC, Node.js 20+                             | API and server logic                   |
+| **Database**    | PostgreSQL 15+, Drizzle ORM, pgvector                     | Primary data store & vector embeddings |
+| **Cache**       | Redis 7+ (Upstash/ioredis)                                | Session cache, rate limiting, pub/sub  |
+| **Queue**       | BullMQ                                                    | Async job processing & scheduling      |
+| **Auth**        | NextAuth.js v5, JWT, OAuth                                | Authentication & authorization         |
+| **Storage**     | Local filesystem, S3-compatible (AWS, R2, MinIO)          | File & asset storage                   |
+| **LLM Clients** | AI SDK (Vercel), LangChain, OpenRouter                    | Multi-provider LLM integration         |
+| **Monitoring**  | OpenTelemetry, Sentry, Pino                               | Logging, tracing, error tracking       |
+| **Testing**     | Vitest, Playwright, MSW                                   | Unit, E2E, and API mocking             |
+| **CI/CD**       | GitHub Actions, Docker, Docker Compose                    | Build, test, deploy                    |
+| **Deployment**  | Docker, Vercel, Railway, Render, self-hosted              | Platform deployment                    |
 
 ---
 
@@ -158,11 +157,11 @@ AgentForge follows a **modular, microservices-inspired architecture** built on a
 
 > Screenshots will be available in the `/apps/web/public/screenshots` directory once generated.
 
-| Dashboard | Agent Builder | Workflow Editor |
-|:---------:|:-------------:|:---------------:|
+|                        Dashboard                        |                          Agent Builder                          |                       Workflow Editor                        |
+| :-----------------------------------------------------: | :-------------------------------------------------------------: | :----------------------------------------------------------: |
 | ![Dashboard](apps/web/public/screenshots/dashboard.png) | ![Agent Builder](apps/web/public/screenshots/agent-builder.png) | ![Workflow](apps/web/public/screenshots/workflow-editor.png) |
-| **Chat Interface** | **Marketplace** | **Analytics** |
-| ![Chat](apps/web/public/screenshots/chat-interface.png) | ![Marketplace](apps/web/public/screenshots/marketplace.png) | ![Analytics](apps/web/public/screenshots/analytics.png) |
+|                   **Chat Interface**                    |                         **Marketplace**                         |                        **Analytics**                         |
+| ![Chat](apps/web/public/screenshots/chat-interface.png) |   ![Marketplace](apps/web/public/screenshots/marketplace.png)   |   ![Analytics](apps/web/public/screenshots/analytics.png)    |
 
 ---
 
@@ -244,22 +243,22 @@ Visit **[http://localhost:3000](http://localhost:3000)** to access AgentForge.
 ### Creating an Agent
 
 ```typescript
-import { AgentForge } from "@agentforge/core";
+import { AgentForge } from '@agentforge/core';
 
 const forge = new AgentForge();
 
 const agent = await forge.agents.create({
-  name: "Code Reviewer",
-  persona: "Senior software engineer with expertise in TypeScript and React",
-  model: "gpt-4o",
-  tools: ["github", "code-analysis", "linting"],
+  name: 'Code Reviewer',
+  persona: 'Senior software engineer with expertise in TypeScript and React',
+  model: 'gpt-4o',
+  tools: ['github', 'code-analysis', 'linting'],
   memory: {
-    type: "conversation",
+    type: 'conversation',
     ttl: 3600,
   },
 });
 
-await agent.run("Review the latest PR in the main repository");
+await agent.run('Review the latest PR in the main repository');
 ```
 
 ### Building a Workflow
@@ -268,15 +267,15 @@ Create visual workflows in the built-in editor, or define them programmatically:
 
 ```typescript
 const workflow = await forge.workflows.create({
-  name: "Bug Triage Pipeline",
+  name: 'Bug Triage Pipeline',
   steps: [
-    { agent: "triage-agent", action: "classify_issue" },
-    { agent: "research-agent", action: "find_similar_bugs" },
-    { agent: "reviewer-agent", action: "assess_severity" },
-    { agent: "assigner-agent", action: "assign_developer" },
+    { agent: 'triage-agent', action: 'classify_issue' },
+    { agent: 'research-agent', action: 'find_similar_bugs' },
+    { agent: 'reviewer-agent', action: 'assess_severity' },
+    { agent: 'assigner-agent', action: 'assign_developer' },
   ],
   onComplete: {
-    webhook: "https://hooks.slack.com/services/...",
+    webhook: 'https://hooks.slack.com/services/...',
   },
 });
 ```
@@ -352,16 +351,16 @@ agentforge/
 
 AgentForge exposes a comprehensive REST and tRPC API. Key endpoints:
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/agents` | CRUD | Manage agents (create, read, update, delete) |
-| `/api/agents/:id/run` | POST | Execute an agent with input |
-| `/api/teams` | CRUD | Manage agent teams |
-| `/api/workflows` | CRUD | Manage workflows |
-| `/api/workflows/:id/execute` | POST | Trigger a workflow execution |
-| `/api/tools` | GET | List available tools |
-| `/api/marketplace/packages` | GET | Browse marketplace |
-| `/api/auth/*` | Various | Authentication endpoints |
+| Endpoint                     | Method  | Description                                  |
+| ---------------------------- | ------- | -------------------------------------------- |
+| `/api/agents`                | CRUD    | Manage agents (create, read, update, delete) |
+| `/api/agents/:id/run`        | POST    | Execute an agent with input                  |
+| `/api/teams`                 | CRUD    | Manage agent teams                           |
+| `/api/workflows`             | CRUD    | Manage workflows                             |
+| `/api/workflows/:id/execute` | POST    | Trigger a workflow execution                 |
+| `/api/tools`                 | GET     | List available tools                         |
+| `/api/marketplace/packages`  | GET     | Browse marketplace                           |
+| `/api/auth/*`                | Various | Authentication endpoints                     |
 
 Full API documentation is available in the `/docs` directory.
 
@@ -372,6 +371,7 @@ Full API documentation is available in the `/docs` directory.
 We welcome contributions from the community! See our [Contributing Guide](CONTRIBUTING.md) for detailed information.
 
 **Quick steps:**
+
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feat/amazing-feature`)
 3. Commit your changes (`git commit -m "feat: add amazing feature"`)
@@ -385,6 +385,7 @@ Please read our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing.
 ## 🗺 Roadmap
 
 ### Q1 2026 — Foundation & Core
+
 - [x] Agent creation and management engine
 - [x] Multi-LLM provider support (OpenAI, Anthropic, Google, Groq)
 - [x] Visual workflow builder
@@ -394,6 +395,7 @@ Please read our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing.
 - [x] Docker deployment
 
 ### Q2 2026 — Scale & Collaborate
+
 - [🔄] Real-time agent collaboration and communication
 - [🔄] Advanced team orchestration (debate, voting, consensus)
 - [🔄] Enterprise SSO (SAML, OIDC, LDAP)
@@ -402,6 +404,7 @@ Please read our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing.
 - [🔄] Agent analytics and cost tracking dashboard
 
 ### Q3 2026 — Ecosystem & Enterprise
+
 - [📅] Mobile companion app (React Native)
 - [📅] Custom model fine-tuning pipeline
 - [📅] Agent-to-agent communication protocol
@@ -410,6 +413,7 @@ Please read our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing.
 - [📅] Plugin SDK for third-party developers
 
 ### Q4 2026 — Platform Maturity
+
 - [📅] Agent monitoring and observability suite
 - [📅] Auto-scaling and self-healing infrastructure
 - [📅] Compliance certifications (SOC 2, GDPR)
@@ -468,6 +472,7 @@ AgentForge stands on the shoulders of giants. Special thanks to:
 ## 📋 Repository Topics
 
 When setting up this repository on GitHub, add these topics:
+
 - `ai-agents`
 - `agent-framework`
 - `llm`

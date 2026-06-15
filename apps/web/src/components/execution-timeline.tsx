@@ -22,10 +22,26 @@ interface ExecutionTimelineProps {
 }
 
 const stepColors: Record<TimelineStep['type'], { bg: string; text: string; border: string }> = {
-  thought: { bg: 'bg-blue-50 dark:bg-blue-950', text: 'text-blue-600 dark:text-blue-400', border: 'border-blue-200 dark:border-blue-800' },
-  action: { bg: 'bg-amber-50 dark:bg-amber-950', text: 'text-amber-600 dark:text-amber-400', border: 'border-amber-200 dark:border-amber-800' },
-  observation: { bg: 'bg-purple-50 dark:bg-purple-950', text: 'text-purple-600 dark:text-purple-400', border: 'border-purple-200 dark:border-purple-800' },
-  result: { bg: 'bg-green-50 dark:bg-green-950', text: 'text-green-600 dark:text-green-400', border: 'border-green-200 dark:border-green-800' },
+  thought: {
+    bg: 'bg-blue-50 dark:bg-blue-950',
+    text: 'text-blue-600 dark:text-blue-400',
+    border: 'border-blue-200 dark:border-blue-800',
+  },
+  action: {
+    bg: 'bg-amber-50 dark:bg-amber-950',
+    text: 'text-amber-600 dark:text-amber-400',
+    border: 'border-amber-200 dark:border-amber-800',
+  },
+  observation: {
+    bg: 'bg-purple-50 dark:bg-purple-950',
+    text: 'text-purple-600 dark:text-purple-400',
+    border: 'border-purple-200 dark:border-purple-800',
+  },
+  result: {
+    bg: 'bg-green-50 dark:bg-green-950',
+    text: 'text-green-600 dark:text-green-400',
+    border: 'border-green-200 dark:border-green-800',
+  },
 };
 
 const stepIcons = {
@@ -59,11 +75,16 @@ export function ExecutionTimeline({ steps, className }: ExecutionTimelineProps) 
         return (
           <Card
             key={step.id}
-            className={cn('overflow-hidden transition-all cursor-pointer hover:shadow-sm', colors.border)}
+            className={cn(
+              'overflow-hidden transition-all cursor-pointer hover:shadow-sm',
+              colors.border,
+            )}
             onClick={() => setExpandedStep(isExpanded ? null : step.id)}
           >
             <div className={cn('flex items-center gap-3 p-3', colors.bg)}>
-              <div className={cn('flex h-8 w-8 items-center justify-center rounded-full', colors.text)}>
+              <div
+                className={cn('flex h-8 w-8 items-center justify-center rounded-full', colors.text)}
+              >
                 {step.status === 'running' ? (
                   <Loader2 className="h-4 w-4 animate-spin" />
                 ) : step.status === 'failed' ? (
@@ -77,8 +98,11 @@ export function ExecutionTimeline({ steps, className }: ExecutionTimelineProps) 
                   <span className="text-sm font-medium capitalize">{step.type}</span>
                   <Badge
                     variant={
-                      step.status === 'completed' ? 'success' :
-                      step.status === 'failed' ? 'destructive' : 'secondary'
+                      step.status === 'completed'
+                        ? 'success'
+                        : step.status === 'failed'
+                          ? 'destructive'
+                          : 'secondary'
                     }
                     className="text-[10px]"
                   >

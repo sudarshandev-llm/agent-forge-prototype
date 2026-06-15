@@ -17,11 +17,45 @@ const mockStats = {
 };
 
 const mockActivity = [
-  { id: '1', type: 'agent_executed' as const, user: { name: 'Alice Chen' }, description: 'Ran Customer Support Agent for ticket #1234', timestamp: new Date(Date.now() - 60000).toISOString(), status: 'success' as const },
-  { id: '2', type: 'agent_created' as const, user: { name: 'Bob Smith' }, description: 'Created new Data Analyst agent', timestamp: new Date(Date.now() - 3600000).toISOString(), status: 'success' as const },
-  { id: '3', type: 'workflow_run' as const, user: { name: 'Carol Davis' }, description: 'Content Review Pipeline completed', timestamp: new Date(Date.now() - 7200000).toISOString(), status: 'success' as const },
-  { id: '4', type: 'team_updated' as const, user: { name: 'David Lee' }, description: 'Added 2 members to Engineering team', timestamp: new Date(Date.now() - 14400000).toISOString() },
-  { id: '5', type: 'error' as const, user: { name: 'Eve Wilson' }, description: 'Web Scraper agent failed - rate limit exceeded', timestamp: new Date(Date.now() - 28800000).toISOString(), status: 'failed' as const },
+  {
+    id: '1',
+    type: 'agent_executed' as const,
+    user: { name: 'Alice Chen' },
+    description: 'Ran Customer Support Agent for ticket #1234',
+    timestamp: new Date(Date.now() - 60000).toISOString(),
+    status: 'success' as const,
+  },
+  {
+    id: '2',
+    type: 'agent_created' as const,
+    user: { name: 'Bob Smith' },
+    description: 'Created new Data Analyst agent',
+    timestamp: new Date(Date.now() - 3600000).toISOString(),
+    status: 'success' as const,
+  },
+  {
+    id: '3',
+    type: 'workflow_run' as const,
+    user: { name: 'Carol Davis' },
+    description: 'Content Review Pipeline completed',
+    timestamp: new Date(Date.now() - 7200000).toISOString(),
+    status: 'success' as const,
+  },
+  {
+    id: '4',
+    type: 'team_updated' as const,
+    user: { name: 'David Lee' },
+    description: 'Added 2 members to Engineering team',
+    timestamp: new Date(Date.now() - 14400000).toISOString(),
+  },
+  {
+    id: '5',
+    type: 'error' as const,
+    user: { name: 'Eve Wilson' },
+    description: 'Web Scraper agent failed - rate limit exceeded',
+    timestamp: new Date(Date.now() - 28800000).toISOString(),
+    status: 'failed' as const,
+  },
 ];
 
 const usageData = Array.from({ length: 7 }, (_, i) => {
@@ -128,7 +162,9 @@ export default function DashboardPage() {
                   <XAxis
                     dataKey="date"
                     className="text-xs"
-                    tickFormatter={(v) => new Date(v).toLocaleDateString('en-US', { weekday: 'short' })}
+                    tickFormatter={(v) =>
+                      new Date(v).toLocaleDateString('en-US', { weekday: 'short' })
+                    }
                   />
                   <YAxis className="text-xs" />
                   <Tooltip

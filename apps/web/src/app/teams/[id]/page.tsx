@@ -10,7 +10,18 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Separator } from '@/components/ui/separator';
 import { ActivityFeed } from '@/components/dashboard/activity-feed';
 import { formatDate, getInitials, truncate } from '@/lib/utils';
-import { ArrowLeft, Bot, Users, Activity, UserPlus, Settings, Shield, Mail, Clock, Play } from 'lucide-react';
+import {
+  ArrowLeft,
+  Bot,
+  Users,
+  Activity,
+  UserPlus,
+  Settings,
+  Shield,
+  Mail,
+  Clock,
+  Play,
+} from 'lucide-react';
 
 interface TeamMember {
   id: string;
@@ -34,24 +45,86 @@ const mockTeam = {
   name: 'Engineering',
   description: 'Core engineering team building agent infrastructure and tooling.',
   members: [
-    { id: 'u1', name: 'Alice Chen', email: 'alice@example.com', role: 'admin' as const, joinedAt: new Date(Date.now() - 86400000 * 30).toISOString() },
-    { id: 'u2', name: 'Bob Smith', email: 'bob@example.com', role: 'member' as const, joinedAt: new Date(Date.now() - 86400000 * 20).toISOString() },
-    { id: 'u3', name: 'Carol Davis', email: 'carol@example.com', role: 'member' as const, joinedAt: new Date(Date.now() - 86400000 * 10).toISOString() },
-    { id: 'u4', name: 'David Lee', email: 'david@example.com', role: 'viewer' as const, joinedAt: new Date(Date.now() - 86400000 * 5).toISOString() },
+    {
+      id: 'u1',
+      name: 'Alice Chen',
+      email: 'alice@example.com',
+      role: 'admin' as const,
+      joinedAt: new Date(Date.now() - 86400000 * 30).toISOString(),
+    },
+    {
+      id: 'u2',
+      name: 'Bob Smith',
+      email: 'bob@example.com',
+      role: 'member' as const,
+      joinedAt: new Date(Date.now() - 86400000 * 20).toISOString(),
+    },
+    {
+      id: 'u3',
+      name: 'Carol Davis',
+      email: 'carol@example.com',
+      role: 'member' as const,
+      joinedAt: new Date(Date.now() - 86400000 * 10).toISOString(),
+    },
+    {
+      id: 'u4',
+      name: 'David Lee',
+      email: 'david@example.com',
+      role: 'viewer' as const,
+      joinedAt: new Date(Date.now() - 86400000 * 5).toISOString(),
+    },
   ],
   agents: [
-    { id: 'a1', name: 'Code Reviewer', description: 'Reviews PRs and suggests improvements', status: 'active', role: 'Developer' },
-    { id: 'a2', name: 'Bug Triage Agent', description: 'Automatically triages and categorizes bugs', status: 'active', role: 'QA' },
-    { id: 'a3', name: 'Docs Generator', description: 'Generates documentation from code', status: 'idle', role: 'Writer' },
+    {
+      id: 'a1',
+      name: 'Code Reviewer',
+      description: 'Reviews PRs and suggests improvements',
+      status: 'active',
+      role: 'Developer',
+    },
+    {
+      id: 'a2',
+      name: 'Bug Triage Agent',
+      description: 'Automatically triages and categorizes bugs',
+      status: 'active',
+      role: 'QA',
+    },
+    {
+      id: 'a3',
+      name: 'Docs Generator',
+      description: 'Generates documentation from code',
+      status: 'idle',
+      role: 'Writer',
+    },
   ],
   createdAt: new Date(Date.now() - 86400000 * 60).toISOString(),
   updatedAt: new Date(Date.now() - 86400000 * 2).toISOString(),
 };
 
 const mockActivity = [
-  { id: '1', type: 'agent_executed' as const, user: { name: 'Alice Chen' }, description: 'Code Reviewer analyzed PR #234', timestamp: new Date(Date.now() - 3600000).toISOString(), status: 'success' as const },
-  { id: '2', type: 'team_updated' as const, user: { name: 'Bob Smith' }, description: 'Added David Lee as viewer', timestamp: new Date(Date.now() - 7200000).toISOString() },
-  { id: '3', type: 'workflow_run' as const, user: { name: 'Carol Davis' }, description: 'Deployment pipeline triggered', timestamp: new Date(Date.now() - 14400000).toISOString(), status: 'success' as const },
+  {
+    id: '1',
+    type: 'agent_executed' as const,
+    user: { name: 'Alice Chen' },
+    description: 'Code Reviewer analyzed PR #234',
+    timestamp: new Date(Date.now() - 3600000).toISOString(),
+    status: 'success' as const,
+  },
+  {
+    id: '2',
+    type: 'team_updated' as const,
+    user: { name: 'Bob Smith' },
+    description: 'Added David Lee as viewer',
+    timestamp: new Date(Date.now() - 7200000).toISOString(),
+  },
+  {
+    id: '3',
+    type: 'workflow_run' as const,
+    user: { name: 'Carol Davis' },
+    description: 'Deployment pipeline triggered',
+    timestamp: new Date(Date.now() - 14400000).toISOString(),
+    status: 'success' as const,
+  },
 ];
 
 export default function TeamDetailPage() {
@@ -144,7 +217,9 @@ export default function TeamDetailPage() {
                   </div>
                 )}
               </div>
-              <p className="text-sm text-muted-foreground">{team.members.length} members · {team.agents.length} agents</p>
+              <p className="text-sm text-muted-foreground">
+                {team.members.length} members · {team.agents.length} agents
+              </p>
             </CardContent>
           </Card>
 
@@ -155,7 +230,10 @@ export default function TeamDetailPage() {
             <CardContent>
               <div className="space-y-2">
                 {team.agents.slice(0, 3).map((agent) => (
-                  <div key={agent.id} className="flex items-center justify-between rounded-lg border p-3">
+                  <div
+                    key={agent.id}
+                    className="flex items-center justify-between rounded-lg border p-3"
+                  >
                     <div className="flex items-center gap-3">
                       <Bot className="h-5 w-5 text-primary" />
                       <div>
@@ -163,7 +241,10 @@ export default function TeamDetailPage() {
                         <p className="text-xs text-muted-foreground">{agent.role}</p>
                       </div>
                     </div>
-                    <Badge variant={agent.status === 'active' ? 'success' : 'warning'} className="text-[10px]">
+                    <Badge
+                      variant={agent.status === 'active' ? 'success' : 'warning'}
+                      className="text-[10px]"
+                    >
                       {agent.status}
                     </Badge>
                   </div>
@@ -214,8 +295,7 @@ export default function TeamDetailPage() {
                         Joined {formatDate(member.joinedAt, 'relative')}
                       </span>
                       <Button variant="ghost" size="icon" className="h-8 w-8 text-destructive">
-                        <span className="sr-only">Remove</span>
-                        ×
+                        <span className="sr-only">Remove</span>×
                       </Button>
                     </div>
                   </div>
@@ -234,13 +314,20 @@ export default function TeamDetailPage() {
             <CardContent>
               <div className="space-y-2">
                 {team.agents.map((agent) => (
-                  <div key={agent.id} className="flex items-center justify-between rounded-lg border p-3 transition-colors hover:bg-muted/50">
+                  <div
+                    key={agent.id}
+                    className="flex items-center justify-between rounded-lg border p-3 transition-colors hover:bg-muted/50"
+                  >
                     <div className="flex items-center gap-3">
                       <Bot className="h-5 w-5 text-primary" />
                       <div>
                         <p className="font-medium">{agent.name}</p>
-                        <p className="text-sm text-muted-foreground">{truncate(agent.description, 80)}</p>
-                        <Badge variant="outline" className="text-[10px] mt-1">{agent.role}</Badge>
+                        <p className="text-sm text-muted-foreground">
+                          {truncate(agent.description, 80)}
+                        </p>
+                        <Badge variant="outline" className="text-[10px] mt-1">
+                          {agent.role}
+                        </Badge>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">

@@ -95,7 +95,9 @@ export async function processAgentExecution(job: Job<AgentExecutionPayload>) {
   }
 }
 
-function extractToolCalls(content: string): Array<{ name: string; parameters: Record<string, unknown> }> {
+function extractToolCalls(
+  content: string,
+): Array<{ name: string; parameters: Record<string, unknown> }> {
   const calls: Array<{ name: string; parameters: Record<string, unknown> }> = [];
   const regex = /<tool_call>\s*(\{[\s\S]*?\})\s*<\/tool_call>/g;
   let match;

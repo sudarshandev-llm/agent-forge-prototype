@@ -1,7 +1,10 @@
 import type { LLMMessage, LLMResponse } from '../../types.js';
 
 export abstract class LLMProvider {
-  abstract complete(messages: LLMMessage[], options?: Record<string, unknown>): Promise<LLMResponse>;
+  abstract complete(
+    messages: LLMMessage[],
+    options?: Record<string, unknown>,
+  ): Promise<LLMResponse>;
 
   abstract completeStream(
     messages: LLMMessage[],

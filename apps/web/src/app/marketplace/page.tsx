@@ -26,40 +26,106 @@ const sortOptions = [
 
 const mockListings: Listing[] = [
   {
-    id: '1', title: 'Customer Support Agent', description: 'AI-powered customer support agent with ticket management and smart routing.', price: 0, category: 'Agents', rating: 4.8, downloads: 12340,
-    author: { name: 'AI Labs' }, tags: ['support', 'tickets', 'chat'], featured: true,
+    id: '1',
+    title: 'Customer Support Agent',
+    description: 'AI-powered customer support agent with ticket management and smart routing.',
+    price: 0,
+    category: 'Agents',
+    rating: 4.8,
+    downloads: 12340,
+    author: { name: 'AI Labs' },
+    tags: ['support', 'tickets', 'chat'],
+    featured: true,
   },
   {
-    id: '2', title: 'Web Search Tool', description: 'Real-time web search and content extraction tool.', price: 0, category: 'Tools', rating: 4.6, downloads: 8720,
-    author: { name: 'DataForge' }, tags: ['search', 'web', 'scraping'],
+    id: '2',
+    title: 'Web Search Tool',
+    description: 'Real-time web search and content extraction tool.',
+    price: 0,
+    category: 'Tools',
+    rating: 4.6,
+    downloads: 8720,
+    author: { name: 'DataForge' },
+    tags: ['search', 'web', 'scraping'],
   },
   {
-    id: '3', title: 'Code Review Workflow', description: 'Automated code review workflow with multi-model analysis.', price: 29, category: 'Workflows', rating: 4.7, downloads: 5610,
-    author: { name: 'DevAI' }, tags: ['code', 'review', 'github'],
+    id: '3',
+    title: 'Code Review Workflow',
+    description: 'Automated code review workflow with multi-model analysis.',
+    price: 29,
+    category: 'Workflows',
+    rating: 4.7,
+    downloads: 5610,
+    author: { name: 'DevAI' },
+    tags: ['code', 'review', 'github'],
   },
   {
-    id: '4', title: 'Data Analyst Agent', description: 'Analyze datasets, generate reports, and visualize insights.', price: 49, category: 'Agents', rating: 4.9, downloads: 21500,
-    author: { name: 'DataForge' }, tags: ['analytics', 'reports', 'visualization'], featured: true,
+    id: '4',
+    title: 'Data Analyst Agent',
+    description: 'Analyze datasets, generate reports, and visualize insights.',
+    price: 49,
+    category: 'Agents',
+    rating: 4.9,
+    downloads: 21500,
+    author: { name: 'DataForge' },
+    tags: ['analytics', 'reports', 'visualization'],
+    featured: true,
   },
   {
-    id: '5', title: 'Email Template Pack', description: 'Professional email templates for customer communications.', price: 0, category: 'Templates', rating: 4.5, downloads: 15400,
-    author: { name: 'ContentLab' }, tags: ['email', 'templates', 'marketing'],
+    id: '5',
+    title: 'Email Template Pack',
+    description: 'Professional email templates for customer communications.',
+    price: 0,
+    category: 'Templates',
+    rating: 4.5,
+    downloads: 15400,
+    author: { name: 'ContentLab' },
+    tags: ['email', 'templates', 'marketing'],
   },
   {
-    id: '6', title: 'Research Assistant Agent', description: 'Deep research agent that summarizes papers and extracts insights.', price: 39, category: 'Agents', rating: 4.4, downloads: 4320,
-    author: { name: 'DeepResearch' }, tags: ['research', 'summarize', 'papers'],
+    id: '6',
+    title: 'Research Assistant Agent',
+    description: 'Deep research agent that summarizes papers and extracts insights.',
+    price: 39,
+    category: 'Agents',
+    rating: 4.4,
+    downloads: 4320,
+    author: { name: 'DeepResearch' },
+    tags: ['research', 'summarize', 'papers'],
   },
   {
-    id: '7', title: 'HTTP Request Tool', description: 'Make HTTP requests to any API with authentication support.', price: 0, category: 'Tools', rating: 4.7, downloads: 9800,
-    author: { name: 'APIConnect' }, tags: ['http', 'api', 'rest'],
+    id: '7',
+    title: 'HTTP Request Tool',
+    description: 'Make HTTP requests to any API with authentication support.',
+    price: 0,
+    category: 'Tools',
+    rating: 4.7,
+    downloads: 9800,
+    author: { name: 'APIConnect' },
+    tags: ['http', 'api', 'rest'],
   },
   {
-    id: '8', title: 'Content Generation Template', description: 'Template for AI-powered content generation workflows.', price: 19, category: 'Templates', rating: 4.3, downloads: 3210,
-    author: { name: 'ContentLab' }, tags: ['content', 'writing', 'template'],
+    id: '8',
+    title: 'Content Generation Template',
+    description: 'Template for AI-powered content generation workflows.',
+    price: 19,
+    category: 'Templates',
+    rating: 4.3,
+    downloads: 3210,
+    author: { name: 'ContentLab' },
+    tags: ['content', 'writing', 'template'],
   },
   {
-    id: '9', title: 'Deployment Pipeline', description: 'Automated CI/CD deployment workflow with approval gates.', price: 99, category: 'Workflows', rating: 4.8, downloads: 2150,
-    author: { name: 'DevOpsAI' }, tags: ['deployment', 'ci-cd', 'devops'], featured: true,
+    id: '9',
+    title: 'Deployment Pipeline',
+    description: 'Automated CI/CD deployment workflow with approval gates.',
+    price: 99,
+    category: 'Workflows',
+    rating: 4.8,
+    downloads: 2150,
+    author: { name: 'DevOpsAI' },
+    tags: ['deployment', 'ci-cd', 'devops'],
+    featured: true,
   },
 ];
 
@@ -72,11 +138,13 @@ export default function MarketplacePage() {
   const filtered = useMemo(() => {
     return mockListings
       .filter((l) => {
-        const matchesSearch = l.title.toLowerCase().includes(search.toLowerCase()) ||
+        const matchesSearch =
+          l.title.toLowerCase().includes(search.toLowerCase()) ||
           l.description.toLowerCase().includes(search.toLowerCase()) ||
           l.tags.some((t) => t.toLowerCase().includes(search.toLowerCase()));
         const matchesCategory = category === 'All' || l.category === category;
-        const matchesPrice = priceFilter === 'all' ||
+        const matchesPrice =
+          priceFilter === 'all' ||
           (priceFilter === 'free' && l.price === 0) ||
           (priceFilter === 'paid' && l.price > 0);
         return matchesSearch && matchesCategory && matchesPrice;
@@ -128,7 +196,10 @@ export default function MarketplacePage() {
             ))}
           </div>
           <div className="flex items-center gap-2">
-            <Tabs value={priceFilter} onValueChange={(v) => setPriceFilter(v as typeof priceFilter)}>
+            <Tabs
+              value={priceFilter}
+              onValueChange={(v) => setPriceFilter(v as typeof priceFilter)}
+            >
               <TabsList>
                 <TabsTrigger value="all">All</TabsTrigger>
                 <TabsTrigger value="free" className="gap-1">
@@ -146,7 +217,9 @@ export default function MarketplacePage() {
               </SelectTrigger>
               <SelectContent>
                 {sortOptions.map((opt) => (
-                  <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>
+                  <SelectItem key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </SelectItem>
                 ))}
               </SelectContent>
             </Select>
@@ -158,7 +231,9 @@ export default function MarketplacePage() {
         <div className="flex flex-col items-center justify-center py-16 text-center">
           <Search className="h-12 w-12 text-muted-foreground/30 mb-4" />
           <h3 className="text-lg font-semibold">No listings found</h3>
-          <p className="text-sm text-muted-foreground mt-1">Try adjusting your search or filters.</p>
+          <p className="text-sm text-muted-foreground mt-1">
+            Try adjusting your search or filters.
+          </p>
         </div>
       ) : (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

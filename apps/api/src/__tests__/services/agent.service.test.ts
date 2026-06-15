@@ -9,7 +9,13 @@ const mockAgent = {
   name: 'Test Agent',
   description: 'A test agent',
   capabilities: ['code_generation'],
-  config: { model: 'gpt-4', provider: 'openai', temperature: 0.7, maxTokens: 2048, systemPrompt: 'You are helpful' },
+  config: {
+    model: 'gpt-4',
+    provider: 'openai',
+    temperature: 0.7,
+    maxTokens: 2048,
+    systemPrompt: 'You are helpful',
+  },
   ownerId: 'user-1',
   teamId: null,
   avatarUrl: null,
@@ -92,7 +98,13 @@ describe('agentService', () => {
         avatarUrl: 'https://example.com/avatar.png',
       };
 
-      const expected = { ...mockAgent, ...createData, teamId: 'team-1', isPublic: true, avatarUrl: createData.avatarUrl };
+      const expected = {
+        ...mockAgent,
+        ...createData,
+        teamId: 'team-1',
+        isPublic: true,
+        avatarUrl: createData.avatarUrl,
+      };
       vi.mocked(prisma.agent.create).mockResolvedValue(expected);
 
       const result = await agentService.createAgent(createData);
@@ -135,7 +147,9 @@ describe('agentService', () => {
       vi.mocked(prisma.agent.findFirst).mockResolvedValue(null);
 
       await expect(agentService.getAgentById('bad-id', 'user-1')).rejects.toThrow(ApiError);
-      await expect(agentService.getAgentById('bad-id', 'user-1')).rejects.toThrow('Agent not found');
+      await expect(agentService.getAgentById('bad-id', 'user-1')).rejects.toThrow(
+        'Agent not found',
+      );
     });
   });
 
@@ -205,8 +219,12 @@ describe('agentService', () => {
     it('should throw 403 when user is not owner', async () => {
       vi.mocked(prisma.agent.findFirst).mockResolvedValue(mockAgent);
 
-      await expect(agentService.updateAgent('agent-1', 'user-2', { name: 'Hack' })).rejects.toThrow(ApiError);
-      await expect(agentService.updateAgent('agent-1', 'user-2', { name: 'Hack' })).rejects.toThrow('Not authorized');
+      await expect(agentService.updateAgent('agent-1', 'user-2', { name: 'Hack' })).rejects.toThrow(
+        ApiError,
+      );
+      await expect(agentService.updateAgent('agent-1', 'user-2', { name: 'Hack' })).rejects.toThrow(
+        'Not authorized',
+      );
     });
 
     it('should create a new version snapshot on update', async () => {
@@ -249,7 +267,13 @@ describe('agentService', () => {
   describe('forkAgent', () => {
     it('should create a forked copy of the agent', async () => {
       vi.mocked(prisma.agent.findFirst).mockResolvedValue(mockAgent);
-      const forked = { ...mockAgent, id: 'agent-2', name: 'Test Agent (fork)', ownerId: 'user-2', version: 1 };
+      const forked = {
+        ...mockAgent,
+        id: 'agent-2',
+        name: 'Test Agent (fork)',
+        ownerId: 'user-2',
+        version: 1,
+      };
       vi.mocked(prisma.agent.create).mockResolvedValue(forked);
 
       const result = await agentService.forkAgent('agent-1', 'user-2');
@@ -269,7 +293,11 @@ describe('agentService', () => {
 
     it('should use custom fork name when provided', async () => {
       vi.mocked(prisma.agent.findFirst).mockResolvedValue(mockAgent);
-      vi.mocked(prisma.agent.create).mockResolvedValue({ ...mockAgent, id: 'agent-3', name: 'My Custom Fork' });
+      vi.mocked(prisma.agent.create).mockResolvedValue({
+        ...mockAgent,
+        id: 'agent-3',
+        name: 'My Custom Fork',
+      });
 
       const result = await agentService.forkAgent('agent-1', 'user-1', 'My Custom Fork');
 

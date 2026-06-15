@@ -52,8 +52,22 @@ export default function SettingsPage() {
   });
 
   const [apiKeys, setApiKeys] = useState<ApiKey[]>([
-    { id: '1', name: 'Development', key: 'af_dev_sk_a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6', createdAt: '2024-01-15', lastUsed: '2024-03-20', enabled: true },
-    { id: '2', name: 'Production', key: 'af_prod_sk_z9y8x7w6v5u4t3s2r1q0p9o8i7u6y5t4', createdAt: '2024-02-01', lastUsed: '2024-03-21', enabled: true },
+    {
+      id: '1',
+      name: 'Development',
+      key: 'af_dev_sk_a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6',
+      createdAt: '2024-01-15',
+      lastUsed: '2024-03-20',
+      enabled: true,
+    },
+    {
+      id: '2',
+      name: 'Production',
+      key: 'af_prod_sk_z9y8x7w6v5u4t3s2r1q0p9o8i7u6y5t4',
+      createdAt: '2024-02-01',
+      lastUsed: '2024-03-21',
+      enabled: true,
+    },
   ]);
 
   const [notifications, setNotifications] = useState({
@@ -113,16 +127,22 @@ export default function SettingsPage() {
           <Card>
             <CardHeader>
               <CardTitle>Profile Information</CardTitle>
-              <CardDescription>Update your personal information and public profile.</CardDescription>
+              <CardDescription>
+                Update your personal information and public profile.
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="flex items-center gap-4">
                 <Avatar className="h-16 w-16">
                   <AvatarImage src={user?.imageUrl} />
-                  <AvatarFallback className="text-lg">{getInitials(profile.name || 'User')}</AvatarFallback>
+                  <AvatarFallback className="text-lg">
+                    {getInitials(profile.name || 'User')}
+                  </AvatarFallback>
                 </Avatar>
                 <div>
-                  <Button variant="outline" size="sm">Change Avatar</Button>
+                  <Button variant="outline" size="sm">
+                    Change Avatar
+                  </Button>
                   <p className="text-xs text-muted-foreground mt-1">JPG, PNG or GIF. 1MB max.</p>
                 </div>
               </div>
@@ -130,18 +150,28 @@ export default function SettingsPage() {
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="name">Full Name</Label>
-                  <Input id="name" value={profile.name} onChange={(e) => setProfile({ ...profile, name: e.target.value })} />
+                  <Input
+                    id="name"
+                    value={profile.name}
+                    onChange={(e) => setProfile({ ...profile, name: e.target.value })}
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="username">Username</Label>
-                  <Input id="username" value={profile.username} onChange={(e) => setProfile({ ...profile, username: e.target.value })} />
+                  <Input
+                    id="username"
+                    value={profile.username}
+                    onChange={(e) => setProfile({ ...profile, username: e.target.value })}
+                  />
                 </div>
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <Input id="email" type="email" value={profile.email} disabled />
-                <p className="text-xs text-muted-foreground">Email cannot be changed. Contact support.</p>
+                <p className="text-xs text-muted-foreground">
+                  Email cannot be changed. Contact support.
+                </p>
               </div>
 
               <div className="space-y-2">
@@ -156,7 +186,11 @@ export default function SettingsPage() {
               </div>
 
               <Button onClick={handleSaveProfile} disabled={saving}>
-                {saving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Save className="mr-2 h-4 w-4" />}
+                {saving ? (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                ) : (
+                  <Save className="mr-2 h-4 w-4" />
+                )}
                 Save Changes
               </Button>
             </CardContent>
@@ -183,8 +217,16 @@ export default function SettingsPage() {
                       </Badge>
                     </div>
                     <div className="flex items-center gap-1">
-                      <Button variant="ghost" size="icon" onClick={() => toggleKeyVisibility(apiKey.id)}>
-                        {showKeys[apiKey.id] ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => toggleKeyVisibility(apiKey.id)}
+                      >
+                        {showKeys[apiKey.id] ? (
+                          <EyeOff className="h-4 w-4" />
+                        ) : (
+                          <Eye className="h-4 w-4" />
+                        )}
                       </Button>
                       <Button variant="ghost" size="icon" onClick={() => copyApiKey(apiKey.key)}>
                         <Copy className="h-4 w-4" />
@@ -196,7 +238,9 @@ export default function SettingsPage() {
                   </div>
                   <div className="bg-muted rounded-md p-2">
                     <code className="text-sm font-mono">
-                      {showKeys[apiKey.id] ? apiKey.key : `${apiKey.key.slice(0, 12)}${'•'.repeat(32)}${apiKey.key.slice(-4)}`}
+                      {showKeys[apiKey.id]
+                        ? apiKey.key
+                        : `${apiKey.key.slice(0, 12)}${'•'.repeat(32)}${apiKey.key.slice(-4)}`}
                     </code>
                   </div>
                   <div className="flex gap-4 mt-2 text-xs text-muted-foreground">
@@ -221,12 +265,31 @@ export default function SettingsPage() {
             <CardContent className="space-y-6">
               <div className="space-y-4">
                 {[
-                  { key: 'emailNotifications', label: 'Email Notifications', desc: 'Receive notifications via email' },
-                  { key: 'executionCompleted', label: 'Execution Completed', desc: 'When an agent execution finishes' },
-                  { key: 'executionFailed', label: 'Execution Failed', desc: 'When an agent execution fails' },
-                  { key: 'agentErrors', label: 'Agent Errors', desc: 'When an agent encounters an error' },
+                  {
+                    key: 'emailNotifications',
+                    label: 'Email Notifications',
+                    desc: 'Receive notifications via email',
+                  },
+                  {
+                    key: 'executionCompleted',
+                    label: 'Execution Completed',
+                    desc: 'When an agent execution finishes',
+                  },
+                  {
+                    key: 'executionFailed',
+                    label: 'Execution Failed',
+                    desc: 'When an agent execution fails',
+                  },
+                  {
+                    key: 'agentErrors',
+                    label: 'Agent Errors',
+                    desc: 'When an agent encounters an error',
+                  },
                 ].map((item) => (
-                  <div key={item.key} className="flex items-center justify-between rounded-lg border p-4">
+                  <div
+                    key={item.key}
+                    className="flex items-center justify-between rounded-lg border p-4"
+                  >
                     <div>
                       <Label>{item.label}</Label>
                       <p className="text-sm text-muted-foreground">{item.desc}</p>
@@ -246,10 +309,21 @@ export default function SettingsPage() {
               <div className="space-y-4">
                 <h4 className="font-medium">Digest</h4>
                 {[
-                  { key: 'weeklyDigest', label: 'Weekly Digest', desc: 'Weekly summary of activity' },
-                  { key: 'marketingEmails', label: 'Marketing Emails', desc: 'Product updates and tips' },
+                  {
+                    key: 'weeklyDigest',
+                    label: 'Weekly Digest',
+                    desc: 'Weekly summary of activity',
+                  },
+                  {
+                    key: 'marketingEmails',
+                    label: 'Marketing Emails',
+                    desc: 'Product updates and tips',
+                  },
                 ].map((item) => (
-                  <div key={item.key} className="flex items-center justify-between rounded-lg border p-4">
+                  <div
+                    key={item.key}
+                    className="flex items-center justify-between rounded-lg border p-4"
+                  >
                     <div>
                       <Label>{item.label}</Label>
                       <p className="text-sm text-muted-foreground">{item.desc}</p>

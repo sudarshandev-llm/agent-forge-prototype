@@ -218,9 +218,7 @@ export default function WorkflowsPage() {
                         <StatusIcon className={cn('h-4 w-4', status.class)} />
                         <span className={cn('font-medium', status.class)}>{status.label}</span>
                       </div>
-                      <span className="text-muted-foreground">
-                        {workflow.nodeCount} nodes
-                      </span>
+                      <span className="text-muted-foreground">{workflow.nodeCount} nodes</span>
                     </div>
                     <div className="mt-3 flex items-center justify-between text-xs text-muted-foreground">
                       <span>{formatNumber(workflow.runCount)} runs</span>

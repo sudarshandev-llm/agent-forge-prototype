@@ -33,10 +33,7 @@ export const toolService = {
     const tool = await prisma.tool.findFirst({
       where: {
         id,
-        OR: [
-          { ownerId: userId },
-          { isPublic: true },
-        ],
+        OR: [{ ownerId: userId }, { isPublic: true }],
         deletedAt: null,
       },
     });
@@ -61,10 +58,7 @@ export const toolService = {
 
     const where: Record<string, unknown> = {
       deletedAt: null,
-      OR: [
-        { ownerId: params.ownerId },
-        { isPublic: true },
-      ],
+      OR: [{ ownerId: params.ownerId }, { isPublic: true }],
     };
 
     if (params.type) where.type = params.type;

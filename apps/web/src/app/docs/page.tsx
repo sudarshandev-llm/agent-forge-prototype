@@ -6,7 +6,20 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
-import { Search, Menu, Bot, ChevronRight, Book, Code, Cpu, Workflow, Puzzle, Key, Globe, ChevronDown } from 'lucide-react';
+import {
+  Search,
+  Menu,
+  Bot,
+  ChevronRight,
+  Book,
+  Code,
+  Cpu,
+  Workflow,
+  Puzzle,
+  Key,
+  Globe,
+  ChevronDown,
+} from 'lucide-react';
 
 interface DocSection {
   id: string;
@@ -196,10 +209,12 @@ A workflow is a series of connected steps (nodes) that execute in sequence. Each
       if (section.children) {
         for (const child of section.children) {
           if (child.id === activeSection) {
-            return content[child.id as keyof typeof content] || {
-              title: child.label,
-              body: 'Documentation content coming soon.',
-            };
+            return (
+              content[child.id as keyof typeof content] || {
+                title: child.label,
+                body: 'Documentation content coming soon.',
+              }
+            );
           }
         }
       }

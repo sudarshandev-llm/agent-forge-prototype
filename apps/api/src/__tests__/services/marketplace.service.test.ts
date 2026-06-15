@@ -95,7 +95,11 @@ describe('marketplaceService', () => {
 
   describe('getListingById', () => {
     it('should return published listing', async () => {
-      const listingWithAuthor = { ...mockListing, author: { id: 'user-1', name: 'Author', avatarUrl: null }, _count: { reviews: 5 } };
+      const listingWithAuthor = {
+        ...mockListing,
+        author: { id: 'user-1', name: 'Author', avatarUrl: null },
+        _count: { reviews: 5 },
+      };
       vi.mocked(prisma.marketplaceListing.findUnique).mockResolvedValue(listingWithAuthor as any);
 
       const result = await marketplaceService.getListingById('listing-1');
@@ -104,7 +108,10 @@ describe('marketplaceService', () => {
     });
 
     it('should throw 404 for archived listing', async () => {
-      vi.mocked(prisma.marketplaceListing.findUnique).mockResolvedValue({ ...mockListing, status: ListingStatus.ARCHIVED } as any);
+      vi.mocked(prisma.marketplaceListing.findUnique).mockResolvedValue({
+        ...mockListing,
+        status: ListingStatus.ARCHIVED,
+      } as any);
 
       await expect(marketplaceService.getListingById('listing-1')).rejects.toThrow(ApiError);
     });
@@ -172,9 +179,14 @@ describe('marketplaceService', () => {
   describe('updateListing', () => {
     it('should update when user is author', async () => {
       vi.mocked(prisma.marketplaceListing.findUnique).mockResolvedValue(mockListing);
-      vi.mocked(prisma.marketplaceListing.update).mockResolvedValue({ ...mockListing, name: 'Updated Name' });
+      vi.mocked(prisma.marketplaceListing.update).mockResolvedValue({
+        ...mockListing,
+        name: 'Updated Name',
+      });
 
-      const result = await marketplaceService.updateListing('listing-1', 'user-1', { name: 'Updated Name' });
+      const result = await marketplaceService.updateListing('listing-1', 'user-1', {
+        name: 'Updated Name',
+      });
 
       expect(result.name).toBe('Updated Name');
     });
@@ -182,7 +194,9 @@ describe('marketplaceService', () => {
     it('should throw 403 when not author', async () => {
       vi.mocked(prisma.marketplaceListing.findUnique).mockResolvedValue(mockListing);
 
-      await expect(marketplaceService.updateListing('listing-1', 'user-2', { name: 'Hack' })).rejects.toThrow(ApiError);
+      await expect(
+        marketplaceService.updateListing('listing-1', 'user-2', { name: 'Hack' }),
+      ).rejects.toThrow(ApiError);
     });
   });
 
@@ -221,7 +235,10 @@ describe('marketplaceService', () => {
   describe('archiveListing', () => {
     it('should archive a published listing', async () => {
       vi.mocked(prisma.marketplaceListing.findUnique).mockResolvedValue(mockListing);
-      vi.mocked(prisma.marketplaceListing.update).mockResolvedValue({ ...mockListing, status: ListingStatus.ARCHIVED });
+      vi.mocked(prisma.marketplaceListing.update).mockResolvedValue({
+        ...mockListing,
+        status: ListingStatus.ARCHIVED,
+      });
 
       const result = await marketplaceService.archiveListing('listing-1', 'user-1');
 
@@ -296,7 +313,17 @@ describe('marketplaceService', () => {
   describe('getListingReviews', () => {
     it('should return reviews with user info', async () => {
       const reviews = [
-        { id: 'r-1', listingId: 'listing-1', userId: 'user-2', rating: 5, title: 'Great', content: 'Love it', pros: [], cons: [], user: { id: 'user-2', name: 'User', avatarUrl: null } },
+        {
+          id: 'r-1',
+          listingId: 'listing-1',
+          userId: 'user-2',
+          rating: 5,
+          title: 'Great',
+          content: 'Love it',
+          pros: [],
+          cons: [],
+          user: { id: 'user-2', name: 'User', avatarUrl: null },
+        },
       ];
       vi.mocked(prisma.marketplaceReview.findMany).mockResolvedValue(reviews as any);
 

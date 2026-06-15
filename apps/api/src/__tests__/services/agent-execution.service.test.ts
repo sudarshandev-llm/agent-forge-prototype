@@ -131,7 +131,10 @@ describe('executionService', () => {
       await executionService.processExecution(jobData);
 
       expect(prisma.execution.update).toHaveBeenCalledWith(
-        expect.objectContaining({ where: { id: 'exec-1' }, data: { status: ExecutionStatus.RUNNING } }),
+        expect.objectContaining({
+          where: { id: 'exec-1' },
+          data: { status: ExecutionStatus.RUNNING },
+        }),
       );
       expect(websocketService.sendToUser).toHaveBeenCalledWith('user-1', {
         type: 'execution:running',
@@ -145,7 +148,11 @@ describe('executionService', () => {
             status: ExecutionStatus.COMPLETED,
             output: { content: 'Hello! How can I help you today?', toolResults: [] },
             duration: expect.any(Number),
-            tokenUsage: expect.objectContaining({ totalTokens: 30, promptTokens: 10, completionTokens: 20 }),
+            tokenUsage: expect.objectContaining({
+              totalTokens: 30,
+              promptTokens: 10,
+              completionTokens: 20,
+            }),
             cost: expect.any(Number),
             completedAt: expect.any(Date),
           }),
@@ -153,7 +160,11 @@ describe('executionService', () => {
       );
       expect(websocketService.sendToUser).toHaveBeenLastCalledWith('user-1', {
         type: 'execution:completed',
-        payload: { executionId: 'exec-1', output: 'Hello! How can I help you today?', toolResults: [] },
+        payload: {
+          executionId: 'exec-1',
+          output: 'Hello! How can I help you today?',
+          toolResults: [],
+        },
       });
     });
 
@@ -184,7 +195,10 @@ describe('executionService', () => {
 
       expect(prisma.execution.update).toHaveBeenLastCalledWith(
         expect.objectContaining({
-          data: expect.objectContaining({ status: ExecutionStatus.FAILED, error: 'API rate limit exceeded' }),
+          data: expect.objectContaining({
+            status: ExecutionStatus.FAILED,
+            error: 'API rate limit exceeded',
+          }),
         }),
       );
     });
@@ -194,14 +208,17 @@ describe('executionService', () => {
       vi.mocked(prisma.agent.findUnique).mockResolvedValue(mockAgent as any);
       vi.mocked(memoryService.getRelevantContext).mockResolvedValue([]);
       vi.mocked(llmService.complete).mockResolvedValue({
-        content: 'Let me search. <tool_call>{"name":"web_search","parameters":{"query":"weather"}}</tool_call>',
+        content:
+          'Let me search. <tool_call>{"name":"web_search","parameters":{"query":"weather"}}</tool_call>',
         usage: { promptTokens: 5, completionTokens: 10, totalTokens: 15 },
       });
       vi.mocked(toolService.executeToolByName).mockResolvedValue({ results: ['sunny'] });
 
       await executionService.processExecution(jobData);
 
-      expect(toolService.executeToolByName).toHaveBeenCalledWith('web_search', 'user-1', { query: 'weather' });
+      expect(toolService.executeToolByName).toHaveBeenCalledWith('web_search', 'user-1', {
+        query: 'weather',
+      });
     });
 
     it('should not store memory when memoryEnabled is false', async () => {
@@ -219,7 +236,9 @@ describe('executionService', () => {
 
   describe('buildMessages', () => {
     it('should build message array with system prompt and context', () => {
-      const messages = executionService.buildMessages('You are a bot', ['ctx1', 'ctx2'], { query: 'hi' });
+      const messages = executionService.buildMessages('You are a bot', ['ctx1', 'ctx2'], {
+        query: 'hi',
+      });
 
       expect(messages).toHaveLength(4);
       expect(messages[0]).toEqual({ role: 'system', content: 'You are a bot' });
@@ -258,7 +277,8 @@ describe('executionService', () => {
     });
 
     it('should skip invalid JSON tool calls', () => {
-      const content = '<tool_call>{"name": broken}</tool_call><tool_call>{"name":"valid","parameters":{}}</tool_call>';
+      const content =
+        '<tool_call>{"name": broken}</tool_call><tool_call>{"name":"valid","parameters":{}}</tool_call>';
       const calls = executionService.extractToolCalls(content);
 
       expect(calls).toHaveLength(1);
@@ -310,7 +330,10 @@ describe('executionService', () => {
     });
 
     it('should throw 400 if execution already completed', async () => {
-      vi.mocked(prisma.execution.findFirst).mockResolvedValue({ ...mockExecution, status: ExecutionStatus.COMPLETED } as any);
+      vi.mocked(prisma.execution.findFirst).mockResolvedValue({
+        ...mockExecution,
+        status: ExecutionStatus.COMPLETED,
+      } as any);
 
       await expect(executionService.cancelExecution('exec-1', 'user-1')).rejects.toThrow(ApiError);
     });
@@ -321,7 +344,11 @@ describe('executionService', () => {
       vi.mocked(prisma.execution.findMany).mockResolvedValue([mockExecution] as any);
       vi.mocked(prisma.execution.count).mockResolvedValue(1);
 
-      const result = await executionService.listExecutions({ userId: 'user-1', page: 1, limit: 20 });
+      const result = await executionService.listExecutions({
+        userId: 'user-1',
+        page: 1,
+        limit: 20,
+      });
 
       expect(result.data).toHaveLength(1);
       expect(result.meta.total).toBe(1);

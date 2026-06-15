@@ -53,10 +53,7 @@ interface NodePaletteProps {
 
 export function NodePalette({ className }: NodePaletteProps) {
   const handleDragStart = (e: DragEvent, type: string, label: string) => {
-    e.dataTransfer.setData(
-      'application/json',
-      JSON.stringify({ type, label }),
-    );
+    e.dataTransfer.setData('application/json', JSON.stringify({ type, label }));
     e.dataTransfer.effectAllowed = 'copy';
   };
 
@@ -66,9 +63,7 @@ export function NodePalette({ className }: NodePaletteProps) {
         <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
           Nodes
         </h3>
-        <p className="text-xs text-muted-foreground mt-0.5">
-          Drag nodes onto the canvas
-        </p>
+        <p className="text-xs text-muted-foreground mt-0.5">Drag nodes onto the canvas</p>
       </div>
 
       <div className="space-y-2">

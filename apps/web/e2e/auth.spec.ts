@@ -11,22 +11,26 @@ test.describe('Authentication Flow', () => {
       const emailInput = page.locator('input[type="email"], input[name="email"]');
       const passwordInput = page.locator('input[type="password"], input[name="password"]');
 
-      if (await emailInput.count() > 0) {
+      if ((await emailInput.count()) > 0) {
         await expect(emailInput.first()).toBeVisible();
       }
-      if (await passwordInput.count() > 0) {
+      if ((await passwordInput.count()) > 0) {
         await expect(passwordInput.first()).toBeVisible();
       }
     });
 
     test('should have a submit button for sign up', async ({ page }) => {
-      const submitBtn = page.getByRole('button', { name: /sign up|create account|get started|continue/i });
+      const submitBtn = page.getByRole('button', {
+        name: /sign up|create account|get started|continue/i,
+      });
       await expect(submitBtn).toBeVisible();
     });
 
     test('should have a link to sign in', async ({ page }) => {
-      const signInLink = page.getByRole('link', { name: /sign in|log in|already have an account/i });
-      if (await signInLink.count() > 0) {
+      const signInLink = page.getByRole('link', {
+        name: /sign in|log in|already have an account/i,
+      });
+      if ((await signInLink.count()) > 0) {
         await expect(signInLink.first()).toBeVisible();
       }
     });
@@ -45,10 +49,10 @@ test.describe('Authentication Flow', () => {
       const emailInput = page.locator('input[type="email"], input[name="email"]');
       const passwordInput = page.locator('input[type="password"], input[name="password"]');
 
-      if (await emailInput.count() > 0) {
+      if ((await emailInput.count()) > 0) {
         await expect(emailInput.first()).toBeVisible();
       }
-      if (await passwordInput.count() > 0) {
+      if ((await passwordInput.count()) > 0) {
         await expect(passwordInput.first()).toBeVisible();
       }
     });
@@ -64,16 +68,16 @@ test.describe('Authentication Flow', () => {
       await page.goto('/dashboard');
       const currentUrl = page.url();
       expect(
-        currentUrl.includes('/sign-in') || currentUrl.includes('/sign-up') || currentUrl === 'http://localhost:3000/',
+        currentUrl.includes('/sign-in') ||
+          currentUrl.includes('/sign-up') ||
+          currentUrl === 'http://localhost:3000/',
       ).toBeTruthy();
     });
 
     test('should redirect to sign-in when accessing /agents without auth', async ({ page }) => {
       await page.goto('/agents');
       const currentUrl = page.url();
-      expect(
-        currentUrl.includes('/sign-in') || currentUrl.includes('/sign-up'),
-      ).toBeTruthy();
+      expect(currentUrl.includes('/sign-in') || currentUrl.includes('/sign-up')).toBeTruthy();
     });
   });
 });

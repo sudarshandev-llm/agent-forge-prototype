@@ -32,16 +32,32 @@ const mockListing = {
 };
 
 vi.mock('../../controllers/marketplace.controller.js', () => ({
-  createListingHandler: vi.fn((_req: any, res: any) => res.status(201).json({ success: true, data: mockListing })),
-  getListingHandler: vi.fn((req: any, res: any) => res.json({ success: true, data: { ...mockListing, id: req.params.id } })),
-  listListingsHandler: vi.fn((_req: any, res: any) => res.json({ success: true, data: [mockListing], meta: { page: 1, total: 1 } })),
-  updateListingHandler: vi.fn((req: any, res: any) => res.json({ success: true, data: { ...mockListing, ...req.body } })),
+  createListingHandler: vi.fn((_req: any, res: any) =>
+    res.status(201).json({ success: true, data: mockListing }),
+  ),
+  getListingHandler: vi.fn((req: any, res: any) =>
+    res.json({ success: true, data: { ...mockListing, id: req.params.id } }),
+  ),
+  listListingsHandler: vi.fn((_req: any, res: any) =>
+    res.json({ success: true, data: [mockListing], meta: { page: 1, total: 1 } }),
+  ),
+  updateListingHandler: vi.fn((req: any, res: any) =>
+    res.json({ success: true, data: { ...mockListing, ...req.body } }),
+  ),
   deleteListingHandler: vi.fn((_req: any, res: any) => res.status(204).send()),
-  publishListingHandler: vi.fn((_req: any, res: any) => res.json({ success: true, data: { ...mockListing, status: 'published' } })),
-  archiveListingHandler: vi.fn((_req: any, res: any) => res.json({ success: true, data: { ...mockListing, status: 'archived' } })),
-  createReviewHandler: vi.fn((_req: any, res: any) => res.status(201).json({ success: true, data: { id: 'review-1', rating: 5 } })),
+  publishListingHandler: vi.fn((_req: any, res: any) =>
+    res.json({ success: true, data: { ...mockListing, status: 'published' } }),
+  ),
+  archiveListingHandler: vi.fn((_req: any, res: any) =>
+    res.json({ success: true, data: { ...mockListing, status: 'archived' } }),
+  ),
+  createReviewHandler: vi.fn((_req: any, res: any) =>
+    res.status(201).json({ success: true, data: { id: 'review-1', rating: 5 } }),
+  ),
   getListingReviewsHandler: vi.fn((_req: any, res: any) => res.json({ success: true, data: [] })),
-  getUserListingsHandler: vi.fn((_req: any, res: any) => res.json({ success: true, data: [mockListing] })),
+  getUserListingsHandler: vi.fn((_req: any, res: any) =>
+    res.json({ success: true, data: [mockListing] }),
+  ),
 }));
 
 describe('Marketplace Routes', () => {
@@ -73,8 +89,13 @@ describe('Marketplace Routes', () => {
 
   it('POST /api/v1/marketplace should create listing (auth required)', async () => {
     const res = await makeRequest('POST', '/api/v1/marketplace', {
-      name: 'New Listing', description: 'Desc', shortDescription: 'Short',
-      type: 'agent', sourceId: 'src-1', sourceType: 'agent', category: 'chat',
+      name: 'New Listing',
+      description: 'Desc',
+      shortDescription: 'Short',
+      type: 'agent',
+      sourceId: 'src-1',
+      sourceType: 'agent',
+      category: 'chat',
     });
     expect(res.status).toBe(201);
   });
@@ -102,7 +123,9 @@ describe('Marketplace Routes', () => {
 
   it('POST /api/v1/marketplace/:id/reviews should create review', async () => {
     const res = await makeRequest('POST', '/api/v1/marketplace/listing-1/reviews', {
-      rating: 5, title: 'Great', content: 'Awesome',
+      rating: 5,
+      title: 'Great',
+      content: 'Awesome',
     });
     expect(res.status).toBe(201);
   });
@@ -113,18 +136,36 @@ describe('Marketplace Routes', () => {
   });
 });
 
-async function makeRequest(method: string, path: string, body?: any): Promise<{ status: number; body: string }> {
+async function makeRequest(
+  method: string,
+  path: string,
+  body?: any,
+): Promise<{ status: number; body: string }> {
   return new Promise((resolve, reject) => {
     const server = (app as any).listen(0, () => {
       const port = server.address().port;
       const http = require('http');
-      const options = { hostname: 'localhost', port, path, method, headers: { 'Content-Type': 'application/json' } };
+      const options = {
+        hostname: 'localhost',
+        port,
+        path,
+        method,
+        headers: { 'Content-Type': 'application/json' },
+      };
       const clientReq = http.request(options, (res: any) => {
         let data = '';
-        res.on('data', (chunk: string) => { data += chunk; });
-        res.on('end', () => { server.close(); resolve({ status: res.statusCode || 200, body: data }); });
+        res.on('data', (chunk: string) => {
+          data += chunk;
+        });
+        res.on('end', () => {
+          server.close();
+          resolve({ status: res.statusCode || 200, body: data });
+        });
       });
-      clientReq.on('error', (err: Error) => { server.close(); reject(err); });
+      clientReq.on('error', (err: Error) => {
+        server.close();
+        reject(err);
+      });
       if (body) clientReq.write(JSON.stringify(body));
       clientReq.end();
     });

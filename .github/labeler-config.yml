@@ -1,36 +1,36 @@
-"type: api":
+'type: api':
   - apps/api/**/*
 
-"type: web":
+'type: web':
   - apps/web/**/*
 
-"type: worker":
+'type: worker':
   - apps/worker/**/*
 
-"type: core":
+'type: core':
   - packages/core/**/*
 
-"type: database":
+'type: database':
   - packages/database/**/*
 
-"type: shared":
+'type: shared':
   - packages/shared/**/*
 
-"type: infra":
+'type: infra':
   - infra/**/*
 
-"type: docs":
+'type: docs':
   - docs/**/*
 
-"type: ci":
+'type: ci':
   - .github/**/*
   - .github/workflows/**/*
 
-"type: docker":
+'type: docker':
   - infra/docker/**/*
   - Dockerfile*
 
-"area: dependencies":
+'area: dependencies':
   - package.json
   - pnpm-lock.yaml
   - yarn.lock

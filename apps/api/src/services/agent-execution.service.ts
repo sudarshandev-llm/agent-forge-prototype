@@ -168,11 +168,7 @@ export const executionService = {
     }
   },
 
-  buildMessages(
-    systemPrompt: string,
-    context: string[],
-    input: Record<string, unknown>,
-  ) {
+  buildMessages(systemPrompt: string, context: string[], input: Record<string, unknown>) {
     const messages: Array<{ role: string; content: string }> = [];
 
     if (systemPrompt) {
@@ -195,7 +191,10 @@ export const executionService = {
 
     while ((match = regex.exec(content)) !== null) {
       try {
-        const parsed = JSON.parse(match[1]!) as { name: string; parameters: Record<string, unknown> };
+        const parsed = JSON.parse(match[1]!) as {
+          name: string;
+          parameters: Record<string, unknown>;
+        };
         toolCalls.push(parsed);
       } catch {
         // Skip invalid tool calls
@@ -268,7 +267,10 @@ export const executionService = {
   async cancelExecution(id: string, userId: string) {
     const execution = await this.getExecutionById(id, userId);
 
-    if (execution.status !== ExecutionStatus.PENDING && execution.status !== ExecutionStatus.RUNNING) {
+    if (
+      execution.status !== ExecutionStatus.PENDING &&
+      execution.status !== ExecutionStatus.RUNNING
+    ) {
       throw new ApiError(400, 'Execution cannot be cancelled');
     }
 

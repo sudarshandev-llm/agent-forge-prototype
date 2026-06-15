@@ -47,8 +47,8 @@ Please describe the tests you ran to verify your changes:
 
 ## Screenshots (if applicable)
 
-| Before | After |
-| ------ | ----- |
+| Before  | After   |
+| ------- | ------- |
 | (image) | (image) |
 
 ## Additional Notes

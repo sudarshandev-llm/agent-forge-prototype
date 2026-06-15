@@ -48,7 +48,13 @@ export default function NewTeamPage() {
   const { addToast } = useUIStore();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<FormData>({
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: { name: '', description: '', members: [], agents: [] },
   });
@@ -58,7 +64,10 @@ export default function NewTeamPage() {
 
   const toggleMember = (userId: string) => {
     if (selectedMembers.includes(userId)) {
-      setValue('members', selectedMembers.filter((id) => id !== userId));
+      setValue(
+        'members',
+        selectedMembers.filter((id) => id !== userId),
+      );
     } else {
       setValue('members', [...selectedMembers, userId]);
     }
@@ -66,14 +75,20 @@ export default function NewTeamPage() {
 
   const toggleAgent = (agentId: string) => {
     if (selectedAgents.find((a) => a.id === agentId)) {
-      setValue('agents', selectedAgents.filter((a) => a.id !== agentId));
+      setValue(
+        'agents',
+        selectedAgents.filter((a) => a.id !== agentId),
+      );
     } else {
       setValue('agents', [...selectedAgents, { id: agentId, role: 'Member' }]);
     }
   };
 
   const setAgentRole = (agentId: string, role: string) => {
-    setValue('agents', selectedAgents.map((a) => (a.id === agentId ? { ...a, role } : a)));
+    setValue(
+      'agents',
+      selectedAgents.map((a) => (a.id === agentId ? { ...a, role } : a)),
+    );
   };
 
   const onSubmit = async () => {
@@ -116,7 +131,9 @@ export default function NewTeamPage() {
                 className="min-h-[80px]"
                 {...register('description')}
               />
-              {errors.description && <p className="text-sm text-destructive">{errors.description.message}</p>}
+              {errors.description && (
+                <p className="text-sm text-destructive">{errors.description.message}</p>
+              )}
             </div>
           </CardContent>
         </Card>
@@ -154,7 +171,9 @@ export default function NewTeamPage() {
                 );
               })}
             </div>
-            {errors.members && <p className="text-sm text-destructive mt-2">{errors.members.message}</p>}
+            {errors.members && (
+              <p className="text-sm text-destructive mt-2">{errors.members.message}</p>
+            )}
           </CardContent>
         </Card>
 
@@ -196,7 +215,9 @@ export default function NewTeamPage() {
                         className="h-8 rounded-md border border-input bg-background px-2 text-xs"
                       >
                         {roles.map((role) => (
-                          <option key={role} value={role}>{role}</option>
+                          <option key={role} value={role}>
+                            {role}
+                          </option>
                         ))}
                       </select>
                     )}
@@ -210,7 +231,9 @@ export default function NewTeamPage() {
         <Separator />
 
         <div className="flex items-center justify-end gap-2">
-          <Button type="button" variant="outline" onClick={() => router.back()}>Cancel</Button>
+          <Button type="button" variant="outline" onClick={() => router.back()}>
+            Cancel
+          </Button>
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
             Create Team

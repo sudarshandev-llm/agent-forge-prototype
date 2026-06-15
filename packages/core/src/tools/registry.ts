@@ -44,7 +44,10 @@ export class ToolRegistry {
         return {
           success: true,
           query,
-          results: [`Simulated search result for "${query}" - result 1`, `Simulated search result for "${query}" - result 2`],
+          results: [
+            `Simulated search result for "${query}" - result 1`,
+            `Simulated search result for "${query}" - result 2`,
+          ],
         };
       },
     });
@@ -79,7 +82,11 @@ export class ToolRegistry {
         type: 'object',
         properties: {
           url: { type: 'string', description: 'Request URL' },
-          method: { type: 'string', description: 'HTTP method', enum: ['GET', 'POST', 'PUT', 'DELETE'] },
+          method: {
+            type: 'string',
+            description: 'HTTP method',
+            enum: ['GET', 'POST', 'PUT', 'DELETE'],
+          },
           body: { type: 'string', description: 'Request body (optional)' },
         },
         required: ['url', 'method'],

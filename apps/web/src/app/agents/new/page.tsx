@@ -60,7 +60,13 @@ export default function NewAgentPage() {
   const [step, setStep] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<FormData>({
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues,
   });
@@ -118,7 +124,9 @@ export default function NewAgentPage() {
                   className="min-h-[100px]"
                   {...register('description')}
                 />
-                {errors.description && <p className="text-sm text-destructive">{errors.description.message}</p>}
+                {errors.description && (
+                  <p className="text-sm text-destructive">{errors.description.message}</p>
+                )}
               </div>
               <div className="space-y-2">
                 <Label htmlFor="role">Role</Label>
@@ -194,12 +202,7 @@ export default function NewAgentPage() {
         );
 
       case 2:
-        return (
-          <ToolSelector
-            value={tools}
-            onChange={(v) => setValue('tools', v)}
-          />
-        );
+        return <ToolSelector value={tools} onChange={(v) => setValue('tools', v)} />;
 
       case 3:
         return (
@@ -236,9 +239,16 @@ export default function NewAgentPage() {
               <div className="rounded-lg border p-4 text-sm text-muted-foreground">
                 <p className="font-medium text-foreground mb-1">About Memory Types</p>
                 <ul className="list-disc list-inside space-y-1 text-xs">
-                  <li><strong>Conversation:</strong> Stores recent messages in a buffer</li>
-                  <li><strong>Vector:</strong> Uses embeddings for semantic retrieval</li>
-                  <li><strong>Both:</strong> Combines buffer for recent context + vector for long-term memory</li>
+                  <li>
+                    <strong>Conversation:</strong> Stores recent messages in a buffer
+                  </li>
+                  <li>
+                    <strong>Vector:</strong> Uses embeddings for semantic retrieval
+                  </li>
+                  <li>
+                    <strong>Both:</strong> Combines buffer for recent context + vector for long-term
+                    memory
+                  </li>
                 </ul>
               </div>
             </CardContent>
@@ -263,15 +273,21 @@ export default function NewAgentPage() {
                   <p className="font-medium">{model}</p>
                 </div>
                 <div className="space-y-1">
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Temperature</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">
+                    Temperature
+                  </p>
                   <p className="font-medium">{temperature}</p>
                 </div>
                 <div className="space-y-1">
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Max Tokens</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">
+                    Max Tokens
+                  </p>
                   <p className="font-medium">{maxTokens}</p>
                 </div>
                 <div className="space-y-1">
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Memory Type</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">
+                    Memory Type
+                  </p>
                   <p className="font-medium capitalize">{memoryType}</p>
                 </div>
                 <div className="space-y-1">
@@ -281,17 +297,23 @@ export default function NewAgentPage() {
               </div>
               <Separator />
               <div className="space-y-1">
-                <p className="text-xs text-muted-foreground uppercase tracking-wider">Description</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">
+                  Description
+                </p>
                 <p className="text-sm">{description}</p>
               </div>
               {tools.length > 0 && (
                 <>
                   <Separator />
                   <div className="space-y-2">
-                    <p className="text-xs text-muted-foreground uppercase tracking-wider">Selected Tools</p>
+                    <p className="text-xs text-muted-foreground uppercase tracking-wider">
+                      Selected Tools
+                    </p>
                     <div className="flex flex-wrap gap-2">
                       {tools.map((tool) => (
-                        <Badge key={tool} variant="secondary">{tool}</Badge>
+                        <Badge key={tool} variant="secondary">
+                          {tool}
+                        </Badge>
                       ))}
                     </div>
                   </div>

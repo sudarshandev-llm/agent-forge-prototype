@@ -76,10 +76,7 @@ export const memoryService = {
     const memories = await prisma.agentMemory.findMany({
       where: {
         agentId,
-        OR: [
-          { expiresAt: null },
-          { expiresAt: { gt: new Date() } },
-        ],
+        OR: [{ expiresAt: null }, { expiresAt: { gt: new Date() } }],
       },
       orderBy: { importance: 'desc' },
       take: 10,

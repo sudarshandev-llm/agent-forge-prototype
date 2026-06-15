@@ -104,8 +104,14 @@ export default function ExecutionDetailPage() {
         <div className="text-center">
           <Activity className="mx-auto h-12 w-12 text-muted-foreground" />
           <h3 className="mt-4 text-lg font-semibold">Execution not found</h3>
-          <p className="text-sm text-muted-foreground">{error || 'This execution does not exist'}</p>
-          <Button variant="outline" className="mt-4" onClick={() => router.push('/dashboard/executions')}>
+          <p className="text-sm text-muted-foreground">
+            {error || 'This execution does not exist'}
+          </p>
+          <Button
+            variant="outline"
+            className="mt-4"
+            onClick={() => router.push('/dashboard/executions')}
+          >
             <ArrowLeft className="mr-2 h-4 w-4" /> Back to Executions
           </Button>
         </div>
@@ -125,17 +131,20 @@ export default function ExecutionDetailPage() {
               <h1 className="text-3xl font-bold tracking-tight">Execution Details</h1>
               <Badge
                 variant={
-                  execution.status === 'success' ? 'success' :
-                  execution.status === 'failed' ? 'destructive' :
-                  execution.status === 'running' ? 'default' : 'secondary'
+                  execution.status === 'success'
+                    ? 'success'
+                    : execution.status === 'failed'
+                      ? 'destructive'
+                      : execution.status === 'running'
+                        ? 'default'
+                        : 'secondary'
                 }
               >
                 {execution.status}
               </Badge>
             </div>
             <p className="text-muted-foreground">
-              Agent: <span className="font-medium">{execution.agentName}</span>
-              {' '}&middot;{' '}
+              Agent: <span className="font-medium">{execution.agentName}</span> &middot;{' '}
               {formatDate(execution.createdAt, 'long')}
             </p>
           </div>
@@ -270,7 +279,9 @@ export default function ExecutionDetailPage() {
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Completion Tokens</p>
-                    <p className="font-medium">{formatNumber(execution.metrics.completionTokens)}</p>
+                    <p className="font-medium">
+                      {formatNumber(execution.metrics.completionTokens)}
+                    </p>
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Total Cost</p>

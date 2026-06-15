@@ -54,7 +54,11 @@ describe('Button', () => {
   });
 
   it('renders with size icon', () => {
-    render(<Button size="icon" aria-label="icon button">+</Button>);
+    render(
+      <Button size="icon" aria-label="icon button">
+        +
+      </Button>,
+    );
     const button = screen.getByRole('button', { name: /icon button/i });
     expect(button.className).toContain('h-10 w-10');
   });
@@ -89,7 +93,11 @@ describe('Button', () => {
   });
 
   it('renders children correctly', () => {
-    render(<Button><span data-testid="child">Child</span></Button>);
+    render(
+      <Button>
+        <span data-testid="child">Child</span>
+      </Button>,
+    );
     expect(screen.getByTestId('child')).toBeInTheDocument();
   });
 });

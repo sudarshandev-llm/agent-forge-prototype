@@ -1,5 +1,5 @@
-import { Redis } from "ioredis";
-import { config } from "./index.js";
+import { Redis } from 'ioredis';
+import { config } from './index.js';
 
 let redis: Redis | null = null;
 

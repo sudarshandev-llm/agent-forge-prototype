@@ -11,8 +11,19 @@ import { ExecutionLog } from '@/components/execution-log';
 import { ChatInterface } from '@/components/chat-interface';
 import { cn, formatDate } from '@/lib/utils';
 import {
-  ArrowLeft, Send, Loader2, PanelLeft, PanelRightClose, Bot, User,
-  Brain, Zap, Eye, Check, Clock, Cpu,
+  ArrowLeft,
+  Send,
+  Loader2,
+  PanelLeft,
+  PanelRightClose,
+  Bot,
+  User,
+  Brain,
+  Zap,
+  Eye,
+  Check,
+  Clock,
+  Cpu,
 } from 'lucide-react';
 
 interface ExecutionStep {
@@ -29,7 +40,9 @@ export default function AgentRunPage() {
   const params = useParams();
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [messages, setMessages] = useState<Array<{ role: 'user' | 'assistant'; content: string }>>([]);
+  const [messages, setMessages] = useState<Array<{ role: 'user' | 'assistant'; content: string }>>(
+    [],
+  );
   const [input, setInput] = useState('');
   const [isExecuting, setIsExecuting] = useState(false);
   const [steps, setSteps] = useState<ExecutionStep[]>([]);
@@ -58,7 +71,13 @@ export default function AgentRunPage() {
 
     const stepIds = ['s1', 's2', 's3', 's4'];
     const mockSteps: ExecutionStep[] = [
-      { id: stepIds[0], type: 'thought', content: 'Understanding the user query...', status: 'running', timestamp: new Date().toISOString() },
+      {
+        id: stepIds[0],
+        type: 'thought',
+        content: 'Understanding the user query...',
+        status: 'running',
+        timestamp: new Date().toISOString(),
+      },
     ];
     setSteps(mockSteps);
 
@@ -66,36 +85,66 @@ export default function AgentRunPage() {
       setSteps((prev) =>
         prev.map((s) =>
           s.id === stepIds[0]
-            ? { ...s, status: 'completed' as const, duration: 450, details: 'Identified intent: user needs password reset assistance' }
+            ? {
+                ...s,
+                status: 'completed' as const,
+                duration: 450,
+                details: 'Identified intent: user needs password reset assistance',
+              }
             : s,
         ),
       );
       setTimeout(() => {
         setSteps((prev) => [
-          ...prev.map((s) =>
-            s.id === stepIds[0] ? s : s,
-          ),
-          { id: stepIds[1], type: 'action', content: 'Searching knowledge base for password reset flow...', status: 'running', timestamp: new Date().toISOString() },
+          ...prev.map((s) => (s.id === stepIds[0] ? s : s)),
+          {
+            id: stepIds[1],
+            type: 'action',
+            content: 'Searching knowledge base for password reset flow...',
+            status: 'running',
+            timestamp: new Date().toISOString(),
+          },
         ]);
         setTimeout(() => {
           setSteps((prev) =>
             prev.map((s) =>
-              s.id === stepIds[1]
-                ? { ...s, status: 'completed' as const, duration: 820 }
-                : s,
+              s.id === stepIds[1] ? { ...s, status: 'completed' as const, duration: 820 } : s,
             ),
           );
           setTimeout(() => {
             setSteps((prev) => [
               ...prev,
-              { id: stepIds[2], type: 'observation', content: 'Found 3 relevant articles about password reset', status: 'completed' as const, duration: 120, timestamp: new Date().toISOString(), details: 'Article titles: Reset via email, Reset via SMS, Admin reset' },
+              {
+                id: stepIds[2],
+                type: 'observation',
+                content: 'Found 3 relevant articles about password reset',
+                status: 'completed' as const,
+                duration: 120,
+                timestamp: new Date().toISOString(),
+                details: 'Article titles: Reset via email, Reset via SMS, Admin reset',
+              },
             ]);
             setTimeout(() => {
               setSteps((prev) => [
                 ...prev,
-                { id: stepIds[3], type: 'result', content: 'I can help you reset your password. Would you like to reset via email or SMS?', status: 'completed' as const, duration: 650, timestamp: new Date().toISOString() },
+                {
+                  id: stepIds[3],
+                  type: 'result',
+                  content:
+                    'I can help you reset your password. Would you like to reset via email or SMS?',
+                  status: 'completed' as const,
+                  duration: 650,
+                  timestamp: new Date().toISOString(),
+                },
               ]);
-              setMessages((prev) => [...prev, { role: 'assistant', content: 'I can help you reset your password. Would you like to reset via email or SMS verification?' }]);
+              setMessages((prev) => [
+                ...prev,
+                {
+                  role: 'assistant',
+                  content:
+                    'I can help you reset your password. Would you like to reset via email or SMS verification?',
+                },
+              ]);
               setTokenUsed(342);
               setDuration(Date.now() - startTimeRef.current);
               setIsExecuting(false);
@@ -138,7 +187,11 @@ export default function AgentRunPage() {
               className="h-8 w-8"
               onClick={() => setSidebarOpen(!sidebarOpen)}
             >
-              {sidebarOpen ? <PanelRightClose className="h-4 w-4" /> : <PanelLeft className="h-4 w-4" />}
+              {sidebarOpen ? (
+                <PanelRightClose className="h-4 w-4" />
+              ) : (
+                <PanelLeft className="h-4 w-4" />
+              )}
             </Button>
           </div>
         </div>
@@ -172,9 +225,7 @@ export default function AgentRunPage() {
                   <div
                     className={cn(
                       'max-w-[70%] rounded-lg px-4 py-2',
-                      msg.role === 'user'
-                        ? 'bg-primary text-primary-foreground'
-                        : 'bg-muted',
+                      msg.role === 'user' ? 'bg-primary text-primary-foreground' : 'bg-muted',
                     )}
                   >
                     <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
@@ -206,13 +257,19 @@ export default function AgentRunPage() {
             <textarea
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && (e.preventDefault(), handleSend())}
+              onKeyDown={(e) =>
+                e.key === 'Enter' && !e.shiftKey && (e.preventDefault(), handleSend())
+              }
               placeholder="Type your message..."
               rows={1}
               className="flex-1 resize-none rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             />
             <Button size="icon" onClick={handleSend} disabled={!input.trim() || isExecuting}>
-              {isExecuting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
+              {isExecuting ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <Send className="h-4 w-4" />
+              )}
             </Button>
           </div>
         </div>

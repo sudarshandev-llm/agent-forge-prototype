@@ -51,7 +51,10 @@ export function MemoryConfig({ values, onChange, errors }: MemoryConfigProps) {
         <CardContent className="space-y-6">
           <div className="space-y-2">
             <Label>Memory Type</Label>
-            <Select value={values.type} onValueChange={(v) => update('type', v as MemoryConfigValues['type'])}>
+            <Select
+              value={values.type}
+              onValueChange={(v) => update('type', v as MemoryConfigValues['type'])}
+            >
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
@@ -73,7 +76,9 @@ export function MemoryConfig({ values, onChange, errors }: MemoryConfigProps) {
                     <History className="mt-0.5 h-5 w-5 text-muted-foreground" />
                     <div>
                       <Label>Message History</Label>
-                      <p className="text-sm text-muted-foreground">Maximum recent messages to retain</p>
+                      <p className="text-sm text-muted-foreground">
+                        Maximum recent messages to retain
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
@@ -87,7 +92,9 @@ export function MemoryConfig({ values, onChange, errors }: MemoryConfigProps) {
                     />
                   </div>
                 </div>
-                {errors?.maxMessages && <p className="text-sm text-destructive">{errors.maxMessages}</p>}
+                {errors?.maxMessages && (
+                  <p className="text-sm text-destructive">{errors.maxMessages}</p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -104,7 +111,9 @@ export function MemoryConfig({ values, onChange, errors }: MemoryConfigProps) {
                 <p className="text-xs text-muted-foreground">
                   Maximum tokens allocated for memory context.
                 </p>
-                {errors?.maxTokens && <p className="text-sm text-destructive">{errors.maxTokens}</p>}
+                {errors?.maxTokens && (
+                  <p className="text-sm text-destructive">{errors.maxTokens}</p>
+                )}
               </div>
 
               {(values.type === 'summary' || values.type === 'hybrid') && (
@@ -122,7 +131,9 @@ export function MemoryConfig({ values, onChange, errors }: MemoryConfigProps) {
                   <p className="text-xs text-muted-foreground">
                     Triggers summarization after this many messages.
                   </p>
-                  {errors?.summarizeThreshold && <p className="text-sm text-destructive">{errors.summarizeThreshold}</p>}
+                  {errors?.summarizeThreshold && (
+                    <p className="text-sm text-destructive">{errors.summarizeThreshold}</p>
+                  )}
                 </div>
               )}
 
@@ -131,7 +142,9 @@ export function MemoryConfig({ values, onChange, errors }: MemoryConfigProps) {
                   <Database className="mt-0.5 h-5 w-5 text-muted-foreground" />
                   <div>
                     <Label>Vector Search</Label>
-                    <p className="text-sm text-muted-foreground">Enable semantic similarity search</p>
+                    <p className="text-sm text-muted-foreground">
+                      Enable semantic similarity search
+                    </p>
                   </div>
                 </div>
                 <Switch
@@ -152,7 +165,9 @@ export function MemoryConfig({ values, onChange, errors }: MemoryConfigProps) {
                     value={[values.similarityTopK]}
                     onValueChange={([v]) => update('similarityTopK', v)}
                   />
-                  {errors?.similarityTopK && <p className="text-sm text-destructive">{errors.similarityTopK}</p>}
+                  {errors?.similarityTopK && (
+                    <p className="text-sm text-destructive">{errors.similarityTopK}</p>
+                  )}
                 </div>
               )}
 
@@ -179,7 +194,9 @@ export function MemoryConfig({ values, onChange, errors }: MemoryConfigProps) {
                   <Database className="mt-0.5 h-5 w-5 text-muted-foreground" />
                   <div>
                     <Label>Persist to Disk</Label>
-                    <p className="text-sm text-muted-foreground">Save memory state between sessions</p>
+                    <p className="text-sm text-muted-foreground">
+                      Save memory state between sessions
+                    </p>
                   </div>
                 </div>
                 <Switch

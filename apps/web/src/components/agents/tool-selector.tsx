@@ -7,7 +7,17 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
-import { Search, Check, Wrench, Globe, Database, FileText, Image, Code, MessageSquare } from 'lucide-react';
+import {
+  Search,
+  Check,
+  Wrench,
+  Globe,
+  Database,
+  FileText,
+  Image,
+  Code,
+  MessageSquare,
+} from 'lucide-react';
 
 interface Tool {
   id: string;
@@ -89,7 +99,8 @@ export function ToolSelector({ tools, selectedIds, onChange }: ToolSelectorProps
                   <Icon className="h-4 w-4 text-muted-foreground" />
                   <h4 className="text-sm font-medium capitalize">{category}</h4>
                   <span className="text-xs text-muted-foreground">
-                    {categoryTools.filter((t) => selectedIds.includes(t.id)).length}/{categoryTools.length}
+                    {categoryTools.filter((t) => selectedIds.includes(t.id)).length}/
+                    {categoryTools.length}
                   </span>
                 </div>
                 <div className="space-y-1">
@@ -112,7 +123,9 @@ export function ToolSelector({ tools, selectedIds, onChange }: ToolSelectorProps
                         <div
                           className={cn(
                             'flex h-8 w-8 items-center justify-center rounded-md border',
-                            isSelected ? 'bg-primary text-primary-foreground border-primary' : 'bg-muted',
+                            isSelected
+                              ? 'bg-primary text-primary-foreground border-primary'
+                              : 'bg-muted',
                           )}
                         >
                           {isSelected ? (
@@ -131,10 +144,14 @@ export function ToolSelector({ tools, selectedIds, onChange }: ToolSelectorProps
                               {category}
                             </Badge>
                           </div>
-                          <p className="text-xs text-muted-foreground truncate">{tool.description}</p>
+                          <p className="text-xs text-muted-foreground truncate">
+                            {tool.description}
+                          </p>
                         </div>
                         {!tool.enabled && (
-                          <Badge variant="outline" className="text-[10px]">Coming Soon</Badge>
+                          <Badge variant="outline" className="text-[10px]">
+                            Coming Soon
+                          </Badge>
                         )}
                       </button>
                     );
@@ -153,7 +170,13 @@ export function ToolSelector({ tools, selectedIds, onChange }: ToolSelectorProps
           <span className="text-muted-foreground">
             {selectedIds.length} of {tools.length} tools selected
           </span>
-          <Button variant="ghost" size="sm" onClick={() => onChange(selectedIds.length === tools.length ? [] : tools.map(t => t.id))}>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() =>
+              onChange(selectedIds.length === tools.length ? [] : tools.map((t) => t.id))
+            }
+          >
             {selectedIds.length === tools.length ? 'Deselect All' : 'Select All'}
           </Button>
         </div>

@@ -48,11 +48,7 @@ class MockLLMProvider extends LLMProvider {
   }
 }
 
-function createMockAgent(
-  id: string,
-  name: string,
-  provider?: LLMProvider,
-): Agent {
+function createMockAgent(id: string, name: string, provider?: LLMProvider): Agent {
   const config: AgentConfig = {
     id,
     name,
@@ -132,7 +128,11 @@ describe('Team', () => {
 
     it('should run with leader only when no other roles present', async () => {
       const leaderProvider = new MockLLMProvider('leader-model', [
-        { content: 'Leader response', finishReason: 'stop', usage: { promptTokens: 5, completionTokens: 5, totalTokens: 10 } },
+        {
+          content: 'Leader response',
+          finishReason: 'stop',
+          usage: { promptTokens: 5, completionTokens: 5, totalTokens: 10 },
+        },
       ]);
       const leader = createMockAgent('leader-1', 'Leader', leaderProvider);
 
@@ -209,9 +209,11 @@ describe('Team', () => {
     });
 
     it('should measure duration', async () => {
-      const leader = createMockAgent('leader-1', 'Leader', new MockLLMProvider('leader', [
-        { content: 'Done', finishReason: 'stop' },
-      ]));
+      const leader = createMockAgent(
+        'leader-1',
+        'Leader',
+        new MockLLMProvider('leader', [{ content: 'Done', finishReason: 'stop' }]),
+      );
 
       const team = new Team('Timed Team', 'Testing duration');
       team.addMember(leader, 'leader');

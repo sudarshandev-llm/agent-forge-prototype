@@ -95,8 +95,7 @@ export function WorkflowCanvas({
               </div>
               <h3 className="text-lg font-semibold">Empty workflow</h3>
               <p className="text-sm text-muted-foreground mt-1 max-w-sm">
-                Drag nodes from the palette on the left, or click below to add your
-                first step.
+                Drag nodes from the palette on the left, or click below to add your first step.
               </p>
               <Button
                 variant="outline"

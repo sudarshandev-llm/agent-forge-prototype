@@ -1,2 +1,2 @@
-export * from "./schema/index";
-export { getDb, closeDb } from "./connection";
+export * from './schema/index';
+export { getDb, closeDb } from './connection';

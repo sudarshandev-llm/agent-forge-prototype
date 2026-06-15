@@ -56,14 +56,15 @@ We will credit you in the security advisory unless you prefer to remain anonymou
 
 We run a **bug bounty program** for qualifying vulnerabilities:
 
-| Severity   | Bounty Range     |
-| ---------- | ---------------- |
-| Critical   | $1,000 - $5,000  |
-| High       | $500 - $1,000    |
-| Medium     | $100 - $500      |
-| Low        | Recognition only |
+| Severity | Bounty Range     |
+| -------- | ---------------- |
+| Critical | $1,000 - $5,000  |
+| High     | $500 - $1,000    |
+| Medium   | $100 - $500      |
+| Low      | Recognition only |
 
 **In scope:**
+
 - Remote code execution
 - SQL injection
 - Cross-site scripting (XSS)
@@ -73,6 +74,7 @@ We run a **bug bounty program** for qualifying vulnerabilities:
 - Server-side request forgery (SSRF)
 
 **Out of scope:**
+
 - Denial of Service attacks
 - Social engineering
 - Physical attacks

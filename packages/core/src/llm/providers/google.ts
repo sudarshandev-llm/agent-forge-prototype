@@ -21,10 +21,7 @@ export class GoogleProvider extends LLMProvider {
     return 'google';
   }
 
-  async complete(
-    messages: LLMMessage[],
-    options?: Record<string, unknown>,
-  ): Promise<LLMResponse> {
+  async complete(messages: LLMMessage[], options?: Record<string, unknown>): Promise<LLMResponse> {
     const systemMessages = messages.filter((m) => m.role === 'system');
     const history = messages
       .filter((m) => m.role === 'user' || m.role === 'assistant')
@@ -38,7 +35,9 @@ export class GoogleProvider extends LLMProvider {
 
     const chat = this.model.startChat({
       history: history.slice(0, -1) as any,
-      systemInstruction: systemPrompt ? { role: 'user', parts: [{ text: systemPrompt }] } : undefined,
+      systemInstruction: systemPrompt
+        ? { role: 'user', parts: [{ text: systemPrompt }] }
+        : undefined,
       generationConfig: {
         temperature: (options?.temperature as number) ?? 0.7,
         maxOutputTokens: (options?.maxTokens as number) ?? 4096,
@@ -55,7 +54,9 @@ export class GoogleProvider extends LLMProvider {
       usage: {
         promptTokens: response.usageMetadata?.promptTokenCount ?? 0,
         completionTokens: response.usageMetadata?.candidatesTokenCount ?? 0,
-        totalTokens: (response.usageMetadata?.promptTokenCount ?? 0) + (response.usageMetadata?.candidatesTokenCount ?? 0),
+        totalTokens:
+          (response.usageMetadata?.promptTokenCount ?? 0) +
+          (response.usageMetadata?.candidatesTokenCount ?? 0),
       },
       finishReason: 'stop',
     };
@@ -78,7 +79,9 @@ export class GoogleProvider extends LLMProvider {
 
     const chat = this.model.startChat({
       history: history.slice(0, -1) as any,
-      systemInstruction: systemPrompt ? { role: 'user', parts: [{ text: systemPrompt }] } : undefined,
+      systemInstruction: systemPrompt
+        ? { role: 'user', parts: [{ text: systemPrompt }] }
+        : undefined,
       generationConfig: {
         temperature: (options?.temperature as number) ?? 0.7,
         maxOutputTokens: (options?.maxTokens as number) ?? 4096,

@@ -18,8 +18,16 @@ interface ToolSelectorProps {
 }
 
 const builtInTools: ToolItem[] = [
-  { id: 'web_search', name: 'Web Search', description: 'Search the internet for real-time information' },
-  { id: 'code_runner', name: 'Code Runner', description: 'Execute Python/JavaScript code in a sandbox' },
+  {
+    id: 'web_search',
+    name: 'Web Search',
+    description: 'Search the internet for real-time information',
+  },
+  {
+    id: 'code_runner',
+    name: 'Code Runner',
+    description: 'Execute Python/JavaScript code in a sandbox',
+  },
   { id: 'http_request', name: 'HTTP Request', description: 'Make HTTP requests to external APIs' },
   { id: 'file_system', name: 'File System', description: 'Read and write files in the workspace' },
   { id: 'github', name: 'GitHub', description: 'Interact with GitHub repos, issues, and PRs' },
@@ -64,9 +72,7 @@ export function ToolSelector({ value, onChange, className }: ToolSelectorProps) 
                 onClick={() => toggleTool(tool.id)}
                 className={cn(
                   'flex items-start gap-3 rounded-lg border p-3 text-left transition-colors',
-                  isSelected
-                    ? 'border-primary bg-primary/5'
-                    : 'hover:bg-muted',
+                  isSelected ? 'border-primary bg-primary/5' : 'hover:bg-muted',
                 )}
               >
                 <div
@@ -80,7 +86,11 @@ export function ToolSelector({ value, onChange, className }: ToolSelectorProps) 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
                     <span className="font-medium text-sm">{tool.name}</span>
-                    {isSelected && <Badge variant="default" className="text-[10px]">Active</Badge>}
+                    {isSelected && (
+                      <Badge variant="default" className="text-[10px]">
+                        Active
+                      </Badge>
+                    )}
                   </div>
                   <p className="text-xs text-muted-foreground mt-0.5">{tool.description}</p>
                 </div>

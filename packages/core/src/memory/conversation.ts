@@ -27,9 +27,7 @@ export class SlidingWindowConversationMemory extends MemoryProvider {
 
   async search(query: string, limit: number = 5): Promise<LLMMessage[]> {
     const lowerQuery = query.toLowerCase();
-    const results = this.messages.filter(
-      (m) => m.content.toLowerCase().includes(lowerQuery),
-    );
+    const results = this.messages.filter((m) => m.content.toLowerCase().includes(lowerQuery));
     return results.slice(-limit);
   }
 }

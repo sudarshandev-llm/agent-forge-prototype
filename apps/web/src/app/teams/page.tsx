@@ -23,10 +23,56 @@ interface Team {
 }
 
 const mockTeams: Team[] = [
-  { id: '1', name: 'Engineering', description: 'Core engineering team building agent infrastructure.', memberCount: 5, agentCount: 3, members: [{ id: 'u1', name: 'Alice Chen' }, { id: 'u2', name: 'Bob Smith' }, { id: 'u3', name: 'Carol Davis' }], createdAt: '2024-01-15', updatedAt: '2024-06-01' },
-  { id: '2', name: 'Customer Success', description: 'Handling customer inquiries with AI agents.', memberCount: 4, agentCount: 6, members: [{ id: 'u4', name: 'David Lee' }, { id: 'u5', name: 'Eve Wilson' }], createdAt: '2024-02-20', updatedAt: '2024-06-05' },
-  { id: '3', name: 'Data Science', description: 'Data analysis and ML model management.', memberCount: 3, agentCount: 4, members: [{ id: 'u6', name: 'Frank Brown' }], createdAt: '2024-03-10', updatedAt: '2024-05-28' },
-  { id: '4', name: 'Operations', description: 'Automating operational workflows.', memberCount: 6, agentCount: 2, members: [{ id: 'u7', name: 'Grace Kim' }, { id: 'u8', name: 'Henry Patel' }], createdAt: '2024-04-01', updatedAt: '2024-06-08' },
+  {
+    id: '1',
+    name: 'Engineering',
+    description: 'Core engineering team building agent infrastructure.',
+    memberCount: 5,
+    agentCount: 3,
+    members: [
+      { id: 'u1', name: 'Alice Chen' },
+      { id: 'u2', name: 'Bob Smith' },
+      { id: 'u3', name: 'Carol Davis' },
+    ],
+    createdAt: '2024-01-15',
+    updatedAt: '2024-06-01',
+  },
+  {
+    id: '2',
+    name: 'Customer Success',
+    description: 'Handling customer inquiries with AI agents.',
+    memberCount: 4,
+    agentCount: 6,
+    members: [
+      { id: 'u4', name: 'David Lee' },
+      { id: 'u5', name: 'Eve Wilson' },
+    ],
+    createdAt: '2024-02-20',
+    updatedAt: '2024-06-05',
+  },
+  {
+    id: '3',
+    name: 'Data Science',
+    description: 'Data analysis and ML model management.',
+    memberCount: 3,
+    agentCount: 4,
+    members: [{ id: 'u6', name: 'Frank Brown' }],
+    createdAt: '2024-03-10',
+    updatedAt: '2024-05-28',
+  },
+  {
+    id: '4',
+    name: 'Operations',
+    description: 'Automating operational workflows.',
+    memberCount: 6,
+    agentCount: 2,
+    members: [
+      { id: 'u7', name: 'Grace Kim' },
+      { id: 'u8', name: 'Henry Patel' },
+    ],
+    createdAt: '2024-04-01',
+    updatedAt: '2024-06-08',
+  },
 ];
 
 export default function TeamsPage() {
@@ -130,7 +176,9 @@ export default function TeamsPage() {
                   <div className="flex -space-x-2">
                     {team.members.slice(0, 5).map((member) => (
                       <Avatar key={member.id} className="h-8 w-8 border-2 border-background">
-                        <AvatarFallback className="text-xs">{getInitials(member.name)}</AvatarFallback>
+                        <AvatarFallback className="text-xs">
+                          {getInitials(member.name)}
+                        </AvatarFallback>
                       </Avatar>
                     ))}
                     {team.memberCount > 5 && (

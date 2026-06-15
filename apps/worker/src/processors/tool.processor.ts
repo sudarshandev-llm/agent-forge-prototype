@@ -34,7 +34,12 @@ export const toolProcessor = {
   },
 
   async httpRequest(parameters: Record<string, unknown>): Promise<unknown> {
-    const { url, method = 'GET', headers = {}, body } = parameters as {
+    const {
+      url,
+      method = 'GET',
+      headers = {},
+      body,
+    } = parameters as {
       url: string;
       method?: string;
       headers?: Record<string, string>;

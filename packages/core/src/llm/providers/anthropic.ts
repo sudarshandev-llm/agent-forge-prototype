@@ -20,10 +20,7 @@ export class AnthropicProvider extends LLMProvider {
     return 'anthropic';
   }
 
-  async complete(
-    messages: LLMMessage[],
-    options?: Record<string, unknown>,
-  ): Promise<LLMResponse> {
+  async complete(messages: LLMMessage[], options?: Record<string, unknown>): Promise<LLMResponse> {
     const systemMessages = messages.filter((m) => m.role === 'system');
     const nonSystemMessages = messages.filter((m) => m.role !== 'system');
 
@@ -64,7 +61,12 @@ export class AnthropicProvider extends LLMProvider {
             totalTokens: response.usage.input_tokens + response.usage.output_tokens,
           }
         : undefined,
-      finishReason: response.stop_reason === 'end_turn' ? 'stop' : response.stop_reason === 'tool_use' ? 'tool_calls' : 'stop',
+      finishReason:
+        response.stop_reason === 'end_turn'
+          ? 'stop'
+          : response.stop_reason === 'tool_use'
+            ? 'tool_calls'
+            : 'stop',
     };
   }
 
@@ -99,7 +101,12 @@ export class AnthropicProvider extends LLMProvider {
       if (event.type === 'message_delta') {
         yield {
           content: '',
-          finishReason: event.delta.stop_reason === 'end_turn' ? 'stop' : event.delta.stop_reason === 'tool_use' ? 'tool_calls' : undefined,
+          finishReason:
+            event.delta.stop_reason === 'end_turn'
+              ? 'stop'
+              : event.delta.stop_reason === 'tool_use'
+                ? 'tool_calls'
+                : undefined,
         };
       }
     }

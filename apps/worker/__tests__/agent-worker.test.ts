@@ -1,18 +1,19 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
-vi.mock("ioredis", () => {
+vi.mock('ioredis', () => {
   const mockRedis = {
     publish: vi.fn().mockResolvedValue(0),
-    ping: vi.fn().mockResolvedValue("PONG"),
-    quit: vi.fn().mockResolvedValue("OK"),
+    ping: vi.fn().mockResolvedValue('PONG'),
+    quit: vi.fn().mockResolvedValue('OK'),
     on: vi.fn(),
   };
   return {
     default: vi.fn(() => mockRedis),
+    Redis: vi.fn(() => mockRedis),
   };
 });
 
-vi.mock("../src/config/logger.js", () => ({
+vi.mock('../src/config/logger.js', () => ({
   logger: {
     info: vi.fn(),
     error: vi.fn(),
@@ -20,8 +21,8 @@ vi.mock("../src/config/logger.js", () => ({
   },
 }));
 
-vi.mock("bullmq", async () => {
-  const actual = await vi.importActual("bullmq");
+vi.mock('bullmq', async () => {
+  const actual = await vi.importActual('bullmq');
   return {
     ...actual,
     Worker: vi.fn().mockImplementation((queueName, processor, opts) => {
@@ -34,7 +35,7 @@ vi.mock("bullmq", async () => {
       };
     }),
     Queue: vi.fn().mockImplementation(() => ({
-      add: vi.fn().mockResolvedValue({ id: "mock-job-id" }),
+      add: vi.fn().mockResolvedValue({ id: 'mock-job-id' }),
       close: vi.fn().mockResolvedValue(undefined),
       on: vi.fn().mockReturnThis(),
     })),
@@ -45,11 +46,11 @@ vi.mock("bullmq", async () => {
   };
 });
 
-vi.mock("nanoid", () => ({
-  nanoid: vi.fn(() => "test-id"),
+vi.mock('nanoid', () => ({
+  nanoid: vi.fn(() => 'test-id'),
 }));
 
-describe("AgentWorker", () => {
+describe('AgentWorker', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
@@ -58,28 +59,28 @@ describe("AgentWorker", () => {
     vi.resetAllMocks();
   });
 
-  it("should initialize without error", async () => {
-    const { AgentWorker } = await import("../src/workers/agent-worker.js");
+  it('should initialize without error', async () => {
+    const { AgentWorker } = await import('../src/workers/agent-worker.js');
     const worker = new AgentWorker();
     expect(worker).toBeInstanceOf(AgentWorker);
-    expect(worker).toHaveProperty("close");
+    expect(worker).toHaveProperty('close');
     await worker.close();
   });
 
-  it("should publish progress events during processing", async () => {
-    const Redis = (await import("ioredis")).default;
+  it('should publish progress events during processing', async () => {
+    const Redis = (await import('ioredis')).default;
     const mockRedis = new Redis();
 
-    const { AgentWorker } = await import("../src/workers/agent-worker.js");
+    const { AgentWorker } = await import('../src/workers/agent-worker.js');
     const worker = new AgentWorker();
 
     const job: any = {
-      id: "job-1",
+      id: 'job-1',
       data: {
-        executionId: "exec-1",
-        agentId: "agent-1",
-        userId: "user-1",
-        input: "Test input for the agent",
+        executionId: 'exec-1',
+        agentId: 'agent-1',
+        userId: 'user-1',
+        input: 'Test input for the agent',
       },
       isActive: vi.fn().mockResolvedValue(true),
       updateProgress: vi.fn().mockResolvedValue(undefined),
@@ -93,26 +94,26 @@ describe("AgentWorker", () => {
     expect(publishCalls.length).toBeGreaterThanOrEqual(1);
 
     const firstCall = JSON.parse(publishCalls[0][1]);
-    expect(firstCall.executionId).toBe("exec-1");
-    expect(firstCall.status).toBe("running");
+    expect(firstCall.executionId).toBe('exec-1');
+    expect(firstCall.status).toBe('running');
 
     await worker.close();
   });
 
-  it("should emit completion event on successful processing", async () => {
-    const Redis = (await import("ioredis")).default;
+  it('should emit completion event on successful processing', async () => {
+    const Redis = (await import('ioredis')).default;
     const mockRedis = new Redis();
 
-    const { AgentWorker } = await import("../src/workers/agent-worker.js");
+    const { AgentWorker } = await import('../src/workers/agent-worker.js');
     const worker = new AgentWorker();
 
     const job: any = {
-      id: "job-2",
+      id: 'job-2',
       data: {
-        executionId: "exec-2",
-        agentId: "agent-2",
-        userId: "user-2",
-        input: "Another test",
+        executionId: 'exec-2',
+        agentId: 'agent-2',
+        userId: 'user-2',
+        input: 'Another test',
       },
       isActive: vi.fn().mockResolvedValue(true),
       updateProgress: vi.fn().mockResolvedValue(undefined),
@@ -124,70 +125,70 @@ describe("AgentWorker", () => {
     const publishCalls = (mockRedis.publish as ReturnType<typeof vi.fn>).mock.calls;
     const completedEvent = publishCalls.find((call: any[]) => {
       const msg = JSON.parse(call[1]);
-      return msg.status === "completed";
+      return msg.status === 'completed';
     });
 
     expect(completedEvent).toBeDefined();
     const msg = JSON.parse(completedEvent[1]);
-    expect(msg.executionId).toBe("exec-2");
-    expect(msg.status).toBe("completed");
-    expect(msg.output).toContain("Successfully processed");
+    expect(msg.executionId).toBe('exec-2');
+    expect(msg.status).toBe('completed');
+    expect(msg.output).toContain('Successfully processed');
 
     await worker.close();
   });
 
-  it("should publish failure event when processing throws", async () => {
-    const Redis = (await import("ioredis")).default;
+  it('should publish failure event when processing throws', async () => {
+    const Redis = (await import('ioredis')).default;
     const mockRedis = new Redis();
 
-    const { AgentWorker } = await import("../src/workers/agent-worker.js");
+    const { AgentWorker } = await import('../src/workers/agent-worker.js');
     const worker = new AgentWorker();
 
     const job: any = {
-      id: "job-3",
+      id: 'job-3',
       data: {
-        executionId: "exec-3",
-        agentId: "agent-3",
-        userId: "user-3",
-        input: "Failing job",
+        executionId: 'exec-3',
+        agentId: 'agent-3',
+        userId: 'user-3',
+        input: 'Failing job',
       },
-      isActive: vi.fn().mockRejectedValue(new Error("Simulated failure")),
+      isActive: vi.fn().mockRejectedValue(new Error('Simulated failure')),
       updateProgress: vi.fn().mockResolvedValue(undefined),
     };
 
     const processor = (Worker as unknown as ReturnType<typeof vi.fn>).mock.calls[0][1];
-    await expect(processor(job)).rejects.toThrow("Simulated failure");
+    await expect(processor(job)).rejects.toThrow('Simulated failure');
 
     const publishCalls = (mockRedis.publish as ReturnType<typeof vi.fn>).mock.calls;
     const failedEvent = publishCalls.find((call: any[]) => {
       const msg = JSON.parse(call[1]);
-      return msg.status === "failed";
+      return msg.status === 'failed';
     });
 
     expect(failedEvent).toBeDefined();
     const msg = JSON.parse(failedEvent[1]);
-    expect(msg.executionId).toBe("exec-3");
-    expect(msg.status).toBe("failed");
-    expect(msg.error).toBe("Simulated failure");
+    expect(msg.executionId).toBe('exec-3');
+    expect(msg.status).toBe('failed');
+    expect(msg.error).toBe('Simulated failure');
 
     await worker.close();
   });
 
-  it("should handle cancellation by checking isActive", async () => {
-    const Redis = (await import("ioredis")).default;
+  it('should handle cancellation by checking isActive', async () => {
+    const Redis = (await import('ioredis')).default;
     const mockRedis = new Redis();
 
-    const { AgentWorker } = await import("../src/workers/agent-worker.js");
+    const { AgentWorker } = await import('../src/workers/agent-worker.js');
     const worker = new AgentWorker();
 
     let callCount = 0;
     const job: any = {
-      id: "job-4",
+      id: 'job-4',
       data: {
-        executionId: "exec-4",
-        agentId: "agent-4",
-        userId: "user-4",
-        input: "Cancellable job",
+        executionId: 'exec-4',
+        agentId: 'agent-4',
+        userId: 'user-4',
+        input: 'Cancellable job',
       },
       isActive: vi.fn().mockImplementation(() => {
         callCount++;

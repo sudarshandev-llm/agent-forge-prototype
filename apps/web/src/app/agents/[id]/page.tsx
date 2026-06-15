@@ -12,8 +12,19 @@ import { ExecutionTimeline } from '@/components/execution-timeline';
 import { useUIStore } from '@/store/ui-store';
 import { formatDate } from '@/lib/utils';
 import {
-  Bot, ArrowLeft, Pencil, Trash2, Play, Clock, Brain, Wrench, Database,
-  CheckCircle2, XCircle, Loader2, Copy,
+  Bot,
+  ArrowLeft,
+  Pencil,
+  Trash2,
+  Play,
+  Clock,
+  Brain,
+  Wrench,
+  Database,
+  CheckCircle2,
+  XCircle,
+  Loader2,
+  Copy,
 } from 'lucide-react';
 
 const mockAgent = {
@@ -36,9 +47,36 @@ const mockAgent = {
 };
 
 const mockExecutions = [
-  { id: '1', status: 'success' as const, input: 'Help me reset my password', output: 'Sure! I can help you reset your password...', duration: 2340, tokensUsed: 456, createdAt: new Date(Date.now() - 60000).toISOString(), steps: [] },
-  { id: '2', status: 'failed' as const, input: 'What is my order status?', output: '', duration: 1200, tokensUsed: 123, createdAt: new Date(Date.now() - 3600000).toISOString(), steps: [] },
-  { id: '3', status: 'success' as const, input: 'Cancel my subscription', output: 'Your subscription has been cancelled...', duration: 3100, tokensUsed: 678, createdAt: new Date(Date.now() - 7200000).toISOString(), steps: [] },
+  {
+    id: '1',
+    status: 'success' as const,
+    input: 'Help me reset my password',
+    output: 'Sure! I can help you reset your password...',
+    duration: 2340,
+    tokensUsed: 456,
+    createdAt: new Date(Date.now() - 60000).toISOString(),
+    steps: [],
+  },
+  {
+    id: '2',
+    status: 'failed' as const,
+    input: 'What is my order status?',
+    output: '',
+    duration: 1200,
+    tokensUsed: 123,
+    createdAt: new Date(Date.now() - 3600000).toISOString(),
+    steps: [],
+  },
+  {
+    id: '3',
+    status: 'success' as const,
+    input: 'Cancel my subscription',
+    output: 'Your subscription has been cancelled...',
+    duration: 3100,
+    tokensUsed: 678,
+    createdAt: new Date(Date.now() - 7200000).toISOString(),
+    steps: [],
+  },
 ];
 
 export default function AgentDetailPage() {
@@ -66,7 +104,15 @@ export default function AgentDetailPage() {
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-3xl font-bold tracking-tight">{agent.name}</h1>
-              <Badge variant={agent.status === 'active' ? 'success' : agent.status === 'error' ? 'destructive' : 'warning'}>
+              <Badge
+                variant={
+                  agent.status === 'active'
+                    ? 'success'
+                    : agent.status === 'error'
+                      ? 'destructive'
+                      : 'warning'
+                }
+              >
                 {agent.status}
               </Badge>
             </div>
@@ -77,7 +123,11 @@ export default function AgentDetailPage() {
           <Button variant="outline" size="sm" onClick={handleDuplicate}>
             <Copy className="mr-2 h-4 w-4" /> Duplicate
           </Button>
-          <Button variant="outline" size="sm" onClick={() => router.push(`/agents/${params.id}/edit`)}>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => router.push(`/agents/${params.id}/edit`)}
+          >
             <Pencil className="mr-2 h-4 w-4" /> Edit
           </Button>
           <Button variant="destructive" size="sm" onClick={handleDelete}>
@@ -209,7 +259,9 @@ export default function AgentDetailPage() {
                     <span className="text-xs text-muted-foreground">{exec.duration}ms</span>
                   </div>
                   <p className="text-xs text-muted-foreground line-clamp-2">{exec.input}</p>
-                  <p className="text-xs text-muted-foreground mt-1">{formatDate(exec.createdAt, 'relative')}</p>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {formatDate(exec.createdAt, 'relative')}
+                  </p>
                 </CardContent>
               </Card>
             ))}
@@ -225,7 +277,9 @@ export default function AgentDetailPage() {
           <Card>
             <CardHeader>
               <CardTitle>Edit Agent Configuration</CardTitle>
-              <CardDescription>Modify your agent settings here. Changes take effect on next execution.</CardDescription>
+              <CardDescription>
+                Modify your agent settings here. Changes take effect on next execution.
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">

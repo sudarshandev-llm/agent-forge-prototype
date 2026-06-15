@@ -17,7 +17,14 @@ const mockTeam = {
   updatedAt: new Date(),
   deletedAt: null,
   members: [
-    { id: 'tm-1', teamId: 'team-1', userId: 'user-1', role: TeamRole.OWNER, joinedAt: new Date(), lastActiveAt: null },
+    {
+      id: 'tm-1',
+      teamId: 'team-1',
+      userId: 'user-1',
+      role: TeamRole.OWNER,
+      joinedAt: new Date(),
+      lastActiveAt: null,
+    },
   ],
   agents: [],
   _count: { agents: 0 },
@@ -27,8 +34,22 @@ const mockTeamWithMembers = {
   ...mockTeam,
   members: [
     ...mockTeam.members,
-    { id: 'tm-2', teamId: 'team-1', userId: 'user-2', role: TeamRole.ADMIN, joinedAt: new Date(), lastActiveAt: null },
-    { id: 'tm-3', teamId: 'team-1', userId: 'user-3', role: TeamRole.MEMBER, joinedAt: new Date(), lastActiveAt: null },
+    {
+      id: 'tm-2',
+      teamId: 'team-1',
+      userId: 'user-2',
+      role: TeamRole.ADMIN,
+      joinedAt: new Date(),
+      lastActiveAt: null,
+    },
+    {
+      id: 'tm-3',
+      teamId: 'team-1',
+      userId: 'user-3',
+      role: TeamRole.MEMBER,
+      joinedAt: new Date(),
+      lastActiveAt: null,
+    },
   ],
 };
 
@@ -83,7 +104,9 @@ describe('teamService', () => {
       expect(prisma.team.findFirst).toHaveBeenCalledWith({
         where: { id: 'team-1', members: { some: { userId: 'user-1' } }, deletedAt: null },
         include: {
-          members: { include: { user: { select: { id: true, email: true, name: true, avatarUrl: true } } } },
+          members: {
+            include: { user: { select: { id: true, email: true, name: true, avatarUrl: true } } },
+          },
           _count: { select: { agents: true } },
         },
       });
@@ -99,7 +122,10 @@ describe('teamService', () => {
 
   describe('listTeams', () => {
     it('should list teams user belongs to', async () => {
-      vi.mocked(prisma.team.findMany).mockResolvedValue([mockTeam, { ...mockTeam, id: 'team-2' }] as any);
+      vi.mocked(prisma.team.findMany).mockResolvedValue([
+        mockTeam,
+        { ...mockTeam, id: 'team-2' },
+      ] as any);
 
       const result = await teamService.listTeams('user-1');
 
@@ -129,7 +155,9 @@ describe('teamService', () => {
     it('should throw 403 when user has no permission', async () => {
       vi.mocked(prisma.team.findFirst).mockResolvedValue(mockTeamWithMembers as any);
 
-      await expect(teamService.updateTeam('team-1', 'user-3', { name: 'Hack' })).rejects.toThrow(ApiError);
+      await expect(teamService.updateTeam('team-1', 'user-3', { name: 'Hack' })).rejects.toThrow(
+        ApiError,
+      );
     });
   });
 
@@ -165,7 +193,10 @@ describe('teamService', () => {
       };
       vi.mocked(prisma.teamMember.create).mockResolvedValue(newMember as any);
 
-      const result = await teamService.addMember('team-1', 'user-1', { userId: 'user-4', role: TeamRole.MEMBER });
+      const result = await teamService.addMember('team-1', 'user-1', {
+        userId: 'user-4',
+        role: TeamRole.MEMBER,
+      });
 
       expect(prisma.teamMember.create).toHaveBeenCalledWith({
         data: { teamId: 'team-1', userId: 'user-4', role: TeamRole.MEMBER },
@@ -213,7 +244,9 @@ describe('teamService', () => {
     it('should throw 400 when trying to remove owner', async () => {
       vi.mocked(prisma.team.findFirst).mockResolvedValue(mockTeamWithMembers as any);
 
-      await expect(teamService.removeMember('team-1', 'user-1', 'user-1')).rejects.toThrow(ApiError);
+      await expect(teamService.removeMember('team-1', 'user-1', 'user-1')).rejects.toThrow(
+        ApiError,
+      );
     });
   });
 
@@ -223,7 +256,12 @@ describe('teamService', () => {
       const updated = { ...mockTeamWithMembers.members[2]!, role: TeamRole.ADMIN };
       vi.mocked(prisma.teamMember.update).mockResolvedValue(updated as any);
 
-      const result = await teamService.updateMemberRole('team-1', 'user-1', 'user-3', TeamRole.ADMIN);
+      const result = await teamService.updateMemberRole(
+        'team-1',
+        'user-1',
+        'user-3',
+        TeamRole.ADMIN,
+      );
 
       expect(prisma.teamMember.update).toHaveBeenCalledWith({
         where: { teamId_userId: { teamId: 'team-1', userId: 'user-3' } },
@@ -235,7 +273,9 @@ describe('teamService', () => {
     it('should throw 400 when trying to change owner role', async () => {
       vi.mocked(prisma.team.findFirst).mockResolvedValue(mockTeamWithMembers as any);
 
-      await expect(teamService.updateMemberRole('team-1', 'user-1', 'user-1', TeamRole.MEMBER)).rejects.toThrow(ApiError);
+      await expect(
+        teamService.updateMemberRole('team-1', 'user-1', 'user-1', TeamRole.MEMBER),
+      ).rejects.toThrow(ApiError);
     });
   });
 

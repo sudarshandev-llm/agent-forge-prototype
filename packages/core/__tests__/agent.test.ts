@@ -210,7 +210,11 @@ describe('Agent', () => {
       const result = await agent.run('Test tool failure');
 
       expect(result.status).toBe('completed');
-      expect(result.steps.filter((s) => s.type === 'observation').some((s) => s.content.includes('failed'))).toBe(true);
+      expect(
+        result.steps
+          .filter((s) => s.type === 'observation')
+          .some((s) => s.content.includes('failed')),
+      ).toBe(true);
     });
   });
 
@@ -282,7 +286,11 @@ describe('Agent', () => {
       tools.register({
         name: 'web_search',
         description: 'Search',
-        parameters: { type: 'object', properties: { query: { type: 'string' } }, required: ['query'] },
+        parameters: {
+          type: 'object',
+          properties: { query: { type: 'string' } },
+          required: ['query'],
+        },
         async execute() {
           return { results: [] };
         },

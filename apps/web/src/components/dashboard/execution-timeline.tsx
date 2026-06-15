@@ -70,9 +70,7 @@ export function ExecutionTimeline({ steps, className }: ExecutionTimelineProps) 
 
         return (
           <div key={step.id} className="relative flex gap-4 pb-8 last:pb-0">
-            {!isLast && (
-              <div className="absolute left-[19px] top-10 h-full w-px bg-border" />
-            )}
+            {!isLast && <div className="absolute left-[19px] top-10 h-full w-px bg-border" />}
             <div className="relative flex flex-col items-center">
               <div
                 className={cn(

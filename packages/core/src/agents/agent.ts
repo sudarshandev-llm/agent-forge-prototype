@@ -51,9 +51,7 @@ export class Agent extends EventEmitter<AgentEvents> {
 
     const history = await this.memory.getHistory();
 
-    const buildMessages = (
-      additionalContext?: string,
-    ): LLMMessage[] => {
+    const buildMessages = (additionalContext?: string): LLMMessage[] => {
       const systemMsg: LLMMessage = {
         role: 'system',
         content: this.config.systemPrompt,
@@ -240,7 +238,11 @@ export class Agent extends EventEmitter<AgentEvents> {
       const result: AgentRunResult = {
         id: runId,
         agentId: this.config.id,
-        output: steps.filter((s) => s.type === 'result').map((s) => s.content).join('\n') || 'Max iterations reached without final result',
+        output:
+          steps
+            .filter((s) => s.type === 'result')
+            .map((s) => s.content)
+            .join('\n') || 'Max iterations reached without final result',
         steps,
         usage: {
           promptTokens: totalPromptTokens,

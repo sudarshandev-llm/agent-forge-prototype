@@ -11,12 +11,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen">
       <Sidebar />
-      <div
-        className={cn(
-          'transition-all duration-300',
-          sidebarOpen ? 'lg:pl-64' : 'lg:pl-16',
-        )}
-      >
+      <div className={cn('transition-all duration-300', sidebarOpen ? 'lg:pl-64' : 'lg:pl-16')}>
         <Navbar />
         <main className="p-4 lg:p-6">{children}</main>
       </div>

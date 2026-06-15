@@ -82,7 +82,10 @@ export const llmService = {
         model: request.model,
         error: error instanceof Error ? error.message : 'Unknown error',
       });
-      throw new ApiError(502, `LLM provider error: ${error instanceof Error ? error.message : 'Unknown'}`);
+      throw new ApiError(
+        502,
+        `LLM provider error: ${error instanceof Error ? error.message : 'Unknown'}`,
+      );
     }
   },
 

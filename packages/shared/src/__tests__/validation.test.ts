@@ -80,7 +80,7 @@ describe('sanitizeInput', () => {
   });
 
   it('should escape single quotes', () => {
-    expect(sanitizeInput("it's")).toBe("it&#x27;s");
+    expect(sanitizeInput("it's")).toBe('it&#x27;s');
   });
 
   it('should return empty string when given empty input', () => {

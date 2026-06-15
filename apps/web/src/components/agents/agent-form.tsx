@@ -22,7 +22,10 @@ import { useRouter } from 'next/navigation';
 
 const agentFormSchema = z.object({
   name: z.string().min(1, 'Name is required').max(100, 'Name must be 100 characters or less'),
-  description: z.string().min(1, 'Description is required').max(500, 'Description must be 500 characters or less'),
+  description: z
+    .string()
+    .min(1, 'Description is required')
+    .max(500, 'Description must be 500 characters or less'),
   capabilities: z.array(z.string()).min(1, 'At least one capability is required'),
   model: z.string().min(1, 'Model is required'),
   temperature: z.number().min(0).max(2),
@@ -69,18 +72,90 @@ const defaultConfig: AgentFormData = {
 };
 
 const SAMPLE_TOOLS = [
-  { id: 'web_search', name: 'Web Search', description: 'Search the internet for information', category: 'web', enabled: true },
-  { id: 'web_scrape', name: 'Web Scraper', description: 'Extract content from web pages', category: 'web', enabled: true },
-  { id: 'sql_query', name: 'SQL Query', description: 'Execute SQL queries against databases', category: 'data', enabled: true },
-  { id: 'file_read', name: 'File Reader', description: 'Read and parse files', category: 'document', enabled: true },
-  { id: 'file_write', name: 'File Writer', description: 'Write content to files', category: 'document', enabled: true },
-  { id: 'image_gen', name: 'Image Generator', description: 'Generate images from prompts', category: 'image', enabled: true },
-  { id: 'code_interpreter', name: 'Code Interpreter', description: 'Execute Python/JavaScript code', category: 'code', enabled: true },
-  { id: 'send_email', name: 'Send Email', description: 'Send emails via SMTP', category: 'communication', enabled: true },
-  { id: 'slack_message', name: 'Slack Message', description: 'Send messages to Slack channels', category: 'communication', enabled: true },
-  { id: 'math', name: 'Math Solver', description: 'Solve mathematical expressions', category: 'utility', enabled: true },
-  { id: 'json_transform', name: 'JSON Transformer', description: 'Transform JSON data', category: 'utility', enabled: true },
-  { id: 'pdf_parse', name: 'PDF Parser', description: 'Extract text from PDF files', category: 'document', enabled: false },
+  {
+    id: 'web_search',
+    name: 'Web Search',
+    description: 'Search the internet for information',
+    category: 'web',
+    enabled: true,
+  },
+  {
+    id: 'web_scrape',
+    name: 'Web Scraper',
+    description: 'Extract content from web pages',
+    category: 'web',
+    enabled: true,
+  },
+  {
+    id: 'sql_query',
+    name: 'SQL Query',
+    description: 'Execute SQL queries against databases',
+    category: 'data',
+    enabled: true,
+  },
+  {
+    id: 'file_read',
+    name: 'File Reader',
+    description: 'Read and parse files',
+    category: 'document',
+    enabled: true,
+  },
+  {
+    id: 'file_write',
+    name: 'File Writer',
+    description: 'Write content to files',
+    category: 'document',
+    enabled: true,
+  },
+  {
+    id: 'image_gen',
+    name: 'Image Generator',
+    description: 'Generate images from prompts',
+    category: 'image',
+    enabled: true,
+  },
+  {
+    id: 'code_interpreter',
+    name: 'Code Interpreter',
+    description: 'Execute Python/JavaScript code',
+    category: 'code',
+    enabled: true,
+  },
+  {
+    id: 'send_email',
+    name: 'Send Email',
+    description: 'Send emails via SMTP',
+    category: 'communication',
+    enabled: true,
+  },
+  {
+    id: 'slack_message',
+    name: 'Slack Message',
+    description: 'Send messages to Slack channels',
+    category: 'communication',
+    enabled: true,
+  },
+  {
+    id: 'math',
+    name: 'Math Solver',
+    description: 'Solve mathematical expressions',
+    category: 'utility',
+    enabled: true,
+  },
+  {
+    id: 'json_transform',
+    name: 'JSON Transformer',
+    description: 'Transform JSON data',
+    category: 'utility',
+    enabled: true,
+  },
+  {
+    id: 'pdf_parse',
+    name: 'PDF Parser',
+    description: 'Extract text from PDF files',
+    category: 'document',
+    enabled: false,
+  },
 ];
 
 interface AgentFormProps {
@@ -127,7 +202,10 @@ export function AgentForm({ initialData, agentId }: AgentFormProps) {
   };
 
   const removeCapability = (cap: string) => {
-    setValue('capabilities', capabilities.filter((c) => c !== cap));
+    setValue(
+      'capabilities',
+      capabilities.filter((c) => c !== cap),
+    );
   };
 
   const onSubmit = async (data: AgentFormData) => {
@@ -163,7 +241,9 @@ export function AgentForm({ initialData, agentId }: AgentFormProps) {
             {agentId ? 'Edit Agent' : 'Create New Agent'}
           </h2>
           <p className="text-muted-foreground">
-            {agentId ? 'Update your agent configuration' : 'Configure your AI agent with tools and memory'}
+            {agentId
+              ? 'Update your agent configuration'
+              : 'Configure your AI agent with tools and memory'}
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -234,7 +314,9 @@ export function AgentForm({ initialData, agentId }: AgentFormProps) {
                 className="min-h-[100px]"
                 {...register('description')}
               />
-              {errors.description && <p className="text-sm text-destructive">{errors.description.message}</p>}
+              {errors.description && (
+                <p className="text-sm text-destructive">{errors.description.message}</p>
+              )}
             </div>
             <div className="space-y-2">
               <Label>Capabilities</Label>
@@ -242,7 +324,11 @@ export function AgentForm({ initialData, agentId }: AgentFormProps) {
                 {capabilities.map((cap) => (
                   <Badge key={cap} variant="secondary" className="gap-1">
                     {cap}
-                    <button type="button" onClick={() => removeCapability(cap)} className="ml-1 hover:text-destructive">
+                    <button
+                      type="button"
+                      onClick={() => removeCapability(cap)}
+                      className="ml-1 hover:text-destructive"
+                    >
                       <X className="h-3 w-3" />
                     </button>
                   </Badge>
@@ -259,7 +345,9 @@ export function AgentForm({ initialData, agentId }: AgentFormProps) {
                   <Plus className="h-4 w-4" />
                 </Button>
               </div>
-              {errors.capabilities && <p className="text-sm text-destructive">{errors.capabilities.message}</p>}
+              {errors.capabilities && (
+                <p className="text-sm text-destructive">{errors.capabilities.message}</p>
+              )}
             </div>
           </CardContent>
         </Card>
@@ -292,12 +380,7 @@ export function AgentForm({ initialData, agentId }: AgentFormProps) {
       )}
 
       {/* Step 4: Memory */}
-      {step === 3 && (
-        <MemoryConfig
-          values={memoryValues}
-          onChange={(v) => setValue('memory', v)}
-        />
-      )}
+      {step === 3 && <MemoryConfig values={memoryValues} onChange={(v) => setValue('memory', v)} />}
 
       <Separator />
 

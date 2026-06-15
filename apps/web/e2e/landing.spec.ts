@@ -11,9 +11,7 @@ test.describe('Landing Page', () => {
   });
 
   test('should display the description text', async ({ page }) => {
-    await expect(
-      page.getByText(/Create, deploy, and manage AI agents with ease/i),
-    ).toBeVisible();
+    await expect(page.getByText(/Create, deploy, and manage AI agents with ease/i)).toBeVisible();
   });
 
   test('should have Get Started Free button linking to sign-up', async ({ page }) => {
@@ -29,9 +27,7 @@ test.describe('Landing Page', () => {
   });
 
   test('should display the no credit card text', async ({ page }) => {
-    await expect(
-      page.getByText(/No credit card required/i),
-    ).toBeVisible();
+    await expect(page.getByText(/No credit card required/i)).toBeVisible();
   });
 
   test('should navigate to sign-up on Get Started click', async ({ page }) => {
@@ -46,15 +42,13 @@ test.describe('Landing Page', () => {
 
   test('should have a visible navigation or header', async ({ page }) => {
     const nav = page.locator('nav, header');
-    if (await nav.count() > 0) {
+    if ((await nav.count()) > 0) {
       await expect(nav.first()).toBeVisible();
     }
   });
 
   test('should have the badge text visible', async ({ page }) => {
-    await expect(
-      page.getByText('Build, deploy, and scale AI agents'),
-    ).toBeVisible();
+    await expect(page.getByText('Build, deploy, and scale AI agents')).toBeVisible();
   });
 
   test('page title should be set', async ({ page }) => {

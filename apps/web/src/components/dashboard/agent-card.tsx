@@ -41,7 +41,13 @@ const statusVariants: Record<string, 'success' | 'secondary' | 'warning' | 'dest
   error: 'destructive',
 };
 
-export function AgentCard({ agent, view = 'grid', onExecute, onDelete, onDuplicate }: AgentCardProps) {
+export function AgentCard({
+  agent,
+  view = 'grid',
+  onExecute,
+  onDelete,
+  onDuplicate,
+}: AgentCardProps) {
   if (view === 'list') {
     return (
       <div className="flex items-center gap-4 rounded-lg border p-4 transition-colors hover:bg-muted/50">
@@ -52,7 +58,10 @@ export function AgentCard({ agent, view = 'grid', onExecute, onDelete, onDuplica
         </Avatar>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
-            <Link href={`/dashboard/agents/${agent.id}`} className="font-medium hover:underline truncate">
+            <Link
+              href={`/dashboard/agents/${agent.id}`}
+              className="font-medium hover:underline truncate"
+            >
               {agent.name}
             </Link>
             <Badge variant={statusVariants[agent.status]} className="text-[10px]">
@@ -149,7 +158,9 @@ export function AgentCard({ agent, view = 'grid', onExecute, onDelete, onDuplica
         </DropdownMenu>
       </CardHeader>
       <CardContent>
-        <p className="text-sm text-muted-foreground line-clamp-2">{truncate(agent.description, 120)}</p>
+        <p className="text-sm text-muted-foreground line-clamp-2">
+          {truncate(agent.description, 120)}
+        </p>
         <div className="mt-3 flex flex-wrap gap-1">
           {agent.capabilities.slice(0, 4).map((cap) => (
             <Badge key={cap} variant="secondary" className="text-[10px]">
@@ -169,9 +180,16 @@ export function AgentCard({ agent, view = 'grid', onExecute, onDelete, onDuplica
           <span>{agent.model || 'Default'}</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-xs text-muted-foreground">{formatDate(agent.createdAt, 'relative')}</span>
+          <span className="text-xs text-muted-foreground">
+            {formatDate(agent.createdAt, 'relative')}
+          </span>
           {onExecute && (
-            <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => onExecute(agent.id)}>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-7 w-7"
+              onClick={() => onExecute(agent.id)}
+            >
               <Play className="h-3.5 w-3.5" />
             </Button>
           )}

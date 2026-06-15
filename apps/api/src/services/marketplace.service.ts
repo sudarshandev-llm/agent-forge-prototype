@@ -80,10 +80,13 @@ export const marketplaceService = {
     }
 
     const orderBy: Record<string, string> =
-      params.sort === 'popular' ? { downloads: 'desc' } :
-      params.sort === 'rating' ? { rating: 'desc' } :
-      params.sort === 'newest' ? { createdAt: 'desc' } :
-      { downloads: 'desc' };
+      params.sort === 'popular'
+        ? { downloads: 'desc' }
+        : params.sort === 'rating'
+          ? { rating: 'desc' }
+          : params.sort === 'newest'
+            ? { createdAt: 'desc' }
+            : { downloads: 'desc' };
 
     const [listings, total] = await Promise.all([
       prisma.marketplaceListing.findMany({

@@ -54,7 +54,9 @@ vi.mock('../../controllers/agent.controller.js', () => ({
     res.json({ success: true, data: [] });
   }),
   forkAgentHandler: vi.fn((req: any, res: any) => {
-    res.status(201).json({ success: true, data: { ...mockAgent, id: 'forked-1', name: 'Forked Agent' } });
+    res
+      .status(201)
+      .json({ success: true, data: { ...mockAgent, id: 'forked-1', name: 'Forked Agent' } });
   }),
 }));
 
@@ -78,7 +80,12 @@ describe('Agent Routes', () => {
   });
 
   it('POST /api/v1/agents should create agent', async () => {
-    const res = await makeRequest('POST', '/api/v1/agents', { name: 'New Agent', description: 'desc', capabilities: [], config: {} });
+    const res = await makeRequest('POST', '/api/v1/agents', {
+      name: 'New Agent',
+      description: 'desc',
+      capabilities: [],
+      config: {},
+    });
     expect(res.status).toBe(201);
     const body = JSON.parse(res.body);
     expect(body.success).toBe(true);
@@ -100,7 +107,9 @@ describe('Agent Routes', () => {
   });
 
   it('POST /api/v1/agents/:id/execute should execute agent', async () => {
-    const res = await makeRequest('POST', '/api/v1/agents/agent-1/execute', { input: { prompt: 'Hi' } });
+    const res = await makeRequest('POST', '/api/v1/agents/agent-1/execute', {
+      input: { prompt: 'Hi' },
+    });
     expect(res.status).toBe(200);
     const body = JSON.parse(res.body);
     expect(body.data.executionId).toBe('exec-1');
@@ -122,25 +131,40 @@ describe('Agent Routes', () => {
   });
 });
 
-async function makeRequest(method: string, path: string, body?: any): Promise<{ status: number; body: string }> {
+async function makeRequest(
+  method: string,
+  path: string,
+  body?: any,
+): Promise<{ status: number; body: string }> {
   return new Promise((resolve, reject) => {
     const req = (express.request as any) || require('http').request;
-    const appInstance = (app as any);
+    const appInstance = app as any;
     const server = appInstance.listen(0, () => {
       const { AddressInfo } = require('net');
       const port = server.address().port;
       const http = require('http');
 
-      const options = { hostname: 'localhost', port, path, method, headers: { 'Content-Type': 'application/json' } };
+      const options = {
+        hostname: 'localhost',
+        port,
+        path,
+        method,
+        headers: { 'Content-Type': 'application/json' },
+      };
       const clientReq = http.request(options, (res: any) => {
         let data = '';
-        res.on('data', (chunk: string) => { data += chunk; });
+        res.on('data', (chunk: string) => {
+          data += chunk;
+        });
         res.on('end', () => {
           server.close();
           resolve({ status: res.statusCode || 200, body: data });
         });
       });
-      clientReq.on('error', (err: Error) => { server.close(); reject(err); });
+      clientReq.on('error', (err: Error) => {
+        server.close();
+        reject(err);
+      });
       if (body) clientReq.write(JSON.stringify(body));
       clientReq.end();
     });

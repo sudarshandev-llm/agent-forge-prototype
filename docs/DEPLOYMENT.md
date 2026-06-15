@@ -196,11 +196,11 @@ on:
 
 **Branch Strategy:**
 
-| Branch   | Environment | Auto-Deploy |
-|----------|------------|-------------|
-| `main`   | Production | Yes         |
-| `develop`| Staging    | Yes         |
-| `feature/*` | Preview | Via Vercel  |
+| Branch      | Environment | Auto-Deploy |
+| ----------- | ----------- | ----------- |
+| `main`      | Production  | Yes         |
+| `develop`   | Staging     | Yes         |
+| `feature/*` | Preview     | Via Vercel  |
 
 ### Database Migrations in CI
 
@@ -250,26 +250,26 @@ SENTRY_ENVIRONMENT=production
 
 ## Environment Variables
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `DATABASE_URL` | Yes | PostgreSQL connection string |
-| `REDIS_URL` | Yes | Redis connection string |
-| `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | Yes | Clerk publishable key (frontend) |
-| `CLERK_SECRET_KEY` | Yes | Clerk secret key (backend) |
-| `OPENAI_API_KEY` | Yes | OpenAI API key for LLM features |
-| `ANTHROPIC_API_KEY` | No | Anthropic API key (Claude models) |
-| `JWT_SECRET` | Yes | Secret for signing internal JWT tokens |
-| `NEXT_PUBLIC_API_URL` | Yes | Public API base URL |
-| `NEXT_PUBLIC_WS_URL` | Yes | WebSocket server URL |
-| `PORT` | No | API server port (default: 4000) |
-| `NODE_ENV` | Yes | Application environment |
-| `LOG_LEVEL` | No | Logger verbosity (default: info) |
-| `SENTRY_DSN` | No | Sentry error tracking DSN |
-| `SENTRY_ENVIRONMENT` | No | Sentry environment tag |
-| `OTEL_EXPORTER_OTLP_ENDPOINT` | No | OpenTelemetry collector endpoint |
-| `REDIS_QUEUE_CONCURRENCY` | No | Worker concurrent job count (default: 5) |
-| `UPLOAD_DIR` | No | File upload directory path |
-| `MAX_FILE_SIZE_MB` | No | Max upload size in MB (default: 50) |
+| Variable                            | Required | Description                              |
+| ----------------------------------- | -------- | ---------------------------------------- |
+| `DATABASE_URL`                      | Yes      | PostgreSQL connection string             |
+| `REDIS_URL`                         | Yes      | Redis connection string                  |
+| `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | Yes      | Clerk publishable key (frontend)         |
+| `CLERK_SECRET_KEY`                  | Yes      | Clerk secret key (backend)               |
+| `OPENAI_API_KEY`                    | Yes      | OpenAI API key for LLM features          |
+| `ANTHROPIC_API_KEY`                 | No       | Anthropic API key (Claude models)        |
+| `JWT_SECRET`                        | Yes      | Secret for signing internal JWT tokens   |
+| `NEXT_PUBLIC_API_URL`               | Yes      | Public API base URL                      |
+| `NEXT_PUBLIC_WS_URL`                | Yes      | WebSocket server URL                     |
+| `PORT`                              | No       | API server port (default: 4000)          |
+| `NODE_ENV`                          | Yes      | Application environment                  |
+| `LOG_LEVEL`                         | No       | Logger verbosity (default: info)         |
+| `SENTRY_DSN`                        | No       | Sentry error tracking DSN                |
+| `SENTRY_ENVIRONMENT`                | No       | Sentry environment tag                   |
+| `OTEL_EXPORTER_OTLP_ENDPOINT`       | No       | OpenTelemetry collector endpoint         |
+| `REDIS_QUEUE_CONCURRENCY`           | No       | Worker concurrent job count (default: 5) |
+| `UPLOAD_DIR`                        | No       | File upload directory path               |
+| `MAX_FILE_SIZE_MB`                  | No       | Max upload size in MB (default: 50)      |
 
 ---
 

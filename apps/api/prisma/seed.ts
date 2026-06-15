@@ -33,7 +33,8 @@ async function main() {
   const researchAgent = await prisma.agent.create({
     data: {
       name: 'Research Assistant',
-      description: 'A general-purpose research agent that can search the web, analyze data, and summarize findings.',
+      description:
+        'A general-purpose research agent that can search the web, analyze data, and summarize findings.',
       status: 'idle',
       capabilities: ['web_search', 'data_analysis', 'natural_language'],
       config: {
@@ -41,7 +42,8 @@ async function main() {
         provider: 'openai',
         temperature: 0.7,
         maxTokens: 2048,
-        systemPrompt: 'You are a helpful research assistant. Help users find and analyze information.',
+        systemPrompt:
+          'You are a helpful research assistant. Help users find and analyze information.',
         memoryEnabled: true,
       },
       ownerId: user.id,
@@ -89,7 +91,13 @@ async function main() {
         maxRetries: 2,
         parameters: [
           { name: 'query', type: 'string', required: true, description: 'Search query' },
-          { name: 'maxResults', type: 'number', required: false, description: 'Maximum results', defaultValue: 5 },
+          {
+            name: 'maxResults',
+            type: 'number',
+            required: false,
+            description: 'Maximum results',
+            defaultValue: 5,
+          },
         ],
       },
     },
@@ -110,7 +118,13 @@ async function main() {
         maxRetries: 3,
         parameters: [
           { name: 'url', type: 'string', required: true, description: 'Request URL' },
-          { name: 'method', type: 'string', required: false, description: 'HTTP method', defaultValue: 'GET' },
+          {
+            name: 'method',
+            type: 'string',
+            required: false,
+            description: 'HTTP method',
+            defaultValue: 'GET',
+          },
           { name: 'headers', type: 'object', required: false, description: 'Request headers' },
           { name: 'body', type: 'object', required: false, description: 'Request body' },
         ],
@@ -172,13 +186,20 @@ async function main() {
     data: [
       {
         workflowId: workflow.id,
-        sourceNodeId: (await prisma.workflowNode.findFirst({ where: { workflowId, type: 'start' } }))!.id,
-        targetNodeId: (await prisma.workflowNode.findFirst({ where: { workflowId, type: 'agent_execution' } }))!.id,
+        sourceNodeId: (await prisma.workflowNode.findFirst({
+          where: { workflowId, type: 'start' },
+        }))!.id,
+        targetNodeId: (await prisma.workflowNode.findFirst({
+          where: { workflowId, type: 'agent_execution' },
+        }))!.id,
       },
       {
         workflowId: workflow.id,
-        sourceNodeId: (await prisma.workflowNode.findFirst({ where: { workflowId, type: 'agent_execution' } }))!.id,
-        targetNodeId: (await prisma.workflowNode.findFirst({ where: { workflowId, type: 'end' } }))!.id,
+        sourceNodeId: (await prisma.workflowNode.findFirst({
+          where: { workflowId, type: 'agent_execution' },
+        }))!.id,
+        targetNodeId: (await prisma.workflowNode.findFirst({ where: { workflowId, type: 'end' } }))!
+          .id,
       },
     ],
   });
@@ -186,7 +207,8 @@ async function main() {
   const listing = await prisma.marketplaceListing.create({
     data: {
       name: 'Research Assistant Template',
-      description: 'A powerful research agent template that can search the web, analyze data, and generate comprehensive summaries. Perfect for researchers, students, and professionals.',
+      description:
+        'A powerful research agent template that can search the web, analyze data, and generate comprehensive summaries. Perfect for researchers, students, and professionals.',
       shortDescription: 'AI-powered research assistant for web search and analysis',
       type: 'agent',
       status: 'published',
