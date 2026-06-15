@@ -58,11 +58,11 @@ export const analyticsService = {
         totalCost: totalCost._sum.cost ?? 0,
       },
       recentExecutions,
-      executionsByStatus: executionsByStatus.map((e: typeof executionsByStatus[0]) => ({
+      executionsByStatus: executionsByStatus.map((e: (typeof executionsByStatus)[0]) => ({
         status: e.status,
         count: e._count,
       })),
-      executionsByDay: executionsByDay.map((e: typeof executionsByDay[0]) => ({
+      executionsByDay: executionsByDay.map((e: (typeof executionsByDay)[0]) => ({
         date: e.date,
         count: Number(e.count),
       })),
@@ -155,12 +155,15 @@ export const analyticsService = {
       orderBy: { createdAt: 'asc' },
     });
 
-    const totalTokens = executions.reduce((sum: number, e: typeof executions[0]) => {
+    const totalTokens = executions.reduce((sum: number, e: (typeof executions)[0]) => {
       const usage = e.tokenUsage as { totalTokens?: number } | null;
       return sum + (usage?.totalTokens ?? 0);
     }, 0);
 
-    const totalCost = executions.reduce((sum: number, e: typeof executions[0]) => sum + (e.cost ?? 0), 0);
+    const totalCost = executions.reduce(
+      (sum: number, e: (typeof executions)[0]) => sum + (e.cost ?? 0),
+      0,
+    );
 
     return {
       period: { from, to },
@@ -172,16 +175,18 @@ export const analyticsService = {
           executions.length > 0 ? Math.round(totalTokens / executions.length) : 0,
       },
       executionsByType: {
-        agent: executions.filter((e: typeof executions[0]) => e.type === 'agent').length,
-        workflow: executions.filter((e: typeof executions[0]) => e.type === 'workflow').length,
-        tool: executions.filter((e: typeof executions[0]) => e.type === 'tool').length,
+        agent: executions.filter((e: (typeof executions)[0]) => e.type === 'agent').length,
+        workflow: executions.filter((e: (typeof executions)[0]) => e.type === 'workflow').length,
+        tool: executions.filter((e: (typeof executions)[0]) => e.type === 'tool').length,
       },
       executionsByStatus: {
-        completed: executions.filter((e: typeof executions[0]) => e.status === 'completed').length,
-        failed: executions.filter((e: typeof executions[0]) => e.status === 'failed').length,
-        running: executions.filter((e: typeof executions[0]) => e.status === 'running').length,
-        pending: executions.filter((e: typeof executions[0]) => e.status === 'pending').length,
-        cancelled: executions.filter((e: typeof executions[0]) => e.status === 'cancelled').length,
+        completed: executions.filter((e: (typeof executions)[0]) => e.status === 'completed')
+          .length,
+        failed: executions.filter((e: (typeof executions)[0]) => e.status === 'failed').length,
+        running: executions.filter((e: (typeof executions)[0]) => e.status === 'running').length,
+        pending: executions.filter((e: (typeof executions)[0]) => e.status === 'pending').length,
+        cancelled: executions.filter((e: (typeof executions)[0]) => e.status === 'cancelled')
+          .length,
       },
     };
   },
@@ -205,9 +210,12 @@ export const analyticsService = {
       },
     });
 
-    const totalCost = executions.reduce((sum: number, e: typeof executions[0]) => sum + (e.cost ?? 0), 0);
+    const totalCost = executions.reduce(
+      (sum: number, e: (typeof executions)[0]) => sum + (e.cost ?? 0),
+      0,
+    );
     const costByType = executions.reduce(
-      (acc: Record<string, number>, e: typeof executions[0]) => {
+      (acc: Record<string, number>, e: (typeof executions)[0]) => {
         const type = e.type as string;
         acc[type] = (acc[type] ?? 0) + (e.cost ?? 0);
         return acc;

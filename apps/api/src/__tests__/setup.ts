@@ -93,5 +93,3 @@ vi.mock('../services/llm.service.js', () => ({
     embed: vi.fn(),
   },
 }));
-
-
