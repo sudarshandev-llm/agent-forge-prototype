@@ -191,7 +191,10 @@ describe('memoryService', () => {
 
       expect(result).toHaveLength(12);
       expect(prisma.agentMemory.findMany).toHaveBeenCalledWith({
-        where: { agentId: 'agent-1', expiresAt: null || { gt: expect.any(Date) } },
+        where: {
+          agentId: 'agent-1',
+          OR: [{ expiresAt: null }, { expiresAt: { gt: expect.any(Date) } }],
+        },
         orderBy: { importance: 'desc' },
         take: 10,
       });

@@ -129,44 +129,44 @@ describe('Agent Routes', () => {
     await makeRequest('GET', '/api/v1/agents');
     expect(authenticate).toHaveBeenCalled();
   });
-});
 
-async function makeRequest(
-  method: string,
-  path: string,
-  body?: any,
-): Promise<{ status: number; body: string }> {
-  return new Promise((resolve, reject) => {
-    const req = (express.request as any) || require('http').request;
-    const appInstance = app as any;
-    const server = appInstance.listen(0, () => {
-      const { AddressInfo } = require('net');
-      const port = server.address().port;
-      const http = require('http');
+  async function makeRequest(
+    method: string,
+    path: string,
+    body?: any,
+  ): Promise<{ status: number; body: string }> {
+    return new Promise((resolve, reject) => {
+      const req = (express.request as any) || require('http').request;
+      const appInstance = app as any;
+      const server = appInstance.listen(0, () => {
+        const { AddressInfo } = require('net');
+        const port = server.address().port;
+        const http = require('http');
 
-      const options = {
-        hostname: 'localhost',
-        port,
-        path,
-        method,
-        headers: { 'Content-Type': 'application/json' },
-      };
-      const clientReq = http.request(options, (res: any) => {
-        let data = '';
-        res.on('data', (chunk: string) => {
-          data += chunk;
+        const options = {
+          hostname: 'localhost',
+          port,
+          path,
+          method,
+          headers: { 'Content-Type': 'application/json' },
+        };
+        const clientReq = http.request(options, (res: any) => {
+          let data = '';
+          res.on('data', (chunk: string) => {
+            data += chunk;
+          });
+          res.on('end', () => {
+            server.close();
+            resolve({ status: res.statusCode || 200, body: data });
+          });
         });
-        res.on('end', () => {
+        clientReq.on('error', (err: Error) => {
           server.close();
-          resolve({ status: res.statusCode || 200, body: data });
+          reject(err);
         });
+        if (body) clientReq.write(JSON.stringify(body));
+        clientReq.end();
       });
-      clientReq.on('error', (err: Error) => {
-        server.close();
-        reject(err);
-      });
-      if (body) clientReq.write(JSON.stringify(body));
-      clientReq.end();
     });
-  });
-}
+  }
+});

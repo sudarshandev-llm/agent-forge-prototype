@@ -79,7 +79,7 @@ vi.mock('../config/redis.js', () => ({
   redis: { ping: vi.fn().mockResolvedValue('PONG') },
 }));
 
-vi.mock('./websocket.service.js', () => ({
+vi.mock('../services/websocket.service.js', () => ({
   websocketService: {
     sendToUser: vi.fn(),
     sendToTeam: vi.fn(),
@@ -87,9 +87,11 @@ vi.mock('./websocket.service.js', () => ({
   },
 }));
 
-vi.mock('./llm.service.js', () => ({
+vi.mock('../services/llm.service.js', () => ({
   llmService: {
     complete: vi.fn(),
     embed: vi.fn(),
   },
 }));
+
+

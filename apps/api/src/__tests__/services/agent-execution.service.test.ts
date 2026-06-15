@@ -9,6 +9,9 @@ import { toolService } from '../../services/tool.service.js';
 import { ApiError } from '../../middleware/errorHandler.js';
 import { ExecutionStatus, ExecutionType } from '@agentforge/shared';
 
+vi.mock('../../services/memory.service.js');
+vi.mock('../../services/tool.service.js');
+
 const mockAgent = {
   id: 'agent-1',
   name: 'Test Agent',

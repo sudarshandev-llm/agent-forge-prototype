@@ -199,7 +199,7 @@ export const workflowService = {
 
       if (!workflow) throw new Error('Workflow not found');
 
-      const startNode = workflow.nodes.find((n) => n.type === 'start');
+      const startNode = workflow.nodes.find((n: typeof workflow.nodes[0]) => n.type === 'start');
       if (!startNode) throw new Error('No start node found');
 
       let currentNodeId = startNode.id;
@@ -208,7 +208,7 @@ export const workflowService = {
 
       while (currentNodeId && !visited.has(currentNodeId)) {
         visited.add(currentNodeId);
-        const node = workflow.nodes.find((n) => n.id === currentNodeId);
+        const node = workflow.nodes.find((n: typeof workflow.nodes[0]) => n.id === currentNodeId);
         if (!node) break;
 
         const result = await this.executeNode(node, input, nodeResults);
@@ -219,7 +219,7 @@ export const workflowService = {
           data: { currentNodeId, nodeResults } as any,
         });
 
-        const outgoingEdge = workflow.edges.find((e) => e.sourceNodeId === currentNodeId);
+        const outgoingEdge = workflow.edges.find((e: typeof workflow.edges[0]) => e.sourceNodeId === currentNodeId);
         currentNodeId = outgoingEdge?.targetNodeId ?? '';
       }
 

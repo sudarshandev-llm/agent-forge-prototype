@@ -14,6 +14,7 @@ vi.mock('../../config/index.js', () => ({
   config: {
     jwt: { secret: 'test-secret', expiresIn: '7d' },
     env: 'test',
+    logging: { level: 'info' },
   },
 }));
 

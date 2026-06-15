@@ -103,40 +103,40 @@ describe('Team Routes', () => {
     const res = await makeRequest('GET', '/api/v1/teams/team-1/agents');
     expect(res.status).toBe(200);
   });
-});
 
-async function makeRequest(
-  method: string,
-  path: string,
-  body?: any,
-): Promise<{ status: number; body: string }> {
-  return new Promise((resolve, reject) => {
-    const server = (app as any).listen(0, () => {
-      const port = server.address().port;
-      const http = require('http');
-      const options = {
-        hostname: 'localhost',
-        port,
-        path,
-        method,
-        headers: { 'Content-Type': 'application/json' },
-      };
-      const clientReq = http.request(options, (res: any) => {
-        let data = '';
-        res.on('data', (chunk: string) => {
-          data += chunk;
+  async function makeRequest(
+    method: string,
+    path: string,
+    body?: any,
+  ): Promise<{ status: number; body: string }> {
+    return new Promise((resolve, reject) => {
+      const server = (app as any).listen(0, () => {
+        const port = server.address().port;
+        const http = require('http');
+        const options = {
+          hostname: 'localhost',
+          port,
+          path,
+          method,
+          headers: { 'Content-Type': 'application/json' },
+        };
+        const clientReq = http.request(options, (res: any) => {
+          let data = '';
+          res.on('data', (chunk: string) => {
+            data += chunk;
+          });
+          res.on('end', () => {
+            server.close();
+            resolve({ status: res.statusCode || 200, body: data });
+          });
         });
-        res.on('end', () => {
+        clientReq.on('error', (err: Error) => {
           server.close();
-          resolve({ status: res.statusCode || 200, body: data });
+          reject(err);
         });
+        if (body) clientReq.write(JSON.stringify(body));
+        clientReq.end();
       });
-      clientReq.on('error', (err: Error) => {
-        server.close();
-        reject(err);
-      });
-      if (body) clientReq.write(JSON.stringify(body));
-      clientReq.end();
     });
-  });
-}
+  }
+});

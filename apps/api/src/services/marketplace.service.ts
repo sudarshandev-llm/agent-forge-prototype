@@ -258,7 +258,7 @@ export const marketplaceService = {
 
     if (reviews.length === 0) return;
 
-    const averageRating = reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length;
+    const averageRating = reviews.reduce((sum: number, r: typeof reviews[0]) => sum + r.rating, 0) / reviews.length;
 
     await prisma.marketplaceListing.update({
       where: { id: listingId },

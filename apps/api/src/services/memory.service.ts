@@ -82,7 +82,7 @@ export const memoryService = {
       take: 10,
     });
 
-    return memories.map((m) => m.content);
+    return memories.map((m: typeof memories[0]) => m.content);
   },
 
   async searchMemories(params: {
@@ -121,7 +121,7 @@ export const memoryService = {
     });
 
     await prisma.agentMemory.deleteMany({
-      where: { id: { in: toDelete.map((m) => m.id) } },
+      where: { id: { in: toDelete.map((m: typeof toDelete[0]) => m.id) } },
     });
 
     return count - toDelete.length;

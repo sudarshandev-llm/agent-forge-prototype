@@ -77,7 +77,7 @@ export const teamService = {
     data: { name?: string; description?: string; avatarUrl?: string },
   ) {
     const team = await this.getTeamById(id, userId);
-    const member = team.members.find((m) => m.userId === userId);
+    const member = team.members.find((m: typeof team.members[0]) => m.userId === userId);
 
     if (!member || (member.role !== TeamRole.OWNER && member.role !== TeamRole.ADMIN)) {
       throw new ApiError(403, 'Not authorized to update this team');
@@ -105,7 +105,7 @@ export const teamService = {
 
   async addMember(teamId: string, userId: string, data: { userId: string; role: TeamRole }) {
     const team = await this.getTeamById(teamId, userId);
-    const member = team.members.find((m) => m.userId === userId);
+    const member = team.members.find((m: typeof team.members[0]) => m.userId === userId);
 
     if (!member || (member.role !== TeamRole.OWNER && member.role !== TeamRole.ADMIN)) {
       throw new ApiError(403, 'Not authorized to add members');
@@ -139,7 +139,7 @@ export const teamService = {
 
   async removeMember(teamId: string, userId: string, memberUserId: string) {
     const team = await this.getTeamById(teamId, userId);
-    const member = team.members.find((m) => m.userId === userId);
+    const member = team.members.find((m: typeof team.members[0]) => m.userId === userId);
 
     if (!member || (member.role !== TeamRole.OWNER && member.role !== TeamRole.ADMIN)) {
       throw new ApiError(403, 'Not authorized to remove members');
