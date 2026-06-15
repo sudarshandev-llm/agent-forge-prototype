@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+import { getTableConfig } from 'drizzle-orm/pg-core';
 import {
   users,
   agents,
@@ -10,6 +11,27 @@ import {
   marketplaceReviews,
 } from '../src/schema/index';
 
+function getFKTargets(table: any): Map<string, any> {
+  const config = getTableConfig(table);
+  const targets = new Map<string, any>();
+  for (const fk of config.foreignKeys) {
+    const ref = fk.reference();
+    for (let i = 0; i < ref.columns.length; i++) {
+      targets.set(ref.columns[i].name, ref.foreignTable);
+    }
+  }
+  return targets;
+}
+
+function getIndexNames(table: any): string[] {
+  const config = getTableConfig(table);
+  return config.indexes.map((i: any) => i.config?.name ?? i.name);
+}
+
+function getColumns(table: any): Record<string, any> {
+  return table[Symbol.for('drizzle:Columns')] ?? table;
+}
+
 describe('Schema definitions', () => {
   describe('users table', () => {
     it('should be defined', () => {
@@ -17,7 +39,7 @@ describe('Schema definitions', () => {
     });
 
     it('should have required columns', () => {
-      const columns = users[Symbol.for('drizzle:Columns')] ?? users;
+      const columns = getColumns(users);
       expect(columns.id).toBeDefined();
       expect(columns.email).toBeDefined();
       expect(columns.name).toBeDefined();
@@ -26,7 +48,7 @@ describe('Schema definitions', () => {
     });
 
     it('should have unique email constraint', () => {
-      expect(users.config?.uniqueConstraints).toBeDefined();
+      expect(users.email.isUnique).toBe(true);
     });
   });
 
@@ -36,7 +58,7 @@ describe('Schema definitions', () => {
     });
 
     it('should have required columns', () => {
-      const columns = agents[Symbol.for('drizzle:Columns')] ?? agents;
+      const columns = getColumns(agents);
       expect(columns.id).toBeDefined();
       expect(columns.name).toBeDefined();
       expect(columns.model).toBeDefined();
@@ -45,7 +67,7 @@ describe('Schema definitions', () => {
     });
 
     it('should have default values', () => {
-      const columns = agents[Symbol.for('drizzle:Columns')] ?? agents;
+      const columns = getColumns(agents);
       expect(columns.temperature.default).toBe('0.7');
       expect(columns.maxTokens.default).toBe(2048);
       expect(columns.role.default).toBe('executor');
@@ -53,20 +75,17 @@ describe('Schema definitions', () => {
     });
 
     it('should have foreign key to users', () => {
-      const columns = agents[Symbol.for('drizzle:Columns')] ?? agents;
-      expect(columns.ownerId.references).toBeDefined();
-      expect(columns.ownerId.references?.table).toBe(users);
+      const targets = getFKTargets(agents);
+      expect(targets.get('owner_id')).toBe(users);
     });
 
     it('should have foreign key to teams (nullable)', () => {
-      const columns = agents[Symbol.for('drizzle:Columns')] ?? agents;
-      expect(columns.teamId.references).toBeDefined();
-      expect(columns.teamId.references?.table).toBe(teams);
+      const targets = getFKTargets(agents);
+      expect(targets.get('team_id')).toBe(teams);
     });
 
     it('should define indexes', () => {
-      expect(agents.config?.indexes).toBeDefined();
-      const idxNames = agents.config?.indexes?.map((i: any) => i.name) ?? [];
+      const idxNames = getIndexNames(agents);
       expect(idxNames).toContain('idx_agents_owner_id');
       expect(idxNames).toContain('idx_agents_team_id');
       expect(idxNames).toContain('idx_agents_active');
@@ -79,13 +98,12 @@ describe('Schema definitions', () => {
     });
 
     it('should have foreign key to users', () => {
-      const columns = teams[Symbol.for('drizzle:Columns')] ?? teams;
-      expect(columns.ownerId.references).toBeDefined();
-      expect(columns.ownerId.references?.table).toBe(users);
+      const targets = getFKTargets(teams);
+      expect(targets.get('owner_id')).toBe(users);
     });
 
     it('should have default max_members', () => {
-      const columns = teams[Symbol.for('drizzle:Columns')] ?? teams;
+      const columns = getColumns(teams);
       expect(columns.maxMembers.default).toBe(10);
     });
   });
@@ -96,13 +114,13 @@ describe('Schema definitions', () => {
     });
 
     it('should have foreign keys', () => {
-      const columns = workflows[Symbol.for('drizzle:Columns')] ?? workflows;
-      expect(columns.ownerId.references?.table).toBe(users);
-      expect(columns.teamId.references?.table).toBe(teams);
+      const targets = getFKTargets(workflows);
+      expect(targets.get('owner_id')).toBe(users);
+      expect(targets.get('team_id')).toBe(teams);
     });
 
     it('should have default values', () => {
-      const columns = workflows[Symbol.for('drizzle:Columns')] ?? workflows;
+      const columns = getColumns(workflows);
       expect(columns.status.default).toBe('draft');
       expect(columns.version.default).toBe(1);
     });
@@ -114,14 +132,14 @@ describe('Schema definitions', () => {
     });
 
     it('should have foreign keys', () => {
-      const columns = executions[Symbol.for('drizzle:Columns')] ?? executions;
-      expect(columns.ownerId.references?.table).toBe(users);
-      expect(columns.agentId.references?.table).toBe(agents);
-      expect(columns.workflowId.references?.table).toBe(workflows);
+      const targets = getFKTargets(executions);
+      expect(targets.get('owner_id')).toBe(users);
+      expect(targets.get('agent_id')).toBe(agents);
+      expect(targets.get('workflow_id')).toBe(workflows);
     });
 
     it('should have default status', () => {
-      const columns = executions[Symbol.for('drizzle:Columns')] ?? executions;
+      const columns = getColumns(executions);
       expect(columns.status.default).toBe('pending');
     });
   });
@@ -132,11 +150,11 @@ describe('Schema definitions', () => {
     });
 
     it('should have unique name', () => {
-      expect(tools.config?.uniqueConstraints).toBeDefined();
+      expect(tools.name.isUnique).toBe(true);
     });
 
     it('should have indexes', () => {
-      const idxNames = tools.config?.indexes?.map((i: any) => i.name) ?? [];
+      const idxNames = getIndexNames(tools);
       expect(idxNames).toContain('idx_tool_registry_name');
       expect(idxNames).toContain('idx_tool_registry_category');
     });
@@ -148,12 +166,12 @@ describe('Schema definitions', () => {
     });
 
     it('should have foreign key to users', () => {
-      const columns = marketplaceListings[Symbol.for('drizzle:Columns')] ?? marketplaceListings;
-      expect(columns.authorId.references?.table).toBe(users);
+      const targets = getFKTargets(marketplaceListings);
+      expect(targets.get('author_id')).toBe(users);
     });
 
     it('should have default values', () => {
-      const columns = marketplaceListings[Symbol.for('drizzle:Columns')] ?? marketplaceListings;
+      const columns = getColumns(marketplaceListings);
       expect(columns.status.default).toBe('draft');
       expect(columns.price.default).toBe('0');
       expect(columns.currency.default).toBe('USD');
@@ -168,13 +186,13 @@ describe('Schema definitions', () => {
     });
 
     it('should have foreign keys', () => {
-      const columns = marketplaceReviews[Symbol.for('drizzle:Columns')] ?? marketplaceReviews;
-      expect(columns.listingId.references?.table).toBe(marketplaceListings);
-      expect(columns.userId.references?.table).toBe(users);
+      const targets = getFKTargets(marketplaceReviews);
+      expect(targets.get('listing_id')).toBe(marketplaceListings);
+      expect(targets.get('user_id')).toBe(users);
     });
 
     it('should have required rating', () => {
-      const columns = marketplaceReviews[Symbol.for('drizzle:Columns')] ?? marketplaceReviews;
+      const columns = getColumns(marketplaceReviews);
       expect(columns.rating.notNull).toBe(true);
     });
   });
