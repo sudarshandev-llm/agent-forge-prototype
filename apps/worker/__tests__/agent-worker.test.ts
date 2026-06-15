@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { Worker } from 'bullmq';
 
 vi.mock('ioredis', () => {
   const mockRedis = {
@@ -21,30 +22,22 @@ vi.mock('../src/config/logger.js', () => ({
   },
 }));
 
-vi.mock('bullmq', async () => {
-  const actual = await vi.importActual('bullmq');
-  return {
-    ...actual,
-    Worker: vi.fn().mockImplementation((queueName, processor, opts) => {
-      return {
-        queueName,
-        processor,
-        opts,
-        on: vi.fn().mockReturnThis(),
-        close: vi.fn().mockResolvedValue(undefined),
-      };
-    }),
-    Queue: vi.fn().mockImplementation(() => ({
-      add: vi.fn().mockResolvedValue({ id: 'mock-job-id' }),
-      close: vi.fn().mockResolvedValue(undefined),
-      on: vi.fn().mockReturnThis(),
-    })),
-    QueueEvents: vi.fn().mockImplementation(() => ({
-      on: vi.fn().mockReturnThis(),
-      close: vi.fn().mockResolvedValue(undefined),
-    })),
-  };
-});
+vi.mock('bullmq', () => ({
+  Worker: vi.fn().mockImplementation((_queueName: string, _processor: unknown, _opts: unknown) => ({
+    on: vi.fn().mockReturnThis(),
+    close: vi.fn().mockResolvedValue(undefined),
+  })),
+  Queue: vi.fn().mockImplementation(() => ({
+    add: vi.fn().mockResolvedValue({ id: 'mock-job-id' }),
+    close: vi.fn().mockResolvedValue(undefined),
+    on: vi.fn().mockReturnThis(),
+  })),
+  QueueEvents: vi.fn().mockImplementation(() => ({
+    on: vi.fn().mockReturnThis(),
+    close: vi.fn().mockResolvedValue(undefined),
+  })),
+  Job: class MockJob {},
+}));
 
 vi.mock('nanoid', () => ({
   nanoid: vi.fn(() => 'test-id'),
@@ -56,7 +49,7 @@ describe('AgentWorker', () => {
   });
 
   afterEach(() => {
-    vi.resetAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should initialize without error', async () => {
