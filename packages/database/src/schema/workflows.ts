@@ -1,4 +1,5 @@
 import {
+  index,
   integer,
   jsonb,
   pgTable,
@@ -31,7 +32,7 @@ export const workflows = pgTable(
     deletedAt: timestamp("deleted_at"),
   },
   (table) => ({
-    ownerIdx: table.index("idx_workflows_owner_id").on(table.ownerId),
-    teamIdx: table.index("idx_workflows_team_id").on(table.teamId),
+    ownerIdx: index("idx_workflows_owner_id").on(table.ownerId),
+    teamIdx: index("idx_workflows_team_id").on(table.teamId),
   }),
 );

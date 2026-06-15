@@ -1,4 +1,5 @@
 import {
+  index,
   integer,
   jsonb,
   numeric,
@@ -39,9 +40,9 @@ export const marketplaceListings = pgTable(
     publishedAt: timestamp("published_at"),
   },
   (table) => ({
-    authorIdx: table.index("idx_marketplace_author_id").on(table.authorId),
-    statusIdx: table.index("idx_marketplace_status").on(table.status),
-    categoryIdx: table.index("idx_marketplace_category").on(table.category),
+    authorIdx: index("idx_marketplace_author_id").on(table.authorId),
+    statusIdx: index("idx_marketplace_status").on(table.status),
+    categoryIdx: index("idx_marketplace_category").on(table.category),
   }),
 );
 
@@ -64,7 +65,7 @@ export const marketplaceReviews = pgTable(
     updatedAt: timestamp("updated_at").defaultNow().notNull(),
   },
   (table) => ({
-    listingIdx: table.index("idx_reviews_listing_id").on(table.listingId),
-    userIdx: table.index("idx_reviews_user_id").on(table.userId),
+    listingIdx: index("idx_reviews_listing_id").on(table.listingId),
+    userIdx: index("idx_reviews_user_id").on(table.userId),
   }),
 );

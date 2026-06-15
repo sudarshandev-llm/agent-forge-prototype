@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 import { nanoid } from "nanoid";
-import { router, authProcedure, adminProcedure } from "../trpc.js";
+import { router, authProcedure } from "../trpc.js";
 
 const createTeamSchema = z.object({
   name: z.string().min(1),
@@ -16,13 +16,13 @@ const updateTeamSchema = z.object({
   agentIds: z.array(z.string()).optional(),
 });
 
-interface TeamMember {
+export interface TeamMember {
   userId: string;
   role: string;
   joinedAt: string;
 }
 
-interface Team {
+export interface Team {
   id: string;
   name: string;
   description: string;
@@ -33,7 +33,7 @@ interface Team {
   updatedAt: string;
 }
 
-interface TeamRunResult {
+export interface TeamRunResult {
   id: string;
   teamId: string;
   input: string;

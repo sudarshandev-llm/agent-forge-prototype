@@ -18,6 +18,6 @@
     "noEmit": true,
     "isolatedModules": true
   },
-  "include": ["src/**/*", "drizzle.config.ts"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "migrations", "__tests__"]
 }

@@ -28,7 +28,7 @@ const addReviewSchema = z.object({
   cons: z.array(z.string()).default([]),
 });
 
-interface MarketplaceReview {
+export interface MarketplaceReview {
   id: string;
   listingId: string;
   userId: string;
@@ -41,7 +41,7 @@ interface MarketplaceReview {
   createdAt: string;
 }
 
-interface MarketplaceListing {
+export interface MarketplaceListing {
   id: string;
   name: string;
   description: string;
@@ -98,7 +98,7 @@ export const marketplaceRouter = router({
         filters: z.record(z.unknown()).default({}),
       })
     )
-    .query(async ({ ctx, input }) => {
+    .query(async ({ input }) => {
       let list = Array.from(listings.values());
       if (input.category) {
         list = list.filter((l) => l.category === input.category);
@@ -131,7 +131,7 @@ export const marketplaceRouter = router({
 
   getListingById: publicProcedure
     .input(z.object({ id: z.string() }))
-    .query(async ({ ctx, input }) => {
+    .query(async ({ input }) => {
       const listing = listings.get(input.id);
       if (!listing) throw new TRPCError({ code: "NOT_FOUND", message: "Listing not found" });
       return listing;
@@ -186,7 +186,7 @@ export const marketplaceRouter = router({
 
   download: publicProcedure
     .input(z.object({ listingId: z.string() }))
-    .mutation(async ({ ctx, input }) => {
+    .mutation(async ({ input }) => {
       const listing = listings.get(input.listingId);
       if (!listing) throw new TRPCError({ code: "NOT_FOUND", message: "Listing not found" });
       listing.downloads += 1;

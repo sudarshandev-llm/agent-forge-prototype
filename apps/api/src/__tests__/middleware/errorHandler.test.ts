@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { errorHandler, ApiError } from '../../middleware/errorHandler.js';
 import { ZodError } from 'zod';
 import { Prisma } from '@prisma/client';
+import { logger } from '../../utils/logger.js';
 
 vi.mock('../../utils/logger.js', () => ({
   logger: {
@@ -145,7 +146,6 @@ describe('errorHandler', () => {
   });
 
   it('should log all errors', () => {
-    const { logger } = require('../../utils/logger.js');
     const err = new Error('Test error');
     const req = mockReq();
     const res = mockRes();

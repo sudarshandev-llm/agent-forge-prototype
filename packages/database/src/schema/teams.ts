@@ -1,5 +1,6 @@
 import {
   boolean,
+  index,
   integer,
   jsonb,
   pgTable,
@@ -26,6 +27,6 @@ export const teams = pgTable(
     deletedAt: timestamp("deleted_at"),
   },
   (table) => ({
-    ownerIdx: table.index("idx_teams_owner_id").on(table.ownerId),
+    ownerIdx: index("idx_teams_owner_id").on(table.ownerId),
   }),
 );

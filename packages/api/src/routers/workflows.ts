@@ -36,14 +36,14 @@ const updateWorkflowSchema = z.object({
   config: z.record(z.unknown()).optional(),
 });
 
-interface WorkflowStep {
+export interface WorkflowStep {
   id: string;
   type: string;
   config: Record<string, unknown>;
   dependsOn: string[];
 }
 
-interface Workflow {
+export interface Workflow {
   id: string;
   name: string;
   description: string;
@@ -55,7 +55,7 @@ interface Workflow {
   updatedAt: string;
 }
 
-interface WorkflowRun {
+export interface WorkflowRun {
   id: string;
   workflowId: string;
   inputData: Record<string, unknown>;

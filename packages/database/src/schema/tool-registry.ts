@@ -1,5 +1,6 @@
 import {
   boolean,
+  index,
   integer,
   jsonb,
   pgTable,
@@ -29,8 +30,8 @@ export const tools = pgTable(
     deletedAt: timestamp("deleted_at"),
   },
   (table) => ({
-    nameIdx: table.index("idx_tool_registry_name").on(table.name),
-    ownerIdx: table.index("idx_tool_registry_owner_id").on(table.ownerId),
-    categoryIdx: table.index("idx_tool_registry_category").on(table.category),
+    nameIdx: index("idx_tool_registry_name").on(table.name),
+    ownerIdx: index("idx_tool_registry_owner_id").on(table.ownerId),
+    categoryIdx: index("idx_tool_registry_category").on(table.category),
   }),
 );

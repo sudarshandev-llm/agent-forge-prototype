@@ -22,6 +22,12 @@ const t = initTRPC.context<TRPCContext>().create({
 export const router = t.router;
 export const publicProcedure = t.procedure;
 
+export function createTRPCContext(): TRPCContext {
+  return {
+    headers: {},
+  };
+}
+
 export const authProcedure = t.procedure.use(async ({ ctx, next }) => {
   if (!ctx.userId) {
     throw new TRPCError({ code: "UNAUTHORIZED" });

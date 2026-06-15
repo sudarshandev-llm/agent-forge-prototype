@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { agentRouter } from "../src/routers/agents.js";
+import { agentRouter, _reset } from "../src/routers/agents.js";
 import { type TRPCContext } from "../src/trpc.js";
 
 function createCtx(overrides?: Partial<TRPCContext>): TRPCContext {
@@ -22,7 +22,7 @@ const caller = (ctx: TRPCContext) =>
 
 describe("agentRouter", () => {
   beforeEach(() => {
-    // Each test gets a fresh state since modules are reloaded by vitest
+    _reset();
   });
 
   describe("auth middleware", () => {
@@ -151,7 +151,7 @@ describe("agentRouter", () => {
 
     it("should throw NOT_FOUND for non-existent id", async () => {
       const ctx = createCtx();
-      await expect(caller(ctx).getById({ id: "non-existent" })).rejects.toThrow("NOT_FOUND");
+      await expect(caller(ctx).getById({ id: "non-existent" })).rejects.toThrow("Agent not found");
     });
 
     it("should throw FORBIDDEN for another user's agent", async () => {
@@ -174,7 +174,7 @@ describe("agentRouter", () => {
 
     it("should throw NOT_FOUND for non-existent id", async () => {
       const ctx = createCtx();
-      await expect(caller(ctx).update({ id: "non-existent", name: "Nope" })).rejects.toThrow("NOT_FOUND");
+      await expect(caller(ctx).update({ id: "non-existent", name: "Nope" })).rejects.toThrow("Agent not found");
     });
 
     it("should throw FORBIDDEN for another user's agent", async () => {
@@ -192,12 +192,12 @@ describe("agentRouter", () => {
       const result = await caller(ctx).delete({ id: created.id });
       expect(result.deleted).toBe(true);
       expect(result.id).toBe(created.id);
-      await expect(caller(ctx).getById({ id: created.id })).rejects.toThrow("NOT_FOUND");
+      await expect(caller(ctx).getById({ id: created.id })).rejects.toThrow("Agent not found");
     });
 
     it("should throw NOT_FOUND for non-existent id", async () => {
       const ctx = createCtx();
-      await expect(caller(ctx).delete({ id: "non-existent" })).rejects.toThrow("NOT_FOUND");
+      await expect(caller(ctx).delete({ id: "non-existent" })).rejects.toThrow("Agent not found");
     });
   });
 
@@ -214,7 +214,7 @@ describe("agentRouter", () => {
 
     it("should throw NOT_FOUND for non-existent agent", async () => {
       const ctx = createCtx();
-      await expect(caller(ctx).run({ id: "non-existent", input: "Hello" })).rejects.toThrow("NOT_FOUND");
+      await expect(caller(ctx).run({ id: "non-existent", input: "Hello" })).rejects.toThrow("Agent not found");
     });
   });
 
@@ -231,7 +231,7 @@ describe("agentRouter", () => {
 
     it("should throw NOT_FOUND for non-existent agent", async () => {
       const ctx = createCtx();
-      await expect(caller(ctx).getExecutions({ agentId: "non-existent" })).rejects.toThrow("NOT_FOUND");
+      await expect(caller(ctx).getExecutions({ agentId: "non-existent" })).rejects.toThrow("Agent not found");
     });
   });
 });

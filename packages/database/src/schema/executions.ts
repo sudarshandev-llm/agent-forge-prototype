@@ -1,4 +1,5 @@
 import {
+  index,
   integer,
   jsonb,
   numeric,
@@ -35,9 +36,9 @@ export const executions = pgTable(
     createdAt: timestamp("created_at").defaultNow().notNull(),
   },
   (table) => ({
-    ownerIdx: table.index("idx_executions_owner_id").on(table.ownerId),
-    agentIdx: table.index("idx_executions_agent_id").on(table.agentId),
-    workflowIdx: table.index("idx_executions_workflow_id").on(table.workflowId),
-    statusIdx: table.index("idx_executions_status").on(table.status),
+    ownerIdx: index("idx_executions_owner_id").on(table.ownerId),
+    agentIdx: index("idx_executions_agent_id").on(table.agentId),
+    workflowIdx: index("idx_executions_workflow_id").on(table.workflowId),
+    statusIdx: index("idx_executions_status").on(table.status),
   }),
 );

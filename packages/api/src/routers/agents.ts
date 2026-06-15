@@ -37,12 +37,7 @@ const updateAgentSchema = z.object({
   teamId: z.string().optional(),
 });
 
-const paginationSchema = z.object({
-  page: z.number().default(1),
-  limit: z.number().default(20),
-});
-
-interface Agent {
+export interface Agent {
   id: string;
   name: string;
   description: string;
@@ -60,7 +55,7 @@ interface Agent {
   updatedAt: string;
 }
 
-interface AgentExecution {
+export interface AgentExecution {
   id: string;
   agentId: string;
   input: string;
@@ -73,6 +68,11 @@ interface AgentExecution {
 
 const agents = new Map<string, Agent>();
 const executions = new Map<string, AgentExecution>();
+
+export function _reset() {
+  agents.clear();
+  executions.clear();
+}
 
 function paginate<T>(items: T[], page: number, limit: number): { items: T[]; total: number; page: number; limit: number; totalPages: number } {
   const total = items.length;

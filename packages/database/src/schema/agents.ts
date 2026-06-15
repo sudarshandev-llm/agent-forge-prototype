@@ -1,5 +1,7 @@
+import { sql } from "drizzle-orm";
 import {
   boolean,
+  index,
   integer,
   jsonb,
   numeric,
@@ -39,11 +41,10 @@ export const agents = pgTable(
     deletedAt: timestamp("deleted_at"),
   },
   (table) => ({
-    ownerIdx: table.index("idx_agents_owner_id").on(table.ownerId),
-    teamIdx: table.index("idx_agents_team_id").on(table.teamId),
-    activeIdx: table.index("idx_agents_active").on(table.deletedAt).where(
-      // @ts-ignore
-      () => table.deletedAt.isNull(),
+    ownerIdx: index("idx_agents_owner_id").on(table.ownerId),
+    teamIdx: index("idx_agents_team_id").on(table.teamId),
+    activeIdx: index("idx_agents_active").on(table.deletedAt).where(
+      sql`${table.deletedAt} IS NULL`,
     ),
   }),
 );
