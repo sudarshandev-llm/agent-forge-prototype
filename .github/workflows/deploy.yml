@@ -6,7 +6,7 @@ on:
 
 jobs:
   deploy-api:
-    name: Deploy API to Railway
+    name: Deploy API to Render
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
@@ -19,12 +19,11 @@ jobs:
       - name: Generate Prisma client
         run: npx prisma generate --schema=apps/api/prisma/schema.prisma
       - run: npm run build -w apps/api
-      - name: Deploy to Railway
+      - name: Deploy to Render
         run: |
-          npm install -g @railway/cli
-          railway up --service api --yes --ci
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          curl -sS -X POST "https://api.render.com/v1/services/${{ secrets.RENDER_API_SERVICE_ID }}/deploys" \
+            -H "Accept: application/json" \
+            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}"
 
   deploy-web:
     name: Deploy Web to Vercel
