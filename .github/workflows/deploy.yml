@@ -4,9 +4,6 @@ on:
   push:
     branches: [main]
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 jobs:
   deploy-api:
     name: Deploy API to Railway
@@ -25,7 +22,7 @@ jobs:
       - name: Deploy to Railway
         run: |
           npm install -g @railway/cli
-          railway up --service api
+          railway up --service api --yes --ci
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 
@@ -41,9 +38,10 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run build -w apps/web
-      - uses: amondnet/vercel-action@v25
+      - uses: amondnet/vercel-action@v42
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           vercel-args: --prod

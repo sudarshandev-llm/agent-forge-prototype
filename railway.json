@@ -1,0 +1,12 @@
+{
+  "build": {
+    "builder": "DOCKERFILE",
+    "dockerfilePath": "infra/docker/Dockerfile.api"
+  },
+  "deploy": {
+    "startCommand": "node dist/index.js",
+    "healthcheckPath": "/health",
+    "healthcheckTimeout": 300,
+    "restartPolicyType": "on_failure"
+  }
+}
