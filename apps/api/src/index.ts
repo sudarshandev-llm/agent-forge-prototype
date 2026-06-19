@@ -8,7 +8,11 @@ import { logger } from './utils/logger.js';
 
 async function main() {
   try {
-    await connectDatabase();
+    try {
+      await connectDatabase();
+    } catch (dbError) {
+      logger.error('Database connection failed, starting server anyway', dbError);
+    }
 
     const app = createApp();
     const server = http.createServer(app);
