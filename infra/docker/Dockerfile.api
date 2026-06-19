@@ -13,7 +13,7 @@ CMD ["npm", "run", "dev:api"]
 FROM node:20-alpine AS build
 WORKDIR /app
 COPY --from=development /app /app
-RUN npm run build -w apps/api
+RUN npm run build -w packages/shared && npm run build -w apps/api
 
 # Production stage
 FROM node:20-alpine AS production
