@@ -16,6 +16,8 @@ jobs:
           node-version: 20
           cache: 'npm'
       - run: npm ci
+      - name: Build shared package
+        run: npm run build -w packages/shared
       - name: Generate Prisma client
         run: npx prisma generate --schema=apps/api/prisma/schema.prisma
       - run: npm run build -w apps/api
@@ -36,6 +38,8 @@ jobs:
           node-version: 20
           cache: 'npm'
       - run: npm ci
+      - name: Build shared package
+        run: npm run build -w packages/shared
       - run: npm run build -w apps/web
       - uses: amondnet/vercel-action@v42
         with:
@@ -57,6 +61,8 @@ jobs:
           node-version: 20
           cache: 'npm'
       - run: npm ci
+      - name: Build shared package
+        run: npm run build -w packages/shared
       - name: Generate Prisma client
         run: npx prisma generate --schema=apps/api/prisma/schema.prisma
       - run: npm run build -w apps/worker

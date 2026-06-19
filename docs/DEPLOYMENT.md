@@ -128,31 +128,24 @@ Production images use multi-stage builds for minimal size. Resource limits and r
 6. Deploy. Vercel automatically detects PR previews and production branches.
 7. **Custom Domain:** Add your domain in Vercel Dashboard > Project > Domains. Configure DNS with the provided CNAME record.
 
-### Railway (Backend API)
+### Render (API & Worker)
 
-1. Push to GitHub and connect at https://railway.app.
-2. Create a new project → Deploy from GitHub repo.
-3. Add two services:
-   - **api** — Start command: `pnpm run start -w apps/api`
-   - **worker** — Start command: `pnpm run start -w apps/worker`
-4. Attach **PostgreSQL** plugin (Railway provides connection string automatically).
-5. Attach **Redis** plugin (Railway provides `REDIS_URL` automatically).
-6. Set Environment Variables in Railway Dashboard → Variables.
-7. Use `RAILWAY_PUBLIC_DOMAIN` for the API URL in web app env vars.
-
-### Render (Worker)
-
-1. Create a new **Web Service** at https://render.com.
+1. Create a new **Web Service** for the API at https://render.com.
 2. Connect your GitHub repository.
-3. Configure:
+3. Configure the API service:
+   - Name: `agentforge-api`
+   - Root Directory: (leave blank)
+   - Runtime: Docker
+   - Dockerfile Path: `infra/docker/Dockerfile.api`
+4. Create a second **Web Service** for the Worker:
    - Name: `agentforge-worker`
    - Root Directory: (leave blank)
-   - Build Command: `pnpm install && pnpm build`
-   - Start Command: `pnpm run start -w apps/worker`
-4. Select a plan (Starter or higher for background workers).
-5. Add environment variables (same as Railway worker config).
-6. Set up health check path: `/health`.
-7. For scaling, adjust the instance count in Render Dashboard.
+   - Build Command: `npm install && npm run build -w packages/shared && npm run build -w apps/worker`
+   - Start Command: `npm run start -w apps/worker`
+5. For the API, attach a **PostgreSQL** instance (Render provides the connection string).
+6. For Redis, use **Redis Cloud** or **Upstash** and set `REDIS_URL` in environment variables.
+7. Set environment variables in Render Dashboard for each service (`DATABASE_URL`, `REDIS_URL`, `JWT_SECRET`, etc.).
+8. Use `npm ci` instead of `npm install` in build commands for reproducible builds.
 
 ### Supabase (Database)
 
