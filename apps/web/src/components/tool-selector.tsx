@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
-import { Globe, Code, FileText, Github, Chrome, Search, Check } from 'lucide-react';
+import { Globe, Code, FileText, GitBranch, ExternalLink, Search, Check } from 'lucide-react';
 
 interface ToolItem {
   id: string;
@@ -39,8 +39,8 @@ const toolIcons: Record<string, typeof Globe> = {
   code_runner: Code,
   http_request: Globe,
   file_system: FileText,
-  github: Github,
-  browser: Chrome,
+  github: GitBranch,
+  browser: ExternalLink,
 };
 
 export function ToolSelector({ value, onChange, className }: ToolSelectorProps) {

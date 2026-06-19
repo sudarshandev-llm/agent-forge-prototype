@@ -19,6 +19,8 @@ jobs:
           node-version: 20
           cache: 'npm'
       - run: npm ci
+      - name: Generate Prisma client
+        run: npx prisma generate --schema=apps/api/prisma/schema.prisma
       - run: npm run build -w apps/api
       - name: Deploy to Railway
         run: |
@@ -33,12 +35,19 @@ jobs:
     if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build -w apps/web
       - uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           vercel-args: --prod
+          working-directory: apps/web
 
   deploy-worker:
     name: Deploy Worker to Render
@@ -51,6 +60,8 @@ jobs:
           node-version: 20
           cache: 'npm'
       - run: npm ci
+      - name: Generate Prisma client
+        run: npx prisma generate --schema=apps/api/prisma/schema.prisma
       - run: npm run build -w apps/worker
       - name: Deploy to Render
         run: |
