@@ -1,0 +1,24 @@
+name: Pipeline Health Check
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  health:
+    name: Basic Sanity Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+      - name: Build shared package
+        run: npm run build -w packages/shared
+      - name: Check TypeScript compiles (api)
+        run: npx tsc --noEmit -p apps/api/tsconfig.json
+      - name: Check TypeScript compiles (core)
+        run: npx tsc --noEmit -p packages/core/tsconfig.json

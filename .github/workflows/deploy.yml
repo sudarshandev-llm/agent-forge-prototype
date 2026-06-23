@@ -41,7 +41,7 @@ jobs:
       - name: Build shared package
         run: npm run build -w packages/shared
       - run: npm run build -w apps/web
-      - uses: amondnet/vercel-action@v42
+      - uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}

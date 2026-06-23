@@ -21,6 +21,8 @@ jobs:
           node-version: 20
           cache: 'npm'
       - run: npm ci
+      - name: Build shared package
+        run: npm run build -w packages/shared
       - name: Generate Prisma client
         run: npx prisma generate --schema=apps/api/prisma/schema.prisma
       - run: npm run lint
@@ -36,6 +38,8 @@ jobs:
           node-version: 20
           cache: 'npm'
       - run: npm ci
+      - name: Build shared package
+        run: npm run build -w packages/shared
       - name: Generate Prisma client
         run: npx prisma generate --schema=apps/api/prisma/schema.prisma
       - run: npx tsc --noEmit -p apps/api/tsconfig.json
@@ -78,6 +82,8 @@ jobs:
           node-version: 20
           cache: 'npm'
       - run: npm ci
+      - name: Build shared package
+        run: npm run build -w packages/shared
       - name: Generate Prisma client
         run: npx prisma generate --schema=apps/api/prisma/schema.prisma
       - run: npm test
